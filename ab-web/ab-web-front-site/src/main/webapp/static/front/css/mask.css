@@ -1,0 +1,93 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*实名认证弹窗*/
+.maskName {position: fixed; left: 0; top: 0; width: 100%; height: 100%; background:#000; opacity:.1;z-index:10000; /*display:none;*/}
+.boxName {width:400px; height:240px;border:1px solid #f27267;font-size:14px; font-family:"Microsoft YaHei"; position: fixed; .position:absolute;left:50%;top:50%; margin-left:-200px; margin-top:-120px;z-index:11111;background:#fff;/*display:none;*/}
+.boxName h3{height:50px;line-height: 50px; background: #f27267;}
+.boxName h3 span{font-size:18px;color:#fff; margin-left:18px;}
+.boxName .CloseNom{cursor:pointer;display: inline-block;width: 26px;height: 26px;position: relative;top: -38px;right: -360px;background:url(../images/Close.png) no-repeat center center;}
+.boxName .CloseOn{cursor:pointer;display: inline-block;width: 26px;height: 26px;position: relative;top: -38px;right: -360px;background:url(../images/CloseOn.png) no-repeat center center;}
+
+.boxName p .ico_Y{ display:inline-block;width: 35px;height:35px; margin-right:10px;background:url(../images/ico_safe.png) no-repeat 0px -1px; vertical-align: middle;}
+.boxName p{height:35px;line-height:35px;font-size: 20px;color:#6b6b6b; margin-top: 15px; text-align:center;}
+.boxName a{ display:block;width:150px;height:40px;line-height:40px; background:#f27267; margin:40px 0 0 126px;border-radius:4px;text-align:center;font-size:16px;color:#fff;}
+
+/*渠道返佣弹窗*/
+.maskShort {position:fixed; left: 0; top: 0; width: 100%; height: 100%; background:#000; opacity:.1;z-index:10000}
+.boxShort {width:500px; height:540px;font-size:14px; font-family:"Microsoft YaHei"; border: 1px solid #ccc; position: fixed; .position:absolute;left:50%;top:50%; margin-left:-250px; margin-top:-290px;z-index:11111;background:#fff;}
+.boxShort h3{font-size:14px;width:480px;height:32px;line-height:32px;color:#323232;padding-left:20px;background:#efefef;}
+.boxShort .Close{font-size:22px; font-weight:bold;color:#bdbdbd;cursor:pointer;display: inline-block;top: -36px;right: -472px;position: relative;width: 30px;height: 30px}
+.boxShort label{ display:block;width:500px;margin-left:20px;}
+.boxShort label span{ display:inline-block;width:70px;}
+.boxShort label input{width:190px;height:32px;line-height:32px;border:1px solid #c2c2c2;vertical-align:middle; margin-bottom:15px;text-indent:5px;}
+.boxShort form p{width:500px;line-height:32px; text-align:center;}
+.boxShort .textShort{ position:relative;}
+.boxShort .textShort span{ position:absolute;width:75px; padding-left:12px;}
+.boxShort .textShort textarea{width:380px;height:40px;border:1px solid #c2c2c2; margin-left:92px; padding-left:10px; text-indent:12px;line-height:24px;}
+
+.boxShort .yanzheng{ margin-top:20px;}
+.boxShort .yanzheng span{ padding-left:26px;padding-right:6px;}
+.boxShort .yzInput{width:68px;height:32px;line-height:32px;border:1px solid #c2c2c2;}
+.boxShort .yanzheng img{ margin:0 8px;}
+.boxShort .yanzheng a{color:#287ad2;}
+.boxShort .yzSub{width:110px;height:36px;line-height:36px;background:#287ad2;color:#fff;margin-left:200px;margin-top:30px;}
+
+/*复制链接弹窗*/
+.fz_mask{position:fixed; left: 0; top: 0; width: 100%; height: 100%; background:#000; opacity:.1;z-index:1; display:none;}
+.fz_lj{width:500px; height:200px;font-size:14px; font-family:"Microsoft YaHei"; border: 1px solid #ccc; position: fixed; .position:absolute;left:50%;top:50%; margin-left:-250px; margin-top:-100px;z-index:2;background:#fff;color:#555; display:none;}
+.fz_lj p{width:500px;line-height:50px;font-size:18px;color:#fff;text-align:center; background:#f27267;}
+.fz_lj .fz_input{width:400px;height:32px;line-height:32px;border:1px solid #c5c5c5;margin:10px 0 30px 50px; text-indent:5px;}
+.fz_lj .CloseN{cursor:pointer;display: inline-block;position: relative;top: -145px;right: -468px;width: 25px;height: 25px;background:url(../images/Close.png) no-repeat center center;}
+.fz_lj .CloseY{cursor:pointer;display: inline-block;position: relative;top: -145px;right: -468px;width: 25px;height: 25px;background:url(../images/CloseOn.png) no-repeat center center;}
+
+.fz_lj .anniu_div input{width:120px;height:36px;line-height:36px; background:#ff9600;color:#fff; margin-left:190px;cursor:pointer;}
+/*绑定提现银行卡弹窗//账户总览弹框*/
+.bindingMask {position: fixed; left: 0; top: 0; width: 100%; height: 100%; background:#000; opacity:.1;z-index:10000; /*display:none;*/}
+.binding,.cashMask{width:558px; height:278px;font-size:14px; font-family:"Microsoft YaHei"; border: 1px solid #f27267; position: fixed; .position:absolute;left:50%;top:50%; margin-left:-250px; margin-top:-139px;z-index:11111;background:#fff;/*display:none;*/}
+.binding i.tishi{display:inline-block;width:58px;height:58px;background:url(../images/tishi.png) no-repeat 0px 0px; position: absolute;left:105px;top:90px;}
+.cashMask i.tishi{display:inline-block;width:58px;height:58px;background:url(../images/tishi.png) no-repeat 0px 0px; position: absolute;left:105px;top:90px;}
+.cashMask span.off{top:12px;right: 20px;font-size: 18px;color:#fff;cursor: pointer;z-index: 1;}
+.binding span.off{top:12px;right: 20px;font-size: 18px;color:#fff;cursor: pointer;z-index: 1;}
+
+.binding h3,.cashMask h3{height:50px;line-height:50px; background:#f27267; padding-left:20px;font-size:18px;color:#fff;}
+.binding h3 span,.cashMask h3 span{ position: absolute;left:25px;top:0px;}
+.binding h3 .off,.cashMask h3 .off{right:12px;top:0px;color:#bdbdbd; cursor:pointer;font-size:18px;color:#fff;}
+.cashMask p.top{font-size:24px;color:#383838;margin-left: 190px;margin-top:30px;}
+.cashMask p.bot{font-size:16px;color:#ababab;margin-left: 190px;}
+.binding p.top{font-size:24px;color:#383838;margin-left: 190px;margin-top:44px;}
+.binding p.topOne{font-size:24px;color:#383838;margin-left: 100px;margin-top:30px;}
+.binding p.bot{font-size:16px;color:#ababab;margin-left: 190px;}
+.binding a,.cashMask a{display:inline-block;height:40px;line-height:40px; margin-top:25px; text-align:center;}
+.binding a.open{width:204px;background:#f27267;font-size:16px;color:#fff;margin: 56px 0 0 175px;}
+.binding a.recharge_open{margin:56px 0 0 175px;border-radius: 4px;}
+.binding a.close{width:120px;background:#ff8c00;color:#fff;}
+.cashMask a{width:155px;background:#f27267;color:#fff;margin:40px 0 0 188px;}
+
+/*充值弹窗*/
+.RechargeMask{position: fixed; left: 0; top: 0; width: 100%; height: 100%; background:#000; opacity:.1;z-index:10000; display:none;}
+.Recharge{width:400px; height:200px;font-size:14px; font-family:"Microsoft YaHei"; border: 1px solid #ccc; position: fixed; .position:absolute;left:50%;top:50%; margin-left:-200px; margin-top:-100px;z-index:11111;background:#fff;/*display:none;*/}
+.Recharge h3{height:36px;line-height:36px; background:#efefef; padding-left:20px;}
+.Recharge h3 .off{right:12px;top:0px;color:#bdbdbd; cursor:pointer;}
+.Recharge p.tit{height:32px;line-height:32px; text-align:center; margin-top:8px;}
+.Recharge .fenlie{ margin-top:10px;}
+.Recharge .fenlie .yes,.Recharge .fenlie .no{width:50%; text-align:center;}
+.Recharge .fenlie .yes p.cg{background:url(../images/bitok.png) no-repeat 62px 8px;padding-left:20px;}
+.Recharge .fenlie .no p.shibai{background:url(../images/bittan.png) no-repeat 62px 8px;padding-left:20px;}
+.Recharge .fenlie p{height:32px;line-height:32px;}
+.Recharge .fenlie p a{ display:inline-block;width:120px;height:32px;line-height:32px;color:#fff;}
+.Recharge .fenlie p a.okA{ background:#287AD2;}
+.Recharge .fenlie p a.retA{ background:#ff8c00;}
+/*快捷支付-充值限额*/
+.limit{width:650px; height:436px;font-size:14px; font-family:"Microsoft YaHei"; border: 1px solid #ccc; position: fixed; .position:absolute;left:50%;top:50%; margin-left:-325px; margin-top:-218px;z-index:11111;background:#fff;display:none;}
+.limit h3{height:36px;line-height:36px; background:#efefef; padding-left:20px;}
+.limit h3 .off{right:12px;top:0px;color:#bdbdbd; cursor:pointer;}
+th,td{padding:0;}
+table{border-collapse:collapse;}
+.tab{display:block;width:650px;overflow-y:auto;height:400px;}
+.tab tbody{}
+.tab th,.tab td{.border:1px solid #99b0da;}
+.tab th{ height:36px; font-size:14px; background:#dbe3fa;}
+.tab td{ height:32px; font-size:12px; text-align:center;}
+img{vertical-align:top;}
+.tab .none{border:none; height:4px; overflow:hidden;}

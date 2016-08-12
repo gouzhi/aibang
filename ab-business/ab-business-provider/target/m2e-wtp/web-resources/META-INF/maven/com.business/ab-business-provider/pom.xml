@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+        <groupId>com.aibang</groupId>
+		<artifactId>ab-business</artifactId>
+        <version>1.0.0</version>
+    </parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.business</groupId>
+	<artifactId>ab-business-provider</artifactId>
+	<packaging>war</packaging>
+	<dependencies>
+		<dependency>
+			<groupId>com.framework</groupId>
+			<artifactId>ab-framework-support</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.framework</groupId>
+			<artifactId>ab-framework-utils</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.business</groupId>
+			<artifactId>ab-business-api</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.framework</groupId>
+			<artifactId>ab-framework-exception</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.framework</groupId>
+			<artifactId>ab-framework-memcache</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.framework</groupId>
+			<artifactId>ab-framework-redis-shiro</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+            <groupId>com.framework</groupId>
+            <artifactId>ab-framework-fadada</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>develope</id>
+			<properties>
+				<zookeeper.url>127.0.0.1:2181</zookeeper.url>
+				<memcache.ip>127.0.0.1</memcache.ip>
+				<memcache.port>11211</memcache.port>
+				<redis.ip>127.0.0.1</redis.ip>
+				<redis.port>6379</redis.port>
+				<activemq.url>tcp://localhost:61616</activemq.url>
+				<!--写数据库 -->
+				<writesource.jdbc.url>jdbc:mysql://172.11.1.248:3306/ab_web?useUnicode=true&amp;characterEncoding=UTF-8</writesource.jdbc.url>
+				<writesource.jdbc.username>root</writesource.jdbc.username>
+				<writesource.jdbc.password>root</writesource.jdbc.password>
+				<!--读数据库 -->
+				<readsource.jdbc.url>jdbc:mysql://172.11.1.248:3306/ab_web?useUnicode=true&amp;characterEncoding=UTF-8</readsource.jdbc.url>
+				<readsource.jdbc.username>root</readsource.jdbc.username>
+				<readsource.jdbc.password>root</readsource.jdbc.password>
+
+				<!--nginx的html根目录 后面无/ -->
+				<web.nginx.htmlpath>F:/tools/nginx/html</web.nginx.htmlpath>
+                <!--法大大配置开始 -->
+                <fdd.api_id>400106</fdd.api_id>
+				<fdd.app_secret>1iLroUGiPhvN5H9zKcubRWz6</fdd.app_secret>
+				<fdd.api_url>https://testapi.fadada.com:8443/api/</fdd.api_url>
+				<fdd.doc_template_id>contract20160720</fdd.doc_template_id>
+				<fdd.doc_template_authorid>author2016801</fdd.doc_template_authorid>
+				<fdd.notify_host>http://58.132.171.109:9005/ab-web-admin-operation</fdd.notify_host>
+				<fdd.return_host>http://admin.domain.com.cn/ab-web-admin-operation</fdd.return_host>
+				<fdd.notify_sign_url>/fadada/notify_sign_url</fdd.notify_sign_url>
+				<fdd.return_sign_url>/fadada/return_sign_url</fdd.return_sign_url>
+                <!--法大大配置结束 -->
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+		<profile>
+			<id>test</id>
+			<properties>
+				<zookeeper.url>172.11.1.249:2181</zookeeper.url>
+				<memcache.ip>172.11.1.249</memcache.ip>
+				<memcache.port>11211</memcache.port>
+				<redis.ip>172.11.1.249</redis.ip>
+				<redis.port>6379</redis.port>
+				<activemq.url>tcp://172.11.1.249:61616</activemq.url>
+				<!--写数据库 -->
+				<writesource.jdbc.url>jdbc:mysql://172.11.1.249:3306/ab_web?useUnicode=true&amp;characterEncoding=UTF-8</writesource.jdbc.url>
+				<writesource.jdbc.username>ab</writesource.jdbc.username>
+				<writesource.jdbc.password>ab@123$</writesource.jdbc.password>
+				<!--读数据库 -->
+				<readsource.jdbc.url>jdbc:mysql://172.11.1.249:3306/ab_web?useUnicode=true&amp;characterEncoding=UTF-8</readsource.jdbc.url>
+				<readsource.jdbc.username>ab</readsource.jdbc.username>
+				<readsource.jdbc.password>ab@123$</readsource.jdbc.password>
+
+				<!--nginx的html根目录 后面无/ -->
+				<web.nginx.htmlpath>/data/huafax/nginx/html</web.nginx.htmlpath>
+
+				<!--法大大配置开始 -->
+				<fdd.api_id>400106</fdd.api_id>
+				<fdd.app_secret>1iLroUGiPhvN5H9zKcubRWz6</fdd.app_secret>
+				<fdd.api_url>https://testapi.fadada.com:8443/api/</fdd.api_url>
+				<fdd.doc_template_id>contract20160720</fdd.doc_template_id>
+				<fdd.doc_template_authorid>author2016801</fdd.doc_template_authorid>
+				<fdd.notify_host>http://admin-test.huafax.com</fdd.notify_host>
+				<fdd.return_host>http://admin.ab.com</fdd.return_host>
+				<fdd.notify_sign_url>/fadada/notify_sign_url</fdd.notify_sign_url>
+				<fdd.return_sign_url>/fadada/return_sign_url</fdd.return_sign_url>
+				<!--法大大配置结束 -->
+
+			</properties>
+		</profile>
+		<profile>
+			<id>production</id>
+			<properties>
+				<zookeeper.url>10.45.139.237:2181</zookeeper.url>
+				<memcache.ip>10.45.139.237</memcache.ip>
+				<memcache.port>11211</memcache.port>
+				<redis.ip>10.45.139.237</redis.ip>
+				<redis.port>6379</redis.port>
+				<activemq.url>tcp://10.45.136.93:61616</activemq.url>
+				<!--写数据库 -->
+				<writesource.jdbc.url>jdbc:mysql://10.45.139.237:3306/ab_web?useUnicode=true&amp;characterEncoding=UTF-8</writesource.jdbc.url>
+				<writesource.jdbc.username>ab</writesource.jdbc.username>
+				<writesource.jdbc.password>ab@123$</writesource.jdbc.password>
+				<!--读数据库 -->
+				<readsource.jdbc.url>jdbc:mysql://10.45.136.93:3306/ab_web?useUnicode=true&amp;characterEncoding=UTF-8</readsource.jdbc.url>
+				<readsource.jdbc.username>ab</readsource.jdbc.username>
+				<readsource.jdbc.password>ab@123$</readsource.jdbc.password>
+
+				<!--nginx的html根目录 后面无/ -->
+				<web.nginx.htmlpath>/data/huafax/nginx/html</web.nginx.htmlpath>
+
+				<!--法大大配置开始 -->
+				<fdd.api_id>400106</fdd.api_id>
+				<fdd.app_secret>1iLroUGiPhvN5H9zKcubRWz6</fdd.app_secret>
+				<fdd.api_url>https://testapi.fadada.com:8443/api/</fdd.api_url>
+				<fdd.doc_template_id>contract20160720</fdd.doc_template_id>
+				<fdd.doc_template_authorid>author2016801</fdd.doc_template_authorid>
+				<fdd.notify_host>http://admim.huafax.com</fdd.notify_host>
+				<fdd.return_host>http://admim.huafax.com</fdd.return_host>
+				<fdd.notify_sign_url>/fadada/notify_sign_url</fdd.notify_sign_url>
+				<fdd.return_sign_url>/fadada/return_sign_url</fdd.return_sign_url>
+				<!--法大大配置结束 -->
+
+			</properties>
+		</profile>
+	</profiles>
+
+
+	<build>
+		<finalName>ab-business-provider</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<port>8081</port>
+					<path>/ab-business-provider</path>
+					<uriEncoding>UTF-8</uriEncoding>
+					<finalName>ab-business-provider</finalName>
+					<server>tomcat7</server>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

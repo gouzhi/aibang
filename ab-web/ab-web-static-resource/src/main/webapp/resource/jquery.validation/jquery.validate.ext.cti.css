@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+input:focus { border: 1px dotted black; }
+input.error { border: 1px dotted red; }
+span.error { float:left; color:#CC0000; margin-left:3px;  height:20px; line-height:20px; padding-left: 16px; background: url(../images/unchecked.gif) left no-repeat; }
+span.success { float:left;  margin-left:3px;  height:20px; width:20px; padding-left: 16px; background: url(../images/checked.gif) left no-repeat;  }

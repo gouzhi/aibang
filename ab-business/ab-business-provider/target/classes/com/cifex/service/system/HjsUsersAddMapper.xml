@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="HjsUsersAdd">
+
+	<resultMap id="RM_HjsUsersAdd" type="com.cifex.transfer.model.dto.HjsUsersAdd">
+        <result property="id" column="ID"/>
+        <result property="areaid" column="AREAID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="realname" column="REALNAME"/>
+        <result property="tel" column="TEL"/>
+        <result property="post" column="POST"/>
+        <result property="addr" column="ADDR"/>
+        <result property="remark" column="REMARK"/>
+        <result property="createTime" column="CREATE_TIME"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="HjsUsersAdd.columns">
+	    <![CDATA[
+		ID,AREAID,USER_ID,REALNAME,TEL,POST,ADDR,REMARK,CREATE_TIME
+	    ]]>
+	</sql>
+
+    <sql id="HjsUsersAdd.tbcolumns">
+	    <![CDATA[
+		tb.ID,tb.AREAID,tb.USER_ID,tb.REALNAME,tb.TEL,tb.POST,tb.ADDR,tb.REMARK,tb.CREATE_TIME
+	    ]]>
+	</sql>
+	
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="HjsUsersAdd.insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO hjs_users_add (
+        	
+        	AREAID ,
+        	USER_ID ,
+        	REALNAME ,
+        	TEL ,
+        	POST ,
+        	ADDR ,
+        	REMARK ,
+        	CREATE_TIME 
+        ) VALUES (
+        	
+        	#{areaid} ,
+        	#{userId} ,
+        	#{realname} ,
+        	#{tel} ,
+        	#{post} ,
+        	#{addr} ,
+        	#{remark} ,
+        	#{createTime} 
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    <!--
+		描述：（前台、后台）更新用户地址功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUsersAdd.update" >
+    <![CDATA[
+        UPDATE hjs_users_add SET
+	        AREAID = #{areaid} ,
+	        USER_ID = #{userId} ,
+	        REALNAME = #{realname} ,
+	        TEL = #{tel} ,
+	        POST = #{post} ,
+	        ADDR = #{addr} ,
+	        REMARK = #{remark} ,
+	        CREATE_TIME = #{createTime} 
+        WHERE 
+	        ID = #{id} 
+    ]]>
+	</update>
+
+
+   <!--
+		描述：（前台、后台）逻辑删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	
+    <update id="HjsUsersAdd.remove">
+    <![CDATA[
+        UPDATE hjs_users_add SET
+	       IS_DEL=1,
+	       DELETE_TIME=#{deleteTime} 
+        WHERE 
+        ID = #{id} 
+    ]]>
+    </update>
+    
+    <!--
+		描述：（后台）删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <delete id="HjsUsersAdd.delete">
+    <![CDATA[
+        DELETE FROM hjs_users_add WHERE
+        ID = #{id} 
+    ]]>
+    </delete>
+    <!--
+		描述：（后台）通过ID获取用户收货地址功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <select id="HjsUsersAdd.getById" resultMap="RM_HjsUsersAdd">
+		SELECT <include refid="HjsUsersAdd.columns" />
+	    <![CDATA[
+		    FROM hjs_users_add 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</select>
+	<!--
+		描述：（后台）通过账户ID获取收货地址信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsUsersAdd.getByBaseId" resultMap="RM_HjsUsersAdd">
+		SELECT <include refid="HjsUsersAdd.columns" />
+	    <![CDATA[
+		    FROM hjs_users_add 
+	        WHERE 
+		        USER_ID = #{userId}
+	    ]]>
+	</select>
+	
+	<sql id="HjsUsersAdd.findPage.where">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	      				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND tb.ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(areaid)">
+				AND tb.AREAID = #{areaid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userId)">
+				AND tb.USER_ID = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(realname)">
+				AND tb.REALNAME = #{realname}
+			</if>
+	       <if test="@Ognl@isNotEmpty(tel)">
+				AND tb.TEL = #{tel}
+			</if>
+	       <if test="@Ognl@isNotEmpty(post)">
+				AND tb.POST = #{post}
+			</if>
+	       <if test="@Ognl@isNotEmpty(addr)">
+				AND tb.ADDR = #{addr}
+			</if>
+	       <if test="@Ognl@isNotEmpty(remark)">
+				AND tb.REMARK = #{remark}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTimeBegin)">
+				AND tb.CREATE_TIME >= #{createTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(createTimeEnd)">
+				AND tb.CREATE_TIME &lt;= #{createTimeEnd}
+		   </if>
+		</where>
+	</sql>
+		
+    <select id="HjsUsersAdd.findPage.count" resultType="long">
+        SELECT count(*) FROM hjs_users_add tb 
+		<include refid="HjsUsersAdd.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="HjsUsersAdd.findPage" resultType="map">
+    	SELECT <include refid="HjsUsersAdd.tbcolumns" />
+	    FROM hjs_users_add tb
+		<include refid="HjsUsersAdd.findPage.where"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+		<if test="@Ognl@isNotEmpty(offset) and @Ognl@isNotEmpty(pageSize)">
+		 limit ${offset},${pageSize} 
+		</if>
+    </select>
+
+	
+	<select id="HjsUsersAdd.findAll" resultMap="RM_HjsUsersAdd">
+    	SELECT <include refid="HjsUsersAdd.columns" />
+	    FROM hjs_users_add  
+    </select>
+</mapper>
+

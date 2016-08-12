@@ -1,0 +1,7 @@
+em.error {
+	color: red;
+	font-style:normal;
+	font-size:14px;
+}
+#em.error { color: black; font-style:normal;font-size:14px;}
+#warning { display: none; }

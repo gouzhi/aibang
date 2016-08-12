@@ -1,0 +1,53 @@
+/*顶部开始*/
+
+.header{width:100%;background:#fff;}
+/*.header_top{width:1200px;height:60px;line-height:60px;margin:0 auto;}*/
+
+.header_top_right li{line-height:56px;}
+.header_top_right li{ margin-left:22px;}
+.header_top_right li:first-child{ margin-left:0; padding-left:20px; background:url(../images/phone_ico.png) no-repeat 0px center;}
+.header_top_right .weibo a{display: block; width:30px;height:60px;line-height:60px;background:url(../images/wb.png) no-repeat 2px center;}
+.header_top_right .weibo a:hover{background:url(../images/weiboOn.png) no-repeat 2px center;}
+.header_top_right .weixin a{display: block; width:30px;height:60px;line-height:60px;background:url(../images/wx.png) no-repeat 2px center;}
+.header_top_right .weixin a:hover{background:url(../images/weixinOn.png) no-repeat 2px center;}
+.header_top_right .weixin img{width:100px;height:100px;display:none;left:-35px;top:48px;z-index:10;}
+.header_top_right .weibo img{width:100px;height:100px;display:none;left:-35px;top:48px;z-index:10;}
+.nav{width:100%;height:39px;line-height:38px;background:#2788c4; margin-bottom:5px;}
+.nav .nav_list{width:1200px;margin:0 auto;height:39px;line-height:39px;}
+.nav .nav_list li{float:left;margin-left:37px;line-height: 39px;}
+.nav .nav_list li.active{ background:#6bc5ff;}
+.nav .nav_list li:first-child{margin:0;}
+.nav .nav_list li a{color:#fff; font-size:16px;padding:0px 28px;display:block;}
+.nav .nav_list li a:hover{background:#6bc5ff;}
+.lastR{padding-left:28px;}
+*+html .lastR{padding:0px;}
+.search{margin-top:3px;}
+*+html .search{margin:0px;}
+.nav .nav_list .searchInp{width:258px;height:32px;line-height:32px; border-radius:30px; text-indent:15px;margin-top: 3px;}
+.nav .nav_list .search i{right:10px;top:12px; cursor:pointer;}
+/*顶部结束*/
+
+/*友情链接 Start*/
+.link_wrap{width:100%; background:#e3e3e3; padding:15px 0; margin-top:40px;}
+.link_wrap .link{width:1200px; margin:0 auto;}
+.link_wrap .link span{display:inline-block;width:80px;height:30px;padding-left:42px; background:url(../images/foot_ico.png) no-repeat 0px -4px;}
+.link_wrap .link_top a{padding-left:10px;border-left:1px solid #333; font-size:16px;color:#333; margin-left:10px;}
+
+.partner_tit{width:80px;height:30px;padding-left:42px; background:url(../images/foot_ico.png) no-repeat 0px -48px; margin-top:15px;}
+.partner_list li{float:left;margin-left:50px;}
+.partner_list li:first-child{ margin-left:44px;}
+/*友情链接 End*/
+
+/*footer Start*/
+.footer_warp{width:100%; background:#3292ce; padding:20px 0 20px;}
+.footer{width:1200px; margin:0 auto;background:#3292ce;}
+.footer .footer_sub a{ font-size:16px;color:#fff; border-left:2px solid #fff; padding:0 14px;}
+.footer .footer_sub a:first-child{ border:none; padding:0 14px 0 0;}
+.footer .saoma li{width:260px;}
+.footer .saoma li span{color:#b3e2ff;right:50px;bottom:4px;}
+.footer_bottom{width:100%; background:#f3f3f3;height:42px;line-height:42px;}
+.footer_bottom p{width:1200px; font-size:16px;color:#666; margin:0 auto; text-align:center;}
+.xinyong{width:735px;margin:20px auto 0;}
+.xinyong a{margin-left:20px;}
+.xinyong a:first-child{margin-left:0;}
+/*footer End*/

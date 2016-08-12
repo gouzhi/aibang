@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* CSS Document */
+/*查看详情*/
+.mask {position:fixed; left: 0; top: 0; width: 100%; height: 100%; background:#000; opacity:.4;z-index:10000; display:none;}
+.xiaoxi_tan{width:700px; height:180px;font-size:14px; font-family:"微软雅黑"; border: 1px solid #ccc; position: fixed;left:50%;top:50%; margin-left:-276px; margin-top:-90px;z-index:11111;background:#fff;display:none;}
+.xiaoxi_tan h3{font-size:14px;width:680px;height:32px;line-height:32px;color:#323232;padding-left:20px;background:#efefef;}
+.xiaoxi_tan .Close{font-size:22px; font-weight:bold;color:#bdbdbd;cursor:pointer;display: inline-block;top: -36px;left: 680px;position: relative;width: 30px;height: 30px}
+.xiaoxi_tan p{font-size:14px;height:33px;line-height:33px;color:#666;width:700px;text-align:center;}
+
+/*设置*/
+#maskPrompt {position: absolute; left: 0; top: 0; width: 100%; height: 100%; background:#000; opacity:.4;z-index:10000}
+#boxPrompt {width:500px; height:280px;font-size:14px; font-family:"微软雅黑"; border: 1px solid #ccc; position: fixed; .position:absolute;left:50%;top:50%; margin-left:-250px; margin-top:-140px;z-index:11111;background:#fff;}
+#boxPrompt h3{font-size:14px;width:480px;height:32px;line-height:32px;color:#323232;padding-left:20px;background:#efefef;}
+#boxPrompt .Close{font-size:22px; font-weight:bold;color:#bdbdbd;cursor:pointer;display: inline-block;top: -36px;right: -472px;position: relative;width: 30px;height: 30px}
+#boxPrompt label{ display:inline-block;width:100px;height:42px;line-height:42px;margin-left:20px;}
+#boxPrompt label input{ vertical-align:middle;}
+#boxPrompt a{font-size:14px;height:33px;line-height:33px;color:#fff; display:block;width:185px; background:#287ad2; text-align:center; margin:35px 0 0 165px;}

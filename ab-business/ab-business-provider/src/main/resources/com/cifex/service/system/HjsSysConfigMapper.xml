@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="HjsSysConfig">
+
+	<resultMap id="RM_HjsSysConfig" type="com.cifex.transfer.model.dto.HjsSysConfig">
+        <result property="id" column="ID"/>
+        <result property="parentId" column="PARENT_ID"/>
+        <result property="cname" column="CNAME"/>
+        <result property="code" column="CODE"/>
+        <result property="pcode" column="P_CODE"/>
+        <result property="remark" column="REMARK"/>
+        <result property="orderId" column="ORDER_ID"/>
+        <result property="layer" column="LAYER"/>
+        <result property="isDel" column="IS_DEL"/>
+        <result property="version" column="VERSION"/>
+        <result property="optId" column="OPT_ID"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="deleteTime" column="DELETE_TIME"/>
+		<result property="value1" column="VALUE1"/>
+		<result property="value2" column="VALUE2"/>
+		<result property="value3" column="VALUE3"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="HjsSysConfig.columns">
+	    <![CDATA[
+		VALUE3,VALUE2,VALUE1,ID,PARENT_ID,CNAME,CODE,P_CODE,REMARK,ORDER_ID,LAYER,IS_DEL,VERSION,OPT_ID,CREATE_TIME,UPDATE_TIME,DELETE_TIME,VALUE1,VALUE2,VALUE3
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<!--
+		描述：（前台/后台）添加功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<insert id="HjsSysConfig.insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO hjs_sys_config (
+        	PARENT_ID ,
+        	CNAME ,
+        	CODE ,
+        	P_CODE ,
+        	REMARK ,
+        	ORDER_ID ,
+        	LAYER ,
+        	IS_DEL ,
+        	VERSION ,
+        	OPT_ID ,
+        	CREATE_TIME,
+        	VALUE1,
+        	VALUE2,
+        	VALUE3
+        ) VALUES (
+        	#{parentId} ,
+        	#{cname} ,
+        	#{code} ,
+        	#{pcode} ,
+        	#{remark} ,
+        	#{orderId} ,
+        	#{layer} ,
+        	#{isDel} ,
+        	#{version} ,
+        	#{optId} ,
+        	#{createTime},
+        	#{value1},
+        	#{value2},
+        	#{value3}
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    <!--
+		描述：（前台/后台）修改功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsSysConfig.update" >
+    <![CDATA[
+        UPDATE hjs_sys_config SET
+	        PARENT_ID = #{parentId} ,
+	        CNAME = #{cname} ,
+	        CODE = #{code} ,
+	        P_CODE = #{pcode} ,
+	        REMARK = #{remark} ,
+	        ORDER_ID = #{orderId} ,
+	        LAYER = #{layer} ,
+	        IS_DEL = #{isDel} ,
+	        VERSION = #{version} ,
+	        OPT_ID = #{optId} ,	       
+	        UPDATE_TIME = #{updateTime},
+	        VALUE1=#{value1},
+	        VALUE2=#{value2},
+	        VALUE3=#{value3}
+        WHERE 
+	        ID = #{id} 
+    ]]>
+	</update>
+	<!--
+		描述：（前台/后台）逻辑删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <update id="HjsSysConfig.remove">
+    <![CDATA[
+        UPDATE hjs_sys_config SET
+	       IS_DEL=1,
+	       DELETE_TIME=#{deleteTime} 
+        WHERE 
+        ID = #{id} 
+    ]]>
+    </update>
+    
+    <!--
+		描述：（前台/后台）删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <delete id="HjsSysConfig.delete">
+    <![CDATA[
+        DELETE FROM hjs_sys_config WHERE
+        ID = #{id} 
+    ]]>
+    </delete>
+    <!--
+		描述：（前台/后台）通过ID获取配置信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <select id="HjsSysConfig.getById" resultMap="RM_HjsSysConfig">
+		SELECT <include refid="HjsSysConfig.columns" />
+	    <![CDATA[
+		    FROM hjs_sys_config 
+	        WHERE IS_DEL=0 AND
+		        ID = #{id} 
+	    ]]>
+	</select>
+	<!--
+		描述：（后台）分页条件sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<sql id="HjsSysConfig.findPage.where">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	 
+			IS_DEL=0     				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(parentId)">
+				AND PARENT_ID = #{parentId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(cname)">
+				AND CNAME like CONCAT(CONCAT('%', #{cname}), '%')
+			</if>
+	       <if test="@Ognl@isNotEmpty(code)">
+				AND CODE = #{code}
+			</if>
+	       <if test="@Ognl@isNotEmpty(pcode)">
+				AND P_CODE = #{pcode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(remark)">
+				AND REMARK = #{remark}
+			</if>
+	       <if test="@Ognl@isNotEmpty(orderId)">
+				AND ORDER_ID = #{orderId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(layer)">
+				AND LAYER = #{layer}
+			</if>
+	       <if test="@Ognl@isNotEmpty(isDel)">
+				AND IS_DEL = #{isDel}
+			</if>
+	       <if test="@Ognl@isNotEmpty(version)">
+				AND VERSION = #{version}
+			</if>
+	       <if test="@Ognl@isNotEmpty(optId)">
+				AND OPT_ID = #{optId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTimeBegin)">
+				AND CREATE_TIME >= #{createTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(createTimeEnd)">
+				AND CREATE_TIME &lt;= #{createTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(updateTimeBegin)">
+				AND UPDATE_TIME >= #{updateTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(updateTimeEnd)">
+				AND UPDATE_TIME &lt;= #{updateTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(deleteTimeBegin)">
+				AND DELETE_TIME >= #{deleteTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(deleteTimeEnd)">
+				AND DELETE_TIME &lt;= #{deleteTimeEnd}
+		   </if>
+		</where>
+	</sql>
+		
+    <select id="HjsSysConfig.findPage.count" resultType="long">
+        SELECT count(*) FROM hjs_sys_config 
+		<include refid="HjsSysConfig.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="HjsSysConfig.findPage" resultMap="RM_HjsSysConfig">
+    	SELECT <include refid="HjsSysConfig.columns" />
+	    FROM hjs_sys_config 
+		<include refid="HjsSysConfig.findPage.where"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	     <if test="@Ognl@isNotEmpty(offset) and @Ognl@isNotEmpty(pageSize)">
+		 limit ${offset},${pageSize}
+		</if>
+    </select>
+	<!--
+		描述：（后台）通过pcode获得配置信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+
+    <select id="HjsSysConfig.getByPcode" resultMap="RM_HjsSysConfig" parameterType="java.lang.String">
+	    SELECT <include refid="HjsSysConfig.columns"/>
+	    <![CDATA[
+	        FROM hjs_sys_config where IS_DEL=0 AND P_CODE = #{pcode}
+	    ]]>
+    </select>
+    
+    <!-- 查询某ID下所有子配置总数 -->
+	<select id="HjsSysConfig.findCount" resultType="long">
+		select 
+			count(ID) ZS
+		from 
+			hjs_sys_config
+		where 
+			IS_DEL=0 AND
+			PARENT_ID = #{id}
+	</select>
+	
+	<!-- 查询某配置 -->
+	<select id="HjsSysConfig.findBmCount" resultMap="RM_HjsSysConfig">
+		select 
+			ID
+		from 
+			hjs_sys_config
+		where
+			IS_DEL=0 AND 
+			CODE = #{code}
+		<if test="@Ognl@isNotEmpty(id)">
+			and ID != #{id} 
+		</if>
+	</select>
+	<!-- 查询某配置下的子类型 -->
+    <select id="HjsSysConfig.findConfigsByParentId" resultMap="RM_HjsSysConfig">
+        select id,cname,code
+        from hjs_sys_config 
+        where  IS_DEL=0 AND  PARENT_ID=#{parentId}
+    </select>
+	<select id="HjsSysConfig.findParentIdAndCode" resultMap="RM_HjsSysConfig">
+		SELECT <include refid="HjsSysConfig.columns"/> FROM hjs_sys_config
+		WHERE PARENT_ID=#{parentId} AND CODE=#{code}
+	</select>
+	
+</mapper>
+

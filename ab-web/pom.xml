@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.wnmfw</groupId>
+		<artifactId>aibang</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.aibang</groupId>
+    <artifactId>ab-web</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>ab-web-admin-operation</module>
+        <module>ab-web-daemon</module>
+        <module>ab-web-front-site</module>
+        <module>ab-web-move-site</module>
+        <module>ab-web-static-resource</module>
+        <module>ab-web-task</module>
+    </modules>
+</project>

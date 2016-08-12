@@ -1,0 +1,39 @@
+@charset "utf-8";
+/* CSS Document */
+
+.contentReg{width:100%;background:#e8e8e8;padding:30px 0 90px;}
+.contentReg-Con{width:1200px; margin:0 auto;height:570px;border-top:0px solid #295cd1;background:#fff; position:relative;}
+.contentReg-Con .formSub{padding-bottom: 82px;background:url(../images/register.jpg) no-repeat}
+.contentReg-Con p{position:absolute;right:0px;top:25px;}
+.contentReg-Con p a{color:#ff9933;}
+#regForm .formInput,#regForm .formVer,.yaoqing{padding-bottom:12px; margin-left:586px;}
+#regForm .formInput span,#regForm .formVer span,.yaoqing span{ display:inline-block;width:75px;color:#858585;}
+.registerRight{ padding-top: 35px;}
+.formName input{ background:url(../images/spirits.png) no-repeat right 2px;}
+.formPass input{ background:url(../images/spirits.png) no-repeat 8px -160px;}
+.formPassSure input{ background:url(../images/spirits.png) no-repeat 8px -160px;}
+.formInvit input{ background:url(../images/invitecode.png) no-repeat 12px 7px;}
+.formPhone input{ background:url(../images/spirits.png) no-repeat 8px 6px;}
+#regForm .formInput input,.yaoqing input{width:298px;height:42px;line-height:42px; border:1px solid #d2d2d2; text-indent:48px;color:#a7a7a7;border-radius: 4px;color:#383838;}
+.phone_code{ background:url(../images/spirits.png) no-repeat 8px 6px;}
+#regForm b{margin-left:8px; font-size:12px;color:#a3a3a3; font-weight:normal; display:none;width: 200px;word-wrap: break-word;vertical-align: middle;}
+#regForm .formVer input{width:298px;height:42px;line-height:42px;border:1px solid #d2d2d2;text-indent:48px;background:url(../images/spirits.png) no-repeat 8px -48px;border-radius: 4px;}
+#regForm .formVer .formVerBut{ display:inline-block;width:108px;height:42px;line-height:42px; background:#eee;text-indent:0;color:#a6a6a6; margin-left:18px; text-align:center;border:1px solid #d2d2d2;border-radius: 4px;}
+#regForm label{ margin-left:586px;}
+
+#agree{ position: absolute;left:0;top:-15px;}
+label.read{top:4px;}
+label.read span{display:inline-block;width: 286px; margin-left: 24px;color:#383838;line-height: 21px;}
+#regForm label a{color:#f27267;}
+#regForm .recSub{ display:block;width:300px;height:42px;line-height:42px;margin:18px 0 0 584px;background:#f27267;color:#fff; cursor:pointer;border-radius: 4px;}
+.time{display:none; position:absolute;width:100px;height:34px;line-height:34px;background:#ff9933;text-indent:0;color:#fff; margin-left:22px; text-align:center;}
+.icp:hover{color:#c2c2c2;}
+.logining{margin-left: 15px;line-height:24px;margin-top:9px; font-size: 14px;color:#7a7a7a;padding-right:3px; margin-left: 766px;}
+/*注册成功代码*/
+.contentregOk{width:100%;margin-top:20px;border-top:2px solid #287ad2;}
+.regOk{width:1000px; margin:50px auto 0; text-align:center;border:1px solid #ccc}
+.regOk .wish{ font-size:16px;color:#2a7fda; margin:108px 0 15px; }  
+.regOk .back{ font-size:14px;color:#464646;line-height:30px;}
+.regOk .open a{display:block;width:180px;height:36px;line-height:36px;font-size:14px;color:#fff;background:#287ad2; margin:5px auto 15px;}
+.regOk .ret{margin:10px 0 120px;}
+.regOk .ret a{color:#67a2ce;}

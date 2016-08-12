@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="HjsSysUserRole">
+
+	<resultMap id="RM_HjsSysUserRole" type="com.cifex.transfer.model.dto.HjsSysUserRole">
+        <result property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="roleId" column="ROLE_ID"/>
+        <result property="isDel" column="IS_DEL"/>
+        <result property="version" column="VERSION"/>
+        <result property="optId" column="OPT_ID"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="deleteTime" column="DELETE_TIME"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="HjsSysUserRole.columns">
+	    <![CDATA[
+		ID,USER_ID,ROLE_ID,IS_DEL,VERSION,OPT_ID,CREATE_TIME,UPDATE_TIME,DELETE_TIME
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="HjsSysUserRole.insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO hjs_sys_user_role (
+        	
+        	USER_ID ,
+        	ROLE_ID ,
+        	IS_DEL ,
+        	VERSION ,
+        	CREATE_TIME 
+        	
+        ) VALUES (
+        	
+        	#{userId} ,
+        	#{roleId} ,
+        	#{isDel} ,
+        	#{version} ,
+        	#{createTime} 
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    <!--
+		描述：（后台）更新角色用户功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsSysUserRole.update" >
+    <![CDATA[
+        UPDATE hjs_sys_user_role SET
+	        USER_ID = #{userId} ,
+	        ROLE_ID = #{roleId} ,
+	        IS_DEL = #{isDel} ,
+	        VERSION = #{version} ,        
+	        UPDATE_TIME = #{updateTime} 
+        WHERE 
+	        ID = #{id} 
+    ]]>
+	</update>
+
+
+   
+	<!--
+		描述：（后台）逻辑删除角色用户功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <update id="HjsSysUserRole.remove">
+    <![CDATA[
+        UPDATE hjs_sys_user_role SET
+	       IS_DEL=1,
+	       DELETE_TIME=#{deleteTime} 
+        WHERE 
+        ID = #{id} 
+    ]]>
+    </update>
+    
+    <!--
+		描述：（后台）删除角色用户关系功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <delete id="HjsSysUserRole.delete">
+    <![CDATA[
+        DELETE FROM hjs_sys_user_role WHERE
+        ID = #{id} 
+    ]]>
+    </delete>
+    <!--
+		描述：（后台）用户管理模块删除用户角色功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <delete id="HjsSysUserRole.deleteUserRole">
+    <![CDATA[
+		DELETE FROM hjs_sys_user_role WHERE
+		USER_ID = #{userId}
+		]]>
+	</delete>
+    <!--
+		描述：（前台/后台）通过ID获取用户角色功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <select id="HjsSysUserRole.getById" resultMap="RM_HjsSysUserRole">
+		SELECT <include refid="HjsSysUserRole.columns" />
+	    <![CDATA[
+		    FROM hjs_sys_user_role 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</select>
+	<!--
+		描述：（前台/后台）分页条件sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<sql id="HjsSysUserRole.findPage.where">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	      				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userId)">
+				AND USER_ID = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(roleId)">
+				AND ROLE_ID = #{roleId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(isDel)">
+				AND IS_DEL = #{isDel}
+			</if>
+	       <if test="@Ognl@isNotEmpty(version)">
+				AND VERSION = #{version}
+			</if>
+	       <if test="@Ognl@isNotEmpty(optId)">
+				AND OPT_ID = #{optId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTimeBegin)">
+				AND CREATE_TIME >= #{createTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(createTimeEnd)">
+				AND CREATE_TIME &lt;= #{createTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(updateTimeBegin)">
+				AND UPDATE_TIME >= #{updateTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(updateTimeEnd)">
+				AND UPDATE_TIME &lt;= #{updateTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(deleteTimeBegin)">
+				AND DELETE_TIME >= #{deleteTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(deleteTimeEnd)">
+				AND DELETE_TIME &lt;= #{deleteTimeEnd}
+		   </if>
+		</where>
+	</sql>
+		
+    <select id="HjsSysUserRole.findPage.count" resultType="long">
+        SELECT count(*) FROM hjs_sys_user_role 
+		<include refid="HjsSysUserRole.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="HjsSysUserRole.findPage" resultMap="RM_HjsSysUserRole">
+    	SELECT <include refid="HjsSysUserRole.columns" />
+	    FROM hjs_sys_user_role 
+		<include refid="HjsSysUserRole.findPage.where"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+			<if test="@Ognl@isNotEmpty(offset) and @Ognl@isNotEmpty(pageSize)">
+		 limit ${offset},${pageSize}
+		</if>
+    </select>
+    
+    <!-- 列出此角色下的所有用户 -->
+	<select id="HjsSysUserRole.listAllUByRid" resultMap="RM_HjsSysUserRole">
+		select USER_ID
+		from HJS_SYS_USER_ROLE 
+		where 
+		ROLE_ID = #{id}
+	</select>
+
+	
+</mapper>
+

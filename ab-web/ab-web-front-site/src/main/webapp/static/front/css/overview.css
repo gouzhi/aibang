@@ -1,0 +1,165 @@
+@charset "utf-8";
+/* CSS Document */
+
+@charset "utf-8";
+/* CSS Document */
+.subnav{border-bottom:2px solid #287ad2;}
+.accountContent{width:1200px; margin:0px auto;}
+.icoPoint{height:54px;line-height:54px;font-size: 14px;color:#929292;}
+.icoPoint span,.icoPoint i{font-size:12px;color:#777;}
+.accountList{width:180px;background:#fff;margin-top: 10px;margin-bottom: 10px}
+.accountList .accountListA{display:block;height:36px;line-height:36px;font-size:16px;color:#383838;background:#fff;}
+.accountList .on{display:block;height:36px;line-height:36px;font-size:16px;color:#383838;background:#fff;}
+.icoI{display:inline-block;width:30px;height:18px;vertical-align:middle;}
+.accounH{width:180px;height:46px;line-height: 46px;font-size:16px;color:#fff;background: #f27267;text-align: center;padding-top:15px;}
+.account-Left{ background: #fff;margin-right: 18px;}
+.accountList .backgroundPull{}
+.accountList .accountListA span{font-size:14px;color:#383838;}
+.accountList .on span{font-size:16px;color:#383838;}
+.accountList .mousover .accountListA:hover{ background:#f3f3f3;}
+.accountList .mousover .accountListA:hover span{color:#f27267;}
+.accountList a .icon-dashboard{display: inline-block;vertical-align:top;min-width: 6px;height:36px;text-align: center;padding-right:40px;}
+.accountList .mousover .accountListA:hover .icon-dashboard {background:url(../images/line-red.png) no-repeat;}
+
+.select .accountListA{ color:#f27267;font-weight:bold;background:url(../images/line-red.png) no-repeat;background-color:#f3f3f3;}
+.select .accountListA span{color:#f27267;}
+
+.accountList .listLi-chind a{display: block;height:36px;line-height:36px; }
+.select a span{font-size:14px;color:#f27267;}
+.accountList .listLi-chind a:hover{background:#f3f3f3;}
+.accountList .listLi-chind a:hover span{font-weight:bold;color:#f27267;}
+.accountList .listLi-chind a:hover .icon-dashChild {background:url(../images/line-red.png) no-repeat;}
+.accountList .listLi-chind .icon-dashChild{ display:inline-block;width:6px;height:36px;vertical-align:top;padding-right:72px;}
+/*右侧*/
+/*.account-Right{width:1000px;margin:0px 0 0 20px;}*/
+.account-Right .account-RightH{width:950px;height:50px;line-height:50px;background: #f3f3f3;padding-left: 50px;font-size: 14px;color:#6b6b6b;margin-bottom: 10px;}
+.account-Right .account-RightH a{font-size: 14px;font-weight: bold;color:#f27267;}
+.account-Right .accuntR-one{height:100px;border-right:none;background: #fff;padding: 20px 0;}
+.accuntR-one .oneRight{height:110px;margin-top: 10px;}
+.accuntR-one .oneLeft{width:500px;border-right:1px solid #e8e8e8;height: 100px;}
+.oneLeft .oneLeft1{margin-left: 48px;}
+.oneLeft .oneLeft2{}
+.oneLeft .oneLeft2 p{margin-top: 10px;margin-left: 42px;}
+.oneLeft .oneLeft2 p:first-child{margin-top: 0px;}
+.oneLeft .oneLeft2 .tit{font-size: 14px;color:#6b6b6b; vertical-align: middle;}
+.oneLeft .oneLeft2 .con{font-family: "Arial";font-size: 14px;color:#383838;vertical-align: middle;}
+.oneLeft .oneLeft2 a{font-size: 14px;color:#f27267;margin-left: 10px;vertical-align: middle;}
+.oneCenter p{width:192px;line-height:55px;height:55px; padding:0 23px;}
+.star_P span.starS{ display:inline-block;width:104px;height:20px;overflow:hidden; background:url(../images/starS.png) no-repeat; vertical-align: middle;}
+.star_P .star_5d0{ background-position:0px -1px;}
+
+.star_P span.star_4d1, .star_P span.star_4d2,.star_P span.star_4d3, .star_P span.star_4d4,.star_P span.star_4d5,.star_P span.star_4d6,.star_P span.star_4d7,.star_P span.star_4d8,.star_P span.star_4d9{
+background-position:0px -21px;}
+.star_P span.star_4d0{background-position:0px -41px;}
+
+.star_P span.star_3d1,.star_P span.star_3d2,.star_P span.star_3d3,.star_P span.star_3d4,.star_P span.star_3d5,.star_P span.star_3d6,.star_P span.star_3d7,.star_P span.star_3d8,.star_P span.star_3d9{background-position:0px -63px;}
+.star_P span.star_3d0{background-position:0px -81px;}
+
+
+
+ .star_P span.star_2d1,.star_P span.star_2d2, .star_P span.star_2d3,.star_P span.star_2d4,.star_P span.star_2d5,.star_P span.star_2d6,.star_P span.star_2d7,.star_P span.star_2d8, .star_P span.star_2d9{background-position:0px -103px;}
+.star_P span.star_2d0{background-position:0px -123px;}
+
+
+ .star_P span.star_1d1,.star_P span.star_1d2,.star_P span.star_1d3,.star_P span.star_1d4,.star_P span.star_1d5,.star_P span.star_1d6,.star_P span.star_1d7,.star_P span.star_1d8,.star_P span.star_1d9{background-position:0px -142px;}
+.star_P span.star_1d0{background-position:0px -164px;}
+
+.star_P span.star_0d1, .star_P span.star_0d2,.star_P span.star_0d3,.star_P span.star_0d4,.star_P span.star_0d5,.star_P span.star_0d6,.star_P span.star_0d7,.star_P span.star_0d8,.star_P span.star_0d9{background-position:0px -187px;}
+.star_P span.star_0d0{background-position:0px -207px;}
+.oneCenter p img{ vertical-align:middle;}
+
+.oneCenter p i{font-style:normal;}
+.oneRight{padding-left: 170px;background:url(../images/pig.png) no-repeat 50px 0;}
+.oneRight p{line-height:32px;font-size:14px;color:#383838;padding-bottom:12px;}
+.oneRight p span.star-value-no{font-size:14px;color:#383838;}
+.oneRight p span.star-value-no i{font-family: "Arial";font-size: 20px;color:#f27267;}
+.oneRight .balanceB .recharges{ display:inline-block;width:88px;height:32px;line-height:32px; background:#fff; border:1px solid #f27267; border-radius:5px;color:#f27267; text-align:center;cursor:pointer;}
+.oneRight .balanceB .recharges:hover{ background:#f4f4f4}
+.oneRight .balanceB .cash{display:inline-block;width:88px;height:32px;line-height:32px;background:#fff;border:1px solid #f27267;border-radius:5px;color:#f27267; margin-left:6px;text-align:center;cursor:pointer;}
+.oneRight .balanceB .cash:hover{ background:#f4f4f4;}
+.accuntR-two{ margin:10px 0;}
+.accuntR-two li{ float:left;width:247px; background: #fff;margin-left: 4px;}
+.accuntR-two li p.titP{color:#fff;font-size: 16px;line-height: 30px;height: 30px; text-align: center; }
+.accuntR-two li:first-child{ margin-left: 0px;}
+.accuntR-two li p.titP1{ background: #f27267;}
+.accuntR-two li p.titP2{ background: #64cd8e;}
+.accuntR-two li p.titP3{background: #2db7ff;}
+.accuntR-two li p.titP4{background: #ffb24e;}
+.accuntR-two li p.conP{font-size:16px;color:#6b6b6b; text-align: center;line-height: 62px;height: 62px;}
+.accuntR-two li p.conP span{font-family: "Arial";font-size:20px;color:#6b6b6b; margin-right: 2px;}
+.accuntR-three{ background: #fff;}
+.accuntR-three li{float:left;width:332px; text-align:center; border-right:1px solid #ededed;padding:0 30px;}
+.accuntR-three .threeList{ margin-left:36px;border:1px solid #ededed; border-right:none;border-top:none;}
+.accuntR-three .threeList .threeTOP{height:50px;line-height:50px; border-bottom:1px solid #ededed;}
+.threeList .real{background: url(../images/real.png) no-repeat 105px 18px;}
+.threeList .bind{background: url(../images/bind.png) no-repeat 96px 18px;}
+.threeList .trad{background: url(../images/trad.png) no-repeat 36px 14px;}
+.accuntR-three .threeList p{color:#b6b6b6;line-height:25px;}
+.accuntR-three .threeList .finish{color:#323232;}
+.accuntR-three .threeList .unfinish{color:#287ad2;}
+.accuntR-three .threeList .state{ margin:15px 0 20px;} 
+.accuntR-three .ready{left:0;top:0px;width:20px;height:115px;color:#fff;background:#287ad2;padding:16px 8px 0; text-align:center;}
+.accuntR-one,.accuntR-two,.accuntR-four,.accuntR-five,.accuntR-six{width:1000px;}
+.accuntR-three .threeList{width:786px;}
+.accuntR-four{ background: #fff;}
+/*表格1*/
+.fourTab{width:900px;height:46px;line-height: 46px;padding:14px 50px 0;}
+.fourTab span{font-size:16px;color:#383838;cursor:pointer;padding:0 10px;height:44px;line-height: 44px;}
+.fourTab span:first-child{ margin-right: 20px;}
+.fourTab a{color:#a6a6a6;}
+.fourTab a:hover{color:#f27267;}
+.fourTab span.actTab{border-bottom: 2px solid #f27267;}
+.tableDiv {width: 898px;padding-top: 14px;display: none; margin-left: 50px;border-top:1px solid #e8e8e8;}
+.ulHeader{width:900px;height:36px;line-height:36px;background:#f6f6f6;height:36px;line-height:36px;}
+.ulTable{width:900px;background:#fff;padding-bottom: 20px;}
+.ulTable li{height:46px;line-height:46px;border-bottom:1px solid #f2f2f2;}
+.ulTable li:hover{ background:#fbfbfb;}
+.ulTable li span{vertical-align:middle;font-size:14px;color:#383838;}
+/*.ulHeader .sp1,.ulTable .sp1{ display:inline-block;width:45px; text-align:center;}
+.ulTable .sp1 input{width:45px;height:auto;}*/
+.ulHeader .sp2,.ulTable .sp2{ display:inline-block;width:232px;text-indent:12px;font-size:14px;color:#383838;}
+.ulHeader .sp3,.ulTable .sp3{ display:inline-block;width:140px; text-align:left;font-size:14px;color:#383838;font-family: "Arial";}
+.ulHeader .sp4,.ulTable .sp4{ display:inline-block;width:118px; text-align:left;word-wrap: break-word;font-size:14px;color:#383838;font-family: "Arial";}
+.ulHeader .sp5,.ulTable .sp5{ display:inline-block;width:138px; text-align:left;font-size:14px;color:#383838;font-family: "Arial";}
+.ulHeader .sp6,.ulTable .sp6{ display:inline-block;width:112px; text-align:left;font-size:14px;color:#383838;}
+.ulHeader .sp7,.ulTable .sp7{ display:inline-block;width:112px; text-align:left;font-size:14px;color:#383838;}
+.ulHeader .sp8,.ulTable .sp8{ display:inline-block;width:138px; text-align:left;font-size:14px;color:#383838;}
+.ulTable .sp8 a{color:#f27267;}
+/*.ulHeader .sp9,.ulTable .sp9{ display:inline-block;width:45px; text-align:center;}
+.ulHeader .sp10,.ulTable .sp10{ display:inline-block;width:30px; text-align:center;}*/
+/*收益统计*/
+/*.accuntR-five{display:none;}*/
+.accuntR-five{ background: #fff; margin-top: 10px;}
+.fiveHead{width:900px;line-height:16px;padding: 26px 0 18px;background:#fff; margin-left: 50px;}
+.fiveChart{ margin-left: 50px;}
+.fiveHead span{font-size:16px;color:#383838; padding-left:28px;background: url(../images/tongji.png) no-repeat 0px center;}
+.fiveHead select{width:115px;height:32px;line-height:32px;border:1px solid #b8b8b8; margin-top:10px; margin-right:25px;}
+.fiveChart{width:900px;border-top:1px solid #ededed;}
+.fiveChart .chartRight{ margin-top:95px;}
+.chartRight p{line-height:16px;}
+.chartRight i{font-size:14px;color: #383838; margin-left:3px;}
+.chartRight .chartTop{width:228px;padding-left:12px;padding-bottom:20px;border-bottom:1px solid #e8e8e8;}
+.chartRight .chartB{width: 228px;padding-left: 12px;padding-top: 20px;}
+.chartRight .chartTop .titS{ display:inline-block;font-size: 16px;color:#383838;padding:0 34px 0 26px;background: url(../images/all_top.png) no-repeat 0px center;}
+.chartRight .chartB .titS{ display:inline-block;font-size: 16px;color:#383838;padding:0 20px 0 26px;background: url(../images/all_sy.png) no-repeat 0px center;}
+#toDayInterest{font-family: "Arial";font-size:20px;color: #ffb24e;}
+#sumInterest{font-family: "Arial";font-size:20px;color: #f27267;}
+.accuntR-six{ margin-top:10px; background: #fff;}
+.accuntR-six h3{width:920px;height:40px;line-height:40px;color:#ff8c00;padding-left:26px;border-left:6px solid #f27267;}
+.accuntR-six h3 span{font-size: 20px;color:#5a5a5a;}
+.accuntR-six h3 a{font-size:14px;color:#a6a6a6;}
+.accuntR-six h3 a:hover{color:#f27267;}
+.accuntR-six .recoTable{width:900px; padding:0 50px;border:1px solid #efefef}
+.accuntR-six .recoTable li{height:82px;line-height:82px;border-top: 1px solid #e8e8e8;}
+.accuntR-six .recoTable li:first-child{border-top:none;}
+.accuntR-six .recoTable span{ display:inline-block;color:#333;}
+.recoTable span.s1{width:295px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;vertical-align: middle;font-size:16px;color:#494646;text-indent:18px;background: url(../images/line_r.png) no-repeat 0px center;}
+.recoTable span.s2{width:192px;text-align:left; font-size: 14px;color:#a1a1a1;}
+.recoTable span.s2 i{ font-style: normal;font-family:"Arial";font-size: 18px;color:#f27267;font-weight: bold;}
+.recoTable span.s3{width:132px;font-size: 14px;color:#a1a1a1;}
+.recoTable span.s3 i{font-style: normal;font-family:"Arial";font-size: 18px;color:#6b6b6b;font-weight: bold;}
+.recoTable span.s4{width:158px;text-align:left; font-size: 14px;color:#a1a1a1;}
+.recoTable span.s4 i{font-style: normal;font-family:"Arial";font-size: 18px;color:#6b6b6b;font-weight: bold;}
+.recoTable span.s5{width:106px;text-align:left;}
+.recoTable span.s5 a{ display:inline-block;width:106px;height:32px;line-height:32px;color:#f27267;background:#fff;text-align: center;border:1px solid #f27267;border-radius: 5px;}
+.recoTable span.s5 a:hover{ background:#f4f4f4;}

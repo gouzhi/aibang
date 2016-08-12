@@ -1,0 +1,22 @@
+@charset "utf-8";
+/* CSS Document */
+
+.polyWarp{width:100%;border-top:2px solid #287ad2;}
+.poly{width:850px; margin:20px auto 0;}
+/*.poly .polyTitle{padding-bottom: 20px;font-size: 16px;font-size: 1.6rem;border-bottom: 1px #e5e5e5 solid;margin-bottom: 5px;color: #333333;}*/
+.poly .polyTitle{background: url(../images/zhixiang.png) no-repeat left center;font-size:14px;display: inline-block;width: 150px;padding: 6px 0px;color: #fff;text-align: center;text-indent: -2em;}
+.poly .polyList .polyUl li{width:850px;padding: 30px 0;border-bottom: 1px solid #f2f2f2;overflow: hidden;}
+.poly .polyList .polyUl{border-top:1px solid #e5e5e5;}
+.poly .polyList img{ padding:0 20px;}
+.poly .polyList .liList{width:530px;}
+.poly .liList h3{margin-bottom: 12px;}
+.poly .liList h3 a{color: #333333;font-size: 20px;line-height: 1.4em; padding-bottom:12px;}
+.poly .liList p.timeP{color:#b3b3b3;}
+.poly .plun{padding-left: 20px;background: url(../images/eye.png) no-repeat 0 5px;display: none;}
+.poly .liList p.intro{font-size:16px;line-height:1.6em;margin-bottom: 15px;color:#808080;}
+
+.pagination ul li{ float:left;}
+.pagination{padding-top:35px;margin-bottom:55px; margin-left:130px;}
+.pagination a{ padding:5px;border:1px solid #ccc; margin:0 3px;}
+#toGoPage {border: 1px solid #ccc; padding:5px;margin-top: -6px;}
+.currentPage{color:#287ad2;}

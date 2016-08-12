@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>hjs-business</artifactId>
+		<groupId>com.cifex</groupId>
+		<version>1.0.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.business</groupId>
+	<artifactId>hjs-business-provider</artifactId>
+	<packaging>war</packaging>
+	<dependencies>
+		<dependency>
+			<groupId>com.framework</groupId>
+			<artifactId>hjs-framework-support</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.framework</groupId>
+			<artifactId>hjs-framework-utils</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.business</groupId>
+			<artifactId>hjs-business-api</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.framework</groupId>
+			<artifactId>hjs-framework-exception</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.framework</groupId>
+			<artifactId>hjs-framework-memcache</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.framework</groupId>
+			<artifactId>hjs-framework-redis-shiro</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+            <groupId>com.framework</groupId>
+            <artifactId>hjs-framework-fadada</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>develope</id>
+			<properties>
+				<zookeeper.url>127.0.0.1:2181</zookeeper.url>
+				<memcache.ip>127.0.0.1</memcache.ip>
+				<memcache.port>11211</memcache.port>
+				<redis.ip>127.0.0.1</redis.ip>
+				<redis.port>6379</redis.port>
+				<activemq.url>tcp://localhost:61616</activemq.url>
+				<!--写数据库 -->
+				<writesource.jdbc.url>jdbc:mysql://172.11.1.248:3306/hjs_web?useUnicode=true&amp;characterEncoding=UTF-8</writesource.jdbc.url>
+				<writesource.jdbc.username>root</writesource.jdbc.username>
+				<writesource.jdbc.password>root</writesource.jdbc.password>
+				<!--读数据库 -->
+				<readsource.jdbc.url>jdbc:mysql://172.11.1.248:3306/hjs_web?useUnicode=true&amp;characterEncoding=UTF-8</readsource.jdbc.url>
+				<readsource.jdbc.username>root</readsource.jdbc.username>
+				<readsource.jdbc.password>root</readsource.jdbc.password>
+
+				<!--汇付相关配置开始 -->
+				<hjs.chinapnr.gateway>http://mertest.chinapnr.com/muser/publicRequests</hjs.chinapnr.gateway>
+				<hjs.chinapnr.merKeyFile>D:/chinapnr/test/MerPrK530831.key</hjs.chinapnr.merKeyFile>
+				<hjs.chinapnr.pgKeyFile>D:/chinapnr/test/PgPubk.key</hjs.chinapnr.pgKeyFile>
+				<hjs.chinapnr.merId>530831</hjs.chinapnr.merId>
+				<hjs.chinapnr.merCustId>6000060002365373</hjs.chinapnr.merCustId>
+				<hjs.chinapnr.retHost>http://money.domain.com.cn/hjs-web-front-site</hjs.chinapnr.retHost>
+				<hjs.chinapnr.bgHost>http://58.132.171.109:9007/hjs-web-front-site</hjs.chinapnr.bgHost>
+				<hjs.chinapnr.moveRetHost>http://m.money.domain.com.cn/hjs-web-move-site</hjs.chinapnr.moveRetHost>
+				<hjs.chinapnr.moveBgHost>http://58.132.171.109:9007/hjs-web-move-site</hjs.chinapnr.moveBgHost>
+				<hjs.chinapnr.adminRetHost>http://admin.domain.com.cn/hjs-web-admin-operation</hjs.chinapnr.adminRetHost>
+				<hjs.chinapnr.adminBgHost>http://58.132.171.109:9007/hjs-web-admin-operation</hjs.chinapnr.adminBgHost>
+				<!--汇付相关配置结束 -->
+				<!--nginx的html根目录 后面无/ -->
+				<web.nginx.htmlpath>F:/tools/nginx/html</web.nginx.htmlpath>
+                <!--法大大配置开始 -->
+                <fdd.api_id>400106</fdd.api_id>
+				<fdd.app_secret>1iLroUGiPhvN5H9zKcubRWz6</fdd.app_secret>
+				<fdd.api_url>https://testapi.fadada.com:8443/api/</fdd.api_url>
+				<fdd.doc_template_id>contract20160720</fdd.doc_template_id>
+				<fdd.doc_template_authorid>author2016801</fdd.doc_template_authorid>
+				<fdd.notify_host>http://58.132.171.109:9005/hjs-web-admin-operation</fdd.notify_host>
+				<fdd.return_host>http://admin.domain.com.cn/hjs-web-admin-operation</fdd.return_host>
+				<fdd.notify_sign_url>/fadada/notify_sign_url</fdd.notify_sign_url>
+				<fdd.return_sign_url>/fadada/return_sign_url</fdd.return_sign_url>
+                <!--法大大配置结束 -->
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+		<profile>
+			<id>test</id>
+			<properties>
+				<zookeeper.url>172.11.1.249:2181</zookeeper.url>
+				<memcache.ip>172.11.1.249</memcache.ip>
+				<memcache.port>11211</memcache.port>
+				<redis.ip>172.11.1.249</redis.ip>
+				<redis.port>6379</redis.port>
+				<activemq.url>tcp://172.11.1.249:61616</activemq.url>
+				<!--写数据库 -->
+				<writesource.jdbc.url>jdbc:mysql://172.11.1.249:3306/hjs_web?useUnicode=true&amp;characterEncoding=UTF-8</writesource.jdbc.url>
+				<writesource.jdbc.username>hjs</writesource.jdbc.username>
+				<writesource.jdbc.password>hjs@123$</writesource.jdbc.password>
+				<!--读数据库 -->
+				<readsource.jdbc.url>jdbc:mysql://172.11.1.249:3306/hjs_web?useUnicode=true&amp;characterEncoding=UTF-8</readsource.jdbc.url>
+				<readsource.jdbc.username>hjs</readsource.jdbc.username>
+				<readsource.jdbc.password>hjs@123$</readsource.jdbc.password>
+
+				<!--汇付相关配置开始 -->
+				<hjs.chinapnr.gateway>http://mertest.chinapnr.com/muser/publicRequests</hjs.chinapnr.gateway>
+				<hjs.chinapnr.merKeyFile>/data/chinapnr/MerPrK530831.key</hjs.chinapnr.merKeyFile>
+				<hjs.chinapnr.pgKeyFile>/data/chinapnr/PgPubk.key</hjs.chinapnr.pgKeyFile>
+				<hjs.chinapnr.merId>530831</hjs.chinapnr.merId>
+				<hjs.chinapnr.merCustId>6000060002365373</hjs.chinapnr.merCustId>
+				<hjs.chinapnr.retHost>http://money.hjs.com</hjs.chinapnr.retHost>
+				<hjs.chinapnr.bgHost>http://money-test.huafax.com</hjs.chinapnr.bgHost>
+				<hjs.chinapnr.moveRetHost>http://m-test.huafax.com</hjs.chinapnr.moveRetHost>
+				<hjs.chinapnr.moveBgHost>http://m-test.huafax.com</hjs.chinapnr.moveBgHost>
+				<!--<hjs.chinapnr.bgHost>http://58.132.171.109:8082/</hjs.chinapnr.bgHost>-->
+				<hjs.chinapnr.adminRetHost>http://admin.hjs.com</hjs.chinapnr.adminRetHost>
+				<hjs.chinapnr.adminBgHost>http://admin-test.huafax.com</hjs.chinapnr.adminBgHost>
+				<!--<hjs.chinapnr.adminBgHost>http://58.132.171.109:8080/</hjs.chinapnr.adminBgHost>-->
+				<!--汇付相关配置结束 -->
+				<!--nginx的html根目录 后面无/ -->
+				<web.nginx.htmlpath>/data/huafax/nginx/html</web.nginx.htmlpath>
+
+				<!--法大大配置开始 -->
+				<fdd.api_id>400106</fdd.api_id>
+				<fdd.app_secret>1iLroUGiPhvN5H9zKcubRWz6</fdd.app_secret>
+				<fdd.api_url>https://testapi.fadada.com:8443/api/</fdd.api_url>
+				<fdd.doc_template_id>contract20160720</fdd.doc_template_id>
+				<fdd.doc_template_authorid>author2016801</fdd.doc_template_authorid>
+				<fdd.notify_host>http://admin-test.huafax.com</fdd.notify_host>
+				<fdd.return_host>http://admin.hjs.com</fdd.return_host>
+				<fdd.notify_sign_url>/fadada/notify_sign_url</fdd.notify_sign_url>
+				<fdd.return_sign_url>/fadada/return_sign_url</fdd.return_sign_url>
+				<!--法大大配置结束 -->
+
+			</properties>
+		</profile>
+		<profile>
+			<id>production</id>
+			<properties>
+				<zookeeper.url>10.45.139.237:2181</zookeeper.url>
+				<memcache.ip>10.45.139.237</memcache.ip>
+				<memcache.port>11211</memcache.port>
+				<redis.ip>10.45.139.237</redis.ip>
+				<redis.port>6379</redis.port>
+				<activemq.url>tcp://10.45.136.93:61616</activemq.url>
+				<!--写数据库 -->
+				<writesource.jdbc.url>jdbc:mysql://10.45.139.237:3306/hjs_web?useUnicode=true&amp;characterEncoding=UTF-8</writesource.jdbc.url>
+				<writesource.jdbc.username>hjs</writesource.jdbc.username>
+				<writesource.jdbc.password>Hjs@123$</writesource.jdbc.password>
+				<!--读数据库 -->
+				<readsource.jdbc.url>jdbc:mysql://10.45.136.93:3306/hjs_web?useUnicode=true&amp;characterEncoding=UTF-8</readsource.jdbc.url>
+				<readsource.jdbc.username>hjs</readsource.jdbc.username>
+				<readsource.jdbc.password>Hjs@123$</readsource.jdbc.password>
+
+				<!--汇付相关配置开始 -->
+				<hjs.chinapnr.gateway>https://lab.chinapnr.com/muser/publicRequests</hjs.chinapnr.gateway>
+				<hjs.chinapnr.merKeyFile>/data/huafax/chinapnr/product/MerPrK830972.key</hjs.chinapnr.merKeyFile>
+				<hjs.chinapnr.pgKeyFile>/data/huafax/chinapnr/product/PgPubk.key</hjs.chinapnr.pgKeyFile>
+				<hjs.chinapnr.merId>830972</hjs.chinapnr.merId>
+				<hjs.chinapnr.merCustId>6000060078818189</hjs.chinapnr.merCustId>
+				<hjs.chinapnr.retHost>http://money.huafax.com</hjs.chinapnr.retHost>
+				<hjs.chinapnr.bgHost>http://money.huafax.com</hjs.chinapnr.bgHost>
+				<hjs.chinapnr.moveRetHost>http://m.huafax.com</hjs.chinapnr.moveRetHost>
+				<hjs.chinapnr.moveBgHost>http://m.huafax.com</hjs.chinapnr.moveBgHost>
+				<hjs.chinapnr.adminRetHost>http://admin.huafax.com</hjs.chinapnr.adminRetHost>
+				<hjs.chinapnr.adminBgHost>http://admin.huafax.com</hjs.chinapnr.adminBgHost>
+				<!--汇付相关配置结束 -->
+
+				<!--nginx的html根目录 后面无/ -->
+				<web.nginx.htmlpath>/data/huafax/nginx/html</web.nginx.htmlpath>
+
+				<!--法大大配置开始 -->
+				<fdd.api_id>400106</fdd.api_id>
+				<fdd.app_secret>1iLroUGiPhvN5H9zKcubRWz6</fdd.app_secret>
+				<fdd.api_url>https://testapi.fadada.com:8443/api/</fdd.api_url>
+				<fdd.doc_template_id>contract20160720</fdd.doc_template_id>
+				<fdd.doc_template_authorid>author2016801</fdd.doc_template_authorid>
+				<fdd.notify_host>http://admim.huafax.com</fdd.notify_host>
+				<fdd.return_host>http://admim.huafax.com</fdd.return_host>
+				<fdd.notify_sign_url>/fadada/notify_sign_url</fdd.notify_sign_url>
+				<fdd.return_sign_url>/fadada/return_sign_url</fdd.return_sign_url>
+				<!--法大大配置结束 -->
+
+			</properties>
+		</profile>
+	</profiles>
+
+
+	<build>
+		<finalName>hjs-business-provider</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<port>8081</port>
+					<path>/hjs-business-provider</path>
+					<uriEncoding>UTF-8</uriEncoding>
+					<finalName>hjs-business-provider</finalName>
+					<server>tomcat7</server>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

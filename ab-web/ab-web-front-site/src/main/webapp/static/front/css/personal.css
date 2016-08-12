@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*个人资料右边*/
+.ownRight {}
+.ownRight h3.tit{width:964px;height:50px;line-height:50px; background:#fff;padding-left: 30px;border-left: 6px solid #f27267;margin-bottom: 10px;}
+.ownRight .own_Wrap{width:900px;padding:10px 50px 130px; background: #fff;}
+.ownRight .ownTab{width:900px;height:55px;line-height:55px;border-bottom: 1px solid #e8e8e8;}
+
+.ownRight .ownTab span{font-size:16px;color:#6b6b6b;cursor:pointer;padding: 0 10px 15px 10px;margin-left: 26px;}
+.ownRight .ownTab span:first-child{margin-left: 0;}
+.ownRight .ownTab span.activeO{font-size:16px;color:#f27267;border-bottom: 2px solid #f27267;}
+.ownRight .ownTabList{width:900px;}
+/*右侧表格内容-基本资料*/
+.ownBasic{display:none;}
+/*个人基本资料*/
+
+.ownBasic span.tit{ display:inline-block;width:56px;text-align: right;font-size: 16px;color:#494646;margin-right: 20px;}
+#basicForm{width:745px; margin-left: 155px;margin-top: 45px;}
+.ownBasic .ownName input{width:328px;height: 42px;line-height: 42px;border: 1px solid #d2d2d2;border-radius: 4px;text-indent:10px; }
+.ownBasic .ownSub{width:180px;height: 44px;line-height: 44px; background: #f27267;font-size: 20px;color:#fff;margin-left: 80px;margin-top:30px;border-radius: 4px; cursor: pointer;}
+.ownYear,.ownGender{margin-bottom: 14px;}
+.ownEmail b,.ownQQ b,.ownPhone b,.ownId b{color:#858585; font-weight:normal;}
+.ownBasic .ownName b{display:inline-block;width:195px;}
+.ownDet strong{font-size:14px;color:#f07a7a;font-weight: 100;}
+.ownBasic .ownName strong{font-size:14px;color:#f07a7a;font-weight: 100;margin-left: 6px;}
+.ownBasic .ownGender label{ margin-right:50px;}
+.ownBasic .ownGender input{ vertical-align:middle;}
+.ownBasic .ownYear select{width:100px;height:34px;line-height:34px;border:1px solid #c2c2c2; margin-right:12px;border-radius: 4px;}
+.ownBasic .ownBrief{ position:relative;}
+.ownBasic .ownBrief span{position:absolute;left:0;top:0;}
+.ownBasic .ownBrief textarea{width:328px;height:114px; margin-left:80px;text-indent:1em;line-height:24px;border:1px solid #d2d2d2;resize:none;border-radius: 4px;}
+.ownBasic .ownOpn label{ cursor: pointer;}
+.ownOpn i,.ownGender i{ display:inline-block;width:15px;height:15px; border:1px solid #c2c2c2;border-radius:50%; background:#fff;vertical-align:middle;}
+.ownOpn i.activeI,.ownGender i.activeI{ display:inline-block;width:15px;height:15px; border:1px solid #f27267;border-radius:50%; background:#f27267;vertical-align:middle;}
+.ownBasic .ownOpn span{vertical-align:middle;}
+.ownBasic .ownSubThree{width:212px;height:36px;line-height:36px; margin-left:105px; margin-top:50px;background:#287ad2; font-size:18px;color:#fff;border:1px solid #1f67b5;cursor: pointer;}
+/*个人详细资料*/
+#infoForm{width:762px;margin-left: 138px;margin-top: 45px;}
+.ownBasic span.tit1{ display:inline-block;width:68px;text-align: right;font-size: 16px;color:#494646;margin-right: 20px;}
+#infoForm .ownAddrss,.ownQQ,.ownBlood,.ownSchool,.ownMarr{margin-bottom: 14px;}
+.ownBasic .ownSubTwo{width:180px;height: 44px;line-height: 44px; background: #f27267;font-size: 20px;color:#fff;margin-left:90px;margin-top:30px;border-radius: 4px;}
+.ownBasic .ownId input{width:258px;height:34px;line-height:34px;border:1px solid #d2d2d2;text-indent:5px;}
+.ownBasic .ownAddrss select{min-width:122px;height:42px;line-height:42px;border:1px solid #d2d2d2; margin-right:12px;}
+.ownBasic .ownQQ input{width:258px;height:42px;line-height:42px;border:1px solid #d2d2d2;text-indent:5px;border-radius:4px;}
+.ownBasic .ownBlood select{width:124px;height:42px;line-height:42px;border:1px solid #d2d2d2;}
+.ownBasic .ownSchool input{width:258px;height:42px;line-height:42px;border:1px solid #d2d2d2; margin-right:12px;text-indent:5px;}
+.ownBasic .ownSchool select{width:124px;height:42px;line-height:42px;border:1px solid #d2d2d2;}
+#marriage{width:124px;height:42px;line-height:42px;border:1px solid #d2d2d2;}
+#faith{width:124px;height:42px;line-height:42px;border:1px solid #d2d2d2;}
+/*收货地址*/
+#receiverForm{width:780px;margin-left: 120px;margin-top: 45px;}
+.ownBasic .ownAdd select{width:124px;height:42px;line-height:42px;border:1px solid #d2d2d2; margin-right:12px;}
+#receiverForm span{display: inline-block;;width:96px;text-align: right;font-size: 16px;color:#494646;margin-right: 20px;}
+#receiverForm input{width:260px;height:42px;line-height:42px;border:1px solid #d2d2d2; text-indent:5px;}
+.ownAdd,.ownDet,.ownZit,.ownName,.ownPhone{margin-bottom: 14px;}
+/*个人头像*/
+.ownBasic .ownHead .ownHeadTopLeft{width:390px;margin-left: 100px;}
+.ownHead .ownHeadTopLeft h3,.ownHead .ownHeadTopRight h3{width:145px;border-bottom:1px solid #c2c2c2;color:#287ad2; margin-bottom:20px;}
+.ownHead .ownHeadTopRight{width:290px; margin-left:125px;}
+
+/*上传标签美化*/
+.file-box{ margin-top: 45px;}
+.file {position: relative;display: inline-block;background: #f9f9f9;width: 175px;border: 1px solid #d2d2d2;height: 30px;overflow: hidden;font-family: "宋体";color: #2d2d2d;text-decoration: none;text-align: center;line-height: 32px;margin-bottom: 12px;}
+.file input {position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;}
+#avatarForm p{width:330px;font-family:"宋体";font-size: 12px;color:#888;}
+.file-box .boxImg{width: 204px;border: 1px solid #d2d2d2;padding: 20px 92px;margin: 10px 0 28px; background: #f2f2f2;}
+.file-box .btn{display:block;width:180px;height:44px;border:1px solid #ff8c19;margin-bottom:110px; background:#f27267;border-radius:4px;font-size:20px;color:#fff;}
+/*上传标签美化 End*/

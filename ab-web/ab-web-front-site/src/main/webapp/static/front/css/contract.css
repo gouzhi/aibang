@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+.loginH_w{width:100%; background: #fff;}
+.loginH{width:1200px; margin:0 auto;}
+.loginH_l,.loginH_r{height:48px;line-height:48px;padding:14px 0;}
+.loginH_l .logo_line{display:inline-block;width:1px;height:40px;background:url(../images/logo_line.png) no-repeat;margin:0 30px;}
+.welcome{ font-size:24px;color:#494646;font-family:"Microsoft YaHei"; margin-right:30px;}
+.ico_p{display:inline-block;width:21px;height:21px;background:url(../images/ico_p.png) no-repeat;}
+.loginH_r i{display:inline-block;width:20px;height:18px;background:url(../images/back.png) no-repeat; margin-right:5px;}
+.vm{ vertical-align:middle;}
+
+.contractWarp{width:100%; margin-top:30px; }
+.contract{width:1000px; margin:0 auto;padding:22px 100px 30px; background:url(../images/Watermark.png); background-color:#fff;}
+.contract h1{font-size:20px;color:#383838;font-weight:bold;text-align:center;line-height:78px;border-bottom:4px solid #f27267;}
+.contract div.phead {line-height:22px;text-indent:2em;margin-top:10px; font-size:16px;color:#666;}
+.contract div.titP{font-size:14px;color:#333; margin-top:22px;}
+.table_con{ margin-top:14px;}
+th,td{padding:0;}
+table{border-collapse:collapse;}
+.tab{ width:1000px; margin:0px auto 30px;}
+.tab th,.tab td{border:1px solid #c2c2c2;color:#333;}
+.tab th{ height:30px; font-size:14px;text-indent:5px;text-align:left;}
+.tab td{ height:28px; font-size:13px;text-indent:5px;text-align:left;}
+.contract h2{ text-align:center;height:36px;line-height:36px; font-size:16px;color:#383838;font-weight:bold;}
+.contract h3{line-height:30px; font-size:16px;color:#383838;}
+.contract h4{line-height:36px; font-size:16px;color:#383838; margin-top:20px;}
+.contract p{font-size:14px;color:#383838;line-height:24px;}
+.contract p.titB{line-height:50px;}

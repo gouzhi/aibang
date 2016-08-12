@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="front-web-task"   />
+
+	<dubbo:registry address="zookeeper://${zookeeper.url}" />
+
+	<dubbo:reference id="userService" interface="com.cifex.business.api.system.user.HjsUserService"   />
+	<dubbo:reference id="borrowTenderService" interface="com.cifex.business.api.user.borrow.BorrowTenderService"/>
+	<dubbo:reference id="hjsAccountRechargeService" interface="com.cifex.business.api.system.account.HjsAccountRechargeService" />
+	<dubbo:reference id="qianJingFtpFileSync" interface="com.cifex.framework.qianjing.sync.IQianJingFtpFileSync" />
+	<dubbo:reference id="fundUserAccountlogService" interface="com.cifex.business.api.fund.user.account.FundUserAccountlogService" />
+	<dubbo:reference id="hjsFundSynclogService" interface="com.cifex.business.api.fund.system.logs.HjsFundSynclogService"/>
+</beans>

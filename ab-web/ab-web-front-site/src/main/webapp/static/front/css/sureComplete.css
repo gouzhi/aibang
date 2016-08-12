@@ -1,0 +1,132 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*分页代码*/
+.pagination ul li{ float:left;}
+.pagination{padding-top:35px;margin-bottom:55px; margin-left:130px;}
+.pagination a{ padding:5px;border:1px solid #ccc; margin:0 3px;}
+#toGoPage {border: 1px solid #ccc; padding:5px;margin-top: -6px;}
+/*确认信息*/
+.confirm{width:100%;}
+.information,.contract,.pay,.finish{width:1000px; margin:30px auto 0;}
+.information img,.contract img,.pay img,.finish img{margin:70px 0 60px 282px}
+
+.information h3,.contract h3,.pay h3{width:964px;height:48px;line-height:48px;background:#d9ebff;font-size:18px;font-weight:bold;color:#252525;padding-left:36px; margin-bottom:30px;}
+.informUl{border:1px solid #b7b7b7;border-bottom:none; margin-bottom:30px;}
+.informUl li{height:65px;line-height:65px;border-bottom:1px solid #b7b7b7;}
+.informUl li .informList{display:inline-block;width:495px;}
+.informUl li .informT{border-left:1px solid #e7e7e7;} 
+.informUl li span{color:#5a5a5a;}
+.informUl li .spTitle{ display:inline-block;width:135px;font-size:16px;color:#4c4c4c;font-weight:bold;text-align:right; padding-left:30px;} 
+.information .amount{font-size:16px;font-weight:bold;color:#4c4c4c; margin-left:62px; margin-bottom:40px;}
+.information .amount span{font-weight:normal;color:#f00;}
+.information .jump,.contract .jump{display:block;width:168px;height:40px;line-height:40px;font-size:16px;color:#fff; background:#287ad2;border:1px solid #1f67b5;text-align:center;margin:80px 0 120px 415px;} 
+.shuoming{width:945px;margin-top: -6px;margin-left: 7px;line-height:24px;color:#666;}
+.shuoming a{color:#287ad2;}
+/*确认合同*/
+.contract h4,.pay h4{width:978px;height:46px;line-height:46px;font-size:16px;font-weight:bold;color:#4c4c4c; padding-left:22px;}
+.contract textarea{width:986px;height:200px;border:1px solid #b7b7b7; resize:none; padding-left:12px;line-height:24px;}  
+.contract label input{width:16px;height:16px; margin:5px 5px 0 20px;}
+.contract label p{width:945px;line-height:24px;color:#707070;}
+/*支付确认*/
+.payDiv .payHead{width:1000px;height:48px;line-height:48px; background:#dbdbdb;} 
+.payDiv .payHead span{font-size:16px;font-weight:bold;}
+.payDiv span{ display:inline-block; vertical-align:middle; text-align:center;color:#4c4c4c;}
+.payDiv .payList{border:1px solid #d7d7d7;border-bottom:none;} 
+.payList li{padding:10px 0; border-bottom:1px solid #d7d7d7;}
+.payDiv .paySp1{width:40px;}
+.payDiv .paySp2{width:60px;}
+.payDiv .paySp3{width:185px;}
+.payDiv .paySp4{width:185px;}
+.payDiv .paySp5{width:210px;}
+.payDiv .paySp6{width:275px;}
+.pay h5{width:980px;height:78px;line-height:78px;font-size:16px;color:#4c4c4c;font-weight:bold; padding-left:20px;}
+.pay h5 span{color:#f00;}
+.pay h5 b{font-size:12px;font-weight:normal; margin-left:35px;}
+.pay .free{width:1000px;height:64px;line-height:64px; background:#d9ebff;}
+.pay .free .labelL input{ margin-left:20px; vertical-align:middle;}
+.pay .free .labelL span{font-size:18px;vertical-align:middle;padding-left:6px;color:#4c4c4c;}
+.pay .free .labelR{ display:inline-block;width:270px;height:36px;line-height:36px;border:1px solid #8dc3ff;border-radius:5px;background:#c5dffc;margin-top:13px; text-align:center;margin-right:15px;}
+.pay .free .labelR span{font-size:22px;color:#4c4c4c;}
+.pay .free .labelR span b{font-weight:normal;color:#ff7e00;}
+.payForm{ margin:40px 0 0 310px;}
+.payForm label{display:block; margin-bottom:35px;}
+.payForm label span{display:inline-block;width:75px; text-align:right;}
+.payForm input{width:224px;height:32px;line-height:32px;border:1px solid #c2c2c2; text-indent:5px;}
+.payForm .yzInput{width:108px;}
+.payForm .yanzheng img{ margin:0 8px;}
+.payForm .yanzheng a{color:#287ad2;}
+.payForm .paySub{width:168px;height:48px;line-height:48px; background:#287ad2;font-size:18px;color:#fff; margin-left:110px;cursor:pointer;}
+/*完成*/
+.subnav{border-bottom: 2px solid #287ad2;}
+.finish h3{width:1000px;height:40px;line-height:40px;font-size:24px;color:#287ad2;text-align:center; margin-bottom:20px;}
+.finish .fore-line{width:495px;border:1px solid #d1d1d1;padding:10px 0; margin-left:275px;}
+.finish p{width:650px;line-height:26px;color:#4c4c4c; background:url(../images/point.png) no-repeat 20px center; padding-left:30px;}
+.finish .finishBut{ margin-left:325px; margin-top:60px;}
+.finish a{ display:inline-block;width:156px;height:42px;line-height:42px;background:#287ad2; text-align:center; font-size:16px;color:#fff; margin-right:70px;cursor:pointer;}
+
+.manual{width:100%;background: #e8e8e8;padding-top:30px;padding-bottom: 36px;}
+.manual_con,.pledge_con{width:1000px; margin:0 auto;background: #fff;padding: 20px 100px 70px;}
+.manual_con h3,.pledge_con h3{width:1000px;height:80px;line-height:80px;font-family:"微软雅黑";font-size:20px;color:#494646;text-align:center;border-bottom: 4px solid #f27267;margin-bottom: 14px;}
+.manual_con_dl dt,.manual_con_dl dd{font-size: 14px;color:#494646;line-height: 46px;}
+/*.manual_con dt,.manual_con dd,.manual_con p{width:950px;line-height:24px; padding-left:28px;color:#666;}*/
+.manual_con p{font-size: 14px;color:#494646;line-height:26px;color:#666;}
+
+.manual_con .ulList1{ margin-top:20px;padding-bottom: 50px;border-bottom: 2px solid #f27267;}
+.manual_con .ulList1 li{font-size:14px;color:#666;line-height:26px; margin-bottom: 16px;}
+.manual_con .ulList2 li{margin:0;}
+.icp{font-size:14px;color:#9d9c9c;}
+.icp:hover{color:#c2c2c2;}
+/*质押借款协议*/
+.pledge_con dl{ margin-left:55px;width:800px;color:#666; padding:45px 0;}
+.pledge_con dl dt{line-height:26px;}
+.pledge_con dl dd{line-height:22px; margin-left:24px;}
+/* 2016-3-19 zrl 确认信息 */
+.newWidBg{background:#fff;width:1100px;margin:30px auto 0;padding:0 50px 55px;}
+
+.newsNums{border-bottom:1px solid #e8e8e8;padding-top:46px;margin-bottom:15px;text-align:center;overflow:hidden;}
+.newsNums li{display:inline-block;*display:inline;color:#b5b5b5;line-height:24px;margin-right:45px;}
+.newsNums li span{border-bottom:2px solid #fff;display:inline-block;padding-bottom:23px;font-size:20px;}
+.newsNums li span b{background:url(../images/newNums.png) no-repeat left top;display:inline-block;width:24px;height:24px;margin-right:9px;vertical-align:middle;}
+.newsNums li span b.bbg1{background-position:0 0;}
+.newsNums li span b.bbg2{background-position:-24px 0;}
+.newsNums li span b.bbg3{background-position:right 0;}
+.newsNums li i{display:inline-block;margin-left:36px;color:#bababa;font-size:24px;}
+.newsNums li.on span{border-bottom:2px solid #2cb7ff;color:#494646;}
+.newsNums li.on span b.bbg1{background-position:0 bottom;}
+.newsNums li.on span b.bbg2{background-position:-24px bottom;}
+.newsNums li.on span b.bbg3{background-position:right bottom;}
+
+.newsH3Tt{color:#494646;font-size:16px;line-height:20px;margin:15px 0;}
+.newsH3Tt span{background:#f27267;display:inline-block;width:6px;height:20px;vertical-align:text-bottom;margin-right:10px;}
+.informList319 li{color:#494646;font-size:20px;line-height:22px;margin-bottom:26px;}
+.informList319 li .spTitle{display:inline-block;color:#ababab;font-size:16px;text-align:right;width:423px;padding-right:25px;}
+.informList319 li.fontOrange{color:#f27267;}
+.newsLine{background:#e8e8e8;height:1px;line-height:1px;overflow:hidden;margin-top:30px;}
+.readOk{padding:40px 186px 0px 210px;color:#494646;font-size:14px;line-height:22px;}
+.readOk span{display:inline-block;width:24px;margin-left:-24px;float:left;padding-top:2px;}
+.readOk a{color:#f27267;}
+.nextBtn319{text-align:center;}
+.nextBtn319 a, .nextBtn319 input{background:#f27267;border-radius:5px;display:inline-block;width:300px;height:50px;color:#fff;font-size:24px;text-align:center;line-height:50px;}
+
+/*--------------------*/
+.truePay{border-bottom:1px solid #b5b5b5;padding:16px 0;color:#494646;font-size:16px;line-height:22px;}
+.truePay span{color:#ff6e56;font-size:20px;}
+.availableBalance{padding:16px 0;color:#494646;font-size:16px;line-height:22px;overflow:hidden;}
+.availableBalance span{color:#ff6e56;font-size:20px;}
+.availableBalance .labelL span{color:#f27267;}
+.availableBalance .labelR label{display:inline-block;margin-right:30px;}
+.syjl319{background:url(../images/money319.png) no-repeat left top;border-bottom:1px solid #b5b5b5;padding:0 0 10px 25px;margin-top:30px;color:#2cb7ff;font-size:16px;line-height:18px;}
+.payDiv319{border-bottom:1px solid #b5b5b5;}
+.payDiv319 table{border-collapse:collapse;color:#494646;width:100%;}
+.payDiv319 th{border-bottom:1px solid #b5b5b5;height:69px;line-height:69px;font-size:18px;font-weight:400;text-align:center;}
+.payDiv319 td{background:#fafafa;border-bottom:1px solid #e8e8e8;height:52px;line-height:52px;font-size:14px;text-align:center;}
+
+.marginT64{margin-top:64px;}
+
+
+
+
+
+
+

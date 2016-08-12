@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	height: 630px;
+	margin: 0;
+	background: url(images/bottomBG.jpg) repeat-x bottom;
+	font: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #191919;
+	overflow: auto;
+}
+
+a {
+	font-size: 12px;
+	color: #191919;
+	text-decoration: none;
+}
+
+a:hover {
+	font-size: 12px;
+	color: #174288;
+	text-decoration: none;
+}
+
+.topBG {
+	margin-top: 0px;
+	padding: 0px;
+	width: auto;
+	height: 160px;
+	background: url(images/topBG.jpg) top repeat-x;
+}
+
+.loginBOX {
+	margin: 0 auto;
+	width: 540px;
+	height: 266px;
+	background: url(images/loginBOX.jpg) repeat-x;
+}
+
+.loginLOGO {
+	width: 288px;
+	height: 266px;
+	margin-left: 20px;
+	float: left;
+	background: url(images/logoinLOGO.jpg) no-repeat left;
+}
+
+.loginTEXT {
+	width: 230px;
+	margin: 0px;
+	padding-top: 90px;
+	padding-left: 0px;
+	float: left
+}
+
+.loginTEXT li {
+	margin-left: 10px;
+	padding-left: 0px;
+	height: 30x;
+	line-height: 30px;
+	display: block;
+	list-style-type: none;
+	margin-bottom: 10px;
+}
+
+.loginTEXT span {
+	float: left;
+	width: 50px;
+	margin: 0px;
+	padding: 0px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.input01 {
+	width: 130px;
+	font-size: 12px;
+	color: #666666;
+	height: 18px;
+	padding-left: 4px;
+	margin: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+}
+
+.error {
+	color: red
+}

@@ -1,0 +1,12 @@
+import java.util.*;
+
+
+import ${basepackage}.transfer.model.dto.${className};
+ 
+ 
+/** 
+ * @author 
+ * @version 1.0
+ * @since 1.0
+ */
+

@@ -1,0 +1,25 @@
+.land{width:100%; background:#e8e8e8;height:510px; margin-top:15px;}
+.landCont{width:1200px; margin:0 auto;}
+.landCont #landForm{width:378px;border:1px solid #cdcdcd; margin-top:40px; background:#fff; float:right;padding-bottom: 30px;margin-right: 120px;}
+.landCont #landForm h2{ margin-left:20px;color:#287ad2;}
+.landCont #landForm div{ position:relative;width:300px;height:42px; padding-bottom:14px; margin-left:40px;}
+.landCont #landForm i{position:absolute;left:0px;top:9px;width:38px;height:26px;border-right:1px solid #d2d2d2;vertical-align:middle;}
+.landCont #landForm .nameDiv i{ background:url(../images/lock.png) no-repeat center 1px; }
+.landCont #landForm .passDiv i{ background:url(../images/lock.png) no-repeat center -55px;}
+#landForm .nameDiv input,#landForm .passDiv input{width:298px;line-height:42px;border:1px solid #d2d2d2;text-indent:45px;height: 42px;border-radius: 4px;}
+#landForm .nameDiv p,#landForm .passDiv p{ display:none;}
+#landForm .yanzheng span{}
+.landCont #landForm .yzInput{width:68px;height:32px;line-height:32px;text-indent:5px;}
+#landForm .yanzheng img{ margin:0 8px;}
+#landForm .yanzheng a{color:#287ad2;}
+#landForm .xieyi{}
+#landForm .xieyi input,#landForm .xieyi span{vertical-align:middle;}
+
+#landForm .xieyi a{font-size:14px;color:#f27267;line-height:28px;}
+#landForm label{ padding:0 20px;}
+#landForm label.jz{ padding:0 0 0 40px;}
+#landForm label input{ vertical-align:middle;}
+
+#landForm label span{ font-size:14px;}
+#landForm label a{ font-size:14px;color:#287ad2;}
+.logoSub{ display:block;width:300px;height:50px;line-height:50px; border:none; background:#f27267;color:#fff; font-size:24px; margin:12px 0 12px 40px;cursor: pointer;border-radius: 4px;}

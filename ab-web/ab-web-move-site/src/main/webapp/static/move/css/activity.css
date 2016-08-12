@@ -1,0 +1,95 @@
+/*投资送现金活动页样式*/
+*{margin:0px;padding:0px;}
+html,body{height:100%;}
+html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:10px;}
+div,span,a,header{-webkit-tap-highlight-color:rgba(255,255,255,0);}
+body{background:#fff;padding:0;margin:0;color:#333;font-size:12px;font-size:1.2rem;font-family:Tahoma,Arial,Roboto,'Heiti SC','Droid Sans','Helvetica Neue','Droid Sans Fallback','Glyphicons Halflings',sans-self;}
+ul,li{margin:0;padding:0;list-style:none;}
+img{max-width:100%;border:none;border:0px;vertical-align:middle;}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display: block;}
+audio,canvas,progress,video{display:inline-block;vertical-align:baseline;}
+a,a:hover{text-decoration:none;}
+a,button,input{outline:0;}
+table{border-collapse:collapse;}
+.clearFix:after{content:'';display:block;clear:both;font-size:0px;height:0px;}
+.wapOutside{width:100%;min-width:320px;max-width:750px;margin:0px auto;}
+.disNone{display:none;}
+.disBlock{display:block;}
+/* arrow */
+.arrowLeft{border:1px solid #fff;border-right:none;border-top:none;display:inline-block;width:1.2rem;height:1.2rem;-moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg);}
+.arrowRight{border:1px solid #666;border-left:none;border-bottom:none;display:inline-block;width:1.2rem;height:1.2rem;-moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg);}
+/*  */
+.header{background:#00a7ed;border-bottom:1px solid #2098f1;height:3.6rem;color:#fff;font-size:1.45rem;line-height:3.6rem;text-align:center;}
+.bannerImg{margin-bottom:1.6rem;}
+/* actCon */
+.actCon{margin-bottom:2rem;}
+.actCon img{display:block;}
+.actList li{text-align:center;margin-bottom:0.5rem;padding:0 0.8rem;}
+/* form */
+.zhuce{padding:0 0.9rem;margin-bottom:1rem;}
+.zhuce div{margin-bottom:0.8rem;}
+.zhuce b, .zhuce bb{line-height:1.8erm;display:block;margin-top:0.3rem;padding-left:0.5rem;display:none;}
+.zhuce input{background:#f6f6f6;border:1px solid #cccccc;width:100%;height:3.4rem;border-radius:0.7rem;color:#666;font-size:1.28rem;line-height:3.4rem;padding:0 0.8rem;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.zhuce input::-webkit-input-placeholder{color:#bfbfbf}
+.zhuce input:-moz-placeholder{color:#bfbfbf}
+.zhuce input::-moz-placeholder{color:#bfbfbf}
+.zhuce input:-ms-input-placeholder{color:#bfbfbf}
+.zhuce .phone_yz input{width:67.5%;}
+.zhuce .phone_yz #code_btn{display:inline-block;background:#00a7ed;border:1px solid #3c8af4;width:29.8%;height:3.4rem;border-radius:0.7rem;color:#fff;font-size:1.45rem;line-height:3.4rem;text-align:center;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;vertical-align:middle;}
+.zhuce .phone_yz .time{display:none;background:#c2c2c2;border:1px solid #adadad;width:29.8%;height:3.4rem;border-radius:0.7rem;color:#fff;font-size:1.45rem;line-height:3.4rem;text-align:center;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;vertical-align:middle;}
+#mobile_sub{background:#00a7ed;border:1px solid #3c8af4;display:inline-block;width:100%;height:3.8rem;color:#fff;font-size:1.536rem;line-height:3.8rem;text-align:center;border-radius:0.9rem;}
+#but{background:#ff8400;margin:0 0.9rem 3.5rem;height:3.8rem;color:#fff;font-size:1.536rem;line-height:3.8rem;text-align:center;}
+/* 弹窗 */
+.maskMobil{position:fixed;left:0;top:0;width:100%;height:100%;background:#000;opacity:.1;z-index:10000;display:none}
+.boxMobile{width:300px;height:150px;font-size:14px;font-family:"微软雅黑";border:1px solid #ccc;position:fixed;.position:absolute;left:50%;top:50%;margin-left:-150px;margin-top:-75px;z-index:11111;background:#fff;color:#555;display:none}
+.boxMobile p{font-size:16px;text-align:center;line-height:80px}
+.close_btn{text-align:center}
+.boxMobile .sure{width:150px;height:36px;line-height:36px;background-color:#467fcc;border:1px solid #3c8af4;text-align:center;font-size:16px;color:#fff}
+.grid{text-align:center}
+.banner{text-align:center;padding:10px 0}
+.table{margin-bottom:35px}
+.banner button{margin-top:7px}
+.divider{width:100%;background:#CCC;height:1px;margin:25px 0}
+.explainer{font-weight:200;color:#222;margin-bottom:10px}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(min-width:320px){html{font-size:10px;}}
+@media(min-width:360px){html{font-size:11.25px;}}
+@media(min-width:400px){html{font-size:12.5px;}}
+@media(min-width:445px){html{font-size:13.9px;}}
+@media(min-width:495px){html{font-size:15.4px;}}
+@media(min-width:550px){html{font-size:17.1px;}}
+@media(min-width:605px){html{font-size:18.8px;}}
+@media(min-width:665px){html{font-size:20.6px;}}
+@media(min-width:732px){html{font-size:22.6px;}}
+
+
+
+
+
+
+
+
+
+

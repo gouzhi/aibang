@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* CSS Document */
+
+.testEmail{width:760px;border:1px solid #dbdbdb; padding-left:50px; margin:50px auto; padding-bottom:25px;}
+.testEmail .emailLogo{ background:url(../images/emailLine.png) no-repeat 0px bottom;padding:25px 0 15px;}
+.testEmail .emailLogo img{ padding-left:25px;}
+.testEmail h3{height:68px;line-height:68px;font-size:16px;color:#1c1c1c;font-weight:bold;}
+.testEmail p{width:715px;font-size:14px;color:#333;line-height:26px;}
+.testEmail .email_link{width:705px;line-height:22px; padding:20px 0; border-bottom:1px dashed #ddd;word-wrap: break-word;word-break: normal;}
+.testEmail .email_link a{color:#287ad2;}
+.testEmail h4{color:#ff2b08; margin:15px 0;}
+.testEmail .contP{color:#8a8a8a; margin-bottom:15px;}
+.testEmail .botP{ font-size:12px; margin-left:544px;}
+.testEmail .botP span{color:#287ad2;font-size:12px;}

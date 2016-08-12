@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="HjsApproveEmailActive">
+
+	<resultMap id="RM_HjsApproveEmailActive" type="com.cifex.transfer.model.dto.HjsApproveEmailActive">
+        <result property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="email" column="EMAIL"/>
+        <result property="status" column="STATUS"/>
+        <result property="verifyUserid" column="VERIFY_USERID"/>
+        <result property="verifyMemo" column="VERIFY_MEMO"/>
+        <result property="verifyTime" column="VERIFY_TIME"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="createIp" column="CREATE_IP"/>
+        <collection property="hjsUser" column="LOGINID"  ofType="com.cifex.transfer.model.dto.HjsUser">
+			<id property="id" column="LOGINID"/>
+        	<result property="username" column="USERNAME"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="HjsApproveEmailActive.columns">
+	    <![CDATA[
+		ID,USER_ID,EMAIL,STATUS,CREATE_TIME,CREATE_IP,VERIFY_USERID,VERIFY_MEMO,VERIFY_TIME
+	    ]]>
+	</sql>
+
+    <sql id="HjsApproveEmailActive.tbcolumns">
+	    <![CDATA[
+		tb.ID,tb.USER_ID,tb.EMAIL,tb.STATUS,tb.CREATE_TIME,tb.CREATE_IP,tb.VERIFY_USERID,tb.VERIFY_MEMO,tb.VERIFY_TIME,
+		u.ID as LOGINID,u.USERNAME
+	    ]]>
+	</sql>
+	
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<!--
+		描述：（前台/后台）添加功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<insert id="HjsApproveEmailActive.insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO hjs_approve_email_active (       	
+        	USER_ID ,
+        	EMAIL ,
+        	STATUS ,
+        	VERIFY_USERID,
+        	VERIFY_MEMO,
+        	VERIFY_TIME,
+        	CREATE_TIME ,
+        	CREATE_IP 
+        ) VALUES (
+        	#{userId} ,
+        	#{email} ,
+        	#{status} ,
+        	#{verifyUserid} ,
+        	#{verifyMemo} ,
+        	#{verifyTime} ,
+        	#{createTime} ,
+        	#{createIp} 
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    <!--
+		描述：（前台/后台）更新功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsApproveEmailActive.update" >
+    <![CDATA[
+        UPDATE hjs_approve_email_active SET
+	        USER_ID = #{userId} ,
+	        EMAIL = #{email} ,
+	        STATUS = #{status} ,
+	        VERIFY_USERID = #{verifyUserid} ,
+	        VERIFY_MEMO = #{verifyMemo} ,
+	        VERIFY_TIME = #{verifyTime} ,
+	        CREATE_TIME = #{createTime} ,
+	        CREATE_IP = #{createIp} 
+        WHERE 
+	        ID = #{id} 
+    ]]>
+	</update>
+	<!--
+		描述：（后台）会员认证模块审核功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsApproveEmailActive.audit">		
+		update hjs_approve_email_active set 
+		STATUS = #{status} ,
+		VERIFY_USERID = #{verifyUserid} ,
+	    VERIFY_MEMO = #{verifyMemo} ,
+	    VERIFY_TIME = #{verifyTime} 
+	    where ID = #{id}
+	</update>
+	<!--
+		描述：（前台）会员认证邮箱功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsApproveEmailActive.activate">		
+		update hjs_approve_email_active set 
+		EMAIL = #{email} ,
+		STATUS = #{status} ,
+	    VERIFY_TIME = #{verifyTime} 
+	    where ID = #{id}
+	</update>
+	<!--
+		描述：（前台/后台）逻辑删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <update id="HjsApproveEmailActive.remove">
+    <![CDATA[
+        UPDATE hjs_approve_email_active SET
+	       IS_DEL=1,
+	       DELETE_TIME=#{deleteTime} 
+        WHERE 
+        ID = #{id} 
+    ]]>
+    </update>
+    
+    <!--
+		描述：（前台/后台）删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <delete id="HjsApproveEmailActive.delete">
+    <![CDATA[
+        DELETE FROM hjs_approve_email_active WHERE
+        ID = #{id} 
+    ]]>
+    </delete>
+    <!--
+		描述：（前台/后台）通过ID获取验证信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <select id="HjsApproveEmailActive.getById" resultMap="RM_HjsApproveEmailActive">
+		SELECT <include refid="HjsApproveEmailActive.columns" />
+	    <![CDATA[
+		    FROM hjs_approve_email_active 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</select>
+	<!--
+		描述：（前台/后台）通过userId获取验证信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsApproveEmailActive.getByLoginId" resultMap="RM_HjsApproveEmailActive">
+		SELECT <include refid="HjsApproveEmailActive.columns" />
+	    <![CDATA[
+		    FROM hjs_approve_email_active 
+	        WHERE 
+		        USER_ID = #{userId} 
+	    ]]>
+	</select>
+	<!--
+		描述：（后台）分页条件sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<sql id="HjsApproveEmailActive.findPage.where">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	      				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND tb.ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userId)">
+				AND tb.USER_ID = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(email)">
+				AND tb.EMAIL = #{email}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				AND tb.STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTimeBegin)">
+				AND tb.CREATE_TIME >= #{createTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(createTimeEnd)">
+				AND tb.CREATE_TIME &lt;= #{createTimeEnd}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(verifyTimeBegin)">
+				AND tb.VERIFY_TIME >= #{verifyTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(verifyTimeEnd)">
+				AND tb.VERIFY_TIME &lt;= #{verifyTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(createIp)">
+				AND tb.CREATE_IP = #{createIp}
+			</if>
+			<if test="@Ognl@isNotEmpty(username)">
+				AND (u.USERNAME LIKE CONCAT(CONCAT('%', #{username}), '%') or tb.EMAIL LIKE CONCAT(CONCAT('%', #{username}), '%')) 
+			</if>
+		</where>
+	</sql>
+		
+    <select id="HjsApproveEmailActive.findPage.count" resultType="long">
+        SELECT count(*) FROM hjs_approve_email_active tb 
+        left join hjs_user u on tb.USER_ID=u.ID 
+		<include refid="HjsApproveEmailActive.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="HjsApproveEmailActive.findPage" resultType="map">
+    	SELECT <include refid="HjsApproveEmailActive.tbcolumns" />
+	    FROM hjs_approve_email_active tb 
+	    left join hjs_user u on tb.USER_ID=u.ID 
+		<include refid="HjsApproveEmailActive.findPage.where"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+		<if test="@Ognl@isNotEmpty(offset) and @Ognl@isNotEmpty(pageSize)">
+		 limit ${offset},${pageSize}
+		</if>
+    </select>
+
+	
+</mapper>
+

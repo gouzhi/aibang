@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="daemon-site"   />
+
+	<dubbo:registry address="zookeeper://${ZOOKEEPER_SERVER}" />
+
+  
+	<dubbo:reference id="actBonusUsersService" interface="com.cifex.business.api.user.activity.ActBonusUsersService" />
+	<dubbo:reference id="hjsActBonusUsersService" interface="com.cifex.business.api.system.activity.HjsActBonusUsersService" />
+	<dubbo:reference id="usersChannelRecordService" interface="com.cifex.business.api.user.user.UsersChannelRecordService"   />
+	<dubbo:reference id="usersMessageService" interface="com.cifex.business.api.user.message.UsersMessageService"   />
+	<dubbo:reference id="usersInfoService" interface="com.cifex.business.api.user.user.UsersInfoService"   />
+	<dubbo:reference id="borrowService" interface="com.cifex.business.api.user.borrow.BorrowService"   />
+</beans> 

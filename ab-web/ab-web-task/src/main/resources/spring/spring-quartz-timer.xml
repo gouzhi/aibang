@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<!-- 定时器 -->
+
+
+	<!-- 测试  -->
+	<bean id="testJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>com.cifex.web.task.timer.TestTimer</value>
+		</property>
+	</bean>
+	<bean id="testTrigger" lazy-init="false" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="testJob" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 1 * * ?</value><!--每天凌晨1:30点执行/>-->
+		</property>
+	</bean>
+
+
+
+	<!-- 投资订单取消  -->
+	<bean id="cancelTender" class="com.cifex.web.task.timer.CancelTenderTimer"/>
+	<bean id="cancelTenderDitail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="cancelTender"></property><!-- 指定任务类 -->
+		<property name="targetMethod" value="work"></property><!-- 指定任务方法 -->
+	</bean>
+	<bean id="cancelTenderTrigger" lazy-init="false" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="cancelTenderDitail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0/5 * * * ?</value><!--每隔5分钟执行-->
+		</property>
+	</bean>
+
+
+
+	<!-- 同步充值记录 -->
+	<bean id="syncRecharge" class="com.cifex.web.task.timer.SyncRechargeTimer"></bean>
+	<bean id="syncRechargeList" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="syncRecharge"></property><!-- 指定任务类 -->
+		<property name="targetMethod" value="startSync"></property><!-- 指定任务方法 -->
+	</bean>
+	<bean id="syncRechargeTrigger" lazy-init="false" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="syncRechargeList" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0/10 * * * ?</value><!--每隔10分钟执行-->
+		</property>
+	</bean>
+
+
+
+	<!-- 基金用户资金同步 -->
+	<bean id="syncFundUserAccount" class="com.cifex.web.task.timer.SyncFundUserAccount" />
+	<bean id="syncFundUserAccountDitail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="syncFundUserAccount"></property><!-- 指定任务类 -->
+		<property name="targetMethod" value="syncFundUsersAccount"></property><!-- 指定任务方法 -->
+	</bean>
+	<bean id="syncFundUserAccountTrigger" lazy-init="false" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="syncFundUserAccountDitail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 6 * * ?</value><!--每天早上6点更新-->
+		</property>
+	</bean>
+
+
+
+
+	<!--同步基金-->
+	<bean id="syncFundTimer" class="com.cifex.web.task.timer.SyncFundTimer"/>
+	<bean id="syncFundDitail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="syncFundTimer"></property><!-- 指定任务类 -->
+		<property name="targetMethod" value="syncFund"></property><!-- 指定任务方法 -->
+	</bean>
+	<bean id="syncFundTrigger" lazy-init="false" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="syncFundDitail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 2,4,6 * * ?</value><!--每日固定时间（凌晨 2：00 / 4：00 / 6：00）获取-->
+		</property>
+	</bean>
+
+
+
+	<!-- 下载ftp数据到本地  -->
+	<bean id="downLoadFTP" class="com.cifex.web.task.timer.DownLoadFTPTimer"/>
+	<bean id="downLoadFTPDitail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="downLoadFTP"></property><!-- 指定任务类 -->
+		<property name="targetMethod" value="work"></property><!-- 指定任务方法 -->
+	</bean>
+	<bean id="downLoadFTPTrigger" lazy-init="false" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="downLoadFTPDitail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 14 * * ?</value><!--每天凌晨3点执行-->
+		</property>
+	</bean>
+	
+
+
+
+
+
+	<!--
+		一个cron表达式有至少6个（也可能7个）有空格分隔的时间元素。从左到右：
+		1.秒2.分3.小时4.月份中的日期（1-31）5.月份（1-12或JAN-DEC)6.星期中的日期（1-7或SUN-SAT）7.年份（1970-2099）
+		每个元素都显示的规定一个值（如6），一个区间（9-12），一个列表（9，11，13）或一个通配符（*）。因为4和6这两个元素是互斥的，
+		因此应该通过设置一个问号（？）来表明不想设置的那个字段，“/”如果值组合就表示重复次数（10/6表示每10秒重复6次）。
+
+	-->
+	<!-- 可以定义多个触发器list -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!--<ref bean="testTrigger" />-->
+				<ref bean="cancelTenderTrigger"/>
+				<ref bean="syncRechargeTrigger" />
+				<!--<ref bean="downLoadFTPTrigger" />-->
+				<!--<ref bean="syncFundUserAccountTrigger" />-->
+				<!--<ref bean="syncFundTrigger"/>-->
+			</list>
+		</property>
+	</bean>
+
+</beans>

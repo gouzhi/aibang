@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* CSS Document */
+
+.subnav{ padding-bottom:25px; background: #fff; margin-bottom: 20px;}
+.subnav-top{width:1200px; margin:0 auto;}
+.subnav-top .left a{width:145px;height:36px;padding-right:28px;margin-top:18px;}
+.subnav-top .LogoR{ margin:15px 0 0 20px;}
+.subnav-top .right_zhuR{padding-top:35px;margin-left: 118px;}
+.subnav-top .right_zhuR span{ font-size:15px;color:#000;}
+.subnav-top .right .sub{width:30px;height:32px; background:url(../images/fd.png) no-repeat center center; position:absolute;top:1px;right:0px;cursor:pointer;}
+.marT10{ margin-top:-10px;}
+.privacy{width:100%;}
+.privacy_con{width:1000px;margin:0 auto;padding: 22px 100px 30px; background: #fff;margin-top: 20px; margin-bottom: 30px;}
+.privacy_con h2{font-size:20px;font-weight:bold;height:60px;line-height:60px;color:#333;text-align:center; margin-top:20px; margin-bottom: 24px;border-bottom: 4px solid #f27267;}
+.privacy_con h4{font-size:18px;height:42px;line-height:42px;color:#383838;}
+.privacy_con p{font-size:16px;line-height:32px;color:#666; text-indent:2em;margin-bottom: 12px;}

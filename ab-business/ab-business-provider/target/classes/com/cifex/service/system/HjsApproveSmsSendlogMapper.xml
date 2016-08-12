@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="HjsApproveSmsSendlog">
+
+	<resultMap id="RM_HjsApproveSmsSendlog" type="com.cifex.transfer.model.dto.HjsApproveSmsSendlog">
+        <result property="id" column="ID"/>
+        <result property="typeId" column="TYPE_ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="phone" column="PHONE"/>
+        <result property="contents" column="CONTENTS"/>
+        <result property="status" column="STATUS"/>
+        <result property="sendReturn" column="SEND_RETURN"/>
+        <result property="sendTime" column="SEND_TIME"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="createIp" column="CREATE_IP"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="HjsApproveSmsSendlog.columns">
+	    <![CDATA[
+		ID,TYPE_ID,USER_ID,PHONE,CONTENTS,STATUS,SEND_RETURN,SEND_TIME,CREATE_TIME,CREATE_IP
+	    ]]>
+	</sql>
+
+    <sql id="HjsApproveSmsSendlog.tbcolumns">
+	    <![CDATA[
+		tb.ID,tb.TYPE_ID,tb.USER_ID,tb.PHONE,tb.CONTENTS,tb.STATUS,tb.SEND_RETURN,tb.SEND_TIME,tb.CREATE_TIME,tb.CREATE_IP
+	    ]]>
+	</sql>
+	
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="HjsApproveSmsSendlog.insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO hjs_approve_sms_sendlog (
+        	ID ,
+        	TYPE_ID ,
+        	USER_ID ,
+        	PHONE ,
+        	CONTENTS ,
+        	STATUS ,
+        	SEND_RETURN ,
+        	SEND_TIME ,
+        	CREATE_TIME ,
+        	CREATE_IP 
+        ) VALUES (
+        	#{id} ,
+        	#{typeId} ,
+        	#{userId} ,
+        	#{phone} ,
+        	#{contents} ,
+        	#{status} ,
+        	#{sendReturn} ,
+        	#{sendTime} ,
+        	#{createTime} ,
+        	#{createIp} 
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    
+	<update id="HjsApproveSmsSendlog.update" >
+    <![CDATA[
+        UPDATE hjs_approve_sms_sendlog SET
+	        TYPE_ID = #{typeId} ,
+	        USER_ID = #{userId} ,
+	        PHONE = #{phone} ,
+	        CONTENTS = #{contents} ,
+	        STATUS = #{status} ,
+	        SEND_RETURN = #{sendReturn} ,
+	        SEND_TIME = #{sendTime} ,
+	        CREATE_TIME = #{createTime} ,
+	        CREATE_IP = #{createIp} 
+        WHERE 
+	        ID = #{id} 
+    ]]>
+	</update>
+
+
+   
+	
+    <update id="HjsApproveSmsSendlog.remove">
+    <![CDATA[
+        UPDATE hjs_approve_sms_sendlog SET
+	       IS_DEL=1,
+	       DELETE_TIME=#{deleteTime} 
+        WHERE 
+        ID = #{id} 
+    ]]>
+    </update>
+    
+    
+    <delete id="HjsApproveSmsSendlog.delete">
+    <![CDATA[
+        DELETE FROM hjs_approve_sms_sendlog WHERE
+        ID = #{id} 
+    ]]>
+    </delete>
+    
+    <select id="HjsApproveSmsSendlog.getById" resultMap="RM_HjsApproveSmsSendlog">
+		SELECT <include refid="HjsApproveSmsSendlog.columns" />
+	    <![CDATA[
+		    FROM hjs_approve_sms_sendlog 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</select>
+	
+	<sql id="HjsApproveSmsSendlog.findPage.where">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	      				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND tb.ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(typeId)">
+				AND tb.TYPE_ID = #{typeId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userId)">
+				AND tb.USER_ID = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(phone)">
+				AND tb.PHONE = #{phone}
+			</if>
+	       <if test="@Ognl@isNotEmpty(contents)">
+				AND tb.CONTENTS = #{contents}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				AND tb.STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(sendReturn)">
+				AND tb.SEND_RETURN = #{sendReturn}
+			</if>
+	       <if test="@Ognl@isNotEmpty(sendTimeBegin)">
+				AND tb.SEND_TIME >= #{sendTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(sendTimeEnd)">
+				AND tb.SEND_TIME &lt;= #{sendTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(createTimeBegin)">
+				AND tb.CREATE_TIME >= #{createTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(createTimeEnd)">
+				AND tb.CREATE_TIME &lt;= #{createTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(createIp)">
+				AND tb.CREATE_IP = #{createIp}
+			</if>
+		</where>
+	</sql>
+		
+    <select id="HjsApproveSmsSendlog.findPage.count" resultType="long">
+        SELECT count(*) FROM hjs_approve_sms_sendlog tb 
+		<include refid="HjsApproveSmsSendlog.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="HjsApproveSmsSendlog.findPage" resultType="map">
+    	SELECT <include refid="HjsApproveSmsSendlog.tbcolumns" />
+	    FROM hjs_approve_sms_sendlog tb
+		<include refid="HjsApproveSmsSendlog.findPage.where"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+		<if test="@Ognl@isNotEmpty(offset) and @Ognl@isNotEmpty(pageSize)">
+		 limit ${offset},${pageSize}
+		</if>
+    </select>
+
+	
+</mapper>
+

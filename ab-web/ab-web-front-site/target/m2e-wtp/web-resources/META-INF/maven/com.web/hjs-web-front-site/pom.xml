@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>hjs-web</artifactId>
+        <groupId>com.cifex</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.web</groupId>
+    <artifactId>hjs-web-front-site</artifactId>
+    <packaging>war</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>com.framework</groupId>
+            <artifactId>hjs-framework-exception</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.framework</groupId>
+            <artifactId>hjs-framework-utils</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.business</groupId>
+            <artifactId>hjs-business-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.framework</groupId>
+            <artifactId>hjs-framework-web</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.framework</groupId>
+            <artifactId>hjs-framework-redis-shiro</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.framework</groupId>
+            <artifactId>hjs-framework-memcache</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency> 
+
+    </dependencies>
+
+
+    <profiles>
+        <profile>
+            <id>develope</id>
+            <properties>
+                <zookeeper.url>127.0.0.1:2181</zookeeper.url>
+                <memcache.ip>127.0.0.1</memcache.ip>
+                <memcache.port>11211</memcache.port>
+                <redis.ip>127.0.0.1</redis.ip>
+                <redis.port>6379</redis.port>
+                <activemq.url>tcp://localhost:61616</activemq.url>
+
+                <css.image.domain>/hjs-web-front-site/static</css.image.domain>
+                <web.domain>.domain.com.cn</web.domain>
+                <web.name>money</web.name>
+                <project.name>/hjs-web-front-site</project.name>
+                <ip.ipseeker.ip.file>E://qqwry.dat</ip.ipseeker.ip.file>
+                <util.configuration.upload.path>D:/tools/nginx/html/</util.configuration.upload.path>
+                <web.commoninterceptor.image.domain.public>http://172.11.1.249/</web.commoninterceptor.image.domain.public>
+                <web.commoninterceptor.image.domain>http://172.11.1.249/</web.commoninterceptor.image.domain>
+                <education.domain>http\://www.huafax.com/</education.domain>
+                <move.domain>http\://m.domain.com.cn</move.domain>
+                <money.domain>http\://money.domain.com.cn/hjs-web-front-site</money.domain>
+                <fund.domain>http\://fund.domain.com.cn/hjs-web-fund-site</fund.domain>
+                <sms.flag>off</sms.flag>
+
+
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>test</id>
+            <properties>
+                <zookeeper.url>172.11.1.249:2181</zookeeper.url>
+                <memcache.ip>172.11.1.249</memcache.ip>
+                <memcache.port>11211</memcache.port>
+                <redis.ip>172.11.1.249</redis.ip>
+                <redis.port>6379</redis.port>
+                <activemq.url>tcp://172.11.1.249:61616</activemq.url>
+
+                <css.image.domain>/static</css.image.domain>
+                <web.domain>.hjs.com</web.domain>
+                <web.name>money</web.name>
+                <project.name></project.name>
+                <ip.ipseeker.ip.file>/data/huafax/qqwry.dat</ip.ipseeker.ip.file>
+                <util.configuration.upload.path>/data/huafax/nginx/html/</util.configuration.upload.path>
+                <web.commoninterceptor.image.domain.public>http://172.11.1.249/</web.commoninterceptor.image.domain.public>
+                <web.commoninterceptor.image.domain>http://172.11.1.249/</web.commoninterceptor.image.domain>
+                <education.domain>http\://172.11.1.251\:8081/</education.domain>
+                <move.domain>http\://m.hjs.com</move.domain>
+                <sms.flag>off</sms.flag>
+            </properties>
+        </profile>
+        <profile>
+            <id>production</id>
+            <properties>
+                <zookeeper.url>10.45.139.237:2181</zookeeper.url>
+                <memcache.ip>10.45.139.237</memcache.ip>
+                <memcache.port>11211</memcache.port>
+                <redis.ip>10.45.139.237</redis.ip>
+                <redis.port>6379</redis.port>
+                <activemq.url>tcp://10.45.136.93:61616</activemq.url>
+
+                <css.image.domain>/static</css.image.domain>
+                <web.domain>.huafax.com</web.domain>
+                <web.name>money</web.name>
+                <project.name></project.name>
+                <ip.ipseeker.ip.file>/data/huafax/qqwry.dat</ip.ipseeker.ip.file>
+                <util.configuration.upload.path>/data/huafax/nginx/html/</util.configuration.upload.path>
+                <web.commoninterceptor.image.domain>http://static2.huafax.com/</web.commoninterceptor.image.domain>
+                <web.commoninterceptor.image.domain.public>http://static1.huafax.com/</web.commoninterceptor.image.domain.public>
+                <education.domain>http\://www.huafax.com/</education.domain>
+                <move.domain>http\://m.huafax.com/</move.domain>
+                <sms.flag>on</sms.flag>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <finalName>hjs-web-front-site</finalName>
+        <plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<port>9003</port>
+					<path>/hjs-web-front-site</path>
+					<uriEncoding>UTF-8</uriEncoding>
+					<finalName>hjs-web-front-site</finalName>
+					<server>tomcat7</server>
+				</configuration>
+			</plugin>
+		</plugins>
+    </build>
+
+</project>

@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* CSS Document */
+
+.ownContent{width:100%; margin-top:50px;border-top:2px solid #295cd1;}
+.own{width:1000px; margin:0 auto;}
+/*个人资料左边公共样式*/
+.own .ownLeft{ margin-top:45px;}
+.ownLeft .ownLeftBott{width:198px;min-height:495px;border:1px solid #dbdbdb; text-align:center;}
+.ownLeft .ownPh{width:150px; border-bottom:1px dashed #dbdbdb; margin:15px 20px;}
+
+.ownLeft .ownPh p{line-height:60px;}
+.ownLeft .ownList h3{}
+.ownLeft .ownList li{line-height:26px;}
+.ownLeft .ownList li a{ padding:5px 70px;}
+/*找回密码右侧*/
+.ownRight{width:785px; margin-left:10px; margin-top:65px;}
+.ownRight .backSub{width:212px;height:42px;line-height:42px;color:#fff; background:#287ad2;margin:18px 0 30px 190px;cursor: pointer;}
+/*密码设置*/
+.setPassword-align{ margin:60px 0 15px 125px;}
+.setPassword-align label{ display:block; margin-bottom:40px;}
+.setPassword-align label span{ display:inline-block;width:85px; text-align:right;}
+.setPassword-align label input{width:262px;height:34px;line-height:34px;border:1px solid #ababab; text-indent:5px;}
+.setPassword-align b{color:#858585; font-weight:normal;}
+/*手机绑定*/
+.tabSwitch{ display:none;}
+.phoneTab{ margin-left:30px;}
+.phoneTab span{ padding:12px 32px; border:1px solid #ababab; border-bottom:none; background:#f6f6f6;}
+.phoneTab span.activeClick{ background:#fff;}
+.phoneBinding{width:790px;border:1px solid #ababab; margin-top:11px;}
+.phoneBinding h6{width:562px;color:#858585;line-height:26px; margin:30px 0 30px 145px;border-bottom:1px solid #ababab;}
+.phoneBinding h6 b{font-size:16px; font-weight:bold;color:#000; margin-right:3px;}
+.phoneBinding p{font-weight:bold;color:#333;margin-left:145px; margin-bottom:30px;}
+.phoneBinding label{ margin-left:145px;margin-bottom:40px;}
+.phoneBinding label san{display:inline-block;width:130px;color:#333;}
+.phoneBinding label input{width:120px;height:34px;line-height:34px;border:1px solid #ababab; text-indent:5px;}
+.phoneBinding label .formVerBut{ display:inline-block;width:100px;height:34px;line-height:34px; background:#ff9933;text-indent:0;color:#fff; margin-left:18px; text-align:center;cursor: pointer;}
+.phoneBinding label .time{display:none; position:absolute;width:100px;height:34px;line-height:34px;background:#ff9933;text-indent:0;color:#fff; margin-left:22px; text-align:center;}
+.phoneBinding .btnDiv{ margin:60px 0;text-align:center;}
+.btnDiv .phoneSub{width:120px;height:40px;line-height:40px;margin-right:25px;color:#fff;background:#287ad2;cursor: pointer;}
+.btnDiv .cancel{width:120px;height:40px;line-height:40px;color:#fff; background:#ccc;cursor: pointer;}
+
+/*邮箱绑定*/
+.email h5{width:562px;font-size:16px;font-weight:bold;color:#000;line-height:26px; margin:30px 0 30px 145px;border-bottom:1px solid #ababab;}
+.email .emailAdd{ margin-left:145px;}
+.email .emailAdd b{ font-size:16px;}
+.email .see{width:100px;height:34px;line-height:34px; background:#287ad2;color:#fff; margin:40px 0 15px 145px; cursor: pointer;}
+.email .prompt{width:430px;line-height:30px;color:#f00;margin-left:145px;padding-bottom:20px;border-bottom:1px dashed #ababab;}
+.email .error{margin:30px 0 30px 145px;color:#5c5c5c;}
+.email .emailText{ display:block; margin:20px 0 30px 145px;width:265px;height:34px;line-height:34px;text-indent:5px; border:1px solid #ababab;}
+.email .sendSub{width:115px;height:34px;line-height:34px;margin:15px 25px 70px 145px; background:#ff9933;color:#fff;cursor: pointer;}
+.email .sendCancel{width:115px;height:34px;line-height:34px;background:#ccc;color:#fff;cursor: pointer;}

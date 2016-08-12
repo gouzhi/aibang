@@ -1,0 +1,15 @@
+em.error {
+	color: #f27267;
+	/* background:url("../images/unchecked.gif") no-repeat 5px 0px; */
+	padding-left: 8px;
+	display: inline-block;
+	width: 200px;
+	word-wrap: break-word;
+	vertical-align: middle;
+}
+em.success {color: black;
+  /* background:url("../images/checked.gif") no-repeat 5px 0px; */
+  padding-left: 21px;
+}
+#em.error { color: black; }
+#warning { display: none; }

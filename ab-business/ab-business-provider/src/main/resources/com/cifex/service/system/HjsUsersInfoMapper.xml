@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="HjsUsersInfo">
+
+	<resultMap id="RM_HjsUsersInfo" type="com.cifex.transfer.model.dto.HjsUsersInfo">
+        <result property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="loginId" column="LOGIN_ID"/>
+        <result property="areaid" column="AREAID"/>
+        <result property="niname" column="NINAME"/>
+        <result property="birthday" column="BIRTHDAY"/>
+        <result property="sex" column="SEX"/>
+        <result property="inviteUserid" column="INVITE_USERID"/>
+        <result property="inviteMoney" column="INVITE_MONEY"/>
+        <result property="question" column="QUESTION"/>
+        <result property="answer" column="ANSWER"/>
+        <result property="lastTime" column="LAST_TIME"/>
+        <result property="lastIp" column="LAST_IP"/>
+        <result property="inviteCode" column="INVITE_CODE"/>
+        <result property="introduction" column="INTRODUCTION"/>
+        <result property="baseinfoOpen" column="BASEINFO_OPEN"/>
+        <result property="qq" column="QQ"/>
+        <result property="blood" column="BLOOD"/>
+        <result property="faith" column="FAITH"/>
+        <result property="education" column="EDUCATION"/>
+        <result property="university" column="UNIVERSITY"/>
+        <result property="marriage" column="MARRIAGE"/>
+        <result property="infoOpen" column="INFO_OPEN"/>
+        <result property="headPic" column="HEAD_PIC"/>
+        <result property="source" column="SOURCE"/>
+	</resultMap>
+	<resultMap id="RM_HjsUsersInfoPage" type="com.cifex.transfer.model.dto.HjsUsersInfo">
+        <id property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="loginId" column="LOGIN_ID"/>
+        <result property="areaid" column="AREAID"/>
+        <result property="niname" column="NINAME"/>
+        <result property="birthday" column="BIRTHDAY"/>
+        <result property="sex" column="SEX"/>
+        <result property="inviteUserid" column="INVITE_USERID"/>
+        <result property="inviteMoney" column="INVITE_MONEY"/>
+        <result property="question" column="QUESTION"/>
+        <result property="answer" column="ANSWER"/>
+        <result property="lastTime" column="LAST_TIME"/>
+        <result property="lastIp" column="LAST_IP"/>
+        <result property="inviteCode" column="INVITE_CODE"/>
+        <result property="introduction" column="INTRODUCTION"/>
+        <result property="baseinfoOpen" column="BASEINFO_OPEN"/>
+        <result property="qq" column="QQ"/>
+        <result property="blood" column="BLOOD"/>
+        <result property="faith" column="FAITH"/>
+        <result property="education" column="EDUCATION"/>
+        <result property="university" column="UNIVERSITY"/>
+        <result property="marriage" column="MARRIAGE"/>
+        <result property="infoOpen" column="INFO_OPEN"/>
+        <result property="headPic" column="HEAD_PIC"/>
+        <result property="source" column="SOURCE"/>
+        <collection property="hjsUser" column="LOGINID"  ofType="com.cifex.transfer.model.dto.HjsUser">
+			<id property="id" column="LOGINID"/>
+        	<result property="username" column="USERNAME"/>
+        	<result property="typeId" column="TYPE_ID"/>
+        	<result property="email" column="EMAIL"/>
+        	<result property="phone" column="PHONE"/>
+        	<result property="password" column="PASSWORD"/>
+        	<result property="status" column="STATUS"/>
+        	<result property="optId" column="OPT_ID"/>
+        	<result property="createTime" column="CREATE_TIME"/>
+        	<result property="createIp" column="CREATE_IP"/>
+        	<result property="isDel" column="IS_DEL"/>
+        	<result property="deleteTime" column="DELETE_TIME"/>
+        	<result property="phoneStatus" column="PHONE_STATUS"/>
+        	<result property="emailStatus" column="EMAIL_STATUS"/>
+        	<result property="realName" column="REALNAME"/>
+        	<result property="realNameStatus" column="REALNAME_STATUS"/>
+        	<result property="nrpUsrId" column="NRP_USR_ID"/>
+		</collection>
+		<collection property="hjsUserBase" column="USERID"  ofType="com.cifex.transfer.model.dto.HjsUserBase">
+			<id property="id" column="USERID"/>
+        	<result property="typeId" column="TYPE_ID"/>
+        	<result property="username" column="USERNAME"/>
+        	<result property="payPassword" column="PAY_PASSWORD"/>
+        	<result property="total" column="TOTAL"/>
+        	<result property="balance" column="BALANCE"/>
+        	<result property="avlBalance" column="AVL_BALANCE"/>
+        	<result property="frost" column="FROST"/>
+        	<result property="await" column="AWAIT"/>
+        	<result property="tenderNum" column="TENDER_NUM"/>
+        	<result property="tenderAccount" column="TENDER_ACCOUNT"/>
+        	<result property="income" column="INCOME"/>
+        	<result property="expend" column="EXPEND"/>
+        	<result property="createTime" column="CREATE_TIME"/>
+        	<result property="createIp" column="CREATE_IP"/>
+        	<result property="updateTime" column="UPDATE_TIME"/>
+        	<result property="updateIp" column="UPDATE_IP"/>
+        	<result property="optId" column="OPT_ID"/>
+        	<result property="usrCustId" column="USR_CUST_ID"/>
+        	<result property="fadadaCaId" column="FADADA_CA_ID"/>
+        	<result property="authorEndDate" column="AUTHOR_END_DATE"/>
+		</collection>
+		<collection property="hjsSysArea" column="AREAID" ofType="com.cifex.transfer.model.dto.HjsSysArea">
+			<id property="id" column="USERID"/>
+			<result property="areaName" column="AREA_NAME"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="HjsUsersInfo.columns">
+	    <![CDATA[
+		ID,USER_ID,LOGIN_ID,AREAID,NINAME,BIRTHDAY,SEX,INVITE_USERID,INVITE_MONEY,QUESTION,ANSWER,LAST_TIME,LAST_IP,INVITE_CODE,INTRODUCTION,BASEINFO_OPEN,QQ,BLOOD,FAITH,EDUCATION,UNIVERSITY,MARRIAGE,INFO_OPEN,HEAD_PIC,SOURCE
+	    ]]>
+	</sql>
+	<!-- 会员管理模块抽取的列 -->
+	<sql id="HjsUsersInfo.columnsPage">
+		i.ID,i.USER_ID,i.LOGIN_ID,i.AREAID,i.NINAME,i.BIRTHDAY,i.SEX,i.INVITE_USERID,
+		i.INVITE_MONEY,i.QUESTION,i.ANSWER,i.LAST_TIME,i.LAST_IP,
+		i.INVITE_CODE,i.INTRODUCTION,i.BASEINFO_OPEN,i.QQ,i.BLOOD,i.FAITH,i.EDUCATION,
+		i.UNIVERSITY,i.MARRIAGE,i.INFO_OPEN,i.HEAD_PIC,i.SOURCE,
+		u.ID as LOGINID,u.USERNAME,u.TYPE_ID,u.EMAIL,u.PHONE,u.PASSWORD,
+		u.STATUS,u.OPT_ID,u.CREATE_TIME,u.CREATE_IP,u.IS_DEL,
+		u.DELETE_TIME,u.PHONE_STATUS,u.EMAIL_STATUS,u.REALNAME,u.REALNAME_STATUS,u.NRP_USR_ID,
+		b.ID as USERID,b.TYPE_ID,b.USERNAME,b.PAY_PASSWORD,b.TOTAL,b.BALANCE,b.AVL_BALANCE,
+		b.FROST,b.AWAIT,b.TENDER_NUM,b.TENDER_ACCOUNT,b.INCOME,b.EXPEND,b.CREATE_TIME,b.AUTHOR_END_DATE,
+		b.CREATE_IP,b.UPDATE_TIME,b.UPDATE_IP,b.OPT_ID,b.USR_CUST_ID,b.FADADA_CA_ID,
+		a.ID as AREAID,a.AREA_NAME		
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<!--
+		描述：（前台/后台）添加功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<insert id="HjsUsersInfo.insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO hjs_users_info (
+        	USER_ID ,
+        	LOGIN_ID ,
+        	AREAID ,
+        	NINAME ,
+        	BIRTHDAY ,
+        	SEX ,
+        	INVITE_USERID ,
+        	INVITE_MONEY ,
+        	QUESTION ,
+        	ANSWER ,
+        	LAST_TIME ,
+        	LAST_IP ,
+        	INVITE_CODE ,
+        	INTRODUCTION ,
+        	BASEINFO_OPEN ,
+        	QQ ,
+        	BLOOD ,
+        	FAITH ,
+        	EDUCATION ,
+        	UNIVERSITY ,
+        	MARRIAGE ,
+        	INFO_OPEN ,
+        	HEAD_PIC,
+        	SOURCE 
+        ) VALUES (
+        	#{userId} ,
+        	#{loginId} ,
+        	#{areaid} ,
+        	#{niname} ,
+        	#{birthday} ,
+        	#{sex} ,
+        	#{inviteUserid} ,
+        	#{inviteMoney} ,
+        	#{question} ,
+        	#{answer} ,
+        	#{lastTime} ,
+        	#{lastIp} ,
+        	#{inviteCode} ,
+        	#{introduction} ,
+        	#{baseinfoOpen} ,
+        	#{qq} ,
+        	#{blood} ,
+        	#{faith} ,
+        	#{education} ,
+        	#{university} ,
+        	#{marriage} ,
+        	#{infoOpen} ,
+        	#{headPic} ,
+        	#{source}
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+	<!--
+		描述：（后台）会员添加模块预添加会员信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<insert id="HjsUsersInfo.addUsersInfo" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO hjs_users_info (
+        	USER_ID ,
+        	LOGIN_ID ,
+        	LAST_TIME ,
+        	SOURCE
+        ) VALUES (
+        	#{userId} ,
+        	#{loginId} ,
+        	#{lastTime} ,
+        	#{source} 
+        )
+    ]]>
+	</insert>
+	<!--
+		描述：（前台/后台）生成邀请码功能sql
+		作者：Zhang Yong
+		时间：2015.9.24
+	-->
+	<update id="HjsUsersInfo.createInviteCode">
+        UPDATE hjs_users_info SET	        
+	        INVITE_CODE = #{inviteCode}
+	         <if test="@Ognl@isNotEmpty(inviteUserid)">
+			,INVITE_USERID = #{inviteUserid} 
+			</if>
+        WHERE 
+	        ID = #{id}  
+
+	</update>
+	<!--
+		描述：（前台）个人资料模块修改基本信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.24
+	-->
+	<update id="HjsUsersInfo.updateBase">
+	<![CDATA[
+        UPDATE hjs_users_info SET	        
+	        SEX = #{sex} ,
+	        BIRTHDAY = #{birthday} ,
+	        INTRODUCTION = #{introduction} ,
+	        BASEINFO_OPEN = #{baseinfoOpen}
+        WHERE 
+	        ID = #{id}  
+    ]]>
+	</update>
+	<!--
+		描述：（前台）个人资料模块修改详细信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.24
+	-->
+	<update id="HjsUsersInfo.updateDetail">
+	<![CDATA[
+        UPDATE hjs_users_info SET	        
+	        AREAID = #{areaid} ,
+	        QQ = #{qq} ,
+	        BLOOD = #{blood} ,
+	        EDUCATION = #{education} ,
+	        UNIVERSITY = #{university} ,
+	        MARRIAGE = #{marriage} ,
+	        FAITH = #{faith} ,
+	        INFO_OPEN = #{infoOpen} 
+        WHERE 
+	        ID = #{id}  
+    ]]>
+	</update>
+	<!--
+		描述：（前台）个人资料模块修改头像功能sql
+		作者：Zhang Yong
+		时间：2015.9.24
+	-->
+	<update id="HjsUsersInfo.updateAvatar">
+	<![CDATA[
+        UPDATE hjs_users_info SET	        
+	        HEAD_PIC = #{headPic} 
+        WHERE 
+	        ID = #{id}  
+    ]]>
+	</update>
+    <!--
+		描述：（前台/后台）更新功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUsersInfo.update" >
+    <![CDATA[
+        UPDATE hjs_users_info SET
+	        USER_ID = #{userId} ,
+	        LOGIN_ID = #{loginId} ,
+	        AREAID = #{areaid} ,
+	        NINAME = #{niname} ,
+	        BIRTHDAY = #{birthday} ,
+	        SEX = #{sex} ,
+	        INVITE_USERID = #{inviteUserid} ,
+	        INVITE_MONEY = #{inviteMoney} ,
+	        QUESTION = #{question} ,
+	        ANSWER = #{answer} ,
+	        LAST_TIME = #{lastTime} ,
+	        LAST_IP = #{lastIp} ,
+	        INVITE_CODE = #{inviteCode} ,
+	        INTRODUCTION = #{introduction} ,
+	        BASEINFO_OPEN = #{baseinfoOpen} ,
+	        QQ = #{qq} ,
+	        BLOOD = #{blood} ,
+	        FAITH = #{faith} ,
+	        EDUCATION = #{education} ,
+	        UNIVERSITY = #{university} ,
+	        MARRIAGE = #{marriage} ,
+	        INFO_OPEN = #{infoOpen} ,
+	        HEAD_PIC = #{headPic} ,
+	        SOURCE = #{source}
+        WHERE 
+	        ID = #{id}  
+    ]]>
+	</update>
+
+
+   
+	<!--
+		描述：（前台/后台）逻辑删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <update id="HjsUsersInfo.remove">
+    <![CDATA[
+        UPDATE hjs_users_info SET
+	       IS_DEL=1,
+	       DELETE_TIME=#{deleteTime} 
+        WHERE 
+        ID = #{id} 
+    ]]>
+    </update>
+    
+    <!--
+		描述：（前台/后台）通过ID删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <delete id="HjsUsersInfo.delete">
+    <![CDATA[
+        DELETE FROM hjs_users_info WHERE
+        ID = #{id} 
+    ]]>
+    </delete>
+    <!--
+		描述：（前台/后台）通过ID获取会员表信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <select id="HjsUsersInfo.getById" resultMap="RM_HjsUsersInfo">
+		SELECT <include refid="HjsUsersInfo.columns" />
+	    <![CDATA[
+		    FROM hjs_users_info 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</select>
+	<!--
+		描述：（前台/后台）通过ID获取会员相关信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsUsersInfo.getUsersInfoById" resultMap="RM_HjsUsersInfoPage">
+		SELECT <include refid="HjsUsersInfo.columnsPage" />
+		    FROM hjs_users_info i
+	    left join hjs_user u on i.LOGIN_ID=u.ID 
+	    left join hjs_user_base b on i.USER_ID = b.ID 
+	    left join hjs_sys_area a on i.AREAID=a.ID
+	        WHERE 
+		        i.ID = #{id} 
+	</select>
+	<!--
+		描述：（前台）通过登录ID获取会员信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsUsersInfo.getByLoginId" resultMap="RM_HjsUsersInfo">
+		SELECT <include refid="HjsUsersInfo.columns" />
+	    <![CDATA[
+		    FROM hjs_users_info 
+	        WHERE 
+		        LOGIN_ID = #{loginId} 
+	    ]]>
+	</select>
+	
+	<!-- 
+		描述：（前台）通过userBaseID获取会员信息功能sql
+		时间：2016.4.16
+	 -->
+	<select id="HjsUsersInfo.getByUserBaseId" resultMap="RM_HjsUsersInfo">
+		SELECT <include refid="HjsUsersInfo.columns" />
+	    <![CDATA[
+		    FROM hjs_users_info 
+	        WHERE 
+		        USER_ID = #{userId} 
+	    ]]>
+	</select>
+	<!--
+		描述：（前台）通过username获取会员信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsUsersInfo.getByUsername" resultMap="RM_HjsUsersInfoPage">
+		SELECT <include refid="HjsUsersInfo.columnsPage" />
+	    <![CDATA[
+		    FROM hjs_users_info i
+	    left join hjs_user u on i.LOGIN_ID=u.ID 
+	    left join hjs_user_base b on i.USER_ID = b.ID 
+	    left join hjs_sys_area a on i.AREAID=a.ID
+	        WHERE
+	        	u.IS_DEL=0 AND u.TYPE_ID=3 AND 
+		        (u.USERNAME LIKE CONCAT(CONCAT('%', #{username}), '%') OR u.REALNAME LIKE CONCAT(CONCAT('%', #{username}), '%'))  
+	    ]]>
+	</select>
+	<!--
+		描述：（前台）通过邀请码获得邀请人信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsUsersInfo.getInviteUser" resultMap="RM_HjsUsersInfo">
+		SELECT <include refid="HjsUsersInfo.columns" />
+	    <![CDATA[
+		    FROM hjs_users_info 
+	        WHERE 
+		        INVITE_CODE = #{inviteCode} 
+	    ]]>
+	</select>
+	<!--
+		描述：（后台）分页条件功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<sql id="HjsUsersInfo.findPage.where">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			u.IS_DEL=0 AND u.TYPE_ID=3	      				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND i.ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userId)">
+				AND i.USER_ID = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(loginId)">
+				AND i.LOGIN_ID = #{loginId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(areaid)">
+				AND i.AREAID = #{areaid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(niname)">
+				AND i.NINAME = #{niname}
+			</if>
+	       <if test="@Ognl@isNotEmpty(birthdayBegin)">
+				AND i.BIRTHDAY >= #{birthdayBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(birthdayEnd)">
+				AND i.BIRTHDAY &lt;= #{birthdayEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(sex)">
+				AND i.SEX = #{sex}
+			</if>
+	       <if test="@Ognl@isNotEmpty(inviteUserid)">
+				AND i.INVITE_USERID = #{inviteUserid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(inviteMoney)">
+				AND i.INVITE_MONEY = #{inviteMoney}
+			</if>
+	       <if test="@Ognl@isNotEmpty(question)">
+				AND i.QUESTION = #{question}
+			</if>
+	       <if test="@Ognl@isNotEmpty(answer)">
+				AND i.ANSWER = #{answer}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lastTimeBegin)">
+				AND u.CREATE_TIME >= #{lastTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(lastTimeEnd)">
+				AND u.CREATE_TIME &lt;= #{lastTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(lastIp)">
+				AND i.LAST_IP = #{lastIp}
+			</if>
+	       <if test="@Ognl@isNotEmpty(inviteCode)">
+				AND i.INVITE_CODE = #{inviteCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(introduction)">
+				AND i.INTRODUCTION = #{introduction}
+			</if>
+	       <if test="@Ognl@isNotEmpty(baseinfoOpen)">
+				AND i.BASEINFO_OPEN = #{baseinfoOpen}
+			</if>
+	       <if test="@Ognl@isNotEmpty(qq)">
+				AND i.QQ = #{qq}
+			</if>
+	       <if test="@Ognl@isNotEmpty(blood)">
+				AND i.BLOOD = #{blood}
+			</if>
+	       <if test="@Ognl@isNotEmpty(faith)">
+				AND i.FAITH = #{faith}
+			</if>
+	       <if test="@Ognl@isNotEmpty(education)">
+				AND i.EDUCATION = #{education}
+			</if>
+	       <if test="@Ognl@isNotEmpty(university)">
+				AND i.UNIVERSITY = #{university}
+			</if>
+	       <if test="@Ognl@isNotEmpty(marriage)">
+				AND i.MARRIAGE = #{marriage}
+			</if>
+	       <if test="@Ognl@isNotEmpty(infoOpen)">
+				AND i.INFO_OPEN = #{infoOpen}
+			</if>
+	       <if test="@Ognl@isNotEmpty(headPic)">
+				AND i.HEAD_PIC = #{headPic}
+			</if>
+			<if test="@Ognl@isNotEmpty(source)">
+				AND i.SOURCE = #{source}
+			</if>
+			<if test="@Ognl@isNotEmpty(username)">
+				AND (u.USERNAME LIKE CONCAT(CONCAT('%', #{username}), '%') OR u.PHONE LIKE CONCAT(CONCAT('%', #{username}), '%')) 
+			</if>
+			<!-- 已投资筛选 -->
+			<if test="checkStatus == 1">
+				AND b.TENDER_NUM > 0
+			</if>
+			<!-- 有冻结筛选 -->
+			<if test="checkStatus == 2">
+				AND b.FROST > 0
+			</if>
+			<!-- 会员账户状态1有效 2停用 3 受限 -->
+			<if test="status == 1">
+				AND u.STATUS = 1
+			</if>
+			<if test="status == 2">
+				AND u.STATUS = 2
+			</if>
+			<if test="status == 3">
+				AND u.STATUS = 3
+			</if>
+		</where>
+	</sql>
+	<!--
+		描述：（后台）分页获取统计数功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->	
+    <select id="HjsUsersInfo.findPage.count" resultType="long">
+        SELECT count(*) FROM hjs_users_info i
+	    left join hjs_user u on i.LOGIN_ID=u.ID 
+	    left join hjs_user_base b on i.USER_ID = b.ID 
+	    left join hjs_sys_area a on i.AREAID=a.ID
+		<include refid="HjsUsersInfo.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="HjsUsersInfo.findPage" resultMap="RM_HjsUsersInfoPage">
+    	SELECT <include refid="HjsUsersInfo.columnsPage" />
+	    FROM hjs_users_info i
+	    left join hjs_user u on i.LOGIN_ID=u.ID 
+	    left join hjs_user_base b on i.USER_ID = b.ID 
+	    left join hjs_sys_area a on i.AREAID=a.ID
+	    left join hjs_users_invite tb on i.USER_ID=tb.USER_ID
+		<include refid="HjsUsersInfo.findPage.where"/>
+		<if test="@Ognl@isNotEmpty(phone)">
+				AND tb.INVITE_USER_ID IN (SELECT b.ID 
+												FROM hjs_user u
+												LEFT JOIN hjs_users_info i ON u.ID = i.LOGIN_ID
+												LEFT JOIN hjs_user_base b ON b.ID = i.USER_ID
+												WHERE u.PHONE LIKE CONCAT(CONCAT('%', #{phone}), '%') OR u.USERNAME LIKE CONCAT(CONCAT('%', #{phone}), '%'))
+		</if>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+		
+		<if test="@Ognl@isNotEmpty(offset) and @Ognl@isNotEmpty(pageSize)">
+		 limit ${offset},${pageSize}
+		</if>
+    </select>
+	
+	<!-- 通过用户的baseid获得用户的手机号 -->
+	<select id="HjsUsersInfo.getUserPhoneByUserBaseId" resultType="string">
+		SELECT u.PHONE
+			FROM hjs_users_info i
+			LEFT JOIN hjs_user u ON u.ID = i.LOGIN_ID 
+			WHERE i.USER_ID = #{userId}
+	</select>
+	
+</mapper>
+

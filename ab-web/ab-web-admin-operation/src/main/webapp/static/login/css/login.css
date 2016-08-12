@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+
+.land{width:100%; background:url(../images/Backstage.jpg) no-repeat top center;height:800px;}
+.landCont{width:1000px; margin:0 auto;}
+.logoB{margin:204px 0 0 116px;}
+.landCont #landForm{width:285px; margin-top:130px; background:rgba(0,0,0,.4); float:right;margin-right:100px; }
+.landCont #landForm .headH h2{display:inline-block; margin-left:20px;color:#c9b970;}
+.landCont #landForm .headH h3{display:inline-block; margin-left:8px;color:#c9b970;}
+
+.landCont #landForm div{ position:relative;width:270px;height:20px; padding-bottom:32px; margin-left:20px;}
+.landCont #landForm .headH{border-bottom:1px solid;border-color:rgba(189,221,255,.29);width:247px;height:44px;padding-bottom:0; margin-bottom:25px;}
+.landCont #landForm i{position:absolute;left:0px;top:0px;width:30px;height:30px;border:1px solid #ccc;vertical-align:middle;}
+.landCont #landForm .nameDiv i{ background:url(../images/lock.png) no-repeat 5px 3px; background-color:#f7f7f7;}
+.landCont #landForm .passDiv i{ background:url(../images/lock.png) no-repeat 5px -52px; background-color:#f7f7f7;}
+#landForm .nameDiv input,#landForm .passDiv input{width:245px;height:30px;line-height:30px;border:1px solid #ccc;text-indent:35px;}
+#landForm .nameDiv p,#landForm .passDiv p{ display:none; padding-left:36px;color:#858585;}
+.landCont #landForm .yzInput{width:68px;height:28px;line-height:28px;background:#f0f0f0; text-indent:5px;}
+#landForm .yanzheng img{ margin:0 4px;}
+#landForm .yanzheng .yzs{color:#c9b970;}
+#landForm .yanzheng a{color:#c9b970;}
+#landForm .xieyi input,#landForm .xieyi span{vertical-align:middle;}
+#landForm .xieyi a{color:#287ad2;line-height:28px;}
+#landForm label{ padding:0 20px;}
+#landForm label input{ vertical-align:middle;}
+#landForm label span{ font-size:14px;}
+#landForm label a{ font-size:14px;color:#287ad2;}
+.logoSub{ display:block;width:230px;height:32px;line-height:32px; border:none; background:#287ad2;color:#fff; font-size:16px; margin:12px 0 25px 24px;cursor:pointer;}
+.footer{width:1000px; margin:0 auto;} 
+.footer p{width:1000px;color:#808080;height:130px;line-height:130px;text-align:center;}
+.footer p span{ padding-left:30px;}

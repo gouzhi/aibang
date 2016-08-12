@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="front-web-site"   />
+	<dubbo:registry address="zookeeper://${ZOOKEEPER_SERVER}" />
+    <dubbo:reference id="userService" interface="com.cifex.business.api.user.user.UserService"   />
+	<dubbo:reference id="usersInfoService" interface="com.cifex.business.api.user.user.UsersInfoService"   />
+	<dubbo:reference id="usersLogService" interface="com.cifex.business.api.user.user.UsersLogService"   />
+	<dubbo:reference id="usersChannelRecordService" interface="com.cifex.business.api.user.user.UsersChannelRecordService"   />
+    <dubbo:reference id="accountUsersService" interface="com.cifex.business.api.user.account.AccountUsersService"   />
+	<dubbo:reference id="userBaseService" interface="com.cifex.business.api.user.account.UserBaseService"   /> 
+	<dubbo:reference id="approveEmailActiveService" interface="com.cifex.business.api.user.approve.ApproveEmailActiveService"   />
+	<dubbo:reference id="approveSmsService" interface="com.cifex.business.api.user.approve.ApproveSmsService"   />
+	<dubbo:reference id="approveRealNameService" interface="com.cifex.business.api.user.approve.ApproveRealnameService"   />   
+	<dubbo:reference id="borrowTenderService" interface="com.cifex.business.api.user.borrow.BorrowTenderService"   />
+	<dubbo:reference id="borrowRecoverService" interface="com.cifex.business.api.user.borrow.BorrowRecoverService"></dubbo:reference>  
+	<dubbo:reference id="borrowAuditService" interface="com.cifex.business.api.user.borrow.BorrowAuditService" />
+	<dubbo:reference id="borrowService" interface="com.cifex.business.api.user.borrow.BorrowService"   />
+
+	<dubbo:reference id="accountUsersBankService" interface="com.cifex.business.api.user.account.AccountUsersBankService" />
+	<dubbo:reference id="accountBankService" interface="com.cifex.business.api.user.account.AccountBankService" />
+	<dubbo:reference id="sysAreaService" interface="com.cifex.business.api.user.area.SysAreaService" />
+	<dubbo:reference id="usersMessageService" interface="com.cifex.business.api.user.message.UsersMessageService" />
+	<dubbo:reference id="accountCashService" interface="com.cifex.business.api.user.account.AccountCashService"   />
+	<dubbo:reference id="accountRechargeService" interface="com.cifex.business.api.user.account.AccountRechargeService"   />
+	<dubbo:reference id="accountPaymentService" interface="com.cifex.business.api.user.account.AccountPaymentService"   />
+	<dubbo:reference id="usersAddService" interface="com.cifex.business.api.user.user.UsersAddService"   />
+	<dubbo:reference id="sysConfigService" interface="com.cifex.business.api.user.config.SysConfigService"   />
+
+
+    <dubbo:reference id="actBonusUsersService" interface="com.cifex.business.api.user.activity.ActBonusUsersService" />
+	<dubbo:reference id="actBonusService" interface="com.cifex.business.api.user.activity.ActBonusService" />
+	<dubbo:reference id="actInfoService" interface="com.cifex.business.api.user.activity.ActInfoService" />
+	<dubbo:reference id="actBonusUsersLogService" interface="com.cifex.business.api.user.activity.ActBonusUsersLogService" />
+	<dubbo:reference id="jcContentExtService" interface="com.cifex.business.api.education.content.JcContentExtService" />
+	<dubbo:reference id="usersEnterpriceService" interface="com.cifex.business.api.user.user.UsersEnterpriceService"   />
+	<dubbo:reference id="borrowProjectService" interface="com.cifex.business.api.user.borrow.BorrowProjectService"   />
+	<dubbo:reference id="borrowUserService" interface="com.cifex.business.api.user.borrow.BorrowUserService"   />
+	<dubbo:reference id="actRechargeService" interface="com.cifex.business.api.user.activity.ActRechargeService"   />
+	
+	<dubbo:reference id="actDrawAwardService" interface="com.cifex.business.api.user.activity.ActDrawAwardService"   />
+	<dubbo:reference id="actDrawAwardWinService" interface="com.cifex.business.api.user.activity.ActDrawAwardWinService"   />
+	<dubbo:reference id="actDrawService" interface="com.cifex.business.api.user.activity.ActDrawService"   />
+	<dubbo:reference id="actDrawUsersLogService" interface="com.cifex.business.api.user.activity.ActDrawUsersLogService"   />
+	<dubbo:reference id="actDrawUsersService" interface="com.cifex.business.api.user.activity.ActDrawUsersService"   />
+	
+</beans> 

@@ -1,0 +1,209 @@
+@charset "utf-8";
+/* CSS Document */
+
+		body{
+			line-height:30px;
+			text-align:left;
+			font-family:"微软雅黑";
+			font-size:14px;
+		}
+		a:hover{ text-decoration:none;color:#fff;}
+		.pl{padding-left:20px;}
+		.pL35{ padding-left:35px;}
+		.pL48{ padding-left:48px;}
+		.pL52{ padding-left:52px;}
+		.pR{padding-right:20px;}
+		.pL40{ padding-left:40px;}
+		.mL40{ margin-left:40px;}
+		.marTB{ margin:22px 0 30px 0;}
+		.row-fluid{ margin-bottom:15px;}
+		.pr{ position:relative;}
+		.pa{ position:absolute;}
+		.center {
+			text-align:left;
+		}
+		.centerW{
+			width: 890px;
+			margin:0 20px;
+			border:1px solid #efefef;
+			border-top:none;
+		}
+		.required{color:#f00; margin-right:2px;}
+		.center [class*="span"] {
+			.border:1px solid #DDD;
+			.margin-top:5px;
+			.margin-bottom:5px;
+			.padding-top:2px;
+			 text-align:left;
+			margin-left:0;
+			vertical-align:middle;
+		}
+		.center [class*="span"]{
+			position:relative;
+		}
+		.center [class*="span"] b{
+			position:absolute;
+			right:50px;
+			top:0;
+		}
+		input[type="text"]{
+			 margin:0;
+		}
+		select{
+			margin:0;
+		}
+		.autOk{
+			display:inline-block;
+			width:80px;
+			height:26px;
+			line-height:26px;
+			background:#ffb164;
+			text-align:center;
+			color:#fff;
+			border-radius:5px;
+		}
+		.autNo{
+			display:inline-block;
+			width:80px;
+			height:26px;
+			line-height:26px;
+			background:#ddd;
+			text-align:center;
+			color:#fff;
+			border-radius:5px;
+			}
+		textarea[class*="span"]{
+			margin:0;
+			 text-align:left;
+		}
+		.center [class*="span"]:hover {
+			.background-color:#FCE6A6;
+			border-color:#EFD27A;
+		}
+		.row-fluid > [class*="span12"]{
+			height:40px;
+			line-height:40px;
+			text-align:left;
+			padding-left:20px;
+			background:#ecf8ff;
+			font-size:18px;
+			color:#438eb9;
+		}
+		.center .spanLine{
+			border-bottom:1px solid #ddd;
+		}
+		/*上传标签美化*/
+		.file {
+			position: relative;
+			disay: inline-block;
+			background: #ffaf14;
+			border: 1px solid #ffa800;
+			padding: 4px 20px;
+			overflow: hidden;
+			color: #fff;
+			text-decoration: none;
+			text-indent: 0;
+			line-height: 20px;
+		}
+		.file input {
+			position: absolute;
+			font-size: 100px;
+			right: 0;
+			top: 0;
+			opacity: 0;
+		}
+
+		.row-fluid:last-child{ text-align:center;}
+		.row-fluid:last-child [type="submit"]{
+			width:145px;
+			height:40px;
+			line-height:40px;
+			border:none;
+			color:#fff;
+			background:#438eb9;
+			text-align:center;
+			}
+		.row-fluid:last-child [type="buttom"]{
+			width:145px;
+			height:40px;
+			line-height:40px;
+			border:none;
+			color:#fff;
+			background:#ccc;
+			text-align:center;
+			cursor: pointer;
+		}
+		.tableDiv{
+			display:none;
+			width:645px;
+			background:#fff;
+			border:1px solid #c9c9c9;
+			box-shadow:0px 0px 10px #c9c9c9;
+			position:absolute;
+			left:74px;
+			top:40px;
+			z-index:1;
+		}
+	.ulHeader{
+		list-style:none;
+		 margin:0;
+		background:#f1f9ff;
+		height:36px;
+		line-height:36px;
+	}
+	.ulTable{
+		background:#fff;
+		margin:0;
+		}
+	.ulTable li{
+		list-style:none;
+		height:46px;
+		border-bottom:1px solid #dadada;
+	}
+	.ulTable li span{ vertical-align:middle;}
+	.ulHeader .sp2,.ulTable .sp2{ display:inline-block;width:52px; text-align:center;}
+	.ulHeader .sp3,.ulTable .sp3{ display:inline-block;width:135px; text-align:center;}
+	.ulHeader .sp4,.ulTable .sp4{ display:inline-block;width:68px; text-align:center;word-wrap: break-word;}
+	.ulHeader .sp5,.ulTable .sp5{ display:inline-block;width:120px; text-align:center;}
+	.ulHeader .sp6,.ulTable .sp6{ display:inline-block;width:80px; text-align:center;}
+	.ulHeader .sp7,.ulTable .sp7{ display:inline-block;width:70px; text-align:center;}
+	.ulHeader .sp8,.ulTable .sp8{ display:inline-block;width:85px; text-align:center;}
+	/*产品列表样式*/
+	.row-fluid .span1{
+		  text-indent:5px;
+		}
+		.row-fluid .span1 [type*="submit"]{
+			width:62px;
+			height:30px;
+			line-height:30px;
+			color:#fff;
+			background:#ffaf31 !important;
+			border:none;
+			text-align:center;
+		}
+		.row-fluid .span2 .span3{
+			border:none;
+		}
+		.span12 .span2 input[value="上架"]:nth-child(2){
+			background:#72b4de;
+			border:none;
+			color:#fff;
+			text-align:center;
+			
+		}
+		.span12 .span2 input[value="删除"]:nth-child(2){
+			background:#abbac3;
+			border:none;
+			color:#fff;
+			text-align:center;
+			
+		}
+		.span12 .span2 input[value="导出Excle"]:nth-child(2){
+			border:none;
+			color:#999;
+			padding-left:30px;
+			background:url(../images/export.png) no-repeat 4px 5px;
+			background-color:#dbf0ff;
+		}
+		
+		

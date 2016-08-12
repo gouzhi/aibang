@@ -1,0 +1,60 @@
+@charset "utf-8";
+/* CSS Document */
+
+ body{
+			line-height:30px;
+			text-align:left;
+			font-family:"微软雅黑";
+			font-size:14px;
+		}
+		a:hover{ text-decoration:none;color:#fff;}
+		.pl{padding-left:20px;}
+		.pR{padding-right:20px;}
+		.pL40{ padding-left:40px;}
+		.mL40{ margin-left:40px;}
+		.row-fluid{ margin-bottom:15px;}
+		.pr{ position:relative;}
+		.pa{ position:absolute;}
+		.center {
+			max-width:800px;
+			text-align:left;
+			border:1px solid #ccc;
+			border-bottom:none;
+		}
+		.center [class*="span"] {
+			.border:1px solid #DDD;
+			.margin-top:5px;
+			.margin-bottom:5px;
+			.padding-top:2px;
+			 text-align:left;
+			margin-left:0;
+			vertical-align:middle;
+		}
+		input[type="text"]{
+			 margin:0;
+		}
+		select{
+			margin:0;
+		}
+		textarea[class*="span"]{
+			margin:0;
+			 text-align:left;
+		}
+		.center [class*="span"]:hover {
+			.background-color:#FCE6A6;
+			border-color:#EFD27A;
+		}
+		.row-fluid > [class*="span12"]{
+			height:40px;
+			line-height:40px;
+			text-align:left;
+			padding-left:20px;
+			background:#ecf8ff;
+			font-size:18px;
+			color:#438eb9;
+		}
+		.borderB{border-bottom:1px solid #c2c2c2;}
+		.center [class*="span4"],.center [class*="span5"],.center [class*="span2"]{
+			text-align:right;
+		}
+		.table-responsive th,.table-responsive td{ text-align:center;}

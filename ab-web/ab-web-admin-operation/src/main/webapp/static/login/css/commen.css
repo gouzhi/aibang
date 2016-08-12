@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* CSS Document */
+a{color:#333;}
+.color01{color:#8f8f8f}
+.fz13{ font-size:13px;}
+.fz14{ font-size:14px;}
+.fz16{ font-size:16px;}
+.fz18{ font-size:18px;}
+.fz20{ font-size:16px;color:#287ad2;}
+.fzw{ font-weight:bold;}
+.lineH22{height:22px;line-height:22px;}
+.lineH24{height:24px;line-height:24px;}
+.lHeight{line-height:24px;}
+.lineH26{height:26px;line-height:26px;}
+.lineH30{height:30px;line-height:30px;}
+.lineH42{line-height:42px;}
+.lineH48{height:48px;line-height:48px;}
+
+.padR25{ padding-right:25px;}
+.padB20{ padding-bottom:20px;}
+.padTB{ padding:15px 0 30px;}
+
+.mar12{ margin-left:12px;}
+.marB{ margin-bottom:30px;}
+.marT{ margin-top:35px;}
+.marT10{ margin-top:-10px;}
+.pr{ position:relative;}
+.pa{ position:absolute;}
+
+.lineD{ border-bottom:1px dashed #ccc;}
+.textC{ text-align:center;}
+/*footer*/
+.footer{width:100%; margin-top:120px;}
+.footer .footerTop{width:100%;background:#12406e; padding-bottom:10px;}
+.footer .footerTop h4{height:20px; padding-left:10px; border-left:2px solid #287ad2; margin:20px 0;}
+.footer .footerTop h4 a{font-size:16px;color:#97C9FF}
+.footer .footerTop .footertopWrap{width:1000px; margin:0 auto;color:#97c9ff;}
+.footer .footerTop .ours{width:300px;}
+.footer .footerTop .ours p{line-height:24px; text-indent:2em;}
+.footer .footerTop .contact{width:300px; padding:0 30px 0 60px;}
+.footer .footerTop .contact p{line-height:35px; font-size:14px;} 
+.footer .footerTop .contact p span{color:#fff;font-size:14px;}
+.footer .footerTop .join{width:300px; position:relative;}
+.footer .footerTop .feedback{ position:absolute;left:115px;top:85px;}
+.footer .footerTop .feedback h4{ margin-left:78px;}
+.footer .footerTop .feedback p{color:#fff;line-height:26px;}
+.footer .footerTop .feedback .joinP{ margin-left:33px; font-size:16px;}
+.footer .footerTop .feedback .fuP{ margin-left:20px;}
+.footer .footerBottom{width:100%; background:#ccc;}
+.footer .footerBottomWrap{width:500px; margin:0 auto;height:36px;line-height:36px;color:#444;}
+.footer .footerBottomWrap span{ padding-left:15px;}

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="SysService">
+<!-- 
+	<resultMap id="RM_SysService" type="com.cifex.transfer.model.dto.HjsSysService">
+        <result property="id" column="ID"/>
+        <result property="serviceName" column="SERVICE_NAME"/>
+        <result property="serviceNamespace" column="SERVICE_NAMESPACE"/>
+        <result property="serviceIcon" column="SERVICE_ICON"/>
+        <result property="parentId" column="PARENT_ID"/>
+        <result property="serviceOrder" column="SERVICE_ORDER"/>
+        <result property="serviceType" column="SERVICE_TYPE"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="deleteTime" column="DELETE_TIME"/>
+	</resultMap>
+	
+	
+	
+	<sql id="SysService.columns">
+	    <![CDATA[
+		ID,SERVICE_NAME,SERVICE_NAMESPACE,SERVICE_ICON,PARENT_ID,SERVICE_ORDER,SERVICE_TYPE,CREATE_TIME,UPDATE_TIME,DELETE_TIME
+	    ]]>
+	</sql>
+
+	useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql
+	<insert id="SysService.insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO hjs_sys_service (
+        	ID ,
+        	SERVICE_NAME ,
+        	SERVICE_NAMESPACE ,
+        	SERVICE_ICON ,
+        	PARENT_ID ,
+        	SERVICE_ORDER ,
+        	SERVICE_TYPE , 
+        	CREATE_TIME ,
+        	UPDATE_TIME ,
+        	DELETE_TIME 
+        ) VALUES (
+        	#{id} ,
+        	#{serviceName} ,
+        	#{serviceNamespace} ,
+        	#{serviceIcon} ,
+        	#{parentId} ,
+        	#{serviceOrder} ,
+        	#{serviceType} , 
+        	#{createTime} ,
+        	#{updateTime} ,
+        	#{deleteTime} 
+        )
+    ]]>
+			
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		
+	</insert>
+    
+	<update id="SysService.update" >
+    <![CDATA[
+        UPDATE hjs_sys_service SET
+	        SERVICE_NAME = #{serviceName} ,
+	        SERVICE_NAMESPACE = #{serviceNamespace} ,
+	        SERVICE_ICON = #{serviceIcon} ,
+	        PARENT_ID = #{parentId} ,
+	        SERVICE_ORDER = #{serviceOrder} ,
+	        SERVICE_TYPE = #{serviceType} , 
+	        CREATE_TIME = #{createTime} ,
+	        UPDATE_TIME = #{updateTime} ,
+	        DELETE_TIME = #{deleteTime} 
+        WHERE 
+	        ID = #{id} 
+    ]]>
+	</update>
+ 
+    
+	
+	<sql id="SysService.findPage.where">
+		ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类
+		<where>	      				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(serviceName)">
+				AND SERVICE_NAME = #{serviceName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(serviceNamespace)">
+				AND SERVICE_NAMESPACE = #{serviceNamespace}
+			</if>
+	       <if test="@Ognl@isNotEmpty(serviceIcon)">
+				AND SERVICE_ICON = #{serviceIcon}
+			</if>
+	       <if test="@Ognl@isNotEmpty(parentId)">
+				AND PARENT_ID = #{parentId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(serviceOrder)">
+				AND SERVICE_ORDER = #{serviceOrder}
+			</if>
+	       <if test="@Ognl@isNotEmpty(serviceType)">
+				AND SERVICE_TYPE = #{serviceType}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTimeBegin)">
+				AND CREATE_TIME >= #{createTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(createTimeEnd)">
+				AND CREATE_TIME &lt;= #{createTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(updateTimeBegin)">
+				AND UPDATE_TIME >= #{updateTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(updateTimeEnd)">
+				AND UPDATE_TIME &lt;= #{updateTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(deleteTimeBegin)">
+				AND DELETE_TIME >= #{deleteTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(deleteTimeEnd)">
+				AND DELETE_TIME &lt;= #{deleteTimeEnd}
+		   </if>
+		</where>
+	</sql>
+		
+    <select id="SysService.findPage.count" resultType="long">
+        SELECT count(*) FROM hjs_sys_service 
+		<include refid="SysService.findPage.where"/>    
+    </select>
+    
+    
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+   
+    <select id="SysService.findPage" resultMap="RM_SysService">
+    	SELECT <include refid="SysService.columns" />
+	    FROM hjs_sys_service 
+		<include refid="SysService.findPage.where"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    
+    
+	<select id="findMaxId" parameterType="pd" resultType="pd">
+		select MAX(id) MID FROM HJS_SYS_SERVICE
+	</select>
+	
+	<select id="listAllParentService" resultMap="RM_SysService">
+		select * from HJS_SYS_SERVICE 
+		where PARENT_ID = '0' order by SERVICE_ORDER 
+	</select>
+	
+	<select id="listSubServiceByParentId" resultMap="RM_SysService">
+		select  * from HJS_SYS_SERVICE
+		where PARENT_ID = #{id} order by SERVICE_ORDER 
+	</select>
+		
+	<select id="getById" resultMap="RM_SysService">
+		select  <include refid="SysService.columns" />
+		 from HJS_SYS_SERVICE 
+		 where ID=#{id}
+	</select>
+	<select id="findAllService" resultMap="RM_SysService">
+		select * from HJS_SYS_SERVICE order by SERVICE_ORDER
+	</select>
+	 
+	 
+	
+	<update id="editicon" >
+		update HJS_SYS_SERVICE set 
+			Service_ICON=#{serviceIcon}
+		where ID=#{id}
+	</update>
+	
+	<update id="editType" >
+		update HJS_SYS_SERVICE set 
+			SERVICE_TYPE=#{serviceType}
+		where PARENT_ID=#{id}
+	</update>
+	
+	<delete id="delete">
+		delete from HJS_SYS_SERVICE 
+		where ID=#{id} 
+		or PARENT_ID=#{id}
+	</delete> -->
+
+	
+</mapper>
+

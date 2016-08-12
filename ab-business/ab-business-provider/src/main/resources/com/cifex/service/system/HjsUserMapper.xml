@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="HjsUser">
+
+	<resultMap id="userAndRoleResultMap" type="com.cifex.transfer.model.dto.HjsUser">
+        <result property="id" column="ID"/>
+        <result property="username" column="USERNAME"/>
+        <result property="typeId" column="TYPE_ID"/>
+        <result property="email" column="EMAIL"/>
+        <result property="phone" column="PHONE"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="status" column="STATUS"/>
+        <result property="optId" column="OPT_ID"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="createIp" column="CREATE_IP"/>
+        <result property="isDel" column="IS_DEL"/>
+        <result property="deleteTime" column="DELETE_TIME"/>
+        <result property="phoneStatus" column="PHONE_STATUS"/>
+        <result property="emailStatus" column="EMAIL_STATUS"/>
+        <result property="realName" column="REALNAME"/>
+        <result property="realNameStatus" column="REALNAME_STATUS"/>
+        <result property="passwordLevel" column="PASSWORD_LEVEL"/>
+        <result property="nrpUsrId" column="NRP_USR_ID"/>
+        <result property="isUpdatedUsername" column="IS_UPDATED_USERNAME"/>
+        <collection property="roles" column="ROLE_ID"  ofType="Role">
+			<id column="ROLE_ID" property="id"/>
+			<result column="ROLE_NAME" property="roleName"/>
+			<result column="MENU_RIGHTS" property="menuRights"/>
+			<result column="ADD_QX" property="addQx"/>
+			<result column="DEL_QX" property="delQx"/>
+			<result column="EDIT_QX" property="editQx"/>
+			<result column="CHA_QX" property="chaQx"/>
+			<result column="AUDIT_QX" property="auditQx"/>
+			<result column="FW_QX" property="fwQx"/>
+			<result column="FX_QX" property="fxQx"/>
+			<result column="QX1" property="qx1"/>
+			<result column="QX2" property="qx2"/>
+			<result column="QX3" property="qx3"/>
+			<result column="QX4" property="qx4"/>
+			<result column="C1" property="c1"/>
+			<result column="C2" property="c2"/>
+			<result column="C3" property="c3"/>
+			<result column="C4" property="c4"/>
+			<result column="Q1" property="q1"/>
+			<result column="Q2" property="q2"/>
+			<result column="Q3" property="q3"/>
+			<result column="Q4" property="q4"/>
+		</collection>
+	</resultMap>
+	<resultMap id="RM_HjsUser" type="com.cifex.transfer.model.dto.HjsUser">
+        <result property="id" column="ID"/>
+        <result property="username" column="USERNAME"/>
+        <result property="typeId" column="TYPE_ID"/>
+        <result property="email" column="EMAIL"/>
+        <result property="phone" column="PHONE"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="status" column="STATUS"/>
+        <result property="optId" column="OPT_ID"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="createIp" column="CREATE_IP"/>
+        <result property="isDel" column="IS_DEL"/>
+        <result property="deleteTime" column="DELETE_TIME"/>
+        <result property="phoneStatus" column="PHONE_STATUS"/>
+        <result property="emailStatus" column="EMAIL_STATUS"/>
+        <result property="realName" column="REALNAME"/>
+        <result property="realNameStatus" column="REALNAME_STATUS"/>
+        <result property="passwordLevel" column="PASSWORD_LEVEL"/>
+        <result property="nrpUsrId" column="NRP_USR_ID"/>
+        <result property="isUpdatedUsername" column="IS_UPDATED_USERNAME"/>
+	</resultMap>
+	<resultMap id="RM_HjsUserOpt" type="com.cifex.transfer.model.dto.HjsUser">
+        <result property="id" column="ID"/>
+        <result property="username" column="USERNAME"/>
+        <result property="typeId" column="TYPE_ID"/>
+        <result property="email" column="EMAIL"/>
+        <result property="phone" column="PHONE"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="status" column="STATUS"/>
+        <result property="optId" column="OPT_ID"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="createIp" column="CREATE_IP"/>
+        <result property="isDel" column="IS_DEL"/>
+        <result property="deleteTime" column="DELETE_TIME"/>
+        <result property="phoneStatus" column="PHONE_STATUS"/>
+        <result property="emailStatus" column="EMAIL_STATUS"/>
+        <result property="realName" column="REALNAME"/>
+        <result property="realNameStatus" column="REALNAME_STATUS"/>
+        <result property="passwordLevel" column="PASSWORD_LEVEL"/>
+        <result property="nrpUsrId" column="NRP_USR_ID"/>
+        <result property="isUpdatedUsername" column="IS_UPDATED_USERNAME"/>
+        <collection property="hjsUsersOpt" column="OPT_ID"  ofType="com.cifex.transfer.model.dto.HjsUsersOpt">
+			<id column="OPT_ID" property="id"/>
+			<result column="LOGIN_ID" property="loginId"/>
+			<result column="ENT_ID" property="entId"/>
+			<result column="REMARK" property="remark"/>
+			<result column="QQ" property="qq"/>
+			<result column="SEX" property="sex"/>
+			<result column="LAST_TIME" property="lastTime"/>
+			<result column="LAST_IP" property="lastIp"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="HjsUser.columns">
+	    <![CDATA[
+		ID,USERNAME,TYPE_ID,EMAIL,PHONE,PASSWORD,STATUS,OPT_ID,CREATE_TIME,CREATE_IP,IS_DEL,DELETE_TIME,PHONE_STATUS,EMAIL_STATUS,REALNAME,REALNAME_STATUS,PASSWORD_LEVEL,NRP_USR_ID,IS_UPDATED_USERNAME
+	    ]]>
+	</sql>
+	<sql id="HjsUser.columnsOpt">	    
+		u.ID,u.USERNAME,u.TYPE_ID,u.EMAIL,u.PHONE,u.PASSWORD,
+		u.STATUS,u.OPT_ID,u.CREATE_TIME,u.CREATE_IP,u.IS_DEL,
+		u.DELETE_TIME,u.PHONE_STATUS,u.EMAIL_STATUS,u.REALNAME,u.REALNAME_STATUS,u.PASSWORD_LEVEL,u.NRP_USR_ID,u.IS_UPDATED_USERNAME,
+		o.ID as OPT_ID,o.LOGIN_ID,o.ENT_ID,o.OPT_USERNAME,o.REMARK,o.QQ,o.SEX,o.LAST_TIME,o.LAST_IP
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<!--
+		描述：（前台/后台）添加功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<insert id="HjsUser.insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO hjs_user (
+        	USERNAME ,
+        	TYPE_ID ,
+        	EMAIL ,
+        	PHONE ,
+        	PASSWORD ,
+        	STATUS ,
+        	OPT_ID ,
+        	CREATE_TIME ,
+        	CREATE_IP ,
+        	IS_DEL ,
+        	DELETE_TIME,
+        	PHONE_STATUS,EMAIL_STATUS,REALNAME,REALNAME_STATUS,PASSWORD_LEVEL,NRP_USR_ID,IS_UPDATED_USERNAME 
+        ) VALUES (
+        	#{username} ,
+        	#{typeId} ,
+        	#{email} ,
+        	#{phone} ,
+        	#{password} ,
+        	#{status} ,
+        	#{optId} ,
+        	#{createTime} ,
+        	#{createIp} ,
+        	#{isDel} ,
+        	#{deleteTime},
+        	#{phoneStatus},#{emailStatus},#{realName},#{realNameStatus},#{passwordLevel},#{nrpUsrId},#{isUpdatedUsername} 
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    <!--
+		描述：（前台/后台）更新功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUser.update" >
+        UPDATE hjs_user SET
+        	<if test="@Ognl@isNotEmpty(username)">
+				USERNAME = #{username} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(typeId)">
+				TYPE_ID = #{typeId} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(email)">
+				EMAIL = #{email} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(phone)">
+				PHONE = #{phone} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(password)">
+				PASSWORD = #{password} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				STATUS = #{status} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(optId)">
+				OPT_ID = #{optId} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(createTime)">
+				CREATE_TIME = #{createTime} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(createIp)">
+				CREATE_IP = #{createIp} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(deleteTime)">
+				DELETE_TIME = #{deleteTime}, 
+			</if>
+			<if test="@Ognl@isNotEmpty(phoneStatus)">
+				PHONE_STATUS = #{phoneStatus}, 
+			</if>
+			<if test="@Ognl@isNotEmpty(emailStatus)">
+				EMAIL_STATUS = #{emailStatus}, 
+			</if>
+			<if test="@Ognl@isNotEmpty(realName)">
+				REALNAME = #{realName},
+			</if>
+			<if test="@Ognl@isNotEmpty(realNameStatus)">
+				REALNAME_STATUS = #{realNameStatus}, 
+			</if>
+			<if test="@Ognl@isNotEmpty(passwordLevel)">
+				PASSWORD_LEVEL = #{passwordLevel}, 
+			</if>
+			<if test="@Ognl@isNotEmpty(nrpUsrId)">
+				NRP_USR_ID = #{nrpUsrId},
+			</if>
+			<if test="@Ognl@isNotEmpty(isUpdatedUsername)">
+				IS_UPDATED_USERNAME = #{isUpdatedUsername},
+			</if>
+			IS_DEL=0        
+        WHERE 
+	        ID = #{id} 
+	</update>
+	<!--
+		描述：（后台）修改资料功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUser.updatePass">
+		update hjs_user set
+			<if test="@Ognl@isNotEmpty(password)">
+				PASSWORD=#{password},
+			</if>
+			<if test="@Ognl@isNotEmpty(phone)">
+				PHONE=#{phone},
+			</if>	
+		STATUS=#{status},
+		OPT_ID=#{optId}
+		where ID = #{id}
+	</update>
+	<!--
+		描述：（前台）用户修改密码功能功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUser.updateCustomerPass">
+		update hjs_user set
+		<if test="@Ognl@isNotEmpty(passwordLevel)">
+		PASSWORD_LEVEL = #{passwordLevel},
+		</if>
+		PASSWORD=#{password}
+		
+		where ID = #{id}
+	</update>
+	<!--
+		描述：（后台）会员认证模块审核实名功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUser.auditRealName">
+		update hjs_user set
+		REALNAME_STATUS=#{realNameStatus},
+		OPT_ID=#{optId}
+		where ID = #{id}
+	</update>
+	<!--
+		描述：（前台）实名认证功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUser.activateRealName">
+		update hjs_user set
+		REALNAME = #{realName},
+		REALNAME_STATUS=#{realNameStatus}
+		where ID = #{id}
+	</update>
+	<!--
+		描述：（后台）会员认证模块审核邮箱功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUser.auditEmail">
+		update hjs_user set
+		EMAIL_STATUS = #{emailStatus},
+		OPT_ID=#{optId}
+		where ID = #{id}
+	</update>
+	<!--
+		描述：（前台）会员邮箱认证sql
+		作者：Zhang Yong
+		时间：2015.9.18
+	-->
+	<update id="HjsUser.activateEmail">
+		update hjs_user set
+		EMAIL = #{email},
+		EMAIL_STATUS = #{emailStatus}
+		where ID = #{id}
+	</update>
+	<!--
+		描述：（前台/后台）会员认证模块审核电话功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUser.auditPhone">
+		update hjs_user set
+		PHONE_STATUS = #{phoneStatus},
+		OPT_ID=#{optId}
+		where ID = #{id}
+	</update>
+	<!--
+		描述：（前台）会员手机认证sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUser.activatePhone">
+		update hjs_user set
+		PHONE = #{phone},
+		PHONE_STATUS = #{phoneStatus}
+		where ID = #{id}
+	</update>
+
+   
+	<!--
+		描述：（前台/后台）逻辑删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <update id="HjsUser.remove">
+    <![CDATA[
+        UPDATE hjs_user SET
+	       IS_DEL=1,
+	       DELETE_TIME=#{deleteTime} 
+        WHERE 
+        ID = #{id} 
+    ]]>
+    </update>
+    
+    <!--
+		描述：（前台/后台）通过ID删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <delete id="HjsUser.delete">
+    <![CDATA[
+        DELETE FROM hjs_user WHERE
+        ID = #{id} 
+    ]]>
+    </delete>
+    <!--
+		描述：（前台/后台）用户管理模块读取修改用户功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <select id="HjsUser.getById" resultMap="userAndRoleResultMap">
+		SELECT 	u.ID,u.USERNAME,u.TYPE_ID,u.EMAIL,u.PHONE,u.PASSWORD,u.STATUS,u.OPT_ID,u.CREATE_TIME,u.CREATE_IP,
+		        u.IS_DEL,u.DELETE_TIME,u.PHONE_STATUS,u.EMAIL_STATUS,u.REALNAME,u.REALNAME_STATUS,u.PASSWORD_LEVEL,u.NRP_USR_ID,u.IS_UPDATED_USERNAME,
+				r.ID as ROLE_ID,
+				r.ROLE_NAME,
+				r.MENU_RIGHTS,
+				r.ADD_QX,
+				r.DEL_QX,
+				r.EDIT_QX,
+				r.CHA_QX,
+				r.AUDIT_QX,
+				r.FX_QX,
+				r.FW_QX,
+				r.QX1,
+				r.QX2,
+				r.QX3,
+				r.QX4,
+				r.C1,
+				r.C2,
+				r.C3,
+				r.C4,
+				r.Q1,
+				r.Q2,
+				r.Q3,
+				r.Q4
+		    FROM hjs_user u
+		left join HJS_SYS_USER_ROLE ur on ur.USER_ID=u.ID 
+		left join HJS_SYS_ROLE r on ur.ROLE_ID=r.ID 
+	        WHERE u.IS_DEL=0 AND
+		        u.ID = #{id} 
+	</select>
+	<!--
+		描述：（后台）分页条件sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<sql id="HjsUser.findPage.where">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	 
+			u.IS_DEL=0 AND u.TYPE_ID=1   				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND u.ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(username)">
+				AND u.USERNAME like CONCAT(CONCAT('%', #{username}), '%') 
+			</if>
+	       <if test="@Ognl@isNotEmpty(typeId)">
+				AND u.TYPE_ID = #{typeId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(email)">
+				AND u.EMAIL = #{email}
+			</if>
+	       <if test="@Ognl@isNotEmpty(phone)">
+				AND u.PHONE = #{phone}
+			</if>
+	       <if test="@Ognl@isNotEmpty(password)">
+				AND u.PASSWORD = #{password}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				AND u.STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(optId)">
+				AND u.OPT_ID = #{optId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTimeBegin)">
+				AND u.CREATE_TIME >= #{createTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(createTimeEnd)">
+				AND u.CREATE_TIME &lt;= #{createTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(createIp)">
+				AND u.CREATE_IP = #{createIp}
+			</if>
+	       <if test="@Ognl@isNotEmpty(isDel)">
+				AND u.IS_DEL = #{isDel}
+			</if>
+	       <if test="@Ognl@isNotEmpty(deleteTimeBegin)">
+				AND u.DELETE_TIME >= #{deleteTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(deleteTimeEnd)">
+				AND u.DELETE_TIME &lt;= #{deleteTimeEnd}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(phoneStatus)">
+				AND u.PHONE_STATUS = #{phoneStatus}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(emailStatus)">
+				AND u.EMAIL_STATUS = #{emailStatus}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(realName)">
+				AND u.REALNAME = #{realName}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(realNameStatus)">
+				AND u.REALNAME_STATUS = #{realNameStatus}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(passwordLevel)">
+				AND u.PASSWORD_LEVEL = #{passwordLevel}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(nrpUsrId)">
+		   		AND u.NRP_USR_ID =#{nrpUsrId}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(isUpdatedUsername)">
+		   		AND u.IS_UPDATED_USERNAME =#{isUpdatedUsername}
+		   </if>
+		   
+		</where>
+	</sql>
+		<!--
+		描述：（后台）通过企业ID获取管理员信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <select id="HjsUser.findPage.count" resultType="long">
+        SELECT count(*) FROM hjs_user u
+		<include refid="HjsUser.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="HjsUser.findPage" resultMap="RM_HjsUserOpt">
+    	SELECT <include refid="HjsUser.columnsOpt" />
+	    FROM hjs_user u
+	    left join hjs_users_opt o on u.ID=o.LOGIN_ID
+		<include refid="HjsUser.findPage.where"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+			<if test="@Ognl@isNotEmpty(offset) and @Ognl@isNotEmpty(pageSize)">
+		 limit ${offset},${pageSize}
+		</if>
+    </select>
+	<!--
+		描述：（前台/后台）通过username获取用户信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <select id="HjsUser.getByUsername" resultMap="RM_HjsUser" parameterType="java.lang.String">
+	    SELECT <include refid="HjsUser.columns"/>
+	    <![CDATA[
+	        FROM hjs_user  where IS_DEL=0 AND STATUS=1 AND USERNAME = #{username}
+	    ]]>
+    </select>
+    <!--
+		描述：（前台/后台）通过USERNAME/PHONE/EMAIL获取用户信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.24
+	-->
+    <select id="HjsUser.getByName" resultMap="RM_HjsUser">
+	    SELECT <include refid="HjsUser.columns"/>
+	    <![CDATA[
+	        FROM hjs_user  where IS_DEL=0 AND STATUS=1 AND ((EMAIL = #{email} AND EMAIL_STATUS=1) OR (PHONE = #{phone} AND PHONE_STATUS=1) OR (USERNAME = #{username}))
+	    ]]>
+    </select>
+    
+    <!--
+		描述：（后台）登录功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsUser.getUserInfo" parameterType="User" resultMap="userAndRoleResultMap"><!-- insert update delete (flushCache="true/false") -->
+		select  u.ID,
+				u.USERNAME,
+				u.PASSWORD,
+				u.EMAIL,
+				u.PHONE_STATUS,u.EMAIL_STATUS,u.REALNAME,u.REALNAME_STATUS,u.PASSWORD_LEVEL,u.NRP_USR_ID,u.IS_UPDATED_USERNAME,
+				r.ID as ROLE_ID,
+				r.ROLE_NAME,
+				r.MENU_RIGHTS,
+				r.ADD_QX,
+				r.DEL_QX,
+				r.EDIT_QX,
+				r.CHA_QX,
+				r.AUDIT_QX,
+				r.FX_QX,
+				r.FW_QX,
+				r.QX1,
+				r.QX2,
+				r.QX3,
+				r.QX4,
+				r.C1,
+				r.C2,
+				r.C3,
+				r.C4,
+				r.Q1,
+				r.Q2,
+				r.Q3,
+				r.Q4  from HJS_USER u
+		left join HJS_SYS_USER_ROLE ur on ur.USER_ID=u.ID 
+		left join HJS_SYS_ROLE r on ur.ROLE_ID=r.ID 
+		where u.IS_DEL=0 and TYPE_ID=1 and STATUS=1
+		<if test="username != null and password != null">
+	  	and	(
+	  		(USERNAME = #{username} and PASSWORD = #{password})
+	  		or
+	  		(EMAIL = #{username} and PASSWORD = #{password} and EMAIL_STATUS=1)
+	  		or
+	  		(PHONE = #{username} and PASSWORD = #{password} and PHONE_STATUS=1)
+	  		)
+		</if>
+		<if test="id != null and id != ''">
+		and ID = #{id}
+		</if>
+	</select>
+	<!--
+		描述：（前台）登录功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsUser.getCustomerInfo" parameterType="User" resultMap="RM_HjsUser"><!-- insert update delete (flushCache="true/false") -->
+		select  <include refid="HjsUser.columns"/>  
+	  	from HJS_USER  
+		where IS_DEL=0 and TYPE_ID=3 
+		<if test="username != null and password != null">
+	  	and	(
+	  		(USERNAME = #{username} and PASSWORD = #{password})
+	  		or
+	  		(EMAIL = #{username} and PASSWORD = #{password} and EMAIL_STATUS=1)
+	  		or
+	  		(PHONE = #{username} and PASSWORD = #{password} and PHONE_STATUS=1)
+	  		)
+		</if>
+		<if test="id != null and id != ''">
+		and ID = #{id}
+		</if>
+	</select>
+    <!--
+		描述：（前台/后台）批量删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUser.deleteAllU">
+		update HJS_USER 
+		set IS_DEL=1,
+		DELETE_TIME=#{deleteTimeBegin}
+		where 
+			ID in
+  			 <foreach item="item" index="index" collection="sysUserIds" open="(" separator="," close=")">
+                  #{item}
+             </foreach>
+	</update>
+	<!--
+		描述：（后台）删除用户角色功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<delete id="HjsUser.deleteUserRole">
+		delete from HJS_SYS_USER_ROLE
+		where USER_ID =#{userId}
+	</delete>
+	<!--
+		描述：（前台/后台）用户名唯一判断功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsUser.userenameUnique" resultMap="RM_HjsUser">
+		select ID from HJS_USER 
+		WHERE IS_DEL=0 AND USERNAME = #{username} 
+		<if test="@Ognl@isNotEmpty(id)">
+				AND ID != #{id}
+		</if>
+	</select>
+	<!--
+		描述：（前台/后台）邮箱唯一判断功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsUser.emailUnique" resultMap="RM_HjsUser">
+		select ID from HJS_USER 
+		WHERE IS_DEL=0 AND EMAIL = #{email}
+		<if test="@Ognl@isNotEmpty(id)">
+				AND ID != #{id}
+		</if>
+	</select>
+	<!--
+		描述：（前台/后台）手机唯一判断功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsUser.phoneUnique" resultMap="RM_HjsUser">
+		select ID from HJS_USER 
+		WHERE IS_DEL=0 AND PHONE = #{phone}
+		<if test="@Ognl@isNotEmpty(id)">
+				AND ID != #{id}
+		</if>
+	</select>
+	<!--
+		描述：（前台）保存汇付用户会员号功能sql
+		作者：Zhang Yong
+		时间：2015.11.18
+	-->
+	<update id="HjsUser.saveHF">
+		update HJS_USER 
+		set NRP_USR_ID=#{nrpUsrId} 
+		where 
+			ID = #{id}			 
+	</update>
+	
+	<!--  通过手机号查询客户信息-->
+	<select id="HjsUser.getByPhone" resultMap="RM_HjsUser">
+		select * from HJS_USER 
+		WHERE PHONE = #{phone} OR USERNAME = #{username}
+	</select>
+</mapper>
+

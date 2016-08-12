@@ -1,0 +1,106 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+
+	font-size: 12px;
+	font-family:microsoft yahei, Verdana, Geneva, sans-serif;
+	color: #333;
+	margin: 0px;
+	padding: 0px;
+}
+
+ul, li ,h1, h2, h3, h4 ,h5 ,h6,p {
+
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	font-weight: normal;
+}
+
+A {
+	color: #333;
+	text-decoration: none;
+}
+.wrap{
+	max-width:750px;
+	margin:0 auto;
+}
+.header{
+	text-align:center;
+	height:55px;
+	line-height:55px;
+	margin-top:40px;
+}
+.header i{
+	display:inline-block;
+	width:42px;
+	height:55px; 
+	background:url(../images/over_right.png) no-repeat 0 3px;
+	vertical-align:middle;
+}
+.header span{
+	display:inline-block;
+	height:55px;
+	line-height:55px;
+	font-size:26px;
+	color:#3e87e9;
+}
+.grant{
+	width:96%;
+	margin:0 2%;
+	border-bottom:1px solid #ccc;
+	padding:12px 0 25px;
+	margin-bottom:32px;
+}
+.grant p{
+	font-size:16px;
+	color:#555;
+	text-align:center;
+	line-height:24px;
+}
+.invite{
+	font-size:16px;
+	color:#555;
+	text-align:center;
+	margin:20px 0;
+}
+.invitation_code{
+	width:96%;
+	margin:0 2%;
+	height:50px;
+	line-height:50px;
+	font-size:18px;
+	color:#fff;
+	background-color:#639ded;
+	text-align:center;
+}
+.invitation_link{
+	width:96%;
+	margin:0 2%;
+	height:72px;
+	line-height:26px;
+	padding-top:18px;
+	font-size:18px;
+	color:#fff;
+	background-color:#639ded;
+	text-align:center;
+}
+.return_reg{
+	width:96%;
+	margin:0 2%;
+	
+}
+.return_reg a{
+	display:block;
+	width:30%;
+	margin:40px auto;
+	 text-align:center;
+	 height:32px;
+	 line-height:32px;
+	 color:#287ad2;
+	 border:1px solid #287ad2;
+	 border-radius:15px;
+}
+.regProcess{text-align:center;margin:50px 0;}
+.regProcess img{max-width:100%;}

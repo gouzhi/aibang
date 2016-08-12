@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.wnmfw</groupId>
+		<artifactId>aibang</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.aibang</groupId>
+    <artifactId>ab-framework</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>ab-framework-exception</module>
+        <module>ab-framework-generator</module>
+        <module>ab-framework-memcache</module>
+        <module>ab-framework-support</module>
+        <module>ab-framework-utils</module>
+        <module>ab-framework-web</module>
+        <module>ab-framework-redis-shiro</module>
+		<module>ab-framework-pay</module>
+		<module>ab-framework-fadada</module>
+    </modules> 
+</project>

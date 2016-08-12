@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="HjsApproveSms">
+
+	<resultMap id="RM_HjsApproveSms" type="com.cifex.transfer.model.dto.HjsApproveSms">
+        <result property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="status" column="STATUS"/>
+        <result property="type" column="TYPE"/>
+        <result property="phone" column="PHONE"/>
+        <result property="credit" column="CREDIT"/>
+        <result property="verifyUserid" column="VERIFY_USERID"/>
+        <result property="verifyTime" column="VERIFY_TIME"/>
+        <result property="verifyRemark" column="VERIFY_REMARK"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="createIp" column="CREATE_IP"/>
+        <collection property="hjsUser" column="LOGINID"  ofType="com.cifex.transfer.model.dto.HjsUser">
+			<id property="id" column="LOGINID"/>
+        	<result property="username" column="USERNAME"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="HjsApproveSms.columns">
+	    <![CDATA[
+		ID,USER_ID,STATUS,TYPE,PHONE,CREDIT,VERIFY_USERID,VERIFY_TIME,VERIFY_REMARK,CREATE_TIME,CREATE_IP
+	    ]]>
+	</sql>
+
+    <sql id="HjsApproveSms.tbcolumns">
+	    <![CDATA[
+		tb.ID,tb.USER_ID,tb.STATUS,tb.TYPE,tb.PHONE,tb.CREDIT,tb.VERIFY_USERID,tb.VERIFY_TIME,tb.VERIFY_REMARK,tb.CREATE_TIME,tb.CREATE_IP,
+		u.ID AS LOGINID,u.USERNAME
+	    ]]>
+	</sql>
+	
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<!--
+		描述：（前台/后台）添加功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<insert id="HjsApproveSms.insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO hjs_approve_sms (
+        	USER_ID ,
+        	STATUS ,
+        	TYPE ,
+        	PHONE ,
+        	CREDIT ,
+        	VERIFY_USERID ,
+        	VERIFY_TIME ,
+        	VERIFY_REMARK ,
+        	CREATE_TIME ,
+        	CREATE_IP 
+        ) VALUES (
+        	#{userId} ,
+        	#{status} ,
+        	#{type} ,
+        	#{phone} ,
+        	#{credit} ,
+        	#{verifyUserid} ,
+        	#{verifyTime} ,
+        	#{verifyRemark} ,
+        	#{createTime} ,
+        	#{createIp} 
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    <!--
+		描述：（前台/后台）更新功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsApproveSms.update" >
+    <![CDATA[
+        UPDATE hjs_approve_sms SET
+	        USER_ID = #{userId} ,
+	        STATUS = #{status} ,
+	        TYPE = #{type} ,
+	        PHONE = #{phone} ,
+	        CREDIT = #{credit} ,
+	        VERIFY_USERID = #{verifyUserid} ,
+	        VERIFY_TIME = #{verifyTime} ,
+	        VERIFY_REMARK = #{verifyRemark} ,
+	        CREATE_TIME = #{createTime} ,
+	        CREATE_IP = #{createIp} 
+        WHERE 
+	        ID = #{id} 
+    ]]>
+	</update>
+	<!--
+		描述：（后台）会员认证模块审核功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsApproveSms.audit">		
+		update hjs_approve_sms set 
+		STATUS = #{status} ,
+		VERIFY_REMARK = #{verifyRemark} ,
+	    VERIFY_TIME = #{verifyTime} ,
+	    VERIFY_USERID = #{verifyUserid} 
+	    where ID = #{id}
+	</update>
+	<!--
+		描述：（前台）会员手机认证sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsApproveSms.activate">		
+		update hjs_approve_sms set 
+		PHONE = #{phone} ,
+		STATUS = #{status} ,
+		VERIFY_REMARK = #{verifyRemark} ,
+	    VERIFY_TIME = #{verifyTime} 
+	    where ID = #{id}
+	</update>
+   <!--
+		描述：（前台/后台）逻辑删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	
+    <update id="HjsApproveSms.remove">
+    <![CDATA[
+        UPDATE hjs_approve_sms SET
+	       IS_DEL=1,
+	       DELETE_TIME=#{deleteTime} 
+        WHERE 
+        ID = #{id} 
+    ]]>
+    </update>
+    <!--
+		描述：（前台/后台）修改手机号(通过loginId)功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	
+    <update id="HjsApproveSms.updatePhone">
+    <![CDATA[
+        UPDATE hjs_approve_sms SET
+	       PHONE = #{phone} ,
+		   STATUS = 0 
+        WHERE 
+        USER_ID = #{userId} 
+    ]]>
+    </update>
+    
+    <!--
+		描述：（前台/后台）删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <delete id="HjsApproveSms.delete">
+    <![CDATA[
+        DELETE FROM hjs_approve_sms WHERE
+        ID = #{id} 
+    ]]>
+    </delete>
+    <!--
+		描述：（前台/后台）通过ID获取手机认证信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <select id="HjsApproveSms.getById" resultMap="RM_HjsApproveSms">
+		SELECT <include refid="HjsApproveSms.columns" />
+	    <![CDATA[
+		    FROM hjs_approve_sms 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</select>
+	<!--
+		描述：（前台/后台）通过登录ID获取认证信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsApproveSms.getByLoginId" resultMap="RM_HjsApproveSms">
+		SELECT <include refid="HjsApproveSms.columns" />
+	    <![CDATA[
+		    FROM hjs_approve_sms 
+	        WHERE 
+		        USER_ID = #{userId} 
+	    ]]>
+	</select>
+	<!--
+		描述：（后台）分页条件sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<sql id="HjsApproveSms.findPage.where">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	      				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND tb.ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userId)">
+				AND tb.USER_ID = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				AND tb.STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(type)">
+				AND tb.TYPE = #{type}
+			</if>
+	       <if test="@Ognl@isNotEmpty(phone)">
+				AND tb.PHONE = #{phone}
+			</if>
+	       <if test="@Ognl@isNotEmpty(credit)">
+				AND tb.CREDIT = #{credit}
+			</if>
+	       <if test="@Ognl@isNotEmpty(verifyUserid)">
+				AND tb.VERIFY_USERID = #{verifyUserid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(verifyTime)">
+				AND tb.VERIFY_TIME = #{verifyTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(verifyRemark)">
+				AND tb.VERIFY_REMARK = #{verifyRemark}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTimeBegin)">
+				AND tb.CREATE_TIME >= #{createTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(createTimeEnd)">
+				AND tb.CREATE_TIME &lt;= #{createTimeEnd}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(verifyTimeBegin)">
+				AND tb.VERIFY_TIME >= #{verifyTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(verifyTimeEnd)">
+				AND tb.VERIFY_TIME &lt;= #{verifyTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(createIp)">
+				AND tb.CREATE_IP = #{createIp}
+			</if>
+			<if test="@Ognl@isNotEmpty(username)">
+				AND (u.USERNAME LIKE CONCAT(CONCAT('%', #{username}), '%') or tb.PHONE LIKE CONCAT(CONCAT('%', #{username}), '%')) 
+			</if>
+		</where>
+	</sql>
+		
+    <select id="HjsApproveSms.findPage.count" resultType="long">
+        SELECT count(*) FROM hjs_approve_sms tb 
+        left join hjs_user u on tb.USER_ID=u.ID 
+		<include refid="HjsApproveSms.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="HjsApproveSms.findPage" resultType="map">
+    	SELECT <include refid="HjsApproveSms.tbcolumns" />
+	    FROM hjs_approve_sms tb 
+	    left join hjs_user u on tb.USER_ID=u.ID 
+		<include refid="HjsApproveSms.findPage.where"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+		<if test="@Ognl@isNotEmpty(offset) and @Ognl@isNotEmpty(pageSize)">
+		 limit ${offset},${pageSize}
+		</if>
+    </select>
+
+	
+</mapper>
+

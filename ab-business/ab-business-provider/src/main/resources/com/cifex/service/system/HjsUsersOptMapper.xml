@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="HjsUsersOpt">
+
+	<resultMap id="RM_HjsUsersOpt" type="com.cifex.transfer.model.dto.HjsUsersOpt">
+        <result property="id" column="ID"/>
+        <result property="loginId" column="LOGIN_ID"/>
+        <result property="entId" column="ENT_ID"/>
+        <result property="optUsername" column="OPT_USERNAME"/>
+        <result property="remark" column="REMARK"/>
+        <result property="qq" column="QQ"/>
+        <result property="sex" column="SEX"/>
+        <result property="lastTime" column="LAST_TIME"/>
+        <result property="lastIp" column="LAST_IP"/>
+        <collection property="hjsUser" column="USER_ID"  ofType="com.cifex.transfer.model.dto.HjsUser">
+			<id column="USER_ID" property="id"/>
+        	<result property="username" column="USERNAME"/>
+        	<result property="typeId" column="TYPE_ID"/>
+        	<result property="email" column="EMAIL"/>
+        	<result property="phone" column="PHONE"/>
+        	<result property="password" column="PASSWORD"/>
+        	<result property="status" column="STATUS"/>
+        	<result property="optId" column="OPT_ID"/>
+        	<result property="createTime" column="CREATE_TIME"/>
+        	<result property="createIp" column="CREATE_IP"/>
+        	<result property="isDel" column="IS_DEL"/>
+        	<result property="deleteTime" column="DELETE_TIME"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="HjsUsersOpt.columns">
+	    <![CDATA[
+		ID,LOGIN_ID,ENT_ID,OPT_USERNAME,REMARK,QQ,SEX,LAST_TIME,LAST_IP
+	    ]]>
+	</sql>
+	<!-- 用于关联查询的列 -->
+	<sql id="HjsUsersOpt.columnsPage">
+	    <![CDATA[
+		o.ID,o.LOGIN_ID,o.ENT_ID,o.OPT_USERNAME,o.REMARK,o.QQ,SEX,o.LAST_TIME,o.LAST_IP,
+		u.ID as USER_ID,u.USERNAME,u.TYPE_ID,u.EMAIL,u.PHONE,u.PASSWORD,u.STATUS,u.OPT_ID,u.CREATE_TIME,u.CREATE_IP,u.IS_DEL,u.DELETE_TIME,u.PHONE_STATUS,u.EMAIL_STATUS,u.REALNAME,u.REALNAME_STATUS
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<!--
+		描述：（后台）用户管理模块下添加功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	
+	<insert id="HjsUsersOpt.insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO hjs_users_opt (
+        	LOGIN_ID ,
+        	ENT_ID ,
+        	OPT_USERNAME ,
+        	REMARK ,
+        	QQ ,
+        	SEX ,
+        	LAST_TIME ,
+        	LAST_IP 
+        ) VALUES (
+        	#{loginId} ,
+        	#{entId} ,
+        	#{optUsername} ,
+        	#{remark} ,
+        	#{qq} ,
+        	#{sex} ,
+        	#{lastTime} ,
+        	#{lastIp} 
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+	<update id="HjsUsersOpt.update" >
+    <![CDATA[
+        UPDATE hjs_users_opt SET
+	        LOGIN_ID = #{loginId} ,
+	        ENT_ID = #{entId} ,
+	        OPT_USERNAME = #{optUsername} ,
+	        REMARK = #{remark} ,
+	        QQ = #{qq} ,
+	        SEX = #{sex} ,
+	        LAST_TIME = #{lastTime} ,
+	        LAST_IP = #{lastIp} 
+        WHERE 
+	        ID = #{id} 
+    ]]>
+	</update>
+	<!--
+		描述：（后台）用户管理模块下修改功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUsersOpt.updateByLoginId" >
+
+        UPDATE hjs_users_opt SET
+	        LOGIN_ID = #{loginId} ,
+	        <if test="@Ognl@isNotEmpty(optUsername)">
+				OPT_USERNAME = #{optUsername} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(remark)">
+				REMARK = #{remark} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(qq)">
+				QQ = #{qq} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(sex)">
+				SEX = #{sex} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(lastTime)">
+				LAST_TIME = #{lastTime} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(lastIp)">
+				LAST_IP = #{lastIp} ,
+			</if>
+	        ENT_ID = #{entId}	        
+        WHERE 
+	        LOGIN_ID = #{loginId} 
+	</update>
+
+
+   
+	<!--
+		描述：（后台）用户管理模块下逻辑删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <update id="HjsUsersOpt.remove">
+    <![CDATA[
+        UPDATE hjs_users_opt SET
+	       IS_DEL=1,
+	       DELETE_TIME=#{deleteTime} 
+        WHERE 
+        ID = #{id} 
+    ]]>
+    </update>
+    
+    
+    <delete id="HjsUsersOpt.delete">
+    <![CDATA[
+        DELETE FROM hjs_users_opt WHERE
+        ID = #{id} 
+    ]]>
+    </delete>
+    <!--
+		描述：（后台）用户管理模块下通过登录ID删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <delete id="HjsUsersOpt.deleteByLoginId">
+    <![CDATA[
+        DELETE FROM hjs_users_opt WHERE
+        LOGIN_ID = #{loginId} 
+    ]]>
+    </delete>
+    <!--
+		描述：（后台）用户管理模块下批量删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUsersOpt.deleteAllByLoginId">
+		DELETE FROM hjs_users_opt 
+		where 
+			LOGIN_ID in
+  			 <foreach item="item" index="index" collection="loginIds" open="(" separator="," close=")">
+                  #{item}
+             </foreach>
+	</update>
+    <!--
+		描述：（前台/后台）通过ID获取管理员信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <select id="HjsUsersOpt.getById" resultMap="RM_HjsUsersOpt">
+		SELECT <include refid="HjsUsersOpt.columns" />
+	    <![CDATA[
+		    FROM hjs_users_opt 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</select>
+	<!--
+		描述：（前台/后台）通过登录ID获取管理员信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsUsersOpt.getByLoginId" resultMap="RM_HjsUsersOpt">
+		SELECT <include refid="HjsUsersOpt.columns" />
+	    <![CDATA[
+		    FROM hjs_users_opt 
+	        WHERE 
+		        LOGIN_ID = #{loginId} 
+	    ]]>
+	</select>
+	<!--
+		描述：（前台/后台）通过企业ID获取管理员信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<select id="HjsUsersOpt.getByENTId" resultMap="RM_HjsUsersOpt">
+		SELECT <include refid="HjsUsersOpt.columns" />
+	    <![CDATA[
+		    FROM hjs_users_opt 
+	        WHERE 
+		        ENT_ID = #{entId} 
+	    ]]>
+	</select>
+	
+	<sql id="HjsUsersOpt.findPage.where">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	
+			 u.IS_DEL=0 AND u.TYPE_ID=1      				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND o.ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(loginId)">
+				AND o.LOGIN_ID = #{loginId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(entId)">
+				AND o.ENT_ID = #{entId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(optUsername)">
+				AND o.OPT_USERNAME = #{optUsername}
+			</if>
+	       <if test="@Ognl@isNotEmpty(remark)">
+				AND o.REMARK = #{remark}
+			</if>
+	       <if test="@Ognl@isNotEmpty(qq)">
+				AND o.QQ = #{qq}
+			</if>
+	       <if test="@Ognl@isNotEmpty(sex)">
+				AND o.SEX = #{sex}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lastTimeBegin)">
+				AND o.LAST_TIME >= #{lastTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(lastTimeEnd)">
+				AND o.LAST_TIME &lt;= #{lastTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(lastIp)">
+				AND o.LAST_IP = #{lastIp}
+			</if>
+	       <if test="@Ognl@isNotEmpty(username)">
+				AND u.USERNAME like CONCAT(CONCAT('%', #{username}), '%') 
+			</if>
+		</where>
+	</sql>
+		
+    <select id="HjsUsersOpt.findPage.count" resultType="long">
+        SELECT count(*) FROM hjs_users_opt o  
+        left join hjs_user u on o.LOGIN_ID=u.ID 
+		<include refid="HjsUsersOpt.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="HjsUsersOpt.findPage" resultMap="RM_HjsUsersOpt">
+    	SELECT <include refid="HjsUsersOpt.columnsPage" />
+	    FROM hjs_users_opt o 
+        left join hjs_user u on o.LOGIN_ID=u.ID 
+		<include refid="HjsUsersOpt.findPage.where"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+			<if test="@Ognl@isNotEmpty(offset) and @Ognl@isNotEmpty(pageSize)">
+		 limit ${offset},${pageSize}
+		</if>
+    </select>
+	
+	<select id="HjsUsersOpt.getByUserId" resultMap="RM_HjsUsersOpt">
+		SELECT <include refid="HjsUsersOpt.columnsPage" />
+			FROM hjs_users_opt o 
+	        left join hjs_user u on o.LOGIN_ID=u.ID 
+        	WHERE o.LOGIN_ID = #{loginId}
+	</select>
+	
+</mapper>
+

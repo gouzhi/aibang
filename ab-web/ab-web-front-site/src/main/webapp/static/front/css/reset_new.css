@@ -1,0 +1,173 @@
+@charset "utf-8";
+/* CSS Document */
+
+body, div, dl, dt, dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote，th,td,i,
+html, div, span, applet, object, iframe, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dt, li, fieldset,form,legend, table, caption, tbody, tfoot, thead, tr
+{
+	font-size:14px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-family:"Arial","Microsoft YaHei";
+
+}
+b,strong,i{font-weight:normal; font-style:normal;}
+body{background:#e8e8e8;font-family:"Arial","Microsoft YaHei"; font-size:12px; color:#000; font-weight:normal;font-style:normal;}
+li{list-style:none;}
+a{ text-decoration:none;}
+img,li{vertical-align:top;}
+.clear{zoom:1;}
+.clear:after{content:"";display:block;clear:both;}
+.fl{ float:left;}
+.fr{ float:right;}
+.pr{ position:relative;}
+.pa{ position:absolute;}
+/*字体*/
+.fz12{ font-size:12px;}
+.fz13{ font-size:13px;}
+.fz14{ font-size:14px;}
+.fz16{ font-size:16px;}
+.fz18{ font-size:18px;}
+.fz20{ font-size:20px;}
+.fz22{ font-size:22px;}
+.fz24{ font-size:24px;}
+.fzw{ font-weight:bold;}
+/*字体颜色*/
+.color0{color:#fff;}
+.color1{color:#333;}
+.color2{color:#222;}
+.color3{color:#3292ce}
+.color4{color:#999}
+/*行高*/
+.lh24{line-height:24px;}
+.lh26{line-height:26px;}
+.lh28{line-height:28px;}
+.lh30{line-height:30px;}
+.lh36{line-height:36px;}
+.lh42{line-height:42px;}
+.lh50{line-height:50px;}
+/*margin*/
+.mL14{margin-left:14px;}
+.mL16{margin-left:16px;}
+.mL20{margin-left:20px;}
+.mL30{margin-left:30px;}
+.mR25{margin-right:25px;}
+.mT3{margin-top:3px;}
+.mB30{margin-bottom:30px;}
+
+.mT22{margin-top:22px;}
+.mT25{margin-top:25px;}
+.mT35{margin-top:35px;}
+.mB10{margin-bottom:10px;}
+.mB20{margin-bottom:20px;}
+.mTL{ margin:15px 0 0 30px;}
+.mTb{ margin:20px 0 12px;}
+/*padding*/
+.pL18{ padding-left:18px;}
+.pL30{ padding-left:30px;}
+.pL38{ padding-left:38px;}
+.pB22{ padding-bottom:22px;}
+/*border*/
+.borderT{ border-bottom:1px solid #ECECEC;}
+.borderO{ border:2px solid #ccc;}
+/**/
+.tc{ text-align:center;}
+/*字体*/
+.num_ber{ font-family: "Arial"}
+.fz12{ font-size:12px;}
+.fz13{ font-size:13px;}
+.fz14{ font-size:14px;}
+.fz16{ font-size:16px;}
+.fz18{ font-size:18px;}
+.fz20{ font-size:20px;}
+.fz22{ font-size:22px;}
+.fz24{ font-size:24px;}
+.fz26{ font-size:26px;}
+.fz40{ font-size:40px;}
+.fz24{ font-size:24px;}
+.fzw{ font-weight:bold;}
+/*字体颜色*/
+.color0{color:#fff;}
+.color1{color:#333;}
+.color2{color:#222;}
+.color3{color:#3292ce}
+.color4{color:#999}
+.color5{color:#a1a0a0}
+.color6{color:#359ce7}
+.color7{color:#6b6b6b;}
+.color8{color:#383838;}
+
+.color10{color:#8f8d8d;}
+.color11{color:#999;}
+.color12{color:#5a5a5a;}
+.color13{color:#494646}
+.color14{color:#2cb7ff}
+.color15{color:#ff6e56;}
+.color16{color:#a6a6a6}
+.color17{color:#a6a6a6}
+.color18{color:#e76767}
+.color19{color:#6b6b6b}
+/*行高*/
+.lh24{line-height:24px;}
+.lh26{line-height:26px;}
+.lh28{line-height:28px;}
+.lh30{line-height:30px;}
+.lh34{line-height:34px;}
+.lh36{line-height:36px;}
+.lh42{line-height:42px;}
+.lh50{line-height:50px;}
+.h40{height:40px;}
+/*margin*/
+.mL14{margin-left:14px;}
+.mL16{margin-left:16px;}
+.mL20{margin-left:20px;}
+.mL52{margin-left:52px;}
+.mL30{margin-left:30px;}
+.mR25{margin-right:25px;}
+.mT3{margin-top:3px;}
+.mB30{margin-bottom:30px;}
+.mT8{margin-top:8px;}
+
+.mT4{margin-top:4px;}
+.mT12{margin-top:12px;}
+.mT14{margin-top:14px;}
+.mT20{margin-top:20px;}
+.mT22{margin-top:22px;}
+.mT25{margin-top:25px;}
+.mT35{margin-top:35px;}
+.mB10{margin-bottom:10px;}
+.mB20{margin-bottom:20px;}
+.mTL{ margin:15px 0 0 30px;}
+.mTb{ margin:20px 0 12px;}
+/*padding*/
+.pL5{ padding-left:5px;}
+.pL10{ padding-left:10px;}
+.pL18{ padding-left:18px;}
+.pL20{ padding-left:20px;}
+.pL21{ padding-left:21px;}
+
+.pL22{ padding-left:22px;}
+.pL30{ padding-left:30px;}
+.pL32{ padding-left:32px;}
+.pL30{ padding-left:30px;}
+.pL38{ padding-left:38px;}
+.pB22{ padding-bottom:22px;}
+.pR10{ padding-right:10px;}
+.pR15{ padding-right:15px;}
+.pR20{ padding-right:20px;}
+.pR30{ padding-right:30px;}
+.pad15{ padding:0 15px 0 20px;}
+/*border*/
+.borderT{ border-bottom:1px solid #ECECEC;}
+.borderO{ border:2px solid #ccc;}
+/**/
+strong{font-weight:bold;}
+.tc{ text-align:center;}
+.tr{ text-align:right;}
+.vm{ vertical-align:middle;}
+/*分页*/
+.pagesite a{color:#333;}
+
+
+

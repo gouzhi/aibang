@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+	<!-- pool配置 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="500" />
+		<property name="maxIdle" value="100" />
+		<property name="maxWaitMillis" value="5000" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+	</bean>
+
+	<!-- jedis pool配置 -->
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+		<constructor-arg index="1" value="${REDIS.SERVER.IP}" />
+		<constructor-arg index="2" value="${REDIS.SERVER.PORT}" />
+	</bean>
+
+	<bean id="localCacheService" class="com.cifex.framework.utils.redis.SpringRedisCacheService">
+		<property name="jedisPool" ref="jedisPool" />
+		<property name="serverName" value="${REDIS.SERVER.IP}" />
+	</bean>
+
+	<!-- 包装类 -->
+	<bean id="redisCacheService" class="com.cifex.framework.utils.redis.CacheService">
+		<property name="cacheService">
+			<map>
+				<entry>
+					<key>
+						<value>local</value>
+					</key>
+					<ref bean="localCacheService"></ref>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	
+</beans>
