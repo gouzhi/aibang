@@ -349,29 +349,7 @@ public class LoginController extends UserController {
 		}
 		return display("register_ok");
 	}
-	/**
-	 * 加载活动页(投资送现金活动)
-	 * @param model
-	 * @return String
-	 * @author zhangyong
-	 * @date 2015年12月2日
-	 */
-	@RequestMapping(value="/tzsxj")
-	public String toActivity(ModelMap model){
-		return "user/activity/activity";
-	}
-	/**
-	 * 加载活动（你买票我报销）
-	 * @param model
-	 * @return String
-	 * @author zhangyong
-	 * @date 2015年12月16日
-	 */
-	@RequestMapping(value="/yingchun")
-	public String toActivity1(ModelMap model){
-		
-		return "user/activity/mpbx";
-	}
+	
 	/**
 	 * 异步加载注册模块
 	 * @param model
