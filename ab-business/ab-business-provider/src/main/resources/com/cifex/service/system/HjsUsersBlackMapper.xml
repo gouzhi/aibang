@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="HjsUsersBlack">
+
+	<resultMap id="RM_HjsUsersBlackpage" type="com.cifex.transfer.model.dto.HjsUsersBlack">
+        <result property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="memo" column="MEMO"/>
+        <result property="createIp" column="CREATE_IP"/>
+        <result property="optId" column="OPT_ID"/>
+        <result property="charge" column="CHARGE"/>
+        <result property="limiteTender" column="LIMITE_TENDER"/>
+        <collection property="hjsUser" column="LOGINID"  ofType="com.cifex.transfer.model.dto.HjsUser">
+			<id property="id" column="LOGINID"/>
+        	<result property="username" column="USERNAME"/>       	
+        	<result property="status" column="STATUS"/>      	
+        	<result property="createTime" column="CREATE_TIME"/>        	
+        	<result property="realName" column="REALNAME"/>
+		</collection>
+	</resultMap>
+	<resultMap id="RM_HjsUsersBlack" type="com.cifex.transfer.model.dto.HjsUsersBlack">
+        <result property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="memo" column="MEMO"/>
+        <result property="createIp" column="CREATE_IP"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="optId" column="OPT_ID"/>
+        <result property="charge" column="CHARGE"/>
+        <result property="limiteTender" column="LIMITE_TENDER"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="HjsUsersBlack.columns">
+	    <![CDATA[
+		ID,USER_ID,MEMO,CREATE_IP,CREATE_TIME,OPT_ID,CHARGE,LIMITE_TENDER
+	    ]]>
+	</sql>
+
+    <sql id="HjsUsersBlack.tbcolumns">
+	    <![CDATA[
+		tb.ID,tb.USER_ID,tb.MEMO,tb.CREATE_IP,tb.OPT_ID,tb.CHARGE,tb.LIMITE_TENDER,
+		u.ID AS LOGINID,u.USERNAME,u.REALNAME,u.CREATE_TIME,u.STATUS
+	    ]]>
+	</sql>
+	
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="HjsUsersBlack.insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO hjs_users_black (
+        	
+        	USER_ID ,
+        	MEMO ,
+        	CREATE_IP ,
+        	CREATE_TIME ,
+        	OPT_ID ,
+        	CHARGE ,
+        	LIMITE_TENDER 
+        ) VALUES (
+        	#{userId} ,
+        	#{memo} ,
+        	#{createIp} ,
+        	#{createTime} ,
+        	#{optId} ,
+        	#{charge} ,
+        	#{limiteTender} 
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    
+	<update id="HjsUsersBlack.update" >
+    <![CDATA[
+        UPDATE hjs_users_black SET
+	        USER_ID = #{userId} ,
+	        MEMO = #{memo} ,
+	        CREATE_IP = #{createIp} ,
+	        CREATE_TIME = #{createTime} ,
+	        OPT_ID = #{optId} ,
+	        CHARGE = #{charge} ,
+	        LIMITE_TENDER = #{limiteTender} 
+        WHERE 
+	        ID = #{id} 
+    ]]>
+	</update>
+	<!--
+		描述：（后台）修改限制状态功能sql
+		作者：Zhang Yong
+		时间：2015.11.3
+	-->
+	<update id="HjsUsersBlack.editBlack" >
+    <![CDATA[
+        UPDATE hjs_users_black SET
+	        OPT_ID = #{optId} ,
+	        CHARGE = #{charge} ,
+	        LIMITE_TENDER = #{limiteTender} 
+        WHERE 
+	        ID = #{id} 
+    ]]>
+	</update>
+
+
+   
+	
+    <update id="HjsUsersBlack.remove">
+    <![CDATA[
+        UPDATE hjs_users_black SET
+	       IS_DEL=1,
+	       DELETE_TIME=#{deleteTime} 
+        WHERE 
+        ID = #{id} 
+    ]]>
+    </update>
+    
+    
+    <delete id="HjsUsersBlack.delete">
+    <![CDATA[
+        DELETE FROM hjs_users_black WHERE
+        ID = #{id} 
+    ]]>
+    </delete>
+    
+    <select id="HjsUsersBlack.getById" resultMap="RM_HjsUsersBlack">
+		SELECT <include refid="HjsUsersBlack.columns" />
+	    <![CDATA[
+		    FROM hjs_users_black 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</select>
+	<!--
+		描述：（后台）通过账户ID获得黑名单信息sql
+		作者：Zhang Yong
+		时间：2015.11.2
+	-->
+	<select id="HjsUsersBlack.getByBaseId" resultMap="RM_HjsUsersBlack">
+		SELECT <include refid="HjsUsersBlack.columns" />
+	    <![CDATA[
+		    FROM hjs_users_black 
+	        WHERE 
+		        USER_ID = #{userId}
+	    ]]>
+	</select>
+	
+	<sql id="HjsUsersBlack.findPage.where">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	      				
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND tb.ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userId)">
+				AND tb.USER_ID = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(memo)">
+				AND tb.MEMO = #{memo}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createIp)">
+				AND tb.CREATE_IP = #{createIp}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTimeBegin)">
+				AND u.CREATE_TIME >= #{createTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(createTimeEnd)">
+				AND u.CREATE_TIME &lt;= #{createTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(optId)">
+				AND tb.OPT_ID = #{optId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(charge)">
+				AND tb.CHARGE = #{charge}
+			</if>
+	       <if test="@Ognl@isNotEmpty(limiteTender)">
+				AND tb.LIMITE_TENDER = #{limiteTender}
+			</if>
+			<if test="@Ognl@isNotEmpty(checkName)">
+				AND (u.USERNAME LIKE CONCAT(CONCAT('%', #{context}), '%') OR u.REALNAME LIKE CONCAT(CONCAT('%', #{context}), '%'))  
+			</if>
+		</where>
+	</sql>
+		
+    <select id="HjsUsersBlack.findPage.count" resultType="long">
+        SELECT count(*) FROM hjs_users_black tb 
+        left join hjs_users_info i on tb.USER_ID=i.USER_ID
+        left join hjs_user u on i.LOGIN_ID=u.ID 
+		<include refid="HjsUsersBlack.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="HjsUsersBlack.findPage" resultType="map">
+    	SELECT <include refid="HjsUsersBlack.tbcolumns" />
+	    FROM hjs_users_black tb 
+	    left join hjs_users_info i on tb.USER_ID=i.USER_ID
+        left join hjs_user u on i.LOGIN_ID=u.ID 
+		<include refid="HjsUsersBlack.findPage.where"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+		<if test="@Ognl@isNotEmpty(offset) and @Ognl@isNotEmpty(pageSize)">
+		 limit ${offset},${pageSize} 
+		</if>
+    </select>
+
+	
+	<select id="HjsUsersBlack.findAll" resultMap="RM_HjsUsersBlack">
+    	SELECT <include refid="HjsUsersBlack.columns" />
+	    FROM hjs_users_black  
+    </select>
+</mapper>
+

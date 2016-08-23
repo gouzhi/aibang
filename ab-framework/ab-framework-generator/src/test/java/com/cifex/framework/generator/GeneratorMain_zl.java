@@ -1,5 +1,8 @@
 package com.cifex.framework.generator;
 
+import com.aibang.framework.generator.GeneratorFacade;
+import com.aibang.framework.generator.GeneratorProperties;
+
 
 
 public class GeneratorMain_zl {

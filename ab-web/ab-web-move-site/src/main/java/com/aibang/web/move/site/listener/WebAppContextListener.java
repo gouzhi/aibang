@@ -1,0 +1,29 @@
+package com.aibang.web.move.site.listener;
+
+import com.aibang.framework.utils.Const;
+
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+
+/**
+ * 
+* 类名称：WebAppContextListener.java
+* 类描述： 
+* 作者单位： 
+* 联系方式：
+* @version 1.0
+ */
+public class WebAppContextListener implements ServletContextListener {
+
+	public void contextDestroyed(ServletContextEvent event) {
+	}
+
+	public void contextInitialized(ServletContextEvent event) {
+		Const.WEB_APP_CONTEXT = WebApplicationContextUtils.getWebApplicationContext(event.getServletContext());
+		//System.out.println("========获取Spring WebApplicationContext");
+	}
+
+}

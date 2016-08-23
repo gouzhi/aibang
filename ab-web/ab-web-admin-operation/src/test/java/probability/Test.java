@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cifex.framework.utils.BigDecimalUtils;
+import com.aibang.framework.utils.BigDecimalUtils;
 
 public class Test {
 	

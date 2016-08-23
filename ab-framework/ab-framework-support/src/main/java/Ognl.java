@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 
-import com.cifex.framework.utils.page.SortInfo;
+import com.aibang.framework.utils.page.SortInfo;
 
 
 

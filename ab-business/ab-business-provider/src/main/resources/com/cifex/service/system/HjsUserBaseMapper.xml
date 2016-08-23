@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="HjsUserBase">
+
+	<resultMap id="RM_HjsUserBase" type="com.cifex.transfer.model.dto.HjsUserBase">
+        <result property="id" column="ID"/>
+        <result property="typeId" column="TYPE_ID"/>
+        <result property="username" column="USERNAME"/>
+        <result property="payPassword" column="PAY_PASSWORD"/>
+        <result property="total" column="TOTAL"/>
+        <result property="balance" column="BALANCE"/>
+        <result property="avlBalance" column="AVL_BALANCE"/>
+        <result property="frost" column="FROST"/>
+        <result property="await" column="AWAIT"/>
+        <result property="tenderNum" column="TENDER_NUM"/>
+        <result property="tenderAccount" column="TENDER_ACCOUNT"/>
+        <result property="income" column="INCOME"/>
+        <result property="expend" column="EXPEND"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="createIp" column="CREATE_IP"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="updateIp" column="UPDATE_IP"/>
+        <result property="optId" column="OPT_ID"/>
+        <result property="awaitInterest" column="AWAIT_INTEREST"/>
+        <result property="awaitCapital" column="AWAIT_CAPITAL"/>
+        <result property="usrCustId" column="USR_CUST_ID"/>
+        <result property="isNew" column="IS_NEW"/>
+        <result property="fadadaCaId" column="FADADA_CA_ID"/>
+        <result property="authorEndDate" column="AUTHOR_END_DATE"/>
+        <result property="authorTradeId" column="AUTHOR_TRADE_ID"/>
+        <result property="authorContractId" column="AUTHOR_CONTRACT_ID"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="HjsUserBase.columns">
+	    <![CDATA[
+		ID,TYPE_ID,USERNAME,PAY_PASSWORD,TOTAL,BALANCE,AVL_BALANCE,FROST,AWAIT,TENDER_NUM,TENDER_ACCOUNT,INCOME,EXPEND,CREATE_TIME,CREATE_IP,UPDATE_TIME,UPDATE_IP,OPT_ID,AWAIT_INTEREST,AWAIT_CAPITAL,USR_CUST_ID,IS_NEW,FADADA_CA_ID,AUTHOR_END_DATE,AUTHOR_TRADE_ID,AUTHOR_CONTRACT_ID
+	    ]]>
+	</sql>
+
+    <sql id="HjsUserBase.tbcolumns">
+	    <![CDATA[
+		tb.ID,tb.TYPE_ID,tb.USERNAME,tb.PAY_PASSWORD,tb.TOTAL,tb.BALANCE,tb.AVL_BALANCE,tb.FROST,tb.AWAIT,tb.TENDER_NUM,tb.TENDER_ACCOUNT,tb.INCOME,tb.EXPEND,tb.CREATE_TIME,tb.CREATE_IP,tb.UPDATE_TIME,tb.UPDATE_IP,tb.OPT_ID,tb.AWAIT_INTEREST,tb.AWAIT_CAPITAL,tb.USR_CUST_ID,tb.IS_NEW,tb.FADADA_CA_ID,tb.AUTHOR_END_DATE,tb.AUTHOR_TRADE_ID,tb.AUTHOR_CONTRACT_ID
+	    ]]>
+	</sql>
+	
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<!--
+		描述：（前台/后台）添加功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<insert id="HjsUserBase.insert" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO hjs_user_base (
+        	TYPE_ID ,
+        	USERNAME ,
+        	PAY_PASSWORD ,
+        	TOTAL ,
+        	BALANCE ,
+        	AVL_BALANCE ,
+        	FROST ,
+        	AWAIT ,
+        	TENDER_NUM ,
+        	TENDER_ACCOUNT ,
+        	INCOME ,
+        	EXPEND ,
+        	CREATE_TIME ,
+        	CREATE_IP ,
+        	UPDATE_TIME ,
+        	UPDATE_IP ,
+        	OPT_ID ,
+        	AWAIT_INTEREST ,
+        	AWAIT_CAPITAL ,
+        	USR_CUST_ID ,
+        	IS_NEW ,
+        	FADADA_CA_ID ,
+        	AUTHOR_END_DATE ,
+        	AUTHOR_TRADE_ID ,
+        	AUTHOR_CONTRACT_ID 
+        ) VALUES (
+        	#{typeId} ,
+        	#{username} ,
+        	#{payPassword} ,
+        	#{total} ,
+        	#{balance} ,
+        	#{avlBalance} ,
+        	#{frost} ,
+        	#{await} ,
+        	#{tenderNum} ,
+        	#{tenderAccount} ,
+        	#{income} ,
+        	#{expend} ,
+        	#{createTime} ,
+        	#{createIp} ,
+        	#{updateTime} ,
+        	#{updateIp} ,
+        	#{optId} ,
+        	#{awaitInterest} ,
+        	#{awaitCapital} ,
+        	#{usrCustId} ,
+        	#{isNew} ,
+        	#{fadadaCaId} ,
+        	#{authorEndDate} ,
+        	#{authorTradeId} ,
+        	#{authorContractId} 
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+	<!--
+		描述：（后台）添加会员功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<insert id="HjsUserBase.addUserBase" useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[
+        INSERT INTO hjs_user_base (
+        	TYPE_ID ,
+        	USERNAME ,
+        	PAY_PASSWORD ,
+        	CREATE_TIME ,
+        	CREATE_IP ,
+        	UPDATE_IP ,
+        	OPT_ID 
+        ) VALUES (
+        	#{typeId} ,
+        	#{username} ,
+        	#{payPassword} ,       	
+        	#{createTime} ,
+        	#{createIp} ,
+        	#{updateIp} ,
+        	#{optId} 
+        )
+    ]]>
+	</insert>
+    <!--
+		描述：（前台/后台）更新功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUserBase.update" >
+    <![CDATA[
+        UPDATE hjs_user_base SET
+	        TYPE_ID = #{typeId} ,
+	        USERNAME = #{username} ,
+	        PAY_PASSWORD = #{payPassword} ,
+	        TOTAL = #{total} ,
+	        BALANCE = #{balance} ,
+	        AVL_BALANCE = #{avlBalance} ,
+	        FROST = #{frost} ,
+	        AWAIT = #{await} ,
+	        TENDER_NUM = #{tenderNum} ,
+	        TENDER_ACCOUNT = #{tenderAccount} ,
+	        INCOME = #{income} ,
+	        EXPEND = #{expend} ,
+	        CREATE_TIME = #{createTime} ,
+	        CREATE_IP = #{createIp} ,
+	        UPDATE_TIME = #{updateTime} ,
+	        UPDATE_IP = #{updateIp} ,
+	        OPT_ID = #{optId} ,
+	        AWAIT_INTEREST = #{awaitInterest} ,
+	        AWAIT_CAPITAL = #{awaitCapital} ,
+	        USR_CUST_ID = #{usrCustId} ,
+	        IS_NEW = #{isNew} ,
+	        FADADA_CA_ID = #{fadadaCaId} ,
+	        AUTHOR_END_DATE = #{authorEndDate} ,
+	        AUTHOR_TRADE_ID = #{authorTradeId} ,
+	        AUTHOR_CONTRACT_ID = #{authorContractId} 
+        WHERE 
+	        ID = #{id} 
+    ]]>
+	</update>
+	<!--
+		描述：（后台）会员列表模块修改会员账户功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUserBase.updatePass">
+		update hjs_user_base set
+		<if test="@Ognl@isNotEmpty(payPassword)">
+				PAY_PASSWORD=#{payPassword},
+			</if>	
+		UPDATE_TIME=#{updateTime},
+		UPDATE_IP=#{updateIp},
+		OPT_ID=#{optId}
+		where ID = #{id}
+	</update>
+	<!--
+		描述：（前台）修改会员支付密码功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<update id="HjsUserBase.updatePayPass">
+		update hjs_user_base set
+		PAY_PASSWORD=#{payPassword},
+		UPDATE_TIME=#{updateTime},
+		UPDATE_IP=#{updateIp}
+		where ID = #{id}
+	</update>
+
+   
+	<!--
+		描述：（前台/后台）逻辑删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <update id="HjsUserBase.remove">
+    <![CDATA[
+        UPDATE hjs_user_base SET
+	       IS_DEL=1,
+	       DELETE_TIME=#{deleteTime} 
+        WHERE 
+        ID = #{id} 
+    ]]>
+    </update>
+    
+    <!--
+		描述：（前台/后台）通过ID删除功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <delete id="HjsUserBase.delete">
+    <![CDATA[
+        DELETE FROM hjs_user_base WHERE
+        ID = #{id} 
+    ]]>
+    </delete>
+    <!--
+		描述：（前台/后台）通过ID获取功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <select id="HjsUserBase.getById" resultMap="RM_HjsUserBase">
+		SELECT <include refid="HjsUserBase.columns" />
+	    <![CDATA[
+		    FROM hjs_user_base 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</select>
+	<select id="HjsUserBase.getByIdForUpdate" resultMap="RM_HjsUserBase">
+		SELECT <include refid="HjsUserBase.columns" />
+	    <![CDATA[
+		    FROM hjs_user_base 
+	        WHERE 
+		        ID = #{id} FOR UPDATE
+	    ]]>
+	</select>
+	<!--
+		描述：（后台）分页条件sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+	<sql id="HjsUserBase.findPage.where">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	      	
+			AND u.IS_DEL=0
+					
+		    <if test="@Ognl@isNotEmpty(context)">
+		        AND (u.USERNAME LIKE CONCAT(CONCAT('%', #{context}),'%') OR u.PHONE LIKE CONCAT(CONCAT('%', #{context}),'%')) 
+			</if>
+	       <if test="@Ognl@isNotEmpty(id)">
+				AND tb.ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(typeId)">
+				AND tb.TYPE_ID = #{typeId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(username)">
+				AND tb.USERNAME = #{username}
+			</if>
+	       <if test="@Ognl@isNotEmpty(payPassword)">
+				AND tb.PAY_PASSWORD = #{payPassword}
+			</if>
+	       <if test="@Ognl@isNotEmpty(total)">
+				AND tb.TOTAL = #{total}
+			</if>
+	       <if test="@Ognl@isNotEmpty(balance)">
+				AND tb.BALANCE = #{balance}
+			</if>
+	       <if test="@Ognl@isNotEmpty(avlBalance)">
+				AND tb.AVL_BALANCE = #{avlBalance}
+			</if>
+	       <if test="@Ognl@isNotEmpty(frost)">
+				AND tb.FROST = #{frost}
+			</if>
+	       <if test="@Ognl@isNotEmpty(await)">
+				AND tb.AWAIT = #{await}
+			</if>
+	       <if test="@Ognl@isNotEmpty(tenderNum)">
+				AND tb.TENDER_NUM = #{tenderNum}
+			</if>
+	       <if test="@Ognl@isNotEmpty(tenderAccount)">
+				AND tb.TENDER_ACCOUNT = #{tenderAccount}
+			</if>
+	       <if test="@Ognl@isNotEmpty(income)">
+				AND tb.INCOME = #{income}
+			</if>
+	       <if test="@Ognl@isNotEmpty(expend)">
+				AND tb.EXPEND = #{expend}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTimeBegin)">
+				AND tb.CREATE_TIME >= #{createTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(createTimeEnd)">
+				AND tb.CREATE_TIME &lt;= #{createTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(createIp)">
+				AND tb.CREATE_IP = #{createIp}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTimeBegin)">
+				AND tb.UPDATE_TIME >= #{updateTimeBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(updateTimeEnd)">
+				AND tb.UPDATE_TIME &lt;= #{updateTimeEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(updateIp)">
+				AND tb.UPDATE_IP = #{updateIp}
+			</if>
+	       <if test="@Ognl@isNotEmpty(optId)">
+				AND tb.OPT_ID = #{optId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(awaitInterest)">
+				AND tb.AWAIT_INTEREST = #{awaitInterest}
+			</if>
+	       <if test="@Ognl@isNotEmpty(awaitCapital)">
+				AND tb.AWAIT_CAPITAL = #{awaitCapital}
+			</if>
+	       <if test="@Ognl@isNotEmpty(usrCustId)">
+				AND tb.USR_CUST_ID = #{usrCustId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(isNew)">
+				AND tb.IS_NEW = #{isNew}
+			</if>
+	       <if test="@Ognl@isNotEmpty(fadadaCaId)">
+				AND tb.FADADA_CA_ID = #{fadadaCaId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(authorEndDateBegin)">
+				AND tb.AUTHOR_END_DATE >= #{authorEndDateBegin}
+		   </if>
+		   <if test="@Ognl@isNotEmpty(authorEndDateEnd)">
+				AND tb.AUTHOR_END_DATE &lt;= #{authorEndDateEnd}
+		   </if>
+	       <if test="@Ognl@isNotEmpty(authorTradeId)">
+				AND tb.AUTHOR_TRADE_ID = #{authorTradeId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(authorContractId)">
+				AND tb.AUTHOR_CONTRACT_ID = #{authorContractId}
+			</if>
+		</where>
+	</sql>
+		
+    <select id="HjsUserBase.findPage.count" resultType="long">
+        SELECT count(*) 
+        FROM hjs_user_base tb
+	    join hjs_users_info info on info.USER_ID=tb.ID
+	    join hjs_user u on u.ID=info.LOGIN_ID
+		<include refid="HjsUserBase.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="HjsUserBase.findPage" resultType="map">
+    	SELECT  <include refid="HjsUserBase.tbcolumns" />,u.USERNAME, tb.ID USERID,u.PHONE
+	    FROM hjs_user_base tb
+	    join hjs_users_info info on info.USER_ID=tb.ID
+	    join hjs_user u on u.ID=info.LOGIN_ID
+		<include refid="HjsUserBase.findPage.where"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    <!--
+		描述：（后台）通过ID获取用户信息详细功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <select id="HjsUserBase.findUserDetailById" resultType="map">
+    	SELECT u.USERNAME,u.REALNAME,info.SEX,u.PHONE,u.PHONE_STATUS,u.EMAIL_STATUS,u.EMAIL,u.CREATE_TIME,info.LAST_TIME,info.LAST_IP,tb.ID,tb.TOTAL,tb.FROST,tb.AVL_BALANCE,tb.AWAIT,u.ID USERID,tb.USR_CUST_ID,tb.IS_NEW,tb.FADADA_CA_ID
+	    FROM hjs_user_base tb
+	    join hjs_users_info info on info.USER_ID=tb.ID
+	    join hjs_user u on u.ID=info.LOGIN_ID
+	    WHERE info.USER_ID=#{userId}
+    </select>
+
+
+    <select id="HjsUserBase.findTotalBalance" resultType="map">
+    	SELECT sum(tb.FROST+tb.AVL_BALANCE)TotalBalance
+	    FROM hjs_user_base tb
+	    join hjs_users_info info on info.USER_ID=tb.ID
+	    join hjs_user u on u.ID=info.LOGIN_ID
+		<include refid="HjsUserBase.findPage.where"/>
+    </select>
+    
+    <!--
+		描述：（前台）保存汇付用户号功能sql
+		作者：Zhang Yong
+		时间：2015.11.18
+	-->
+	<update id="HjsUserBase.saveHF">
+		update hjs_user_base 
+		set USR_CUST_ID=#{usrCustId} , FADADA_CA_ID = #{fadadaCaId}
+		where 
+			ID = #{id}			 
+	</update>
+	
+	
+	<update id="HjsUserBase.updateById">
+		update hjs_user_base 
+		set TOTAL=#{total} 
+		where 
+			ID = #{id}			 
+	</update>
+	<!--
+		描述：（后台）通过汇付帐号查询账户信息功能sql
+		作者：Zhang Yong
+		时间：2015.9.14
+	-->
+    <select id="HjsUserBase.getByUserCustId" resultMap="RM_HjsUserBase">
+		SELECT <include refid="HjsUserBase.columns" />
+	    <![CDATA[
+		    FROM hjs_user_base 
+	        WHERE 
+		        USR_CUST_ID = #{usrCustId} 
+	    ]]>
+	</select>
+	<update id="HjsUserBase.updateIsNewById">
+	  update hjs_user_base set IS_NEW=1  where id=#{id}
+	</update>
+	
+	<!-- 查询没有开通法大大的用户 -->
+	<select id="HjsUserBase.findFadadaNo" resultType="map">
+		SELECT u.PHONE, u.EMAIL , ar.CARD_ID ,ar.REALNAME , ub.ID
+			FROM hjs_users_info ui
+			LEFT OUTER JOIN  hjs_user u ON u.ID = ui.LOGIN_ID
+			LEFT OUTER JOIN hjs_user_base ub ON ub.ID = ui.USER_ID 
+			LEFT OUTER JOIN hjs_approve_realname ar ON ar.USER_ID = u.ID
+			WHERE u.NRP_USR_ID IS NOT NULL 
+				AND ub.FADADA_CA_ID IS NULL
+				AND u.IS_DEL = 0;
+	</select>
+	
+	<!-- 根据baseid用户 -->
+	<select id="HjsUserBase.getByBaseId" resultMap="RM_HjsUserBase">
+		SELECT * FROM hjs_user_base
+			WHERE ID = #{id}
+	</select> 
+</mapper>
+

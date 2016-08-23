@@ -16,176 +16,79 @@
 	<!-- 管理后台配置 -->
 	<dubbo:service interface="com.cifex.business.api.system.menu.HjsSysMenuService" ref="hjsSysMenuService"  protocol="dubbo"  />
 	<dubbo:service interface="com.cifex.business.api.system.role.HjsSysRoleService" ref="hjsSysRoleService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.user.HjsUserService" ref="hjsUserService"  protocol="dubbo"  />
 	<dubbo:service interface="com.cifex.business.api.system.userRole.HjsSysUserRoleService" ref="hjsSysUserRoleService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersOptLogService" ref="hjsUsersOptLogService"  protocol="dubbo"  />
-    <dubbo:service interface="com.cifex.business.api.system.borrow.HjsBorrowProjectService" ref="hjsBorrowProjectService"  protocol="dubbo"  />
 	<dubbo:service interface="com.cifex.business.api.system.config.HjsSysConfigService" ref="hjsSysConfigService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersOptService" ref="hjsUsersOptService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.borrow.HjsBorrowService" ref="hjsBorrowService"  protocol="dubbo"  />
+	<dubbo:service interface="com.cifex.business.api.system.area.HjsSysAreaService" ref="hjsSysAreaService" protocol="dubbo" />
+	
 	<dubbo:service interface="com.cifex.business.api.system.account.HjsUserBaseService" ref="hjsUserBaseService"  protocol="dubbo"  />
+	<dubbo:service interface="com.cifex.business.api.system.user.HjsUserService" ref="hjsUserService"  protocol="dubbo"  />
+	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersOptLogService" ref="hjsUsersOptLogService"  protocol="dubbo"  />
+	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersOptService" ref="hjsUsersOptService"  protocol="dubbo"  />
 	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersInfoService" ref="hjsUsersInfoService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersEnterpriceService" ref="hjsUsersEnterpriceService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.account.HjsAccountUsersService" ref="hjsAccountUsersService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.borrow.HjsBorrowUserService" ref="hjsBorrowUserService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.account.HjsAccountRechargeService" ref="hjsAccountRechargeService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.account.HjsAccountPaymentService" ref="hjsAccountPaymentService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.account.HjsAccountBankService" ref="hjsAccountBankService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.account.HjsAccountCashService" ref="hjsAccountCashService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.account.HjsAccountGrantService" ref="hjsAccountGrantService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.account.HjsAccountRefundService" ref="hjsAccountRefundService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.borrow.HjsBorrowAuditService" ref="hjsBorrowAuditService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.borrow.HjsBorrowTenderService" ref="hjsBorrowTenderService"  protocol="dubbo"  />
+	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersLogService" ref="hjsUsersLogService" protocol="dubbo" />
+	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersBlackService" ref="hjsUsersBlackService" protocol="dubbo" />
+	
 	<dubbo:service interface="com.cifex.business.api.system.approve.HjsApproveRealnameService" ref="hjsApproveRealnameService"  protocol="dubbo"  />
 	<dubbo:service interface="com.cifex.business.api.system.approve.HjsApproveEmailActiveService" ref="hjsApproveEmailActiveService"  protocol="dubbo"  />
 	<dubbo:service interface="com.cifex.business.api.system.approve.HjsApproveSmsService" ref="hjsApproveSmsService"  protocol="dubbo"  />
 	<dubbo:service interface="com.cifex.business.api.system.approve.HjsApproveSmsSendlogService" ref="hjsApproveSmsSendlogService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.account.HjsAccountUsersBankService" ref="hjsAccountUsersBankService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.account.HjsAccountLogService" ref="hjsAccountLogService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersLogService" ref="hjsUsersLogService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.area.HjsSysAreaService" ref="hjsSysAreaService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersBlackService" ref="hjsUsersBlackService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.activity.HjsActBonusService" ref="hjsActBonusService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.activity.HjsActBonusUsersService" ref="hjsActBonusUsersService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.activity.HjsActInfoService" ref="hjsActInfoService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.activity.HjsActRechargeService" ref="hjsActRechargeService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.activity.HjsActBonusUsersManualService" ref="hjsActBonusUsersManualService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.borrow.HjsBorrowRepayRecoverDetailedService" ref="hjsBorrowRepayRecoverDetailedService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersChannelRecordService" ref="hjsUsersChannelRecordService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.draw.HjsActDrawService" ref="hjsActDrawService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.draw.HjsActDrawAwardService" ref="hjsActDrawAwardService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.draw.HjsActDrawAwardWinService" ref="hjsActDrawAwardWinService" protocol="dubbo" />
 	
 	
     <bean id="hjsSysMenuService" class="com.cifex.business.provider.system.menu.HjsSysMenuServiceImpl"></bean>
     <bean id="hjsSysRoleService" class="com.cifex.business.provider.system.role.HjsSysRoleServiceImpl"></bean>
-    <bean id="hjsUserService" class="com.cifex.business.provider.system.user.HjsUserServiceImpl"></bean>
     <bean id="hjsSysUserRoleService" class="com.cifex.business.provider.system.userRole.HjsSysUserRoleServiceImpl"></bean>
-    <bean id="hjsUsersOptLogService" class="com.cifex.business.provider.system.user.HjsUsersOptLogServiceImpl"></bean>
-    <bean id="hjsBorrowProjectService" class="com.cifex.business.provider.system.borrow.HjsBorrowProjectServiceImpl"></bean>
     <bean id="hjsSysConfigService" class="com.cifex.business.provider.system.config.HjsSysConfigServiceImpl"></bean>
-	<bean id="hjsUsersOptService" class="com.cifex.business.provider.system.user.HjsUsersOptServiceImpl"></bean>
-    <bean id="hjsBorrowService" class="com.cifex.business.provider.system.borrow.HjsBorrowServiceImpl"></bean>
+	<bean id="hjsSysAreaService" class="com.cifex.business.provider.system.area.HjsSysAreaServiceImpl"></bean>
+   
     <bean id="hjsUserBaseService" class="com.cifex.business.provider.system.account.HjsUserBaseServiceImpl"></bean>
+    <bean id="hjsUserService" class="com.cifex.business.provider.system.user.HjsUserServiceImpl"></bean>
+    <bean id="hjsUsersOptLogService" class="com.cifex.business.provider.system.user.HjsUsersOptLogServiceImpl"></bean>
+	<bean id="hjsUsersOptService" class="com.cifex.business.provider.system.user.HjsUsersOptServiceImpl"></bean>
     <bean id="hjsUsersInfoService" class="com.cifex.business.provider.system.user.HjsUsersInfoServiceImpl"></bean>
-    <bean id="hjsUsersEnterpriceService" class="com.cifex.business.provider.system.user.HjsUsersEnterpriceServiceImpl"></bean>
-    <bean id="hjsAccountUsersService" class="com.cifex.business.provider.system.account.HjsAccountUsersServiceImpl"></bean>
-    <bean id="hjsBorrowUserService" class="com.cifex.business.provider.system.borrow.HjsBorrowUserServiceImpl"></bean>
-    <bean id="hjsAccountRechargeService" class="com.cifex.business.provider.system.account.HjsAccountRechargeServiceImpl"></bean>
-    <bean id="hjsAccountPaymentService" class="com.cifex.business.provider.system.account.HjsAccountPaymentServiceImpl"></bean>
-    <bean id="hjsAccountGrantService" class="com.cifex.business.provider.system.account.HjsAccountGrantServiceImpl"></bean>
-    <bean id="hjsAccountRefundService" class="com.cifex.business.provider.system.account.HjsAccountRefundServiceImpl"></bean>
-    <bean id="hjsAccountBankService" class="com.cifex.business.provider.system.account.HjsAccountBankServiceImpl"></bean>
-    <bean id="hjsAccountCashService" class="com.cifex.business.provider.system.account.HjsAccountCashServiceImpl"></bean>
-    <bean id="hjsBorrowAuditService" class="com.cifex.business.provider.system.borrow.HjsBorrowAuditServiceImpl"></bean>
-    <bean id="hjsBorrowTenderService" class="com.cifex.business.provider.system.borrow.HjsBorrowTenderServiceImpl"></bean>
+    <bean id="hjsUsersLogService" class="com.cifex.business.provider.system.user.HjsUsersLogServiceImpl"></bean>
+	<bean id="hjsUsersBlackService" class="com.cifex.business.provider.system.user.HjsUsersBlackServiceImpl"></bean>
+
     <bean id="hjsApproveRealnameService" class="com.cifex.business.provider.system.approve.HjsApproveRealnameServiceImpl"></bean>
     <bean id="hjsApproveEmailActiveService" class="com.cifex.business.provider.system.approve.HjsApproveEmailActiveServiceImpl"></bean>
     <bean id="hjsApproveSmsService" class="com.cifex.business.provider.system.approve.HjsApproveSmsServiceImpl"></bean>
     <bean id="hjsApproveSmsSendlogService" class="com.cifex.business.provider.system.approve.HjsApproveSmsSendlogServiceImpl"></bean>
-    <bean id="hjsAccountUsersBankService" class="com.cifex.business.provider.system.account.HjsAccountUsersBankServiceImpl"></bean>
     
-    <bean id="hjsAccountLogService" class="com.cifex.business.provider.system.account.HjsAccountLogServiceImpl"></bean>
-    <bean id="hjsUsersLogService" class="com.cifex.business.provider.system.user.HjsUsersLogServiceImpl"></bean>
-	<bean id="hjsSysAreaService" class="com.cifex.business.provider.system.area.HjsSysAreaServiceImpl"></bean>
-	<bean id="hjsUsersBlackService" class="com.cifex.business.provider.system.user.HjsUsersBlackServiceImpl"></bean>
 	
-    <bean id="hjsActBonusService" class="com.cifex.business.provider.system.activity.HjsActBonusServiceImpl"></bean>
-    <bean id="hjsActBonusUsersManualService" class="com.cifex.business.provider.system.activity.HjsActBonusUsersManualServiceImpl"></bean>
-	<bean id="hjsActInfoService" class="com.cifex.business.provider.system.activity.HjsActInfoServiceImpl"></bean>
-    <bean id="hjsActBonusUsersService" class="com.cifex.business.provider.system.activity.HjsActBonusUsersServiceImpl"></bean>
-    <bean id="hjsActRechargeService" class="com.cifex.business.provider.system.activity.HjsActRechargeServiceImpl"></bean>
     
-    <bean id="hjsBorrowRepayRecoverDetailedService" class="com.cifex.business.provider.system.borrow.HjsBorrowRepayRecoverDetailedServiceImpl"></bean>
-    
-    <bean id="hjsUsersChannelRecordService" class="com.cifex.business.provider.system.user.HjsUsersChannelRecordServiceImpl"></bean>
-    <bean id="hjsActDrawAwardService" class="com.cifex.business.provider.system.draw.HjsActDrawAwardServiceImpl"></bean>
-    <bean id="hjsActDrawService" class="com.cifex.business.provider.system.draw.HjsActDrawServiceImpl"></bean>
-    <bean id="hjsActDrawAwardWinService" class="com.cifex.business.provider.system.draw.HjsActDrawAwardWinServiceImpl"></bean>
     
 	<!-- 管理后台配置结束 -->
 	
-	<!-- 管理前台配置 -->
-	<dubbo:service interface="com.cifex.business.api.user.user.UserService" ref="userService"  protocol="dubbo"  />
+	<!-- 前台配置 -->
+	<dubbo:service interface="com.cifex.business.api.user.area.SysAreaService" ref="sysAreaService"  protocol="dubbo"  />
+	<dubbo:service interface="com.cifex.business.api.user.config.SysConfigService" ref="sysConfigService"  protocol="dubbo"  />
+	
 	<dubbo:service interface="com.cifex.business.api.user.account.UserBaseService" ref="userBaseService"  protocol="dubbo"  />
+	<dubbo:service interface="com.cifex.business.api.user.user.UserService" ref="userService"  protocol="dubbo"  />
 	<dubbo:service interface="com.cifex.business.api.user.user.UsersInfoService" ref="usersInfoService"  protocol="dubbo"  />
+	<dubbo:service interface="com.cifex.business.api.user.user.UsersLogService" ref="usersLogService" protocol="dubbo" />
+	<dubbo:service interface="com.cifex.business.api.user.message.UsersMessageService" ref="usersMessageService" protocol="dubbo"/>
+	<dubbo:service interface="com.cifex.business.api.user.user.UsersAddService" ref="usersAddService" protocol="dubbo"/>
+	
 	<dubbo:service interface="com.cifex.business.api.user.approve.ApproveRealnameService" ref="approveRealnameService"  protocol="dubbo"  />
 	<dubbo:service interface="com.cifex.business.api.user.approve.ApproveEmailActiveService" ref="approveEmailActiveService"  protocol="dubbo"  />
 	<dubbo:service interface="com.cifex.business.api.user.approve.ApproveSmsService" ref="approveSmsService"  protocol="dubbo"  />
 	<dubbo:service interface="com.cifex.business.api.user.approve.ApproveSmsSendlogService" ref="approveSmsSendlogService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.user.UsersLogService" ref="usersLogService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.user.account.AccountUsersService" ref="accountUsersService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.borrow.BorrowTenderService" ref="borrowTenderService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.user.borrow.BorrowRecoverService" ref="borrowRecoverService" protocol="dubbo"/>
-	<dubbo:service interface="com.cifex.business.api.user.borrow.BorrowService" ref="borrowService" protocol="dubbo"/>
-	<dubbo:service interface="com.cifex.business.api.user.account.AccountUsersBankService" ref="accountUsersBankService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.account.AccountBankService" ref="accountBankService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.area.SysAreaService" ref="sysAreaService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.message.UsersMessageService" ref="usersMessageService" protocol="dubbo"/>
-	<dubbo:service interface="com.cifex.business.api.user.borrow.BorrowAuditService" ref="borrowAuditService" protocol="dubbo"/>
-	<dubbo:service interface="com.cifex.business.api.user.user.UsersAddService" ref="usersAddService" protocol="dubbo"/>
-	
-	<dubbo:service interface="com.cifex.business.api.user.borrow.BorrowService" ref="borrowService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.borrow.BorrowTenderService" ref="borrowTenderService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.account.AccountCashService" ref="accountCashService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.user.account.AccountRechargeService" ref="accountRechargeService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.user.account.AccountPaymentService" ref="accountPaymentService" protocol="dubbo" />
-	
-	
-	<dubbo:service interface="com.cifex.business.api.user.activity.ActBonusService" ref="actBonusService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.activity.ActBonusUsersService" ref="actBonusUsersService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.activity.ActInfoService" ref="actInfoService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.activity.ActBonusUsersLogService" ref="actBonusUsersLogService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.borrow.BorrowUserService" ref="borrowUserService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.config.SysConfigService" ref="sysConfigService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.user.UsersChannelRecordService" ref="usersChannelRecordService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.user.UsersEnterpriceService" ref="usersEnterpriceService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.borrow.BorrowProjectService" ref="borrowProjectService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.activity.ActRechargeService" ref="actRechargeService"  protocol="dubbo"  />
 
-	<dubbo:service interface="com.cifex.business.api.user.activity.ActDrawAwardService" ref="actDrawAwardService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.activity.ActDrawAwardWinService" ref="actDrawAwardWinService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.activity.ActDrawService" ref="actDrawService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.activity.ActDrawUsersLogService" ref="actDrawUsersLogService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.activity.ActDrawUsersService" ref="actDrawUsersService"  protocol="dubbo"  />
-
-
-	<bean id="userService" class="com.cifex.business.provider.user.user.UserServiceImpl"></bean>
+	
+	<bean id="sysAreaService" class="com.cifex.business.provider.user.area.SysAreaServiceImpl"></bean>
+	<bean id="sysConfigService" class="com.cifex.business.provider.user.config.SysConfigServiceImpl"></bean>
+	
 	<bean id="userBaseService" class="com.cifex.business.provider.user.account.UserBaseServiceImpl"></bean>
+	<bean id="userService" class="com.cifex.business.provider.user.user.UserServiceImpl"></bean>
     <bean id="usersInfoService" class="com.cifex.business.provider.user.user.UsersInfoServiceImpl"></bean>
+    <bean id="usersLogService" class="com.cifex.business.provider.user.user.UsersLogServiceImpl"></bean>
+	<bean id="usersAddService" class="com.cifex.business.provider.user.user.UsersAddServiceImpl"></bean>
+	<bean id="usersMessageService" class="com.cifex.business.provider.user.message.UsersMessageServiceImpl"></bean>
+    
     <bean id="approveRealnameService" class="com.cifex.business.provider.user.approve.ApproveRealnameServiceImpl"></bean>
     <bean id="approveEmailActiveService" class="com.cifex.business.provider.user.approve.ApproveEmailActiveServiceImpl"></bean>
     <bean id="approveSmsService" class="com.cifex.business.provider.user.approve.ApproveSmsServiceImpl"></bean>
     <bean id="approveSmsSendlogService" class="com.cifex.business.provider.user.approve.ApproveSmsSendlogServiceImpl"></bean>
-    <bean id="usersLogService" class="com.cifex.business.provider.user.user.UsersLogServiceImpl"></bean>
-	<bean id="accountUsersService" class="com.cifex.business.provider.user.account.AccountUsersServiceImpl"></bean>
-	<bean id="borrowTenderService" class="com.cifex.business.provider.user.borrow.BorrowTenderServiceImpl"></bean>
-	<bean id="accountCashService" class="com.cifex.business.provider.user.account.AccountCashServiceImpl"></bean>
-	<bean id="accountRechargeService" class="com.cifex.business.provider.user.account.AccountRechargeServiceImpl"></bean>
-	<bean id="borrowRecoverService" class="com.cifex.business.provider.user.borrow.BorrowRecoverServiceImpl"></bean>
-	<bean id="borrowService" class="com.cifex.business.provider.user.borrow.BorrowServiceImpl"></bean>
-	<bean id="accountUsersBankService" class="com.cifex.business.provider.user.account.AccountUsersBankServiceImpl"></bean>
-	<bean id="accountBankService" class="com.cifex.business.provider.user.account.AccountBankServiceImpl"></bean>
-	<bean id="accountPaymentService" class="com.cifex.business.provider.user.account.AccountPaymentServiceImpl"></bean>
-	<bean id="sysAreaService" class="com.cifex.business.provider.user.area.SysAreaServiceImpl"></bean>
-	<bean id="usersMessageService" class="com.cifex.business.provider.user.message.UsersMessageServiceImpl"></bean>
-	<bean id="borrowAuditService" class="com.cifex.business.provider.user.borrow.BorrowAuditServiceImpl"></bean>
-	<bean id="usersAddService" class="com.cifex.business.provider.user.user.UsersAddServiceImpl"></bean>
-	<bean id="actBonusService" class="com.cifex.business.provider.user.activity.ActBonusServiceImpl"></bean>
-	<bean id="actBonusUsersService" class="com.cifex.business.provider.user.activity.ActBonusUsersServiceImpl"></bean>
-	<bean id="actInfoService" class="com.cifex.business.provider.user.activity.ActInfoServiceImpl"></bean>
-	<bean id="actBonusUsersLogService" class="com.cifex.business.provider.user.activity.ActBonusUsersLogServiceImpl"></bean>
-	<bean id="borrowUserService" class="com.cifex.business.provider.user.borrow.BorrowUserServiceImpl"></bean>
-	<bean id="sysConfigService" class="com.cifex.business.provider.user.config.SysConfigServiceImpl"></bean>
-	<bean id="usersChannelRecordService" class="com.cifex.business.provider.user.user.UsersChannelRecordServiceImpl"></bean>
-	<bean id="usersEnterpriceService" class="com.cifex.business.provider.user.user.UsersEnterpriceServiceImpl"></bean>
-	<bean id="borrowProjectService" class="com.cifex.business.provider.user.borrow.BorrowProjectServiceImpl"></bean>
-	<bean id="actRechargeService" class="com.cifex.business.provider.user.activity.ActRechargeServiceImpl"></bean>
-	<bean id="actDrawAwardService" class="com.cifex.business.provider.user.activity.ActDrawAwardServiceImpl"></bean>
-	<bean id="actDrawAwardWinService" class="com.cifex.business.provider.user.activity.ActDrawAwardWinServiceImpl"></bean>
-	<bean id="actDrawService" class="com.cifex.business.provider.user.activity.ActDrawServiceImpl"></bean>
-	<bean id="actDrawUsersLogService" class="com.cifex.business.provider.user.activity.ActDrawUsersLogServiceImpl"></bean>
-	<bean id="actDrawUsersService" class="com.cifex.business.provider.user.activity.ActDrawUsersServiceImpl"></bean>
-	<!-- 管理前台配置结束 -->
+	<!-- 前台配置结束 -->
 	
 </beans> 

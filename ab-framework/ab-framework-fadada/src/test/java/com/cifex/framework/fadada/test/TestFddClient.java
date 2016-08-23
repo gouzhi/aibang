@@ -18,11 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.aibang.framework.fadada.FddClient;
+import com.aibang.framework.fadada.config.FddConstant;
+import com.aibang.framework.utils.JSONUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.cifex.framework.fadada.FddClient;
-import com.cifex.framework.fadada.config.FddConstant;
-import com.cifex.framework.utils.JSONUtils;
 
 /**
  * <h3>概要:</h3> 

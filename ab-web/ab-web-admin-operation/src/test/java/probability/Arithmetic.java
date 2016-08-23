@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
-import com.cifex.framework.utils.BigDecimalUtils;
+import com.aibang.framework.utils.BigDecimalUtils;
 
 public class Arithmetic {
 	
