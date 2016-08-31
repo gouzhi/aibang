@@ -1,6 +1,5 @@
 package com.aibang.web.daemon.listener;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -18,7 +17,6 @@ import com.aibang.business.api.user.message.UsersMessageService;
 import com.aibang.framework.utils.Const;
 import com.aibang.framework.utils.JSONUtils;
 import com.aibang.framework.utils.MessageStrUtil;
-import com.aibang.transfer.model.dto.HjsUsersChannelRecord;
 import com.aibang.transfer.model.dto.HjsUsersMessage;
 
 
@@ -75,10 +73,6 @@ public class RegisterListener  implements MessageListener {
             }
             
             
-            // 注册成功后像渠道用户记录表添加数据
-            if(StringUtils.isNotBlank(chlid)){
-            	addUserChannel(chlUserid, chlUsername, logo, chlid, userid, username ,phone);
-            }
    
             //注册后送积分
 
@@ -149,46 +143,6 @@ public class RegisterListener  implements MessageListener {
 
 	
 
-	/**
-     * 注册成功后想渠道用户记录表添加数据
-     * @param chlUserid 渠道方用户id
-     * @param chlUsername 渠道方用户名
-     * @param logo 渠道方活动标识
-     * @param chlid 渠道方的唯一标识
-     * @param userid 我方平台的用户id
-     * @param username 我方平台的用户名
-     */
-    private void addUserChannel(String chlUserid,String chlUsername,String logo,String chlid,int userid,String username,String phone){
-        try {
-        	if(null != chlid){//如果有渠道方标识就添加记录
-                HjsUsersChannelRecord hjsUsersChannelRecord = new HjsUsersChannelRecord();
-                hjsUsersChannelRecord.setTypeNo(0);
-                hjsUsersChannelRecord.setChlUserid(chlUserid);
-                hjsUsersChannelRecord.setChlUsername(chlUsername);
-                hjsUsersChannelRecord.setLogo(logo);
-                hjsUsersChannelRecord.setChlid(Integer.parseInt(chlid));
-                hjsUsersChannelRecord.setUserid(userid);
-                if(StringUtils.isNotBlank(username)){
-                	hjsUsersChannelRecord.setUsername(username);                	
-                }else if(StringUtils.isNotBlank(phone)){
-                	hjsUsersChannelRecord.setUsername(phone);            
-                }
-                hjsUsersChannelRecord.setCreateTime(new Date());
-                hjsUsersChannelRecord.setTenderAccount(new BigDecimal(0));
-                /*处理回调
-	            String connTimeoutMills = Const.getProperty("ST_MAX_CONN_TIME");
-	            String readTimeoutMills = Const.getProperty("ST_MAX_READ_TIME");
-	            String attachments = "logo"+"="+logo+"&"+"uid"+"="+chlUserid+"&"+"e_uid"+"="+userid+"&"+"e_user"+"="+username;
-	            logger.info("石头村用户注册请求开始");
-	            logger.info("请求参数:"+attachments);
-	            String msg = HttpAccessUtil.httpRequest(Const.getProperty("ST_REG_URL"), MimeTypes.HTML, "GET", Integer.parseInt(connTimeoutMills), Integer.parseInt(readTimeoutMills), attachments);
-	            logger.info("返回参数:"+msg);
-	            logger.info("石头村用户注册请求结束");*/            }
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
-		}        
-    }
-
+	
 
 }
