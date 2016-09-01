@@ -18,9 +18,9 @@ import com.aibang.business.api.user.user.UsersInfoService;
 import com.aibang.business.api.user.user.UsersLogService;
 import com.aibang.framework.utils.Const;
 import com.aibang.framework.utils.ip.Utils;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.dto.HjsUsersInfo;
-import com.aibang.transfer.model.dto.HjsUsersLog;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.dto.AbUsersInfo;
+import com.aibang.transfer.model.dto.AbUsersLog;
 
 public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
 
@@ -41,7 +41,7 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
 		if (!subject.isAuthenticated() && subject.isRemembered()) {
 		            Object principal = subject.getPrincipal();
 		            if (null != principal) {			            	
-						HjsUser u = userService.getByUsername(String.valueOf(principal));
+						AbUser u = userService.getByUsername(String.valueOf(principal));
 						if (u != null) {
 							if(u.getStatus()==1){					
 								subject.getSession().setAttribute(Const.SESSION_USER, u);
@@ -57,13 +57,13 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
 								}								
 								// 获取会员详细信息，会员账户信息
 								try {
-									HjsUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(u.getId());
+									AbUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(u.getId());
 									subject.getSession().setAttribute(Const.SESSION_USERCUSTOMER,usersInfo);
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
 								//保存登录日志
-								HjsUsersLog usersLog = new HjsUsersLog();
+								AbUsersLog usersLog = new AbUsersLog();
 								usersLog.setContent("登陆");
 								usersLog.setResult(1);
 								usersLog.setUserId(u.getId());

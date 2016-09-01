@@ -15,9 +15,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.aibang.business.api.system.menu.HjsSysMenuService;
-import com.aibang.transfer.model.dto.HjsSysMenu;
-import com.aibang.transfer.model.vo.HjsSysMenuQuery;
+import com.aibang.business.api.system.menu.AbSysMenuService;
+import com.aibang.transfer.model.dto.AbSysMenu;
+import com.aibang.transfer.model.vo.AbSysMenuQuery;
 import com.aibang.web.admin.operation.base.AdminController;
  
 /**
@@ -33,7 +33,7 @@ import com.aibang.web.admin.operation.base.AdminController;
 public class MenuController extends AdminController {
 
 	@Resource(name="hjsSysMenuService")
-	private HjsSysMenuService hjsSysMenuService;
+	private AbSysMenuService hjsSysMenuService;
 	private String display(String pageName)
 	{
 		return  "system/menu/"+pageName;
@@ -50,7 +50,7 @@ public class MenuController extends AdminController {
 	@RequestMapping
 	public String list(ModelMap model)throws Exception{
 		try{
-			List<HjsSysMenu> menuList = hjsSysMenuService.findAllParentMenu();
+			List<AbSysMenu> menuList = hjsSysMenuService.findAllParentMenu();
 			model.addAttribute("menuList", menuList);
 		} catch(Exception e){
 			logger.error(e.toString(), e);
@@ -71,7 +71,7 @@ public class MenuController extends AdminController {
 	@RequestMapping(value="/toAdd")
 	public String toAdd(ModelMap model)throws Exception{
 		try{
-			List<HjsSysMenu> menuList = hjsSysMenuService.findAllParentMenu();
+			List<AbSysMenu> menuList = hjsSysMenuService.findAllParentMenu();
 			model.addAttribute("menuList", menuList);
 		} catch(Exception e){
 			logger.error(e.toString(), e);
@@ -90,7 +90,7 @@ public class MenuController extends AdminController {
 	 */
 	@SuppressWarnings("unused")
 	@RequestMapping(value="/add")
-	public String add(ModelMap model,HjsSysMenu newMenu,HttpServletRequest request)throws Exception{
+	public String add(ModelMap model,AbSysMenu newMenu,HttpServletRequest request)throws Exception{
 		try{
 			int PARENT_ID = 0;
 			//是否有parentID
@@ -99,8 +99,8 @@ public class MenuController extends AdminController {
 			}
 			//判断是否是顶级菜单 默认顶级
 			if(PARENT_ID !=0){
-				HjsSysMenuQuery sysMenu=new HjsSysMenuQuery();
-				HjsSysMenu menu=new HjsSysMenu();
+				AbSysMenuQuery sysMenu=new AbSysMenuQuery();
+				AbSysMenu menu=new AbSysMenu();
 				sysMenu.setId(PARENT_ID);
 				menu = hjsSysMenuService.getById(PARENT_ID);
 				newMenu.setTypeId(menu.getTypeId());	
@@ -111,7 +111,7 @@ public class MenuController extends AdminController {
 			newMenu.setOptId(getLoginUser().getId());
 			newMenu.setVersion(0);
 			newMenu.setIsDel(0);
-			HjsSysMenu rsm=hjsSysMenuService.saveObj(newMenu);
+			AbSysMenu rsm=hjsSysMenuService.saveObj(newMenu);
 			model.addAttribute("msg","success");
 		} catch(Exception e){
 			logger.error(e.toString(), e);
@@ -134,16 +134,16 @@ public class MenuController extends AdminController {
 	@RequestMapping(value="/toEdit")
 	public String toEdit(ModelMap model,String menuId)throws Exception{
 		try{
-			HjsSysMenu m=new HjsSysMenu();
+			AbSysMenu m=new AbSysMenu();
 			
 			m = hjsSysMenuService.getById(Integer.parseInt(menuId));
-			HjsSysMenu parent = null;			
+			AbSysMenu parent = null;			
 			if(m.getParentId()!=null&&m.getParentId().intValue()!=0)
 			{
 				parent= hjsSysMenuService.getById(m.getParentId().intValue());
 			}
 			
-			List<HjsSysMenu> menuList = hjsSysMenuService.findAllParentMenu();
+			List<AbSysMenu> menuList = hjsSysMenuService.findAllParentMenu();
 
 			model.addAttribute("menuList", menuList);
 			model.addAttribute("menu", m);
@@ -167,8 +167,8 @@ public class MenuController extends AdminController {
 	@RequestMapping(value="/toEditicon")
 	public String toEditicon(ModelMap model,String menuId)throws Exception{
 		try{
-			HjsSysMenu m=new HjsSysMenu();
-			HjsSysMenuQuery smq=new HjsSysMenuQuery();
+			AbSysMenu m=new AbSysMenu();
+			AbSysMenuQuery smq=new AbSysMenuQuery();
 			smq.setId(Integer.parseInt(menuId));
 			m = hjsSysMenuService.getById(Integer.parseInt(menuId));
 			model.addAttribute("menu", m);
@@ -189,7 +189,7 @@ public class MenuController extends AdminController {
 	* @throws
 	 */
 	@RequestMapping(value="/editicon")
-	public String editicon(ModelMap model,HjsSysMenu menu)throws Exception{
+	public String editicon(ModelMap model,AbSysMenu menu)throws Exception{
 		try{
 			hjsSysMenuService.editIcon(menu);
 			model.addAttribute("msg","success");
@@ -211,16 +211,16 @@ public class MenuController extends AdminController {
 	* @throws
 	 */
 	@RequestMapping(value="/edit")
-	public String edit(ModelMap model,HjsSysMenu menu,HttpServletRequest request)throws Exception{
+	public String edit(ModelMap model,AbSysMenu menu,HttpServletRequest request)throws Exception{
 		try{
 			//判断修改菜单类型还是菜单内容
 			if(menu.getParentId()==0){
 				hjsSysMenuService.editType(menu);
 			}else
 			{
-				HjsSysMenuQuery query=new HjsSysMenuQuery();
+				AbSysMenuQuery query=new AbSysMenuQuery();
 				query.setId(menu.getParentId());
-				HjsSysMenu parentMenu = hjsSysMenuService.getById(menu.getParentId());
+				AbSysMenu parentMenu = hjsSysMenuService.getById(menu.getParentId());
 				menu.setTypeId(parentMenu.getTypeId());
 				
 			}		
@@ -248,9 +248,9 @@ public class MenuController extends AdminController {
 	@RequestMapping(value="/sub")
 	public void getSub(@RequestParam String menuId,HttpServletResponse response)throws Exception{
 		try {
-			HjsSysMenuQuery menuQuery = new HjsSysMenuQuery();
+			AbSysMenuQuery menuQuery = new AbSysMenuQuery();
 			menuQuery.setId(Integer.parseInt(menuId));
-			List<HjsSysMenu> subMenu = hjsSysMenuService.findSubMenuById(Integer.parseInt(menuId));
+			List<AbSysMenu> subMenu = hjsSysMenuService.findSubMenuById(Integer.parseInt(menuId));
 			JSONArray arr = JSONArray.fromObject(subMenu);
 			//获得对象变为JSON格式，并且输出
 			PrintWriter out;			
@@ -279,7 +279,7 @@ public class MenuController extends AdminController {
 	public void delete(@RequestParam String menuId,PrintWriter out)throws Exception{
 		
 		try{
-			HjsSysMenu sysMenu = new HjsSysMenu();
+			AbSysMenu sysMenu = new AbSysMenu();
 			sysMenu.setId(Integer.parseInt(menuId));
 			sysMenu.setDeleteTime(new Date());
 			hjsSysMenuService.remove(sysMenu);

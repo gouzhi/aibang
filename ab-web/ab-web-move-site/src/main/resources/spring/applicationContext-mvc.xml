@@ -32,9 +32,9 @@
 	</mvc:annotation-driven>
 	<!-- <mvc:default-servlet-handler/> -->
 	
-	<context:component-scan base-package="com.cifex.web.move.site" />
+	<context:component-scan base-package="com.aibang.web.move.site" />
 
-   <bean id="propertyConfigurer" class="com.cifex.framework.utils.Const">
+   <bean id="propertyConfigurer" class="com.aibang.framework.utils.Const">
         <property name="locations">
             <list>
                 <value>classpath*:system.properties</value>
@@ -50,14 +50,14 @@
   	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/><!-- 如果不配置或/*,将拦截所有的Controller -->
-			<bean class="com.cifex.web.move.site.interceptor.WebApplicationInterceptor"/>
+			<bean class="com.aibang.web.move.site.interceptor.WebApplicationInterceptor"/>
 		</mvc:interceptor>
 	 </mvc:interceptors>
 	<!-- 访问拦截  -->  
   <!-- 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**"/>
-			<bean class="com.cifex.front.controller.interceptor.LoginHandlerInterceptor"/>
+			<bean class="com.aibang.front.controller.interceptor.LoginHandlerInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors> -->
 	 
@@ -92,7 +92,7 @@
 		</property>
 	</bean>  
 	
-	<bean id="exceptionResolver" class="com.cifex.web.move.site.resolver.MyExceptionResolver"></bean>
+	<bean id="exceptionResolver" class="com.aibang.web.move.site.resolver.MyExceptionResolver"></bean>
 	<!-- 上传拦截，如最大上传值及最小上传值 -->
 	  <bean id="multipartResolver"   class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >   
 		  <property name="maxUploadSize">    

@@ -3,8 +3,8 @@ package com.aibang.business.api.user.area;
 import java.util.List;
 
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsSysArea;
-import com.aibang.transfer.model.vo.HjsSysAreaQuery;
+import com.aibang.transfer.model.dto.AbSysArea;
+import com.aibang.transfer.model.vo.AbSysAreaQuery;
  
  
 /** 
@@ -20,12 +20,12 @@ public interface SysAreaService {
 	/** 
 	 * 创建HjsSysArea
 	 **/
-	public HjsSysArea saveObj(HjsSysArea model);
+	public AbSysArea saveObj(AbSysArea model);
 	
 	/** 
 	 * 更新HjsSysArea
 	 **/	
-    public void update(HjsSysArea model);
+    public void update(AbSysArea model);
     
 	/** 
 	 * 删除HjsSysArea
@@ -35,25 +35,25 @@ public interface SysAreaService {
     /** 
      * 逻辑删除HjsSysArea
      */
-    public void remove(HjsSysArea model);
+    public void remove(AbSysArea model);
     
 	/** 
 	 * 根据ID得到HjsSysArea
 	 **/    
-    public HjsSysArea getById(Integer id);
+    public AbSysArea getById(Integer id);
     
  
-	public List<HjsSysArea> findAll();
+	public List<AbSysArea> findAll();
 	
-	public HjsSysArea saveOrUpdate(HjsSysArea entity);
+	public AbSysArea saveOrUpdate(AbSysArea entity);
 	 
-	public boolean isUnique(HjsSysArea entity, String uniquePropertyNames);
+	public boolean isUnique(AbSysArea entity, String uniquePropertyNames);
 	
 	/** 
 	 * 分页查询: HjsSysArea
 	 **/      
 	@SuppressWarnings("rawtypes")
-	public Page findPage(HjsSysAreaQuery query);
+	public Page findPage(AbSysAreaQuery query);
 	/**
 	 * 得到某级别地域信息
 	 * @param layer 地域级别1：省级 2：市级 3：县级
@@ -62,6 +62,6 @@ public interface SysAreaService {
 	 * @author zhangyong
 	 * @date 2015年9月22日
 	 */
-	public List<HjsSysArea> getAreaLayer(Integer layer, Integer parentId);
+	public List<AbSysArea> getAreaLayer(Integer layer, Integer parentId);
 	
 }

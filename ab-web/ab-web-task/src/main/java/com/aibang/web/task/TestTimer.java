@@ -1,6 +1,6 @@
 package com.aibang.web.task;
 
-import com.aibang.business.api.system.user.HjsUserService;
+import com.aibang.business.api.system.user.AbUserService;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -16,7 +16,7 @@ public class TestTimer extends QuartzJobBean{
 
     @Resource(name="userService")
 //    @Reference(interfaceClass=UserService.class,interfaceName="com.cifex.business.api.system.user.UserService")
-    private HjsUserService userService;
+    private AbUserService userService;
 //    @Autowired
 //    private BorrowTenderService borrowTenderService;
     protected void executeInternal(JobExecutionContext arg0) throws JobExecutionException

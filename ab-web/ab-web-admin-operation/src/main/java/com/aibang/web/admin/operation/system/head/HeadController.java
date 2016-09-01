@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.aibang.business.api.system.user.HjsUserService;
+import com.aibang.business.api.system.user.AbUserService;
 import com.aibang.framework.utils.AppUtil;
 import com.aibang.framework.utils.Const;
 import com.aibang.framework.utils.PageData;
 import com.aibang.framework.utils.Tools;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.vo.HjsUserQuery;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.vo.AbUserQuery;
 import com.aibang.web.admin.operation.base.AdminController;
   
 /** 
@@ -33,7 +33,7 @@ import com.aibang.web.admin.operation.base.AdminController;
 public class HeadController extends AdminController {
 	
 	@Resource(name="hjsUserService")
-	private HjsUserService hjsUserService;	 
+	private AbUserService hjsUserService;	 
 	
 	/**
 	 * 获取头部信息
@@ -45,19 +45,19 @@ public class HeadController extends AdminController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		try {
 			pd = this.getPageData();
-			List<HjsUser> pdList = new ArrayList<HjsUser>();
+			List<AbUser> pdList = new ArrayList<AbUser>();
 			
 			//shiro管理的session
 			Subject currentUser = SecurityUtils.getSubject();  
 			Session session = currentUser.getSession();
 			
-			HjsUser pds = new HjsUser();
-			pds = (HjsUser)session.getAttribute("userpds");
+			AbUser pds = new AbUser();
+			pds = (AbUser)session.getAttribute("userpds");
 			
 			if(null == pds){
 				String USERNAME = session.getAttribute(Const.SESSION_USERNAME).toString();	//获取当前登录者loginname
 				pd.put("USERNAME", USERNAME);
-				HjsUserQuery query=new HjsUserQuery();
+				AbUserQuery query=new AbUserQuery();
 				query.setUsername(USERNAME);
 				pds = hjsUserService.getByUsername(USERNAME);
 				session.setAttribute("userpds", pds);
@@ -222,7 +222,7 @@ public class HeadController extends AdminController {
 			//if(strEM.length == 4){
 				if("yes".endsWith(isAll)){
 					try {
-						List<HjsUser> userList = new ArrayList<HjsUser>();
+						List<AbUser> userList = new ArrayList<AbUser>();
 						//userList = "appuser".equals(fmsg) ? appuserService.listAllUser(new HjsUser()):userService.listAllUser(new HjsUser());
 						userList=hjsUserService.findAll();
 						zcount = userList.size();

@@ -14,8 +14,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.aibang.framework.utils.Const;
 import com.aibang.framework.utils.RightsHelper;
-import com.aibang.transfer.model.dto.HjsSysMenu;
-import com.aibang.transfer.model.dto.HjsUser;
+import com.aibang.transfer.model.dto.AbSysMenu;
+import com.aibang.transfer.model.dto.AbUser;
  
  
 /**
@@ -38,7 +38,7 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{
 			//shiro管理的session
 			Subject currentUser = SecurityUtils.getSubject();  
 			Session session = currentUser.getSession();
-			HjsUser user = (HjsUser)session.getAttribute(Const.SESSION_USER);
+			AbUser user = (AbUser)session.getAttribute(Const.SESSION_USER);
 			if(user!=null){
 				
 				//判断是否拥有当前点击菜单的权限（内部过滤,防止通过url进入跳过菜单权限）
@@ -47,7 +47,7 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{
 				 * 根据按钮权限，授权按钮(当前点的菜单和角色中各按钮的权限匹对)
 				 */
 				Boolean b = true;
-				List<HjsSysMenu> menuList = (List)session.getAttribute(Const.SESSION_allmenuList); //获取菜单列表
+				List<AbSysMenu> menuList = (List)session.getAttribute(Const.SESSION_allmenuList); //获取菜单列表
 				path = path.substring(1, path.length());
 				for(int i=0;i<menuList.size();i++){
 					for(int j=0;j<menuList.get(i).getSubMenu().size();j++){

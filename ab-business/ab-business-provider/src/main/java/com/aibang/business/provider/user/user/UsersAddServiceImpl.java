@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import com.aibang.business.api.user.user.UsersAddService;
 import com.aibang.business.provider.base.ProviderServiceBase;
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsUsersAdd;
-import com.aibang.transfer.model.vo.HjsUsersAddQuery;
+import com.aibang.transfer.model.dto.AbUsersAdd;
+import com.aibang.transfer.model.vo.AbUsersAddQuery;
 import com.alibaba.dubbo.rpc.RpcException;
  
  
@@ -20,14 +20,14 @@ import com.alibaba.dubbo.rpc.RpcException;
  
 @Service("usersAddService")
 @SuppressWarnings({"unchecked"})
-public class UsersAddServiceImpl  extends ProviderServiceBase<HjsUsersAdd,Integer> implements UsersAddService {
+public class UsersAddServiceImpl  extends ProviderServiceBase<AbUsersAdd,Integer> implements UsersAddService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
 		return "HjsUsersAdd";
 	}
 	
-	public HjsUsersAdd saveOrUpdate(HjsUsersAdd entity) {
+	public AbUsersAdd saveOrUpdate(AbUsersAdd entity) {
 		if(entity.getId() == null) 
 			save(entity);
 		else 
@@ -35,7 +35,7 @@ public class UsersAddServiceImpl  extends ProviderServiceBase<HjsUsersAdd,Intege
 		return entity;
 	}
 	@SuppressWarnings({"rawtypes"})
-	public Page findPage(HjsUsersAddQuery query) {
+	public Page findPage(AbUsersAddQuery query) {
 		try {
 		    return pageQuery("HjsUsersAdd.findPage",query);
 		}catch (Exception e) {
@@ -43,7 +43,7 @@ public class UsersAddServiceImpl  extends ProviderServiceBase<HjsUsersAdd,Intege
 		}
 	}
 	
-	public HjsUsersAdd saveObj(HjsUsersAdd model)
+	public AbUsersAdd saveObj(AbUsersAdd model)
 	{
 		
 		try {
@@ -60,12 +60,12 @@ public class UsersAddServiceImpl  extends ProviderServiceBase<HjsUsersAdd,Intege
 	 * @author zhangyong
 	 * @date 2015年11月4日
 	 */
-	public HjsUsersAdd getAddressByBaseId(Integer baseId){
-		HjsUsersAdd usersAdd = null;
+	public AbUsersAdd getAddressByBaseId(Integer baseId){
+		AbUsersAdd usersAdd = null;
 		try {
-			HjsUsersAddQuery query = new HjsUsersAddQuery();
+			AbUsersAddQuery query = new AbUsersAddQuery();
 			query.setUserId(baseId);
-			usersAdd = (HjsUsersAdd)findForObject(getIbatisMapperNamesapce()+".getByBaseId", query);
+			usersAdd = (AbUsersAdd)findForObject(getIbatisMapperNamesapce()+".getByBaseId", query);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过账户ID获取收货地址信息错误",e.getCause());
 		}

@@ -24,7 +24,7 @@ import com.aibang.framework.utils.Const;
 import com.aibang.framework.utils.DateUtils;
 import com.aibang.framework.utils.Tools;
 import com.aibang.framework.utils.redis.SpringRedisCacheService;
-import com.aibang.transfer.model.dto.HjsUser;
+import com.aibang.transfer.model.dto.AbUser;
 import com.aibang.web.front.site.base.UserController;
 
 /**
@@ -120,7 +120,7 @@ public class SmsCodeController extends UserController{
 	private SpringRedisCacheService springRedisCacheService;
 	@RequestMapping(value= "/passcode")
 	public void getPassCode(ModelMap model,Integer id,HttpServletRequest request,HttpServletResponse response,PrintWriter out){
-		HjsUser user = userService.getById(id);
+		AbUser user = userService.getById(id);
 		//判断找回密码次数，每天超过5次不做操作
 		int times = 0;
 		if(springRedisCacheService.get("reset_"+user.getId())!=null){
@@ -190,7 +190,7 @@ public class SmsCodeController extends UserController{
 	 */
 	@RequestMapping(value= "/phonecode")
 	public void getPhoneCode(ModelMap model,Integer id,HttpServletRequest request,HttpServletResponse response,PrintWriter out){
-		HjsUser user = userService.getById(id);
+		AbUser user = userService.getById(id);
 		String phone = user.getPhone();
 		int res = getSendCode(phone);
 		try{
@@ -236,7 +236,7 @@ public class SmsCodeController extends UserController{
 	 */
 	@RequestMapping(value= "/emailcode")
 	public void getEmailCode(ModelMap model,Integer id,HttpServletRequest request,HttpServletResponse response,PrintWriter out){
-		HjsUser user = userService.getById(id);
+		AbUser user = userService.getById(id);
 		String phone = user.getPhone();
 		int res = getSendCode(phone);
 		try{
@@ -259,7 +259,7 @@ public class SmsCodeController extends UserController{
 	 */
 	@RequestMapping(value= "/namecode")
 	public void getNameCode(ModelMap model,Integer id,HttpServletRequest request,HttpServletResponse response,PrintWriter out){
-		HjsUser user = userService.getById(id);
+		AbUser user = userService.getById(id);
 		//结果状态 0发送失败 否则返回验证码
 		String phone = user.getPhone();
 		int res = getSendCode(phone);

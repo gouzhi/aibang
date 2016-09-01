@@ -3,8 +3,8 @@ package com.aibang.business.provider.user.config;
 import com.aibang.business.api.user.config.SysConfigService;
 import com.aibang.business.provider.base.ProviderServiceBase;
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsSysConfig;
-import com.aibang.transfer.model.vo.HjsSysConfigQuery;
+import com.aibang.transfer.model.dto.AbSysConfig;
+import com.aibang.transfer.model.vo.AbSysConfigQuery;
 import com.alibaba.dubbo.rpc.RpcException;
 
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ import java.util.List;
 @Service("sysConfigService")
 @SuppressWarnings({ "unchecked" })
 public class SysConfigServiceImpl extends
-		ProviderServiceBase<HjsSysConfig, Integer> implements
+		ProviderServiceBase<AbSysConfig, Integer> implements
 		SysConfigService {
 
 	@Override
@@ -37,7 +37,7 @@ public class SysConfigServiceImpl extends
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-	public HjsSysConfig saveOrUpdate(HjsSysConfig entity) {
+	public AbSysConfig saveOrUpdate(AbSysConfig entity) {
 		if (entity.getId() == null)
 			save(entity);
 		else
@@ -54,7 +54,7 @@ public class SysConfigServiceImpl extends
 	 * @date 2015年8月25日
 	 */
 	@SuppressWarnings("rawtypes")
-	public Page findPage(HjsSysConfigQuery query) {
+	public Page findPage(AbSysConfigQuery query) {
 		Page page = new Page();
 		try {
 			page = pageQuery("HjsSysConfig.findPage", query);
@@ -72,10 +72,10 @@ public class SysConfigServiceImpl extends
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-	public HjsSysConfig getByPcode(String v) {
-		HjsSysConfig config = new HjsSysConfig();
+	public AbSysConfig getByPcode(String v) {
+		AbSysConfig config = new AbSysConfig();
 		try {
-			config = (HjsSysConfig) getSqlSessionTemplate().selectOne(
+			config = (AbSysConfig) getSqlSessionTemplate().selectOne(
 					"HjsSysConfig.getByPcode", v);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,
@@ -91,7 +91,7 @@ public class SysConfigServiceImpl extends
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-	public void update(HjsSysConfig model) {
+	public void update(AbSysConfig model) {
 		try {
 			super.update(model);
 		} catch (Exception e) {
@@ -123,7 +123,7 @@ public class SysConfigServiceImpl extends
      * @author zhangyong
      * @date 2015年8月25日
      */
-	public void remove(HjsSysConfig model) {
+	public void remove(AbSysConfig model) {
 		try {
 			super.remove(model);
 		} catch (Exception e) {
@@ -140,8 +140,8 @@ public class SysConfigServiceImpl extends
      * @author zhangyong
      * @date 2015年8月25日
      */
-	public HjsSysConfig getById(Integer id) {
-		HjsSysConfig config = new HjsSysConfig();
+	public AbSysConfig getById(Integer id) {
+		AbSysConfig config = new AbSysConfig();
 		try {
 			config = super.getById(id);
 		} catch (Exception e) {
@@ -158,8 +158,8 @@ public class SysConfigServiceImpl extends
      * @author zhangyong
      * @date 2015年8月25日
      */
-	public List<HjsSysConfig> findAll() {
-		List<HjsSysConfig> configList = new ArrayList<HjsSysConfig>();
+	public List<AbSysConfig> findAll() {
+		List<AbSysConfig> configList = new ArrayList<AbSysConfig>();
 		try {
 			configList = super.findAll();
 		} catch (Exception e) {
@@ -177,7 +177,7 @@ public class SysConfigServiceImpl extends
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-	public boolean isUnique(HjsSysConfig entity, String uniquePropertyNames) {
+	public boolean isUnique(AbSysConfig entity, String uniquePropertyNames) {
 		boolean ref = false;
 		try {
 			ref = super.isUnique(entity, uniquePropertyNames);
@@ -195,7 +195,7 @@ public class SysConfigServiceImpl extends
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-	public Long findCount(HjsSysConfigQuery query) {
+	public Long findCount(AbSysConfigQuery query) {
 		Long count = 0L;
 		try {
 			count = (Long) super.findForObject(this.getIbatisMapperNamesapce()
@@ -214,10 +214,10 @@ public class SysConfigServiceImpl extends
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-	public HjsSysConfig findBmCount(HjsSysConfigQuery query) {
-		HjsSysConfig config = new HjsSysConfig();
+	public AbSysConfig findBmCount(AbSysConfigQuery query) {
+		AbSysConfig config = new AbSysConfig();
 		try {
-			config = (HjsSysConfig) super.findForObject(
+			config = (AbSysConfig) super.findForObject(
 					this.getIbatisMapperNamesapce() + ".findBmCount", query);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION, "查询编码错误",
@@ -235,7 +235,7 @@ public class SysConfigServiceImpl extends
 	 * @date 2015年8月25日
 	 */
 	@Override
-	public HjsSysConfig saveObj(HjsSysConfig model) {
+	public AbSysConfig saveObj(AbSysConfig model) {
 		try {
 			super.save(model);
 		} catch (Exception e) {
@@ -254,15 +254,15 @@ public class SysConfigServiceImpl extends
 	 * @date 2015年8月25日
 	 */
 	@Override
-	public Page<HjsSysConfig> dictlistPage(HjsSysConfigQuery query) {
+	public Page<AbSysConfig> dictlistPage(AbSysConfigQuery query) {
 		
 		return null;
 	}
 
 	@Override
-	public List<HjsSysConfig> findConfigsByParentId(Integer parentId) {
+	public List<AbSysConfig> findConfigsByParentId(Integer parentId) {
 
-		return (List<HjsSysConfig>) super.findForList(
+		return (List<AbSysConfig>) super.findForList(
 				this.getIbatisMapperNamesapce() + ".findConfigsByParentId",
 				parentId);
 	}

@@ -56,12 +56,12 @@ import com.aibang.framework.utils.Tools;
 import com.aibang.framework.utils.ip.Utils;
 import com.aibang.framework.utils.redis.SpringRedisCacheService;
 import com.aibang.framework.utils.validate.ValidateUtils;
-import com.aibang.transfer.model.dto.HjsApproveEmailActive;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.dto.HjsUserBase;
-import com.aibang.transfer.model.dto.HjsUsersInfo;
-import com.aibang.transfer.model.dto.HjsUsersLog;
-import com.aibang.transfer.model.vo.HjsUserQuery;
+import com.aibang.transfer.model.dto.AbApproveEmailActive;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.dto.AbUserBase;
+import com.aibang.transfer.model.dto.AbUsersInfo;
+import com.aibang.transfer.model.dto.AbUsersLog;
+import com.aibang.transfer.model.vo.AbUserQuery;
 import com.aibang.web.front.site.base.UserController;
  
 
@@ -142,14 +142,14 @@ public class LoginController extends UserController {
 				String PASSWORD = KEYDATA[1];
 				pd.put("USERNAME", USERNAME);
 				if (Tools.notEmpty(sessionCode) && sessionCode.equalsIgnoreCase(code)) {
-					HjsUser nameUser = userService.getByName(USERNAME);//通过用户名得到用户数据
+					AbUser nameUser = userService.getByName(USERNAME);//通过用户名得到用户数据
 					if(nameUser != null){
 						String passwd =  new SimpleHash("SHA-1", nameUser.getUsername(), PASSWORD).toString(); // 密码加密
 						pd.put("PASSWORD", passwd);
-						HjsUserQuery query = new HjsUserQuery();
+						AbUserQuery query = new AbUserQuery();
 						query.setUsername(USERNAME);
 						query.setPassword(passwd);
-						HjsUser u = userService.getSysUserByNameAndPwd(query);//通过用户输入的用户名跟密码做校验
+						AbUser u = userService.getSysUserByNameAndPwd(query);//通过用户输入的用户名跟密码做校验
 						if (u != null) {
 							if(u.getStatus()==1){	
 								//查询消息数
@@ -168,13 +168,13 @@ public class LoginController extends UserController {
 									session.setAttribute("unreadMessageCount", unreadMessageCount);
 									session.setAttribute(Const.SESSION_USER, u);
 									session.removeAttribute(Const.SESSION_SECURITY_CODE);
-									HjsUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(u.getId());
+									AbUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(u.getId());
 									session.setAttribute(Const.SESSION_USERCUSTOMER,usersInfo);
 								} catch (AuthenticationException e) {
 									errInfo = "身份验证失败！";
 								}
 								//保存登录日志
-								HjsUsersLog usersLog = new HjsUsersLog();
+								AbUsersLog usersLog = new AbUsersLog();
 								usersLog.setContent("登陆");
 								usersLog.setResult(1);
 								usersLog.setUserId(u.getId());
@@ -373,7 +373,7 @@ public class LoginController extends UserController {
 	 * @date 2015年9月23日
 	 */
 	@RequestMapping(value="/reg")
-	public String registerCustomer(ModelMap model,HjsUser user,String uid,String uname ,String chlid,String logo,String code,String invitecode,String phonecode,HttpServletRequest request,HttpServletResponse response){
+	public String registerCustomer(ModelMap model,AbUser user,String uid,String uname ,String chlid,String logo,String code,String invitecode,String phonecode,HttpServletRequest request,HttpServletResponse response){
 		// shiro管理的session
 		Subject currentUser = SecurityUtils.getSubject();
 		Session session = currentUser.getSession();
@@ -401,7 +401,7 @@ public class LoginController extends UserController {
 				return null;
 			}
 			//后台验证手机号是否跟用户名冲突
-			HjsUser hjsUserV = new HjsUser();
+			AbUser hjsUserV = new AbUser();
 			hjsUserV.setUsername(user.getPhone());
 			if(!userService.isUnique(hjsUserV,"username")){
 				error("手机已经被注册", request, response);
@@ -416,8 +416,8 @@ public class LoginController extends UserController {
 				error("手机校验码不正确", request, response);
 				return null; 
 			}
-			HjsUsersInfo usersInfo = new HjsUsersInfo();
-			HjsUserBase userBase = new HjsUserBase();
+			AbUsersInfo usersInfo = new AbUsersInfo();
+			AbUserBase userBase = new AbUserBase();
 			//会员账户预设置
 			userBase.setCreateIp(Utils.getCdnIpAddr(request));//创建IP
 			userBase.setCreateTime(new Date());//创建时间
@@ -490,14 +490,14 @@ public class LoginController extends UserController {
 	 * @author zhangyong
 	 * @date 2015年9月16日
 	 */
-	private String  registerSuccess(ModelMap model,HjsUser user){
+	private String  registerSuccess(ModelMap model,AbUser user){
 		
 		//保存会员相关信息session
-		HjsUserQuery hjsUserQuery = new HjsUserQuery();
+		AbUserQuery hjsUserQuery = new AbUserQuery();
 		hjsUserQuery.setUsername(user.getUsername());
 		hjsUserQuery.setPassword(user.getPassword());
-		HjsUser u = userService.getSysUserByNameAndPwd(hjsUserQuery);	
-		HjsUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(u.getId());
+		AbUser u = userService.getSysUserByNameAndPwd(hjsUserQuery);	
+		AbUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(u.getId());
 		Subject currentUser = SecurityUtils.getSubject();
 		Session session = currentUser.getSession();
 		session.setAttribute(Const.SESSION_USER, u);
@@ -516,7 +516,7 @@ public class LoginController extends UserController {
 		}
 	
 		//保存登录日志
-		HjsUsersLog usersLog = new HjsUsersLog();
+		AbUsersLog usersLog = new AbUsersLog();
 		usersLog.setContent("登陆");
 		usersLog.setResult(1);
 		usersLog.setUserId(u.getId());
@@ -575,7 +575,7 @@ public class LoginController extends UserController {
 			return null;
 		}
 
-		HjsUser user = userService.getByName(name);
+		AbUser user = userService.getByName(name);
 		//用户信息是否存在
 		if(user==null){
 			error("用户信息不存在或者用户已经停用，请与客服联系", request, response);
@@ -615,7 +615,7 @@ public class LoginController extends UserController {
 			error("请输入验证码", request, response);
 			return null;
 		}
-		HjsUser user = userService.getById(userId);
+		AbUser user = userService.getById(userId);
 		if(request.getSession().getAttribute("passCode")==null)
 		{
 			error("请获取手机验证码", request, response);
@@ -648,7 +648,7 @@ public class LoginController extends UserController {
 			error("参数错误", request, response);
 			return null;
 		}
-		HjsUser user = userService.getById(userId);
+		AbUser user = userService.getById(userId);
 		
 		int times = 0;
 		//判断找回密码次数，每天超过5次不做操作
@@ -725,7 +725,7 @@ public class LoginController extends UserController {
 		Date nDate = DateUtils.fomatDate(DateUtils.getTime());
 		Long datesub = DateUtils.getHourSub(infos[2],DateUtils.getTime());
 		DateUtils.compareDate(vDate, nDate);
-		HjsUser user = userService.getByUsername(infos[0]);
+		AbUser user = userService.getByUsername(infos[0]);
 		//用户不存在及邮件失效处理
 		if(user==null){
 			error("激活用户不存在，激活失败", request, response);
@@ -765,7 +765,7 @@ public class LoginController extends UserController {
 			return null;
 		}
 		Integer userId=(Integer) request.getSession().getAttribute("resetUserId");
-		HjsUser user = userService.getById(userId);
+		AbUser user = userService.getById(userId);
 		newPass = new SimpleHash("SHA-1",user.getUsername(),newPass).toString();//密码加密
 		user.setPassword(newPass);
 		user.setPasswordLevel(passwordLevel);
@@ -780,7 +780,7 @@ public class LoginController extends UserController {
 	 * @date 2015年8月28日
 	 */
 	@RequestMapping(value="/hasU")
-	public void hasUsername(HjsUser user,PrintWriter out){
+	public void hasUsername(AbUser user,PrintWriter out){
 		try{
 			if(!userService.isUnique(user,"username")){
 				out.write("error");
@@ -801,7 +801,7 @@ public class LoginController extends UserController {
 	 * @date 2015年8月28日
 	 */
 	@RequestMapping(value="/hasE")
-	public void hasEmail(HjsUser user,PrintWriter out){
+	public void hasEmail(AbUser user,PrintWriter out){
 		try{
 			if(!userService.isUnique(user,"email")){
 				out.write("error");
@@ -822,7 +822,7 @@ public class LoginController extends UserController {
 	 * @date 2015年8月28日
 	 */
 	@RequestMapping(value="/hasP")
-	public void hasPhone(HjsUser user,PrintWriter out){
+	public void hasPhone(AbUser user,PrintWriter out){
 		try{
 			if(!userService.isUnique(user,"phone")){
 				out.write("error");
@@ -860,7 +860,7 @@ public class LoginController extends UserController {
 		Date nDate = DateUtils.fomatDate(DateUtils.getTime());
 		Long datesub = DateUtils.getHourSub(infos[2],DateUtils.getTime());
 		DateUtils.compareDate(vDate, nDate);
-		HjsUser user = userService.getByUsername(infos[0]);
+		AbUser user = userService.getByUsername(infos[0]);
 		
 		if(user==null){
 			error("用户不存在，验证失败", request, response);
@@ -870,7 +870,7 @@ public class LoginController extends UserController {
 			return "user/customer/activatemail_no";
 		}
 		//验证成功，修改相关激活状态
-		HjsApproveEmailActive hjsApproveEmailActive = new HjsApproveEmailActive();
+		AbApproveEmailActive hjsApproveEmailActive = new AbApproveEmailActive();
 		hjsApproveEmailActive.setUserId(user.getId());
 		hjsApproveEmailActive.setEmail(user.getEmail());
 		hjsApproveEmailActive.setCreateIp(Utils.getCdnIpAddr(request));
@@ -880,7 +880,7 @@ public class LoginController extends UserController {
 		Subject currentUser = SecurityUtils.getSubject();
 		Session session = currentUser.getSession();
 		session.setAttribute(Const.SESSION_USER, user);
-		HjsUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(user.getId());
+		AbUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(user.getId());
 		session.setAttribute(Const.SESSION_USERCUSTOMER, usersInfo);
 		return "user/customer/activatemail_ok";
 	}
@@ -899,7 +899,7 @@ public class LoginController extends UserController {
 	@RequestMapping(value="/vphonecode")
 	public void validatePhoneCode(Integer u,String t,String ph,String co,PrintWriter out,HttpServletRequest request,HttpServletResponse response){
 		if(u!=null){
-			HjsUser user = userService.getById(u);
+			AbUser user = userService.getById(u);
 			ph=user.getPhone();
 		}
 		String codeString = "";

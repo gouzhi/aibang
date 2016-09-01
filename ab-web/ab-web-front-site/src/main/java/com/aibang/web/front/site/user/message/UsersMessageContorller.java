@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aibang.business.api.user.message.UsersMessageService;
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.dto.HjsUsersMessage;
-import com.aibang.transfer.model.vo.HjsUsersMessageQuery;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.dto.AbUsersMessage;
+import com.aibang.transfer.model.vo.AbUsersMessageQuery;
 import com.aibang.web.front.site.base.UserController;
 
 /**   
@@ -42,12 +42,12 @@ public class UsersMessageContorller extends UserController{
 	 */
 	@SuppressWarnings("rawtypes")
 	@RequestMapping("page")
-	public String page(HjsUsersMessageQuery query,HttpServletRequest request){
+	public String page(AbUsersMessageQuery query,HttpServletRequest request){
 		Integer[] param = new Integer[]{2,3}; 
 		if (null != query.getIsread() && query.getIsread().intValue() == 1) {
 			param = new Integer[]{2}; 
 		}
-		HjsUser hjsUser = getLoginUser();
+		AbUser hjsUser = getLoginUser();
 		query.setReceiveLoginid(hjsUser.getId());
 		query.setSortColumns("id desc");
 		query.setStatusArray(param);
@@ -103,7 +103,7 @@ public class UsersMessageContorller extends UserController{
 		if (null == id || id == 0) {
 			return error("参数缺失", request, response);
 		}
-		HjsUsersMessage message = usersMessageService.getById(id);
+		AbUsersMessage message = usersMessageService.getById(id);
 		message.setStatus(3);
 		usersMessageService.update(message);
 		request.setAttribute("message", message);

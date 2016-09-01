@@ -18,7 +18,7 @@ import com.aibang.business.api.user.user.UserService;
 import com.aibang.framework.utils.DateUtils;
 import com.aibang.framework.utils.Tools;
 import com.aibang.framework.utils.redis.SpringRedisCacheService;
-import com.aibang.transfer.model.dto.HjsUser;
+import com.aibang.transfer.model.dto.AbUser;
 import com.aibang.web.move.site.base.UserController;
 
 /**
@@ -75,7 +75,7 @@ public class SmsCodeController extends UserController {
 	@RequestMapping(value= "/passcode")
 	@ResponseBody
 	public String getPassCode(ModelMap model,Integer id,HttpServletRequest request,HttpServletResponse response,PrintWriter out){
-		HjsUser user = userService.getById(id);
+		AbUser user = userService.getById(id);
 		//判断找回密码次数，每天超过5次不做操作
 		int times = 0;
 		if(springRedisCacheService.get("reset_"+user.getId())!=null){
@@ -154,7 +154,7 @@ public class SmsCodeController extends UserController {
 	 */
 	@RequestMapping(value= "/phonecode")
 	public void getPhoneCode(ModelMap model,Integer id,HttpServletRequest request,HttpServletResponse response,PrintWriter out){
-		HjsUser user = userService.getById(id);
+		AbUser user = userService.getById(id);
 		String phone = user.getPhone();
 		int res = getSendCode(phone);
 		try{
@@ -200,7 +200,7 @@ public class SmsCodeController extends UserController {
 	 */
 	@RequestMapping(value= "/emailcode")
 	public void getEmailCode(ModelMap model,Integer id,HttpServletRequest request,HttpServletResponse response,PrintWriter out){
-		HjsUser user = userService.getById(id);
+		AbUser user = userService.getById(id);
 		String phone = user.getPhone();
 		int res = getSendCode(phone);
 		try{
@@ -228,7 +228,7 @@ public class SmsCodeController extends UserController {
 	@RequestMapping(value="/vphonecode")
 	public void validatePhoneCode(Integer u,String t,String ph,String co,PrintWriter out,HttpServletRequest request,HttpServletResponse response){
 		if(u!=null){
-			HjsUser user = userService.getById(u);
+			AbUser user = userService.getById(u);
 			ph=user.getPhone();
 		}
 		String codeString = "";

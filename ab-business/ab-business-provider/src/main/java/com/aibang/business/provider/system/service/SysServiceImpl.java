@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.aibang.business.api.system.service.SysService;
 import com.aibang.business.provider.base.ProviderServiceBase;
-import com.aibang.transfer.model.dto.HjsSysService;
+import com.aibang.transfer.model.dto.AbSysService;
 
  /**
   * 
@@ -24,7 +24,7 @@ import com.aibang.transfer.model.dto.HjsSysService;
   */
 @SuppressWarnings("unchecked")
 @Service
-public class SysServiceImpl  extends ProviderServiceBase<HjsSysService,Integer> implements SysService {
+public class SysServiceImpl  extends ProviderServiceBase<AbSysService,Integer> implements SysService {
 
 	
 	/**  

@@ -13,7 +13,7 @@
 						http://www.springframework.org/schema/tx 
 						http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
- <bean id="mailSender" class="com.cifex.framework.utils.mail.MailSender">
+ <bean id="mailSender" class="com.aibang.framework.utils.mail.MailSender">
          <property name="smtp">
 			<value>${MAIL.SMTP}</value>
 		</property>

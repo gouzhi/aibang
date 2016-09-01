@@ -20,13 +20,13 @@
 		<constructor-arg index="2" value="${REDIS.SERVER.PORT}" />
 	</bean>
 
-	<bean id="localCacheService" class="com.cifex.framework.utils.redis.SpringRedisCacheService">
+	<bean id="localCacheService" class="com.aibang.framework.utils.redis.SpringRedisCacheService">
 		<property name="jedisPool" ref="jedisPool" />
 		<property name="serverName" value="${REDIS.SERVER.IP}" />
 	</bean>
 
 	<!-- 包装类 -->
-	<bean id="redisCacheService" class="com.cifex.framework.utils.redis.CacheService">
+	<bean id="redisCacheService" class="com.aibang.framework.utils.redis.CacheService">
 		<property name="cacheService">
 			<map>
 				<entry>

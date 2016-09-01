@@ -57,7 +57,7 @@
 	</bean>
 
 	<!--queue消息发送 -->
-	<bean id="activemqSendMessage" class="com.cifex.framework.activemq.SendMessage">
+	<bean id="activemqSendMessage" class="com.aibang.framework.activemq.SendMessage">
 		<property name="jmsTemplate" ref="jmsTemplate"></property>
 	</bean>
 

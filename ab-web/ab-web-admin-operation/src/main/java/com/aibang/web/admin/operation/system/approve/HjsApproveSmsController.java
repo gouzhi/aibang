@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.aibang.business.api.system.approve.HjsApproveSmsService;
+import com.aibang.business.api.system.approve.AbApproveSmsService;
 import com.aibang.framework.exception.BaseException;
 import com.aibang.framework.utils.page.Page;
 import com.aibang.framework.utils.validate.ValidateUtils;
-import com.aibang.transfer.model.dto.HjsApproveSms;
-import com.aibang.transfer.model.vo.HjsApproveSmsQuery;
+import com.aibang.transfer.model.dto.AbApproveSms;
+import com.aibang.transfer.model.vo.AbApproveSmsQuery;
 import com.aibang.web.admin.operation.base.AdminController;
 import com.alibaba.dubbo.rpc.RpcException;
 
@@ -34,7 +34,7 @@ import com.alibaba.dubbo.rpc.RpcException;
 public class HjsApproveSmsController extends AdminController {
 	
 	@Resource(name="hjsApproveSmsService")
-	private HjsApproveSmsService hjsApproveSmsService;
+	private AbApproveSmsService hjsApproveSmsService;
 	
 	private String display(String pageName)
 	{
@@ -50,7 +50,7 @@ public class HjsApproveSmsController extends AdminController {
 	 */
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="/list")
-	public String listRealName(ModelMap model,HjsApproveSmsQuery query){
+	public String listRealName(ModelMap model,AbApproveSmsQuery query){
 		query.setSortColumns("tb.CREATE_TIME DESC");
 		Page rnPage = hjsApproveSmsService.findPage(query);
 		model.addAttribute("checkname",query.getUsername());
@@ -69,7 +69,7 @@ public class HjsApproveSmsController extends AdminController {
 	 */
 	@RequestMapping(value="/toaudit")
 	public String goAudit(ModelMap model,String id){
-		HjsApproveSms hjsApproveSms = hjsApproveSmsService.getById(Integer.parseInt(id));
+		AbApproveSms hjsApproveSms = hjsApproveSmsService.getById(Integer.parseInt(id));
 		model.addAttribute("info",hjsApproveSms);
 		return display("sms_audit");
 	}
@@ -82,7 +82,7 @@ public class HjsApproveSmsController extends AdminController {
 	 */
 	@RequestMapping(value="/audit")
 	@ResponseBody
-	public String audit(ModelMap model,HjsApproveSms sms,HttpServletRequest request){
+	public String audit(ModelMap model,AbApproveSms sms,HttpServletRequest request){
 		//判断选择审核状态
 		if (ValidateUtils.isStringEmpty(sms.getStatus()+"")){
 			return "请选择审核操作";

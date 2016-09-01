@@ -21,15 +21,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.aibang.business.api.system.role.HjsSysRoleService;
-import com.aibang.business.api.system.user.HjsUserService;
+import com.aibang.business.api.system.role.AbSysRoleService;
+import com.aibang.business.api.system.user.AbUserService;
 import com.aibang.framework.exception.BaseException;
 import com.aibang.framework.utils.Const;
 import com.aibang.framework.utils.ip.Utils;
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsSysRole;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.vo.HjsUserQuery;
+import com.aibang.transfer.model.dto.AbSysRole;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.vo.AbUserQuery;
 import com.aibang.web.admin.operation.base.AdminController;
 import com.alibaba.dubbo.rpc.RpcException;
  
@@ -46,9 +46,9 @@ import com.alibaba.dubbo.rpc.RpcException;
 public class UserController extends AdminController {
 	
 	@Resource(name="hjsUserService")
-	private HjsUserService hjsUserService;
+	private AbUserService hjsUserService;
 	@Resource(name="hjsSysRoleService")
-	private HjsSysRoleService hjsSysRoleService;
+	private AbSysRoleService hjsSysRoleService;
 	private String display(String pageName)
 	{
 		return  "system/user/"+pageName;
@@ -66,9 +66,9 @@ public class UserController extends AdminController {
 	 */
 	@RequestMapping(value="/saveU")
 
-	public String saveU(ModelMap model,HjsUser user,HttpServletRequest request) throws Exception{
+	public String saveU(ModelMap model,AbUser user,HttpServletRequest request) throws Exception{
 		user.setPassword(new SimpleHash("SHA-1",user.getUsername(),user.getPassword()).toString());
-		HjsUserQuery hsuq = new HjsUserQuery();
+		AbUserQuery hsuq = new AbUserQuery();
 		hsuq.setUsername(user.getUsername());
 		user.setCreateIp(Utils.getCdnIpAddr(request));
 		
@@ -95,8 +95,8 @@ public class UserController extends AdminController {
 			model.addAttribute("message",e.getMessage());
 		}
 		
-		List<HjsSysRole> roleList = hjsSysRoleService.listAllERRoles();			//列出所有二级角色		
-		model.addAttribute("pd", new HjsUser());
+		List<AbSysRole> roleList = hjsSysRoleService.listAllERRoles();			//列出所有二级角色		
+		model.addAttribute("pd", new AbUser());
 		model.addAttribute("ROLE_ID","");
 		model.addAttribute("roleList", roleList);
 		return display("user_add");
@@ -110,7 +110,7 @@ public class UserController extends AdminController {
 	 * @date 2015年8月28日
 	 */
 	@RequestMapping(value="/hasU")
-	public void hasUsername(HjsUser user,PrintWriter out){
+	public void hasUsername(AbUser user,PrintWriter out){
 		try{
 			if(!hjsUserService.isUnique(user,"username")){
 				out.write("error");
@@ -131,7 +131,7 @@ public class UserController extends AdminController {
 	 * @date 2015年8月28日
 	 */
 	@RequestMapping(value="/hasE")
-	public void hasEmail(HjsUser user,PrintWriter out){
+	public void hasEmail(AbUser user,PrintWriter out){
 		try{
 			if(!hjsUserService.isUnique(user,"email")){
 				out.write("error");
@@ -152,7 +152,7 @@ public class UserController extends AdminController {
 	 * @date 2015年8月28日
 	 */
 	@RequestMapping(value="/hasP")
-	public void hasPhone(HjsUser user,PrintWriter out){
+	public void hasPhone(AbUser user,PrintWriter out){
 		try{
 			if(!hjsUserService.isUnique(user,"phone")){
 				out.write("error");
@@ -178,7 +178,7 @@ public class UserController extends AdminController {
 	* @throws
 	 */
 	@RequestMapping(value="/editU")
-	public String editU(ModelMap model,HjsUser user) throws Exception{
+	public String editU(ModelMap model,AbUser user) throws Exception{
 		//密码加密处理
 		if(user.getPassword() != null && !"".equals(user.getPassword())){
 			user.setPassword(new SimpleHash("SHA-1", user.getUsername(), user.getPassword()).toString());
@@ -212,10 +212,10 @@ public class UserController extends AdminController {
 	 */
 	@RequestMapping(value="/goEditU")
 	public String goEditU(ModelMap model,String USER_ID) throws Exception{
-		List<HjsSysRole> roleList = hjsSysRoleService.listAllERRoles();
-		HjsUserQuery hsuq = new HjsUserQuery();
+		List<AbSysRole> roleList = hjsSysRoleService.listAllERRoles();
+		AbUserQuery hsuq = new AbUserQuery();
 		hsuq.setId(Integer.parseInt(USER_ID));
-		HjsUser user = hjsUserService.getById(Integer.parseInt(USER_ID));	//根据ID读取
+		AbUser user = hjsUserService.getById(Integer.parseInt(USER_ID));	//根据ID读取
 		model.addAttribute("msg", "editU");
 		model.addAttribute("pd", user);
 		model.addAttribute("roleList", roleList);	
@@ -236,10 +236,10 @@ public class UserController extends AdminController {
 		//顶部修改个人资料
 		model.addAttribute("fx", "head");
 
-		List<HjsSysRole> roleList = hjsSysRoleService.listAllERRoles();
-		HjsUserQuery hsuq = new HjsUserQuery();
+		List<AbSysRole> roleList = hjsSysRoleService.listAllERRoles();
+		AbUserQuery hsuq = new AbUserQuery();
 		hsuq.setId(Integer.parseInt(USER_ID));
-		HjsUser user = hjsUserService.getById(Integer.parseInt(USER_ID));	//根据ID读取
+		AbUser user = hjsUserService.getById(Integer.parseInt(USER_ID));	//根据ID读取
 		model.addAttribute("msg", "editU");
 		model.addAttribute("pd", user);
 		model.addAttribute("roleList", roleList);
@@ -259,7 +259,7 @@ public class UserController extends AdminController {
 	* @throws
 	 */
 	@RequestMapping(value="/editUP")
-	public String editUP(ModelMap model,HjsUser user) throws Exception{
+	public String editUP(ModelMap model,AbUser user) throws Exception{
 		//密码加密处理
 		if(user.getPassword() != null && !"".equals(user.getPassword())){
 			user.setPassword(new SimpleHash("SHA-1", user.getUsername(), user.getPassword()).toString());
@@ -291,9 +291,9 @@ public class UserController extends AdminController {
 	 */
 	@RequestMapping(value="/goAddU")
 	public String goAddU(ModelMap model)throws Exception{
-		List<HjsSysRole> roleList;	
+		List<AbSysRole> roleList;	
 		roleList = hjsSysRoleService.listAllERRoles();			//列出所有二级角色		
-		HjsUser user= new HjsUser();
+		AbUser user= new AbUser();
 		model.addAttribute("pd", user);
 		model.addAttribute("ROLE_ID","");
 		model.addAttribute("roleList", roleList);
@@ -312,10 +312,10 @@ public class UserController extends AdminController {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value="/listUsers")
-	public String listUsers(ModelMap model,HjsUserQuery page)throws Exception{		
+	public String listUsers(ModelMap model,AbUserQuery page)throws Exception{		
 		Page pd = hjsUserService.findPage(page);
-		List<HjsUser> userList = pd.getResult();			//列出用户列表
-		List<HjsSysRole> roleList = hjsSysRoleService.listAllERRoles();	//列出所有二级角色	
+		List<AbUser> userList = pd.getResult();			//列出用户列表
+		List<AbSysRole> roleList = hjsSysRoleService.listAllERRoles();	//列出所有二级角色	
 		model.addAttribute("userList", userList);
 		model.addAttribute("roleList", roleList);	
 		model.addAttribute("pd", page);
@@ -333,7 +333,7 @@ public class UserController extends AdminController {
 	* @throws
 	 */
 	@RequestMapping(value="/deleteU")
-	public void deleteU(HjsUser user,PrintWriter out){
+	public void deleteU(AbUser user,PrintWriter out){
 		try{		
 			hjsUserService.remove(user);
 			out.write("success");
@@ -361,7 +361,7 @@ public class UserController extends AdminController {
 		try {
 			//批量删除判断
 			if(null != sysUserIds && !"".equals(sysUserIds)){
-				HjsUserQuery hsuq = new HjsUserQuery();
+				AbUserQuery hsuq = new AbUserQuery();
 				hsuq.setSysUserIds(sysUserIds.split(","));
 				hjsUserService.deleteAllU(hsuq);
 				map.put("result", "success");

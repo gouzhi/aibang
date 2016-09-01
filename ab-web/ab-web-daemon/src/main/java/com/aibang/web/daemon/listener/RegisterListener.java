@@ -17,7 +17,7 @@ import com.aibang.business.api.user.message.UsersMessageService;
 import com.aibang.framework.utils.Const;
 import com.aibang.framework.utils.JSONUtils;
 import com.aibang.framework.utils.MessageStrUtil;
-import com.aibang.transfer.model.dto.HjsUsersMessage;
+import com.aibang.transfer.model.dto.AbUsersMessage;
 
 
 /**
@@ -124,7 +124,7 @@ public class RegisterListener  implements MessageListener {
 			//发送站内信
 			//得到注册发送站内信的模版
 			String registerSiteMsg=MessageStrUtil.getMessage("user.register.site.msg");
-	    	HjsUsersMessage hjsUsersMessage = new HjsUsersMessage(); 	
+	    	AbUsersMessage hjsUsersMessage = new AbUsersMessage(); 	
 	    	hjsUsersMessage.setType(1);
 	    	hjsUsersMessage.setStatus(2);
 	    	hjsUsersMessage.setSendLoginid(0);

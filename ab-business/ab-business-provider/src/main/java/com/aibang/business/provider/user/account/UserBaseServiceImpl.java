@@ -7,8 +7,8 @@ import com.aibang.business.api.user.account.UserBaseService;
 import com.aibang.business.provider.base.ProviderServiceBase;
 import com.aibang.framework.utils.DateUtils;
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsUserBase;
-import com.aibang.transfer.model.vo.HjsUserBaseQuery;
+import com.aibang.transfer.model.dto.AbUserBase;
+import com.aibang.transfer.model.vo.AbUserBaseQuery;
 import com.alibaba.dubbo.rpc.RpcException;
 
 
@@ -21,14 +21,14 @@ import com.alibaba.dubbo.rpc.RpcException;
  */
 @Service("userBaseService")
 @SuppressWarnings({"unchecked"})
-public class UserBaseServiceImpl  extends ProviderServiceBase<HjsUserBase,Integer> implements UserBaseService {
+public class UserBaseServiceImpl  extends ProviderServiceBase<AbUserBase,Integer> implements UserBaseService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
 		return "HjsUserBase";
 	}
 	
-	public HjsUserBase saveOrUpdate(HjsUserBase entity) {
+	public AbUserBase saveOrUpdate(AbUserBase entity) {
 		if(entity.getId() == null) 
 			save(entity);
 		else 
@@ -36,7 +36,7 @@ public class UserBaseServiceImpl  extends ProviderServiceBase<HjsUserBase,Intege
 		return entity;
 	}
 	@SuppressWarnings({"rawtypes"})
-	public Page findPage(HjsUserBaseQuery query) {
+	public Page findPage(AbUserBaseQuery query) {
 		query.setUpdateTimeBegin(DateUtils.getStartDate(query.getUpdateTimeBegin()));
 		query.setUpdateTimeEnd(DateUtils.getEndDate(query.getUpdateTimeEnd()));
 		return pageQuery("HjsUserBase.findPage",query);
@@ -51,7 +51,7 @@ public class UserBaseServiceImpl  extends ProviderServiceBase<HjsUserBase,Intege
 	 * @author liuj
 	 * @date 2015年8月26日
 	 */
-	public Object findTotalBalance(HjsUserBaseQuery query) {
+	public Object findTotalBalance(AbUserBaseQuery query) {
 		try {
 		  return findForObject("HjsUserBase.findTotalBalance", query);
 		}catch (Exception e) {
@@ -67,7 +67,7 @@ public class UserBaseServiceImpl  extends ProviderServiceBase<HjsUserBase,Intege
 	 * @author liuj
 	 * @date 2015年8月26日
 	 */
-	public Object findUserDetailById(HjsUserBaseQuery query) {
+	public Object findUserDetailById(AbUserBaseQuery query) {
 		try {
 			return findForObject("HjsUserBase.findUserDetailById", query);
 		}catch (Exception e) {
@@ -75,7 +75,7 @@ public class UserBaseServiceImpl  extends ProviderServiceBase<HjsUserBase,Intege
 		}
 	}
 	
-	public HjsUserBase saveObj(HjsUserBase model)
+	public AbUserBase saveObj(AbUserBase model)
 	{
 		try {
 			save(model);
@@ -91,7 +91,7 @@ public class UserBaseServiceImpl  extends ProviderServiceBase<HjsUserBase,Intege
 	 * @author zhangyong
 	 * @date 2015年9月21日
 	 */
-	public void editUserBase(HjsUserBase entity){
+	public void editUserBase(AbUserBase entity){
 		try {
 			update("HjsUserBase.updatePayPass", entity);
 		}catch (Exception e) {
@@ -108,7 +108,7 @@ public class UserBaseServiceImpl  extends ProviderServiceBase<HjsUserBase,Intege
 	public boolean hasPayPass(Integer id){
 		boolean res = false;
 		try {
-			HjsUserBase userBase = super.getById(id);
+			AbUserBase userBase = super.getById(id);
 			if(userBase!=null&&userBase.getPayPassword()!=null){
 				res = true;
 			}

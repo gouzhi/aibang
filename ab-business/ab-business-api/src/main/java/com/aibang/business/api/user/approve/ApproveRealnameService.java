@@ -3,8 +3,8 @@ package com.aibang.business.api.user.approve;
 import java.util.List;
 
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsApproveRealname;
-import com.aibang.transfer.model.vo.HjsApproveRealnameQuery;
+import com.aibang.transfer.model.dto.AbApproveRealname;
+import com.aibang.transfer.model.vo.AbApproveRealnameQuery;
  
  
 /** 
@@ -20,12 +20,12 @@ public interface ApproveRealnameService {
 	/** 
 	 * 创建HjsApproveRealname
 	 **/
-	public HjsApproveRealname saveObj(HjsApproveRealname model);
+	public AbApproveRealname saveObj(AbApproveRealname model);
 	
 	/** 
 	 * 更新HjsApproveRealname
 	 **/	
-    public void update(HjsApproveRealname model);
+    public void update(AbApproveRealname model);
     
 	/** 
 	 * 删除HjsApproveRealname
@@ -35,7 +35,7 @@ public interface ApproveRealnameService {
     /** 
      * 逻辑删除HjsApproveRealname
      */
-    public void remove(HjsApproveRealname model);
+    public void remove(AbApproveRealname model);
     
 	/**
 	 * 根据ID获得实名信息   
@@ -44,26 +44,26 @@ public interface ApproveRealnameService {
 	 * @author zhangyong
 	 * @date 2015年9月8日
 	 */
-    public HjsApproveRealname getById(Integer id);
+    public AbApproveRealname getById(Integer id);
     
  
-	public List<HjsApproveRealname> findAll();
+	public List<AbApproveRealname> findAll();
 	
-	public HjsApproveRealname saveOrUpdate(HjsApproveRealname entity);
+	public AbApproveRealname saveOrUpdate(AbApproveRealname entity);
 	 
-	public boolean isUnique(HjsApproveRealname entity, String uniquePropertyNames);
+	public boolean isUnique(AbApproveRealname entity, String uniquePropertyNames);
 	
 	/** 
 	 * 分页查询: HjsApproveRealname
 	 **/      
-	public Page<?> findPage(HjsApproveRealnameQuery query);
+	public Page<?> findPage(AbApproveRealnameQuery query);
 	/**
 	 * 用户实名认证审核
 	 * @param entity void
 	 * @author zhangyong
 	 * @date 2015年9月8日
 	 */
-	public void AuditRealName(HjsApproveRealname entity);
+	public void AuditRealName(AbApproveRealname entity);
 	/**
 	 * 通过登录ID获得实名信息
 	 * @param id
@@ -71,14 +71,14 @@ public interface ApproveRealnameService {
 	 * @author zhangyong
 	 * @date 2015年9月11日
 	 */
-	public HjsApproveRealname getByLoginId(Integer id);
+	public AbApproveRealname getByLoginId(Integer id);
 	/**
 	 * 用户验证实名（暂用，待第三方借口）
 	 * @param entity void
 	 * @author zhangyong
 	 * @date 2015年9月21日
 	 */
-	public void activateRealName(HjsApproveRealname entity);
+	public void activateRealName(AbApproveRealname entity);
 	/**
 	 * 判断是否进行实名认证
 	 * @param loginId USER表ID

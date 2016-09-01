@@ -35,11 +35,11 @@ import com.aibang.framework.utils.http.ResponseUtils;
 import com.aibang.framework.utils.ip.Utils;
 import com.aibang.framework.utils.redis.SpringRedisCacheService;
 import com.aibang.framework.utils.validate.ValidateUtils;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.dto.HjsUserBase;
-import com.aibang.transfer.model.dto.HjsUsersInfo;
-import com.aibang.transfer.model.dto.HjsUsersLog;
-import com.aibang.transfer.model.vo.HjsUserQuery;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.dto.AbUserBase;
+import com.aibang.transfer.model.dto.AbUsersInfo;
+import com.aibang.transfer.model.dto.AbUsersLog;
+import com.aibang.transfer.model.vo.AbUserQuery;
 import com.aibang.web.move.site.base.UserController;
 
 
@@ -113,7 +113,7 @@ public class LoginController extends UserController {
 			map.put("result", message);
 			return AppUtil.returnObject(new PageData(), map);
 		} 
-	    HjsUser hjsUser = userService.getByName(username);//通过用户名得到用户数据
+	    AbUser hjsUser = userService.getByName(username);//通过用户名得到用户数据
 	    if(hjsUser==null)
 	    {
 	    	message="用户名或密码不正确";
@@ -143,7 +143,7 @@ public class LoginController extends UserController {
 			// shiro管理的session
 			Session session = getSession();
 			// 获取会员详细信息，会员账户信息
-			HjsUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(hjsUser.getId());
+			AbUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(hjsUser.getId());
 			session.setAttribute(Const.SESSION_USERCUSTOMER,usersInfo);
 			session.setAttribute(Const.SESSION_USER, hjsUser);
 		} catch (AuthenticationException e) {
@@ -152,7 +152,7 @@ public class LoginController extends UserController {
 			return AppUtil.returnObject(new PageData(), map);
 		}
 		//保存登录日志
-		HjsUsersLog usersLog = new HjsUsersLog();
+		AbUsersLog usersLog = new AbUsersLog();
 		usersLog.setContent("登陆");
 		usersLog.setResult(1);
 		usersLog.setUserId(hjsUser.getId());
@@ -231,7 +231,7 @@ public class LoginController extends UserController {
 	 * @date 2015年9月23日
 	 */
 	@RequestMapping(value = "/reg")
-	public String registerCustomer(ModelMap model, HjsUser user,
+	public String registerCustomer(ModelMap model, AbUser user,
 			String invitecode, String phonecode, HttpServletRequest request,
 			HttpServletResponse response) {
 		
@@ -259,8 +259,8 @@ public class LoginController extends UserController {
 			return null;
 		}
 		user.setUsername(user.getPhone());
-		HjsUsersInfo usersInfo = new HjsUsersInfo();
-		HjsUserBase userBase = new HjsUserBase();
+		AbUsersInfo usersInfo = new AbUsersInfo();
+		AbUserBase userBase = new AbUserBase();
 		// 会员账户预设置
 		userBase.setCreateIp(Utils.getCdnIpAddr(request));// 创建IP
 		userBase.setCreateTime(new Date());// 创建时间
@@ -297,14 +297,14 @@ public class LoginController extends UserController {
 	 * @author zhangyong
 	 * @date 2015年9月16日
 	 */
-	private String registerSuccess(ModelMap model, HjsUser user) {
+	private String registerSuccess(ModelMap model, AbUser user) {
 
 		// 保存会员相关信息session
-		HjsUserQuery hjsUserQuery = new HjsUserQuery();
+		AbUserQuery hjsUserQuery = new AbUserQuery();
 		hjsUserQuery.setUsername(user.getUsername());
 		hjsUserQuery.setPassword(user.getPassword());
-		HjsUser u = userService.getSysUserByNameAndPwd(hjsUserQuery);
-		HjsUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(u
+		AbUser u = userService.getSysUserByNameAndPwd(hjsUserQuery);
+		AbUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(u
 				.getId());
 		Subject currentUser = SecurityUtils.getSubject();
 		Session session = currentUser.getSession();
@@ -321,7 +321,7 @@ public class LoginController extends UserController {
 		}
 
 		// 保存登录日志
-		HjsUsersLog usersLog = new HjsUsersLog();
+		AbUsersLog usersLog = new AbUsersLog();
 		usersLog.setContent("登陆");
 		usersLog.setResult(1);
 		usersLog.setUserId(u.getId());
@@ -344,7 +344,7 @@ public class LoginController extends UserController {
 	public String registerOk(ModelMap model){
 		//读取邀请码
 		if(getLoginUser()!=null){
-			HjsUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(getLoginUser().getId());
+			AbUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(getLoginUser().getId());
 			model.addAttribute("inviteCode",usersInfo.getInviteCode());
 		}
 		return display("register_ok");
@@ -387,7 +387,7 @@ public class LoginController extends UserController {
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="/regAct")
 	@ResponseBody
-	public String registForAjax(ModelMap model, HjsUser user,
+	public String registForAjax(ModelMap model, AbUser user,
 			String invitecode, String phonecode, HttpServletRequest request,
 			HttpServletResponse response){
 		ResultModel rsModel=new ResultModel();
@@ -419,8 +419,8 @@ public class LoginController extends UserController {
 		springRedisCacheService.delete("reg_"+user.getPhone());
 		
 		user.setUsername(user.getPhone());
-		HjsUsersInfo usersInfo = new HjsUsersInfo();
-		HjsUserBase userBase = new HjsUserBase();
+		AbUsersInfo usersInfo = new AbUsersInfo();
+		AbUserBase userBase = new AbUserBase();
 		// 会员账户预设置
 		userBase.setCreateIp(Utils.getCdnIpAddr(request));// 创建IP
 		userBase.setCreateTime(new Date());// 创建时间
@@ -469,7 +469,7 @@ public class LoginController extends UserController {
 	 * @date 2015年8月28日
 	 */
 	@RequestMapping(value="/hasU")
-	public void hasUsername(HjsUser user,PrintWriter out){
+	public void hasUsername(AbUser user,PrintWriter out){
 		try{
 			if(!userService.isUnique(user,"username")){
 				out.write("error");
@@ -490,7 +490,7 @@ public class LoginController extends UserController {
 	 * @date 2015年8月28日
 	 */
 	@RequestMapping(value="/hasE")
-	public void hasEmail(HjsUser user,PrintWriter out){
+	public void hasEmail(AbUser user,PrintWriter out){
 		try{
 			if(!userService.isUnique(user,"email")){
 				out.write("error");
@@ -511,7 +511,7 @@ public class LoginController extends UserController {
 	 * @date 2015年8月28日
 	 */
 	@RequestMapping(value="/hasP")
-	public void hasPhone(HjsUser user,PrintWriter out){
+	public void hasPhone(AbUser user,PrintWriter out){
 		try{
 			if(!userService.isUnique(user,"phone")){
 				out.write("error");

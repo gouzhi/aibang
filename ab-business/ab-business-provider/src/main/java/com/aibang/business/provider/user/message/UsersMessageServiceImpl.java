@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import com.aibang.business.api.user.message.UsersMessageService;
 import com.aibang.business.provider.base.ProviderServiceBase;
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsUsersMessage;
-import com.aibang.transfer.model.vo.HjsUsersMessageQuery;
+import com.aibang.transfer.model.dto.AbUsersMessage;
+import com.aibang.transfer.model.vo.AbUsersMessageQuery;
 import com.alibaba.dubbo.rpc.RpcException;
  
  
@@ -20,14 +20,14 @@ import com.alibaba.dubbo.rpc.RpcException;
  
 @Service("usersMessageService")
 @SuppressWarnings({"unchecked"})
-public class UsersMessageServiceImpl  extends ProviderServiceBase<HjsUsersMessage,Integer> implements UsersMessageService {
+public class UsersMessageServiceImpl  extends ProviderServiceBase<AbUsersMessage,Integer> implements UsersMessageService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
 		return "HjsUsersMessage";
 	}
 	
-	public HjsUsersMessage saveOrUpdate(HjsUsersMessage entity) {
+	public AbUsersMessage saveOrUpdate(AbUsersMessage entity) {
 		if(entity.getId() == null) 
 			save(entity);
 		else 
@@ -35,7 +35,7 @@ public class UsersMessageServiceImpl  extends ProviderServiceBase<HjsUsersMessag
 		return entity;
 	}
 	@SuppressWarnings({"rawtypes"})
-	public Page findPage(HjsUsersMessageQuery query) {
+	public Page findPage(AbUsersMessageQuery query) {
 		try {
 		    return pageQuery("HjsUsersMessage.findPage",query);
 		}catch (Exception e) {
@@ -43,7 +43,7 @@ public class UsersMessageServiceImpl  extends ProviderServiceBase<HjsUsersMessag
 		}
 	}
 	
-	public HjsUsersMessage saveObj(HjsUsersMessage model)
+	public AbUsersMessage saveObj(AbUsersMessage model)
 	{
 		
 		try {
@@ -56,7 +56,7 @@ public class UsersMessageServiceImpl  extends ProviderServiceBase<HjsUsersMessag
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public Page findNoticesPageByUserId(HjsUsersMessageQuery query) {
+	public Page findNoticesPageByUserId(AbUsersMessageQuery query) {
 		try {
 		    return pageQuery("HjsUsersMessage.findNoticesPageByUserId",query);
 		}catch (Exception e) {
@@ -67,7 +67,7 @@ public class UsersMessageServiceImpl  extends ProviderServiceBase<HjsUsersMessag
 	@Override
 	public void domark(Integer[] records) {
 		for (Integer id : records) {
-			HjsUsersMessage message = getById(id);
+			AbUsersMessage message = getById(id);
 			message.setStatus(3);
 			update(message);
 		}

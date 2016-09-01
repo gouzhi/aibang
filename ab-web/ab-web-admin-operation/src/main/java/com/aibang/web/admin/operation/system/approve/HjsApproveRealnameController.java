@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.aibang.business.api.system.approve.HjsApproveRealnameService;
+import com.aibang.business.api.system.approve.AbApproveRealnameService;
 import com.aibang.framework.exception.BaseException;
 import com.aibang.framework.utils.page.Page;
 import com.aibang.framework.utils.validate.ValidateUtils;
-import com.aibang.transfer.model.dto.HjsApproveRealname;
-import com.aibang.transfer.model.vo.HjsApproveRealnameQuery;
+import com.aibang.transfer.model.dto.AbApproveRealname;
+import com.aibang.transfer.model.vo.AbApproveRealnameQuery;
 import com.aibang.web.admin.operation.base.AdminController;
 import com.alibaba.dubbo.rpc.RpcException;
 
@@ -34,7 +34,7 @@ import com.alibaba.dubbo.rpc.RpcException;
 public class HjsApproveRealnameController extends AdminController {
 	
 	@Resource(name="hjsApproveRealnameService")
-	private HjsApproveRealnameService hjsApproveRealnameService;
+	private AbApproveRealnameService hjsApproveRealnameService;
 	
 	private String display(String pageName)
 	{
@@ -50,7 +50,7 @@ public class HjsApproveRealnameController extends AdminController {
 	 */
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="/list")
-	public String listRealName(ModelMap model,HjsApproveRealnameQuery query){
+	public String listRealName(ModelMap model,AbApproveRealnameQuery query){
 		query.setSortColumns("tb.CREATE_TIME DESC");
 		Page rnPage = hjsApproveRealnameService.findPage(query);
 		model.addAttribute("checkname",query.getUsername());
@@ -69,7 +69,7 @@ public class HjsApproveRealnameController extends AdminController {
 	 */
 	@RequestMapping(value="/toaudit")
 	public String goAudit(ModelMap model,String id){
-		HjsApproveRealname hjsApproveRealname = hjsApproveRealnameService.getById(Integer.parseInt(id));
+		AbApproveRealname hjsApproveRealname = hjsApproveRealnameService.getById(Integer.parseInt(id));
 		model.addAttribute("info",hjsApproveRealname);
 		return display("realName_audit");
 	}
@@ -82,7 +82,7 @@ public class HjsApproveRealnameController extends AdminController {
 	 */
 	@RequestMapping(value="/audit")
 	@ResponseBody
-	public String audit(ModelMap model,HjsApproveRealname realName,HttpServletRequest request){
+	public String audit(ModelMap model,AbApproveRealname realName,HttpServletRequest request){
 		//判断选择审核状态
 		if (ValidateUtils.isStringEmpty(realName.getStatus()+"")){
 			return "请选择审核操作";

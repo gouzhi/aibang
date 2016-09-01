@@ -37,9 +37,9 @@ import com.aibang.framework.utils.MD5;
 import com.aibang.framework.utils.PageData;
 import com.aibang.framework.utils.ip.Utils;
 import com.aibang.framework.utils.validate.ValidateUtils;
-import com.aibang.transfer.model.dto.HjsApproveRealname;
-import com.aibang.transfer.model.dto.HjsApproveSms;
-import com.aibang.transfer.model.dto.HjsUser;
+import com.aibang.transfer.model.dto.AbApproveRealname;
+import com.aibang.transfer.model.dto.AbApproveSms;
+import com.aibang.transfer.model.dto.AbUser;
 import com.aibang.web.move.site.base.UserController;
 import com.alibaba.fastjson.JSONObject;
 
@@ -105,7 +105,7 @@ public class CustomerController extends UserController{
 			return AppUtil.returnObject(new PageData(), map);
 		}
 		//旧密码校验
-		HjsUser user = getLoginUser();
+		AbUser user = getLoginUser();
 		oldPass =new SimpleHash("SHA-1",user.getUsername(),oldPass).toString();
 		if(!oldPass.equals(user.getPassword())){
 			msg = "errorOldW";//旧密码输入错误
@@ -240,7 +240,7 @@ public class CustomerController extends UserController{
 			json.put("msg", "邮箱格式不正确");
 			return json;
 		}
-		HjsUser user = getLoginUser();
+		AbUser user = getLoginUser();
 		//已经验证邮箱后不做操作，防止重复发送激活邮件
 		if(email.equals(user.getEmail())&&user.getEmailStatus()==1){
 			json.put("code", "1");
@@ -278,7 +278,7 @@ public class CustomerController extends UserController{
 			error("邮箱格式不正确", request, response);
 			return null;
 		}
-		HjsUser user = getLoginUser();
+		AbUser user = getLoginUser();
 		//user.setEmail(email); //--毛茹新注掉，如果执行这句话，已验证邮箱不能修改
 		//已经验证邮箱后不做操作，防止重复发送激活邮件
 		if(email.equals(user.getEmail())&&user.getEmailStatus()==1){
@@ -345,8 +345,8 @@ public class CustomerController extends UserController{
 			error("手机校验码不正确", request, response);
 			return null;
 		}
-		HjsApproveSms sms = new HjsApproveSms();
-		HjsUser user = getLoginUser();
+		AbApproveSms sms = new AbApproveSms();
+		AbUser user = getLoginUser();
 		sms.setCreateIp(Utils.getCdnIpAddr(request));//创建IP
 		sms.setCreateTime(new Date());
 		sms.setVerifyRemark("");//备注
@@ -382,7 +382,7 @@ public class CustomerController extends UserController{
 	 */
 	@RequestMapping(value="/detailHF")
 	public String detailHF(ModelMap model){
-		HjsApproveRealname realname = approveRealnameService.getByLoginId(getLoginUser().getId());//通过登录ID获取实名验证信息
+		AbApproveRealname realname = approveRealnameService.getByLoginId(getLoginUser().getId());//通过登录ID获取实名验证信息
 		String rn = "";
 		String cid = "";
 		if(realname!=null){

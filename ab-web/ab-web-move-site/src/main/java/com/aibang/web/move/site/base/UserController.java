@@ -3,8 +3,8 @@ package com.aibang.web.move.site.base;
 
 import com.aibang.framework.utils.Const;
 import com.aibang.framework.web.controller.BaseController;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.dto.HjsUsersInfo;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.dto.AbUsersInfo;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -27,8 +27,8 @@ public class UserController extends BaseController {
 	 * @author zeng.fangfang
 	 * @date 2015年8月28日
 	 */
-	public HjsUser getLoginUser(){
-	   return (HjsUser)SecurityUtils.getSubject().getSession().getAttribute(Const.SESSION_USER);
+	public AbUser getLoginUser(){
+	   return (AbUser)SecurityUtils.getSubject().getSession().getAttribute(Const.SESSION_USER);
 	}
 	
 	/**
@@ -39,8 +39,8 @@ public class UserController extends BaseController {
 	 * @author liuj
 	 * @date 2015年9月16日
 	 */
-	public HjsUsersInfo getUsersInfo(){
-		return (HjsUsersInfo)SecurityUtils.getSubject().getSession().getAttribute(Const.SESSION_USERCUSTOMER);
+	public AbUsersInfo getUsersInfo(){
+		return (AbUsersInfo)SecurityUtils.getSubject().getSession().getAttribute(Const.SESSION_USERCUSTOMER);
 	}
 	/**
 	 * 获取Session

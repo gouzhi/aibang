@@ -1,8 +1,8 @@
 package com.aibang.business.api.user.config;
 
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsSysConfig;
-import com.aibang.transfer.model.vo.HjsSysConfigQuery;
+import com.aibang.transfer.model.dto.AbSysConfig;
+import com.aibang.transfer.model.vo.AbSysConfigQuery;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public interface SysConfigService {
 	 * @date 2015年8月25日
 	 */
 
-	public HjsSysConfig saveObj(HjsSysConfig model);
+	public AbSysConfig saveObj(AbSysConfig model);
 
 
 	/**
@@ -37,7 +37,7 @@ public interface SysConfigService {
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-    public void update(HjsSysConfig model);
+    public void update(AbSysConfig model);
     /**
      * 通过ID删除配置信息
      *
@@ -57,7 +57,7 @@ public interface SysConfigService {
      * @author zhangyong
      * @date 2015年8月25日
      */
-    public void remove(HjsSysConfig model);
+    public void remove(AbSysConfig model);
     /**
      * 通过id获取配置信息
      *
@@ -66,7 +66,7 @@ public interface SysConfigService {
      * @author zhangyong
      * @date 2015年8月25日
      */
-    public HjsSysConfig getById(Integer id);
+    public AbSysConfig getById(Integer id);
     /**
      * 获得所有配置信息
      *
@@ -75,7 +75,7 @@ public interface SysConfigService {
      * @date 2015年8月25日
      */
 
-	public List<HjsSysConfig> findAll();
+	public List<AbSysConfig> findAll();
 
 	/**
 	 * 添加或修改配置信息
@@ -86,7 +86,7 @@ public interface SysConfigService {
 	 * @date 2015年8月25日
 	 */
 
-	public HjsSysConfig saveOrUpdate(HjsSysConfig entity);
+	public AbSysConfig saveOrUpdate(AbSysConfig entity);
 
 	/**
 	 * 配置唯一性
@@ -98,7 +98,7 @@ public interface SysConfigService {
 	 * @date 2015年8月25日
 	 */
 
-	public boolean isUnique(HjsSysConfig entity, String uniquePropertyNames);
+	public boolean isUnique(AbSysConfig entity, String uniquePropertyNames);
 
 	/**
 	 * 分页获得配置信息
@@ -110,7 +110,7 @@ public interface SysConfigService {
 	 */
 
 	@SuppressWarnings("rawtypes")
-	public Page findPage(HjsSysConfigQuery query);
+	public Page findPage(AbSysConfigQuery query);
 
 	/**
 	 * 通过Pcode获得配置信息
@@ -120,7 +120,7 @@ public interface SysConfigService {
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-	public HjsSysConfig getByPcode(String param);
+	public AbSysConfig getByPcode(String param);
 	/**
 	 * 获得配置信息数量
 	 *  
@@ -129,7 +129,7 @@ public interface SysConfigService {
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-	public Long findCount(HjsSysConfigQuery query) ;
+	public Long findCount(AbSysConfigQuery query) ;
 	/**
 	 * 查询编码是否存在
 	 *  
@@ -138,7 +138,7 @@ public interface SysConfigService {
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-	public HjsSysConfig findBmCount(HjsSysConfigQuery query) ;
+	public AbSysConfig findBmCount(AbSysConfigQuery query) ;
 	/**
 	 * 通过父类ID获得配置信息
 	 *  
@@ -147,7 +147,7 @@ public interface SysConfigService {
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-	public Page<HjsSysConfig> dictlistPage(HjsSysConfigQuery query) ;
+	public Page<AbSysConfig> dictlistPage(AbSysConfigQuery query) ;
 
 
 
@@ -162,6 +162,6 @@ public interface SysConfigService {
 	 * @author wang wei
 	 * @date 2015年8月24日
 	 */
-	public List<HjsSysConfig> findConfigsByParentId(Integer parentId);
+	public List<AbSysConfig> findConfigsByParentId(Integer parentId);
 
 }

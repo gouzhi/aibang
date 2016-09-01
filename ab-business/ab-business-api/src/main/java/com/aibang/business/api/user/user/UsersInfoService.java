@@ -3,8 +3,8 @@ package com.aibang.business.api.user.user;
 import java.util.List;
 
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsUsersInfo;
-import com.aibang.transfer.model.vo.HjsUsersInfoQuery;
+import com.aibang.transfer.model.dto.AbUsersInfo;
+import com.aibang.transfer.model.vo.AbUsersInfoQuery;
 
 
  
@@ -26,7 +26,7 @@ public interface UsersInfoService {
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
-	public HjsUsersInfo saveObj(HjsUsersInfo model);
+	public AbUsersInfo saveObj(AbUsersInfo model);
 	
 	/**	
 	 * 修改会员信息
@@ -34,7 +34,7 @@ public interface UsersInfoService {
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
-    public void update(HjsUsersInfo model);
+    public void update(AbUsersInfo model);
     
 	/**
 	 * 通过ID删除会员信息
@@ -50,7 +50,7 @@ public interface UsersInfoService {
      * @author zhangyong
      * @date 2015年8月31日
      */
-    public void remove(HjsUsersInfo model);
+    public void remove(AbUsersInfo model);
     /**
      * 通过ID得到会员信息   
      * @param id
@@ -58,14 +58,14 @@ public interface UsersInfoService {
      * @author zhangyong
      * @date 2015年8月31日
      */
-    public HjsUsersInfo getById(Integer id);
+    public AbUsersInfo getById(Integer id);
     /**
      * 得到所有会员信息列表
      * @return List<HjsUsersInfo>
      * @author zhangyong
      * @date 2015年8月31日
      */
-	public List<HjsUsersInfo> findAll();
+	public List<AbUsersInfo> findAll();
 	/**
 	 * 添加或修改会员信息
 	 * @param entity
@@ -73,7 +73,7 @@ public interface UsersInfoService {
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
-	public HjsUsersInfo saveOrUpdate(HjsUsersInfo entity);
+	public AbUsersInfo saveOrUpdate(AbUsersInfo entity);
 	 /**
 	  * 会员信息唯一性判别
 	  * @param entity
@@ -82,7 +82,7 @@ public interface UsersInfoService {
 	  * @author zhangyong
 	  * @date 2015年8月31日
 	  */
-	public boolean isUnique(HjsUsersInfo entity, String uniquePropertyNames);
+	public boolean isUnique(AbUsersInfo entity, String uniquePropertyNames);
 	
 	/**
 	 * 分页获取会员信息     
@@ -91,7 +91,7 @@ public interface UsersInfoService {
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
-	public Page<?> findPage(HjsUsersInfoQuery query);
+	public Page<?> findPage(AbUsersInfoQuery query);
 	/**
 	 * 后台得到用户信息列表（分页）
 	 * @param query
@@ -99,7 +99,7 @@ public interface UsersInfoService {
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
-	public Page<?> getUsersInfo(HjsUsersInfoQuery query);
+	public Page<?> getUsersInfo(AbUsersInfoQuery query);
 	/**
 	 * 会员注册
 	 * @param entity
@@ -107,7 +107,7 @@ public interface UsersInfoService {
 	 * @author zhangyong
 	 * @date 2015年9月1日
 	 */
-	public HjsUsersInfo registerUser(HjsUsersInfo entity);
+	public AbUsersInfo registerUser(AbUsersInfo entity);
 	/**
 	 * 后台加载修改会员信息
 	 * @param query
@@ -115,7 +115,7 @@ public interface UsersInfoService {
 	 * @author zhangyong
 	 * @date 2015年9月1日
 	 */
-	public HjsUsersInfo getEditUsersInfo(HjsUsersInfoQuery query);
+	public AbUsersInfo getEditUsersInfo(AbUsersInfoQuery query);
 	/**
 	 * 后台修改会员基本信息
 	 * @param entity
@@ -123,7 +123,7 @@ public interface UsersInfoService {
 	 * @author zhangyong
 	 * @date 2015年9月1日
 	 */
-	public HjsUsersInfo editUsersInfo(HjsUsersInfo entity);
+	public AbUsersInfo editUsersInfo(AbUsersInfo entity);
 	/**
 	 * 通过登录ID获取用户信息
 	 * @param query
@@ -131,28 +131,28 @@ public interface UsersInfoService {
 	 * @author zhangyong
 	 * @date 2015年9月15日
 	 */
-	public HjsUsersInfo getUsersInfoByLoginId(Integer LoginId);
+	public AbUsersInfo getUsersInfoByLoginId(Integer LoginId);
 	/**
 	 * 修改会员基本信息
 	 * @param entity void
 	 * @author zhangyong
 	 * @date 2015年9月24日
 	 */
-	public void updateUserBaseInfo(HjsUsersInfo entity);
+	public void updateUserBaseInfo(AbUsersInfo entity);
 	/**
 	 * 修改会员详细信息
 	 * @param entity void
 	 * @author zhangyong
 	 * @date 2015年9月24日
 	 */
-	public void updateUserDetailInfo(HjsUsersInfo entity);
+	public void updateUserDetailInfo(AbUsersInfo entity);
 	/**
 	 * 修改会员头像
 	 * @param entity void
 	 * @author zhangyong
 	 * @date 2015年9月24日
 	 */
-	public void updateUserAvatar(HjsUsersInfo entity);
+	public void updateUserAvatar(AbUsersInfo entity);
 	/**
 	 * 通过userbaseid获得userinfo
 	 * @methodname getUsersInfoByUserBaseId  
@@ -162,7 +162,7 @@ public interface UsersInfoService {
 	 * @author yinzhigang
 	 * @date 2016年4月16日
 	 */
-	public HjsUsersInfo getUsersInfoByUserBaseId(Integer userBaseId);
+	public AbUsersInfo getUsersInfoByUserBaseId(Integer userBaseId);
 	
 	/**
 	 * 通过UserBaseId获取用户的电话号码

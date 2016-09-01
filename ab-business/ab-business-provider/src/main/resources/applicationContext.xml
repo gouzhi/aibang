@@ -22,12 +22,12 @@
 	  default-autowire="byName" default-lazy-init="true">
     <context:annotation-config />
 
-    <context:component-scan base-package="com.cifex.business" />
-    <context:component-scan base-package="com.cifex.framework" />
+    <context:component-scan base-package="com.aibang.business" />
+    <context:component-scan base-package="com.aibang.framework" />
 
-    <context:component-scan base-package="com.cifex.framework.chinanrp" />
+    <context:component-scan base-package="com.aibang.framework.chinanrp" />
     
-    <bean id="propertyConfigurer" class="com.cifex.framework.utils.Const">
+    <bean id="propertyConfigurer" class="com.aibang.framework.utils.Const">
         <property name="locations">
             <list>
                 <value>classpath*:jdbc.properties</value>
@@ -37,28 +37,6 @@
         </property>
     </bean>
    
-    <bean id="chinaPnrConfig" class="com.cifex.framework.chinanrp.common.ChinaPnrConfig" >
-        <property name="version" value="${chinapnr.version}" />
-		<property name="gateway" value="${chinapnr.gateway}" />
-		<property name="merCustId" value="${chinapnr.merCustId}" />
-		<property name="merId" value="${chinapnr.merId}" />
-		<property name="retHost" value="${chinapnr.retHost}" />
-        <property name="bgHost" value="${chinapnr.bgHost}" />
-        <property name="retUrl" value="${chinapnr.retUrl}" />
-		<property name="bgRetUrl" value="${chinapnr.bgRetUrl}" />
-        <property name="adminRetHost" value="${chinapnr.adminRetHost}" />
-        <property name="adminBgHost" value="${chinapnr.adminBgHost}" />
-        <property name="adminRetUrl" value="${chinapnr.adminRetUrl}" />
-        <property name="adminBgRetUrl" value="${chinapnr.adminBgRetUrl}" />
-        <property name="moveRetHost" value="${chinapnr.moveRetHost}" />
-        <property name="moveRetUrl" value="${chinapnr.moveRetUrl}" />
-        <property name="moveBgHost" value="${chinapnr.moveBgHost}" />
-        <property name="moveBgRetUrl" value="${chinapnr.moveBgRetUrl}" />
-		<property name="merKeyFile" value="${chinapnr.merKeyFile}" />
-		<property name="feeAccount" value="${chinapnr.feeAccount}" />
-		<property name="idType" value="${chinapnr.idType}" />
-		<property name="pgKeyFile" value="${chinapnr.pgKeyFile}" /> 
-    </bean>
     <!-- 阿里 druid数据库连接池 -->
     <!-- 写数据源-->
 	<bean id="writeDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
@@ -125,7 +103,7 @@
          <property name="logAbandoned" value="${logAbandoned}" />
 	</bean>
     <!--一写多读 -->
-    <bean id="readWriteDataSource" class="com.cifex.framework.utils.datasourcecore.ReadWriteDataSource">
+    <bean id="readWriteDataSource" class="com.aibang.framework.utils.datasourcecore.ReadWriteDataSource">
         <property name="writeDataSource" ref="writeDataSource"/>
         <property name="readDataSourceMap">
             <map>
@@ -145,7 +123,7 @@
     <!-- TransactionManager定义 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <bean id="readWriteDataSourceTransactionProcessor" class="com.cifex.framework.utils.datasourcecore.ReadWriteDataSourceProcessor">
+    <bean id="readWriteDataSourceTransactionProcessor" class="com.aibang.framework.utils.datasourcecore.ReadWriteDataSourceProcessor">
         <property name="forceChoiceReadWhenWrite" value="false"/>
     </bean>
  	
@@ -180,7 +158,7 @@
  	
     <aop:config expose-proxy="true">
         <!-- 只对业务逻辑层实施事务 -->
-        <aop:pointcut id="transactionPointCut" expression="(execution(* com.cifex.*.provider.system..*(..)) or execution(* com.cifex.*.provider.user..*(..)))" />
+        <aop:pointcut id="transactionPointCut" expression="(execution(* com.aibang.*.provider.system..*(..)) or execution(* com.aibang.*.provider.user..*(..)))" />
         <aop:advisor pointcut-ref="transactionPointCut" advice-ref="txAdvice-provider" />
 
         <!-- 通过AOP切面实现读/写库选择 -->

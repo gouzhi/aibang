@@ -10,7 +10,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.aibang.framework.utils.Const;
-import com.aibang.transfer.model.dto.HjsUser;
+import com.aibang.transfer.model.dto.AbUser;
 
  
  
@@ -33,7 +33,7 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{
 			//shiro管理的session
 			Subject currentUser = SecurityUtils.getSubject();  
 			Session session = currentUser.getSession();
-			HjsUser user = (HjsUser)session.getAttribute(Const.SESSION_USER);
+			AbUser user = (AbUser)session.getAttribute(Const.SESSION_USER);
 			if(user!=null){
 				return true;
 			}else{

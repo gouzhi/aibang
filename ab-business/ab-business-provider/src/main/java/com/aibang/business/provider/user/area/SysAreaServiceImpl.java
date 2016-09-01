@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import com.aibang.business.api.user.area.SysAreaService;
 import com.aibang.business.provider.base.ProviderServiceBase;
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsSysArea;
-import com.aibang.transfer.model.vo.HjsSysAreaQuery;
+import com.aibang.transfer.model.dto.AbSysArea;
+import com.aibang.transfer.model.vo.AbSysAreaQuery;
 import com.alibaba.dubbo.rpc.RpcException;
  
  
@@ -22,14 +22,14 @@ import com.alibaba.dubbo.rpc.RpcException;
  
 @Service("sysAreaService")
 @SuppressWarnings({"unchecked"})
-public class SysAreaServiceImpl  extends ProviderServiceBase<HjsSysArea,Integer> implements SysAreaService {
+public class SysAreaServiceImpl  extends ProviderServiceBase<AbSysArea,Integer> implements SysAreaService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
 		return "HjsSysArea";
 	}
 	
-	public HjsSysArea saveOrUpdate(HjsSysArea entity) {
+	public AbSysArea saveOrUpdate(AbSysArea entity) {
 		if(entity.getId() == null) 
 			save(entity);
 		else 
@@ -37,12 +37,12 @@ public class SysAreaServiceImpl  extends ProviderServiceBase<HjsSysArea,Integer>
 		return entity;
 	}
 	@SuppressWarnings({"rawtypes"})
-	public Page findPage(HjsSysAreaQuery query) {
+	public Page findPage(AbSysAreaQuery query) {
 		return pageQuery("HjsSysArea.findPage",query);
 	}
 
 	@Override
-	public HjsSysArea saveObj(HjsSysArea model) {
+	public AbSysArea saveObj(AbSysArea model) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -53,13 +53,13 @@ public class SysAreaServiceImpl  extends ProviderServiceBase<HjsSysArea,Integer>
 	 * @author zhangyong
 	 * @date 2015年9月22日
 	 */
-	public List<HjsSysArea> getAreaLayer(Integer layer,Integer parentId){
-		List<HjsSysArea> areaList = null ;
-		HjsSysAreaQuery areaQuery = new HjsSysAreaQuery();
+	public List<AbSysArea> getAreaLayer(Integer layer,Integer parentId){
+		List<AbSysArea> areaList = null ;
+		AbSysAreaQuery areaQuery = new AbSysAreaQuery();
 		areaQuery.setLayer(layer);
 		areaQuery.setParentId(parentId);
 		try {
-			areaList = (List<HjsSysArea>)super.findForList(getIbatisMapperNamesapce()+".findAreaLayer", areaQuery);
+			areaList = (List<AbSysArea>)super.findForList(getIbatisMapperNamesapce()+".findAreaLayer", areaQuery);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"得到某级别地域信息错误",e.getCause());
 		}

@@ -2,11 +2,11 @@ package com.aibang.business.provider.Interceptor.service;
 import org.springframework.stereotype.Service; 
 
 import com.aibang.business.provider.base.ProviderServiceBase;
-import com.aibang.transfer.model.dto.HjsSysService;
+import com.aibang.transfer.model.dto.AbSysService;
 
 @SuppressWarnings("unchecked")
 @Service("systemService")
-public class SystemServiceImpl extends ProviderServiceBase<HjsSysService,Integer> implements SystemService{
+public class SystemServiceImpl extends ProviderServiceBase<AbSysService,Integer> implements SystemService{
 
 	 
 

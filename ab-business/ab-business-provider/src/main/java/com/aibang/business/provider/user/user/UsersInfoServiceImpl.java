@@ -14,15 +14,15 @@ import com.aibang.business.provider.base.ProviderServiceBase;
 import com.aibang.framework.fadada.FddClient;
 import com.aibang.framework.utils.ShareCodeUtil;
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsApproveRealname;
-import com.aibang.transfer.model.dto.HjsApproveSms;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.dto.HjsUserBase;
-import com.aibang.transfer.model.dto.HjsUsersInfo;
-import com.aibang.transfer.model.dto.HjsUsersInvite;
-import com.aibang.transfer.model.vo.HjsApproveRealnameQuery;
-import com.aibang.transfer.model.vo.HjsUserBaseQuery;
-import com.aibang.transfer.model.vo.HjsUsersInfoQuery;
+import com.aibang.transfer.model.dto.AbApproveRealname;
+import com.aibang.transfer.model.dto.AbApproveSms;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.dto.AbUserBase;
+import com.aibang.transfer.model.dto.AbUsersInfo;
+import com.aibang.transfer.model.dto.AbUsersInvite;
+import com.aibang.transfer.model.vo.AbApproveRealnameQuery;
+import com.aibang.transfer.model.vo.AbUserBaseQuery;
+import com.aibang.transfer.model.vo.AbUsersInfoQuery;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -34,7 +34,7 @@ import com.alibaba.fastjson.TypeReference;
  */
 @Service("usersInfoService")
 @SuppressWarnings({"unchecked"})
-public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Integer> implements UsersInfoService {
+public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integer> implements UsersInfoService {
 	
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -49,7 +49,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
-	public HjsUsersInfo saveOrUpdate(HjsUsersInfo entity) {
+	public AbUsersInfo saveOrUpdate(AbUsersInfo entity) {
 		if(entity.getId() == null)
 			save(entity);
 		else
@@ -64,7 +64,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @date 2015年8月31日
 	 */
 	@SuppressWarnings({"rawtypes"})
-	public Page findPage(HjsUsersInfoQuery query) {
+	public Page findPage(AbUsersInfoQuery query) {
 		return pageQuery("HjsUsersInfo.findPage",query);
 	}
 	/**
@@ -74,7 +74,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
-	public HjsUsersInfo saveObj(HjsUsersInfo model)
+	public AbUsersInfo saveObj(AbUsersInfo model)
 	{
 		try {
 			save(model);
@@ -89,7 +89,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
-	public void update(HjsUsersInfo model){
+	public void update(AbUsersInfo model){
 		try {
 			update(model);
 		}catch (Exception e) {
@@ -117,7 +117,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
-	public void remove(HjsUsersInfo model){
+	public void remove(AbUsersInfo model){
 		try {
 			remove(model);
 		}catch (Exception e) {
@@ -131,8 +131,8 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
-	public HjsUsersInfo getById(Integer id){
-		HjsUsersInfo hjsUsersInfo = null;
+	public AbUsersInfo getById(Integer id){
+		AbUsersInfo hjsUsersInfo = null;
 		try {
 			hjsUsersInfo = super.getById(id);
 		}catch (Exception e) {
@@ -146,8 +146,8 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
-	public List<HjsUsersInfo> findAll(){
-		List<HjsUsersInfo> infoList= null;
+	public List<AbUsersInfo> findAll(){
+		List<AbUsersInfo> infoList= null;
 		try {
 			infoList = findAll();
 		}catch (Exception e) {
@@ -163,7 +163,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
-	public boolean isUnique(HjsUsersInfo entity, String uniquePropertyNames){
+	public boolean isUnique(AbUsersInfo entity, String uniquePropertyNames){
 		boolean ref = false;
 		try {
 			ref = isUnique(entity, uniquePropertyNames);
@@ -179,8 +179,8 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
-	public Page<?> getUsersInfo(HjsUsersInfoQuery query){
-		Page<HjsUsersInfo> infoPage=null;
+	public Page<?> getUsersInfo(AbUsersInfoQuery query){
+		Page<AbUsersInfo> infoPage=null;
 		try {
 			infoPage = findPage(query);
 		}catch (Exception e) {
@@ -196,7 +196,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @date 2015年9月1日
 	 */
 	@Transactional
-	public HjsUsersInfo registerUser(HjsUsersInfo entity){
+	public AbUsersInfo registerUser(AbUsersInfo entity){
 		try {
 			save("HjsUser.insert",entity.getHjsUser());//登陆信息
 			save("HjsUserBase.addUserBase",entity.getHjsUserBase());//账户信息
@@ -205,12 +205,12 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 			
 
 			//邀请码相关操作
-			HjsUsersInvite usersInvite = new HjsUsersInvite();
+			AbUsersInvite usersInvite = new AbUsersInvite();
 			String inviteCode = entity.getInviteCode();
 			//判断是否输入邀请码
 			if(inviteCode!=null&&!inviteCode.equals("")){
 				if(inviteCode.length()==6){
-					HjsUsersInfo inviteUsersInfo = (HjsUsersInfo)findForObject("HjsUsersInfo.getInviteUser", inviteCode);
+					AbUsersInfo inviteUsersInfo = (AbUsersInfo)findForObject("HjsUsersInfo.getInviteUser", inviteCode);
 					if(inviteUsersInfo!=null){
 						usersInvite.setInviteCode(inviteCode);
 						usersInvite.setInviteUserId(inviteUsersInfo.getUserId());
@@ -229,7 +229,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 
 			save("HjsUsersInfo.addUsersInfo",entity);//会员信息
 			//注册有手机验证，故设置手机验证通过
-			HjsApproveSms approveSms = new HjsApproveSms();
+			AbApproveSms approveSms = new AbApproveSms();
 			approveSms.setUserId(entity.getHjsUser().getId());
 			approveSms.setType(1);
 			approveSms.setStatus(1);//审核成功
@@ -257,10 +257,10 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @author zhangyong
 	 * @date 2015年9月1日
 	 */
-	public HjsUsersInfo getEditUsersInfo(HjsUsersInfoQuery query){
-		HjsUsersInfo usersInfo = null;
+	public AbUsersInfo getEditUsersInfo(AbUsersInfoQuery query){
+		AbUsersInfo usersInfo = null;
 		try {
-			usersInfo = (HjsUsersInfo)findForObject("HjsUsersInfo.getUsersInfoById", query);
+			usersInfo = (AbUsersInfo)findForObject("HjsUsersInfo.getUsersInfoById", query);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"后台加载修改会员信息错误",e.getCause());
 		}
@@ -274,7 +274,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @date 2015年9月1日
 	 */
 	@Transactional
-	public HjsUsersInfo editUsersInfo(HjsUsersInfo entity){
+	public AbUsersInfo editUsersInfo(AbUsersInfo entity){
 
 		try {
 			update("HjsUser.updatePass",entity.getHjsUser());//登陆信息
@@ -291,18 +291,18 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @author zhangyong
 	 * @date 2015年9月15日
 	 */
-	public HjsUsersInfo getUsersInfoByLoginId(Integer LoginId){
-		HjsUsersInfo usersInfo = null;
+	public AbUsersInfo getUsersInfoByLoginId(Integer LoginId){
+		AbUsersInfo usersInfo = null;
 		try {
 			//会员信息
-			HjsUsersInfoQuery hjsUsersInfoQuery = new HjsUsersInfoQuery();
+			AbUsersInfoQuery hjsUsersInfoQuery = new AbUsersInfoQuery();
 			hjsUsersInfoQuery.setLoginId(LoginId);
-			usersInfo = (HjsUsersInfo)findForObject("HjsUsersInfo.getByLoginId", hjsUsersInfoQuery);
+			usersInfo = (AbUsersInfo)findForObject("HjsUsersInfo.getByLoginId", hjsUsersInfoQuery);
 			//会员账户信息
 			if(usersInfo!=null && usersInfo.getUserId()!=null){
-				HjsUserBaseQuery userBase = new HjsUserBaseQuery();
+				AbUserBaseQuery userBase = new AbUserBaseQuery();
 				userBase.setId(usersInfo.getUserId());
-				usersInfo.setHjsUserBase((HjsUserBase)super.findForObject("HjsUserBase.getById", userBase));
+				usersInfo.setHjsUserBase((AbUserBase)super.findForObject("HjsUserBase.getById", userBase));
 			}
 
 		}catch (Exception e) {
@@ -316,7 +316,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @author zhangyong
 	 * @date 2015年9月24日
 	 */
-	public void updateUserBaseInfo(HjsUsersInfo entity){
+	public void updateUserBaseInfo(AbUsersInfo entity){
 		try {
 			update(getIbatisMapperNamesapce()+".updateBase",entity);
 		}catch (Exception e) {
@@ -329,7 +329,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @author zhangyong
 	 * @date 2015年9月24日
 	 */
-	public void updateUserDetailInfo(HjsUsersInfo entity){
+	public void updateUserDetailInfo(AbUsersInfo entity){
 		try {
 			update(getIbatisMapperNamesapce()+".updateDetail",entity);
 		}catch (Exception e) {
@@ -342,7 +342,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @author zhangyong
 	 * @date 2015年9月24日
 	 */
-	public void updateUserAvatar(HjsUsersInfo entity){
+	public void updateUserAvatar(AbUsersInfo entity){
 		try {
 			update(getIbatisMapperNamesapce()+".updateAvatar",entity);
 		}catch (Exception e) {
@@ -359,10 +359,10 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	 * @date 2015年11月18日
 	 */
 	@Transactional
-	public void saveHF(HjsUsersInfo entity,HjsApproveRealname realName){
-		HjsApproveRealname hjsApproveRealname = null;
-		HjsApproveRealnameQuery hjsApproveRealnameQuery = new HjsApproveRealnameQuery();
-		HjsUser user =new HjsUser();
+	public void saveHF(AbUsersInfo entity,AbApproveRealname realName){
+		AbApproveRealname hjsApproveRealname = null;
+		AbApproveRealnameQuery hjsApproveRealnameQuery = new AbApproveRealnameQuery();
+		AbUser user =new AbUser();
 		user.setId(realName.getUserId());
 		user.setRealName(realName.getRealname());
 		user.setRealNameStatus(1);
@@ -389,7 +389,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 			update("HjsUserBase.saveHF",entity.getHjsUserBase());
 			update("HjsUser.saveHF",entity.getHjsUser());
 			hjsApproveRealnameQuery.setUserId(realName.getUserId());
-			hjsApproveRealname = (HjsApproveRealname)findForObject("HjsApproveRealname.getByLoginId", hjsApproveRealnameQuery);
+			hjsApproveRealname = (AbApproveRealname)findForObject("HjsApproveRealname.getByLoginId", hjsApproveRealnameQuery);
 			if(hjsApproveRealname!=null&&hjsApproveRealname.getId()!=null){
 				realName.setId(hjsApproveRealname.getId());
 				update("HjsApproveRealname.activate",realName);
@@ -406,18 +406,18 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	/**
 	 * 通过userbaseid获得userinfo
 	 */
-	public HjsUsersInfo getUsersInfoByUserBaseId(Integer userBaseId) {
-		HjsUsersInfo usersInfo = null;
+	public AbUsersInfo getUsersInfoByUserBaseId(Integer userBaseId) {
+		AbUsersInfo usersInfo = null;
 		try {
 			//会员信息
-			HjsUsersInfoQuery hjsUsersInfoQuery = new HjsUsersInfoQuery();
+			AbUsersInfoQuery hjsUsersInfoQuery = new AbUsersInfoQuery();
 			hjsUsersInfoQuery.setUserId(userBaseId);
-			usersInfo = (HjsUsersInfo)findForObject("HjsUsersInfo.getByUserBaseId", hjsUsersInfoQuery);
+			usersInfo = (AbUsersInfo)findForObject("HjsUsersInfo.getByUserBaseId", hjsUsersInfoQuery);
 			//会员账户信息
 			if(usersInfo!=null && usersInfo.getUserId()!=null){
-				HjsUserBaseQuery userBase = new HjsUserBaseQuery();
+				AbUserBaseQuery userBase = new AbUserBaseQuery();
 				userBase.setId(usersInfo.getUserId());
-				usersInfo.setHjsUserBase((HjsUserBase)super.findForObject("HjsUserBase.getById", userBase));
+				usersInfo.setHjsUserBase((AbUserBase)super.findForObject("HjsUserBase.getById", userBase));
 			}
 
 		}catch (Exception e) {
@@ -428,7 +428,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<HjsUsersInfo,Inte
 	@Override
 	public String getUserPhoneByUserBaseId(Integer userid) {
 		try{
-			HjsUsersInfoQuery hjsUsersInfoQuery = new HjsUsersInfoQuery();
+			AbUsersInfoQuery hjsUsersInfoQuery = new AbUsersInfoQuery();
 			hjsUsersInfoQuery.setUserId(userid);
 			return (String) findForObject("HjsUsersInfo.getUserPhoneByUserBaseId", hjsUsersInfoQuery);
 		}catch (Exception e) {

@@ -23,15 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.aibang.business.api.system.menu.HjsSysMenuService;
-import com.aibang.business.api.system.role.HjsSysRoleService;
-import com.aibang.business.api.system.userRole.HjsSysUserRoleService;
+import com.aibang.business.api.system.menu.AbSysMenuService;
+import com.aibang.business.api.system.role.AbSysRoleService;
+import com.aibang.business.api.system.userRole.AbSysUserRoleService;
 import com.aibang.framework.utils.Const;
 import com.aibang.framework.utils.RightsHelper;
 import com.aibang.framework.utils.Tools;
-import com.aibang.transfer.model.dto.HjsSysMenu;
-import com.aibang.transfer.model.dto.HjsSysRole;
-import com.aibang.transfer.model.vo.HjsSysRoleQuery;
+import com.aibang.transfer.model.dto.AbSysMenu;
+import com.aibang.transfer.model.dto.AbSysRole;
+import com.aibang.transfer.model.vo.AbSysRoleQuery;
 import com.aibang.web.admin.operation.base.AdminController;
  
 /**
@@ -47,11 +47,11 @@ import com.aibang.web.admin.operation.base.AdminController;
 public class RoleController extends AdminController {
 	
 	@Resource(name="hjsSysMenuService")
-	private HjsSysMenuService hjsSysMenuService;
+	private AbSysMenuService hjsSysMenuService;
 	@Resource(name="hjsSysRoleService")
-	private HjsSysRoleService hjsSysRoleService;
+	private AbSysRoleService hjsSysRoleService;
 	@Resource(name="hjsSysUserRoleService")
-	private HjsSysUserRoleService hjsSysUserRoleService;
+	private AbSysUserRoleService hjsSysUserRoleService;
 	private String display(String pageName)
 	{
 		return  "system/role/"+pageName;
@@ -71,7 +71,7 @@ public class RoleController extends AdminController {
 	@RequestMapping(value="/kfqx")
 	public String kfqx(ModelMap model,String id,String value,String msg)throws Exception{
 		try{
-			HjsSysRole role=new HjsSysRole();
+			AbSysRole role=new AbSysRole();
 			role.setId(Integer.parseInt(id));
 			//根据不同的标识，修改不同权限
 			if(msg.equals("kfqx1")){
@@ -106,7 +106,7 @@ public class RoleController extends AdminController {
 	@RequestMapping(value="/gysqxc")
 	public String gysqxc(ModelMap model,String id,String value,String msg)throws Exception{
 		try{
-			HjsSysRole role=new HjsSysRole();
+			AbSysRole role=new AbSysRole();
 			role.setId(Integer.parseInt(id));
 			role.setC1(Integer.parseInt(value));
 			hjsSysRoleService.updateGysqxc(role,msg);
@@ -133,11 +133,11 @@ public class RoleController extends AdminController {
 			if(ROLE_ID == null || "".equals(ROLE_ID)){
 				ROLE_ID="1";
 			}	
-			HjsSysRoleQuery srq=new HjsSysRoleQuery();
+			AbSysRoleQuery srq=new AbSysRoleQuery();
 			srq.setId(Integer.parseInt(ROLE_ID));
-			List<HjsSysRole> roleList = hjsSysRoleService.findAll();//列出所有角色
-			List<HjsSysRole> roleList_z = hjsSysRoleService.listAllRolesByPId(srq);//列出此角色的所有下级		
-			HjsSysRole role = hjsSysRoleService.getById(Integer.parseInt(ROLE_ID));//取得点击角色
+			List<AbSysRole> roleList = hjsSysRoleService.findAll();//列出所有角色
+			List<AbSysRole> roleList_z = hjsSysRoleService.listAllRolesByPId(srq);//列出此角色的所有下级		
+			AbSysRole role = hjsSysRoleService.getById(Integer.parseInt(ROLE_ID));//取得点击角色
 			model.addAttribute("rolec", role);
 			model.addAttribute("roleList", roleList);
 			model.addAttribute("roleList_z", roleList_z);
@@ -162,7 +162,7 @@ public class RoleController extends AdminController {
 			if(parent_id == null || "".equals(parent_id)){
 				parent_id="1";
 			}
-			HjsSysRole role = new HjsSysRole();
+			AbSysRole role = new AbSysRole();
 			role.setParentId(Integer.parseInt(parent_id));
 			model.addAttribute("role", role);
 
@@ -184,10 +184,10 @@ public class RoleController extends AdminController {
 	 */
 	@SuppressWarnings("unused")
 	@RequestMapping(value="/add")//,method=RequestMethod.POST)
-	public String add(ModelMap model,HjsSysRole role,HttpServletRequest request)throws Exception{		
+	public String add(ModelMap model,AbSysRole role,HttpServletRequest request)throws Exception{		
 		try{		
 			String parent_id = role.getParentId().toString();		//父类角色id
-			HjsSysRoleQuery srq = new HjsSysRoleQuery();
+			AbSysRoleQuery srq = new AbSysRoleQuery();
 			srq.setId(role.getParentId());	
 			
 			if("0".equals(parent_id)){
@@ -244,7 +244,7 @@ public class RoleController extends AdminController {
 	@RequestMapping(value="/toEdit")
 	public String toEdit( ModelMap model,String ROLE_ID )throws Exception{
 		try{
-			HjsSysRole role =hjsSysRoleService.getById(Integer.parseInt(ROLE_ID));			
+			AbSysRole role =hjsSysRoleService.getById(Integer.parseInt(ROLE_ID));			
 			model.addAttribute("role", role);
 		} catch(Exception e){
 			logger.error(e.toString(), e);
@@ -263,7 +263,7 @@ public class RoleController extends AdminController {
 	* @throws
 	 */
 	@RequestMapping(value="/edit")
-	public String edit(ModelMap model,HjsSysRole role,HttpServletRequest request)throws Exception{
+	public String edit(ModelMap model,AbSysRole role,HttpServletRequest request)throws Exception{
 		try{
 			role.setUpdateTime(new Date());
 			role.setOptId(getLoginUser().getId());
@@ -292,21 +292,21 @@ public class RoleController extends AdminController {
 		
 		try{
 
-			List<HjsSysMenu> menuList = hjsSysMenuService.findAll();
-			HjsSysRole role = hjsSysRoleService.getById(Integer.parseInt(ROLE_ID));
+			List<AbSysMenu> menuList = hjsSysMenuService.findAll();
+			AbSysRole role = hjsSysRoleService.getById(Integer.parseInt(ROLE_ID));
 
 			String roleRights = role.getMenuRights();
 			//获取菜单树
 			if(Tools.notEmpty(roleRights)){
-				for(HjsSysMenu menu : menuList){
+				for(AbSysMenu menu : menuList){
 					menu.setHasMenu(RightsHelper.testRights(roleRights, menu.getId()));
 					if(menu.isHasMenu()){
-						List<HjsSysMenu> subMenuList = menu.getSubMenu();
-						for(HjsSysMenu sub : subMenuList){
+						List<AbSysMenu> subMenuList = menu.getSubMenu();
+						for(AbSysMenu sub : subMenuList){
 							sub.setHasMenu(RightsHelper.testRights(roleRights, sub.getId()));
 							if(sub.isHasMenu()){
-								List<HjsSysMenu> subMenuList1 = sub.getSubMenu();
-								for(HjsSysMenu sub1 : subMenuList1){
+								List<AbSysMenu> subMenuList1 = sub.getSubMenu();
+								for(AbSysMenu sub1 : subMenuList1){
 									sub1.setHasMenu(RightsHelper.testRights(roleRights, sub1.getId()));
 								}
 							}
@@ -390,10 +390,10 @@ public class RoleController extends AdminController {
 	public String button(ModelMap model,@RequestParam String ROLE_ID,@RequestParam String msg)throws Exception{
 		try{
 
-			List<HjsSysMenu> menuList = hjsSysMenuService.findAll();
+			List<AbSysMenu> menuList = hjsSysMenuService.findAll();
 
 			
-			HjsSysRole role = hjsSysRoleService.getById(Integer.parseInt(ROLE_ID));
+			AbSysRole role = hjsSysRoleService.getById(Integer.parseInt(ROLE_ID));
 			
 			String roleRights = "";
 			if("add_qx".equals(msg)){
@@ -409,15 +409,15 @@ public class RoleController extends AdminController {
 			}
 			//获得菜单树
 			if(Tools.notEmpty(roleRights)){
-				for(HjsSysMenu menu : menuList){
+				for(AbSysMenu menu : menuList){
 					menu.setHasMenu(RightsHelper.testRights(roleRights, menu.getId()));
 					if(menu.isHasMenu()){
-						List<HjsSysMenu> subMenuList = menu.getSubMenu();
-						for(HjsSysMenu sub : subMenuList){
+						List<AbSysMenu> subMenuList = menu.getSubMenu();
+						for(AbSysMenu sub : subMenuList){
 							sub.setHasMenu(RightsHelper.testRights(roleRights, sub.getId()));
 							if(sub.isHasMenu()){
-								List<HjsSysMenu> subMenuList1 = sub.getSubMenu();
-								for(HjsSysMenu sub1 : subMenuList1){
+								List<AbSysMenu> subMenuList1 = sub.getSubMenu();
+								for(AbSysMenu sub1 : subMenuList1){
 									sub1.setHasMenu(RightsHelper.testRights(roleRights, sub1.getId()));
 								}
 							}
@@ -450,13 +450,13 @@ public class RoleController extends AdminController {
 	 */
 	@RequestMapping(value="/auth/save")
 	public void saveAuth(@RequestParam String ROLE_ID,@RequestParam String menuIds,PrintWriter out)throws Exception{
-		HjsSysRole role = new HjsSysRole();
+		AbSysRole role = new AbSysRole();
 		role.setId(Integer.parseInt(ROLE_ID));
 		try{
 			//判断赋权限的菜单
 			if(null != menuIds && !"".equals(menuIds.trim())){
 				BigInteger rights = RightsHelper.sumRights(Tools.str2StrArray(menuIds));
-				HjsSysRoleQuery hsrq = new HjsSysRoleQuery();
+				AbSysRoleQuery hsrq = new AbSysRoleQuery();
 				hsrq.setId(Integer.parseInt(ROLE_ID));
 				role = hjsSysRoleService.getById(Integer.parseInt(ROLE_ID));
 				role.setMenuRights(rights.toString());
@@ -525,7 +525,7 @@ public class RoleController extends AdminController {
 	@RequestMapping(value="/roleButton/save")
 	public void orleButton(@RequestParam String ROLE_ID,@RequestParam String menuIds,@RequestParam String msg,PrintWriter out)throws Exception{
 		try{
-			HjsSysRole role= new HjsSysRole();
+			AbSysRole role= new AbSysRole();
 			role.setId(Integer.parseInt(ROLE_ID));
 			String rightsStr="";
 			//权限计算
@@ -570,17 +570,17 @@ public class RoleController extends AdminController {
 	public Map<String,String> deleteRole(@RequestParam String ROLE_ID)throws Exception{
 		Map<String,String> map = new HashMap<String,String>();
 		String errInfo = "";
-		HjsSysRoleQuery hsrq = new HjsSysRoleQuery();
-		HjsSysRole hsr = new HjsSysRole();
+		AbSysRoleQuery hsrq = new AbSysRoleQuery();
+		AbSysRole hsr = new AbSysRole();
 		try{
 			hsrq.setId(Integer.parseInt(ROLE_ID));
 			hsr.setId(Integer.parseInt(ROLE_ID));
-			List<HjsSysRole> roleList_z = hjsSysRoleService.listAllRolesByPId(hsrq);		//列出此角色的所有下级
+			List<AbSysRole> roleList_z = hjsSysRoleService.listAllRolesByPId(hsrq);		//列出此角色的所有下级
 			if(roleList_z.size() > 0){
 				errInfo = "false";
 			}else{
 				
-				List<HjsSysRole> userlist = hjsSysUserRoleService.listAllUByRid(hsrq); //列出此角色下所有用户
+				List<AbSysRole> userlist = hjsSysUserRoleService.listAllUByRid(hsrq); //列出此角色下所有用户
 				if(userlist.size() > 0 ){
 					errInfo = "false2";
 				}else{

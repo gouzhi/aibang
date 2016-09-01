@@ -3,8 +3,8 @@ package com.aibang.business.api.user.approve;
 import java.util.List;
 
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsApproveSms;
-import com.aibang.transfer.model.vo.HjsApproveSmsQuery;
+import com.aibang.transfer.model.dto.AbApproveSms;
+import com.aibang.transfer.model.vo.AbApproveSmsQuery;
  
  
 /** 
@@ -20,12 +20,12 @@ public interface ApproveSmsService {
 	/** 
 	 * 创建HjsApproveSms
 	 **/
-	public HjsApproveSms saveObj(HjsApproveSms model);
+	public AbApproveSms saveObj(AbApproveSms model);
 	
 	/** 
 	 * 更新HjsApproveSms
 	 **/	
-    public void update(HjsApproveSms model);
+    public void update(AbApproveSms model);
     
 	/** 
 	 * 删除HjsApproveSms
@@ -35,7 +35,7 @@ public interface ApproveSmsService {
     /** 
      * 逻辑删除HjsApproveSms
      */
-    public void remove(HjsApproveSms model);
+    public void remove(AbApproveSms model);
     
 	/**   
 	 * 根据ID获得手机认证信息
@@ -44,19 +44,19 @@ public interface ApproveSmsService {
 	 * @author zhangyong
 	 * @date 2015年9月8日
 	 */
-    public HjsApproveSms getById(Integer id);
+    public AbApproveSms getById(Integer id);
     
  
-	public List<HjsApproveSms> findAll();
+	public List<AbApproveSms> findAll();
 	
-	public HjsApproveSms saveOrUpdate(HjsApproveSms entity);
+	public AbApproveSms saveOrUpdate(AbApproveSms entity);
 	 
-	public boolean isUnique(HjsApproveSms entity, String uniquePropertyNames);
+	public boolean isUnique(AbApproveSms entity, String uniquePropertyNames);
 	
 	/** 
 	 * 分页查询: HjsApproveSms
 	 **/      
-	public Page<?> findPage(HjsApproveSmsQuery query);
+	public Page<?> findPage(AbApproveSmsQuery query);
 	/**
 	 * 审核手机认证
 	 * @param entity
@@ -64,13 +64,13 @@ public interface ApproveSmsService {
 	 * @author zhangyong
 	 * @date 2015年9月8日
 	 */
-	public void auditSms(HjsApproveSms entity);
+	public void auditSms(AbApproveSms entity);
 	/**
 	 * 前台手机验证
 	 * @param entity void
 	 * @author zhangyong
 	 * @date 2015年9月18日
 	 */
-	public void activateSms(HjsApproveSms entity);
+	public void activateSms(AbApproveSms entity);
 	
 }

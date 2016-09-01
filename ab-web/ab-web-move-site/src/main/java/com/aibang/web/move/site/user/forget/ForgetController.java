@@ -26,7 +26,7 @@ import com.aibang.framework.utils.DateUtils;
 import com.aibang.framework.utils.MD5;
 import com.aibang.framework.utils.redis.SpringRedisCacheService;
 import com.aibang.framework.utils.validate.ValidateUtils;
-import com.aibang.transfer.model.dto.HjsUser;
+import com.aibang.transfer.model.dto.AbUser;
 import com.aibang.web.move.site.base.UserController;
 /**
  * 忘记密码
@@ -90,7 +90,7 @@ public class ForgetController extends UserController {
 			error("验证码不正确", request, response);
 			return null;
 		}
-		HjsUser user = userService.getByName(name);
+		AbUser user = userService.getByName(name);
 		//用户信息是否存在
 		if(user==null){
 			error("用户信息不存在或者用户已经停用，请与客服联系", request, response);
@@ -141,7 +141,7 @@ public class ForgetController extends UserController {
 		String phoneString = request.getSession().getAttribute("passPhone").toString();
 		long diff = (new Date().getTime()-codeTime.getTime())/(1000 * 60);
 		
-		HjsUser user = userService.getById(userId);
+		AbUser user = userService.getById(userId);
 		if(!codeString.equals(code)||diff>30||!user.getPhone().equals(phoneString)){
 			return "手机校验码不正确";
 		}
@@ -192,7 +192,7 @@ public class ForgetController extends UserController {
 			error("参数错误", request, response);
 			return null;
 		}
-		HjsUser user = userService.getById(userId);
+		AbUser user = userService.getById(userId);
 		
 		int times = 0;
 		//判断找回密码次数，每天超过5次不做操作
@@ -271,7 +271,7 @@ public class ForgetController extends UserController {
 		Date nDate = DateUtils.fomatDate(DateUtils.getTime());
 		Long datesub = DateUtils.getHourSub(infos[2],DateUtils.getTime());
 		DateUtils.compareDate(vDate, nDate);
-		HjsUser user = userService.getByUsername(infos[0]);
+		AbUser user = userService.getByUsername(infos[0]);
 		//用户不存在及邮件失效处理
 		if(user==null){
 			error("激活用户不存在，激活失败", request, response);
@@ -318,7 +318,7 @@ public class ForgetController extends UserController {
 		}
 		Integer userId=(Integer) request.getSession().getAttribute("resetUserId");
 		request.getSession().setAttribute("resetUserId",null);
-		HjsUser user = userService.getById(userId);
+		AbUser user = userService.getById(userId);
 		newPass = new SimpleHash("SHA-1",user.getUsername(),newPass).toString();//密码加密
 		user.setPassword(newPass);
 		user.setPasswordLevel(passwordLevel);

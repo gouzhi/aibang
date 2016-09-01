@@ -9,12 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aibang.business.api.user.user.UserService;
 import com.aibang.business.provider.base.ProviderServiceBase;
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsSysRole;
-import com.aibang.transfer.model.dto.HjsSysUserRole;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.dto.HjsUsersOpt;
-import com.aibang.transfer.model.vo.HjsSysUserRoleQuery;
-import com.aibang.transfer.model.vo.HjsUserQuery;
+import com.aibang.transfer.model.dto.AbSysRole;
+import com.aibang.transfer.model.dto.AbSysUserRole;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.dto.AbUsersOpt;
+import com.aibang.transfer.model.vo.AbSysUserRoleQuery;
+import com.aibang.transfer.model.vo.AbUserQuery;
 import com.alibaba.dubbo.rpc.RpcException;
 
 
@@ -28,7 +28,7 @@ import com.alibaba.dubbo.rpc.RpcException;
 
 @Service("userService")
 @SuppressWarnings({"unchecked"})
-public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> implements UserService {
+public class UserServiceImpl  extends ProviderServiceBase<AbUser,Integer> implements UserService {
 
 	@Override
 	public String getIbatisMapperNamesapce() {
@@ -43,7 +43,7 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-	public HjsUser saveOrUpdate(HjsUser entity) {
+	public AbUser saveOrUpdate(AbUser entity) {
 		if(entity.getId() == null)
 			save(entity);
 		else
@@ -60,7 +60,7 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
 	 * @date 2015年8月25日
 	 */
 	@SuppressWarnings({"rawtypes"})
-	public Page findPage(HjsUserQuery query) {
+	public Page findPage(AbUserQuery query) {
 		return pageQuery("HjsUser.findPage",query);
 	}
 
@@ -72,8 +72,8 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-	public HjsUser getByUsername(String v) {
-		return (HjsUser)getSqlSessionTemplate().selectOne("HjsUser.getByUsername",v);
+	public AbUser getByUsername(String v) {
+		return (AbUser)getSqlSessionTemplate().selectOne("HjsUser.getByUsername",v);
 	}
 
 	/**
@@ -85,24 +85,24 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
 	 * @date 2015年8月25日
 	 */
 	@Override
-	public HjsUser saveObj(HjsUser model) {
+	public AbUser saveObj(AbUser model) {
 		try {
 			super.save(model);
 			//用户详细创建
-			HjsUsersOpt admin = model.getHjsUsersOpt();
+			AbUsersOpt admin = model.getHjsUsersOpt();
 			admin.setLoginId(model.getId());
 			admin.setEntId(0);   //暂时设置成固定值，以后可拓展
 			admin.setLastTime(new Date());
 			admin.setOptUsername("");
 			super.save("HjsUsersOpt.insert",admin);
 			//用户角色创建
-			HjsSysUserRole hsurq = new HjsSysUserRole();
+			AbSysUserRole hsurq = new AbSysUserRole();
 			hsurq.setUserId(model.getId());
 			hsurq.setIsDel(0);
 			hsurq.setCreateTime(new Date());
 			hsurq.setVersion(0);
 			if(model.getRoles()!=null && model.getRoles().size()>0){
-				for(HjsSysRole role:model.getRoles()){
+				for(AbSysRole role:model.getRoles()){
 					hsurq.setRoleId(role.getId());
 					super.save("HjsSysUserRole.insert", hsurq);
 				}
@@ -122,12 +122,12 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
-    public void update(HjsUser model){
+    public void update(AbUser model){
     	try {
     			super.update(model);
     			//用户详细修改
     			if(model.getHjsUsersOpt()!=null){
-    				HjsUsersOpt admin = model.getHjsUsersOpt();
+    				AbUsersOpt admin = model.getHjsUsersOpt();
     				admin.setLoginId(model.getId());
     				admin.setEntId(0);   //暂时设置成固定值，以后可拓展
     				admin.setLastTime(new Date());
@@ -135,14 +135,14 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
     				super.update("HjsUsersOpt.updateByLoginId",admin);
     			}
     			//用户角色修改
-				HjsSysUserRole hsur = new HjsSysUserRole();
+				AbSysUserRole hsur = new AbSysUserRole();
 				hsur.setUserId(model.getId());
 				super.delete("HjsSysUserRole.deleteUserRole",hsur);
 				hsur.setIsDel(0);
 				hsur.setCreateTime(new Date());
 				hsur.setVersion(0);
 				if(model.getRoles()!=null&&model.getRoles().size()>0){
-					for(HjsSysRole role:model.getRoles()){
+					for(AbSysRole role:model.getRoles()){
 						if(role.getId()!=null){
 							hsur.setRoleId(role.getId());
 							super.save("HjsSysUserRole.insert", hsur);
@@ -179,10 +179,10 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
      * @author zhangyong
      * @date 2015年8月25日
      */
-    public void remove(HjsUser model){
+    public void remove(AbUser model){
     	try {
 			super.remove(model);
-			HjsSysUserRoleQuery hsurq = new HjsSysUserRoleQuery();
+			AbSysUserRoleQuery hsurq = new AbSysUserRoleQuery();
 			hsurq.setUserId(model.getId());
 			super.delete("HjsSysUserRole.deleteUserRole",hsurq);
 		} catch (Exception e) {
@@ -198,12 +198,12 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
      * @author zhangyong
      * @date 2015年8月25日
      */
-    public HjsUser getById(Integer id){
+    public AbUser getById(Integer id){
     	try {
-    		HjsUser user = super.getById(id);
-    		HjsUsersOpt usersOpt = new HjsUsersOpt();
+    		AbUser user = super.getById(id);
+    		AbUsersOpt usersOpt = new AbUsersOpt();
     		usersOpt.setLoginId(id);
-    		user.setHjsUsersOpt((HjsUsersOpt)super.findForObject("HjsUsersOpt.getByLoginId", usersOpt));
+    		user.setHjsUsersOpt((AbUsersOpt)super.findForObject("HjsUsersOpt.getByLoginId", usersOpt));
 			return user;
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过ID获得用户信息错误",e.getCause());
@@ -217,7 +217,7 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
      * @author zhangyong
      * @date 2015年8月25日
      */
-	public List<HjsUser> findAll(){
+	public List<AbUser> findAll(){
 		try {
 			return super.findAll();
 		} catch (Exception e) {
@@ -234,22 +234,22 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
 	  * @author zhangyong
 	  * @date 2015年8月25日
 	  */
-	public boolean isUnique(HjsUser entity, String uniquePropertyNames){
+	public boolean isUnique(AbUser entity, String uniquePropertyNames){
 
 		try {
-			HjsUser user =null;
+			AbUser user =null;
 			if(uniquePropertyNames.equals("username")){
-				user  = (HjsUser)findForObject(getIbatisMapperNamesapce()+".userenameUnique", entity);
+				user  = (AbUser)findForObject(getIbatisMapperNamesapce()+".userenameUnique", entity);
 				if(user!=null&&user.getId()!=null){
 					return false;
 				}
 			}else if(uniquePropertyNames.equals("email")){
-				user  = (HjsUser)findForObject(getIbatisMapperNamesapce()+".emailUnique", entity);
+				user  = (AbUser)findForObject(getIbatisMapperNamesapce()+".emailUnique", entity);
 				if(user!=null&&user.getId()!=null){
 					return false;
 				}
 			}else if(uniquePropertyNames.equals("phone")){
-				user  = (HjsUser)findForObject(getIbatisMapperNamesapce()+".phoneUnique", entity);
+				user  = (AbUser)findForObject(getIbatisMapperNamesapce()+".phoneUnique", entity);
 				if(user!=null&&user.getId()!=null){
 					return false;
 				}
@@ -269,10 +269,10 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
 	 * @date 2015年8月25日
 	 */
 	@Override
-	public HjsUser getSysUserByNameAndPwd(HjsUserQuery query) {
-		HjsUser user = null;
+	public AbUser getSysUserByNameAndPwd(AbUserQuery query) {
+		AbUser user = null;
 		try {
-			user = (HjsUser) findForObject("HjsUser.getCustomerInfo", query);
+			user = (AbUser) findForObject("HjsUser.getCustomerInfo", query);
 			
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过username与pass获取用户信息错误",e.getCause());
@@ -287,9 +287,9 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
 	 * @date 2015年8月25日
 	 */
 	@Transactional
-	public void deleteAllU(HjsUserQuery query){
+	public void deleteAllU(AbUserQuery query){
 		try {
-			HjsSysUserRoleQuery hsurq = new HjsSysUserRoleQuery();
+			AbSysUserRoleQuery hsurq = new AbSysUserRoleQuery();
 			hsurq.setUserId(query.getId());
 			hsurq.setSysUserIds(query.getSysUserIds());
 			query.setDeleteTimeBegin(new Date());
@@ -306,7 +306,7 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
 	 * @author zhangyong
 	 * @date 2015年9月17日
 	 */
-	public void updateCustomerPass(HjsUser entity){
+	public void updateCustomerPass(AbUser entity){
 		try {
 			super.update("HjsUser.updateCustomerPass",entity);
 		} catch (Exception e) {
@@ -320,14 +320,14 @@ public class UserServiceImpl  extends ProviderServiceBase<HjsUser,Integer> imple
 	 * @author zhangyong
 	 * @date 2015年9月24日
 	 */
-	public HjsUser getByName(String name){
-		HjsUser user = null;
+	public AbUser getByName(String name){
+		AbUser user = null;
 		try {
-			HjsUserQuery userQuery = new HjsUserQuery();
+			AbUserQuery userQuery = new AbUserQuery();
 			userQuery.setEmail(name);
 			userQuery.setUsername(name);
 			userQuery.setPhone(name);
-			user = (HjsUser)findForObject(getIbatisMapperNamesapce()+".getByName", userQuery);
+			user = (AbUser)findForObject(getIbatisMapperNamesapce()+".getByName", userQuery);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"前台通过用户名/手机/邮箱查询会员错误",e.getCause());
 		}		

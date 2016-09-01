@@ -39,13 +39,13 @@ import com.aibang.framework.utils.DateUtils;
 import com.aibang.framework.utils.PageData;
 import com.aibang.framework.utils.ip.Utils;
 import com.aibang.framework.utils.validate.ValidateUtils;
-import com.aibang.transfer.model.dto.HjsApproveRealname;
-import com.aibang.transfer.model.dto.HjsApproveSms;
-import com.aibang.transfer.model.dto.HjsSysArea;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.dto.HjsUserBase;
-import com.aibang.transfer.model.dto.HjsUsersAdd;
-import com.aibang.transfer.model.dto.HjsUsersInfo;
+import com.aibang.transfer.model.dto.AbApproveRealname;
+import com.aibang.transfer.model.dto.AbApproveSms;
+import com.aibang.transfer.model.dto.AbSysArea;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.dto.AbUserBase;
+import com.aibang.transfer.model.dto.AbUsersAdd;
+import com.aibang.transfer.model.dto.AbUsersInfo;
 import com.aibang.web.front.site.base.UserController;
 
 /**
@@ -107,7 +107,7 @@ public class CustomerController extends UserController{
 		}
 
 
-		HjsUser user = userService.getById(getLoginUser().getId());
+		AbUser user = userService.getById(getLoginUser().getId());
 		//手机格式处理
 		String phoneString = user.getPhone();
 		if(phoneString!=null&&phoneString.length()==11){
@@ -161,7 +161,7 @@ public class CustomerController extends UserController{
 			return null;
 		}
 		//旧密码校验
-		HjsUser user = getLoginUser();
+		AbUser user = getLoginUser();
 		oldPass =new SimpleHash("SHA-1",user.getUsername(),oldPass).toString();
 		if(!oldPass.equals(user.getPassword())){
 			error("旧密码不正确，请重新输入", request, response);
@@ -294,7 +294,7 @@ public class CustomerController extends UserController{
 			error("邮箱格式不正确", request, response);
 			return null;
 		}
-		HjsUser user = getLoginUser();
+		AbUser user = getLoginUser();
 		user.setEmail(email);
 		//已经验证邮箱后不做操作，防止重复发送激活邮件
 		if(email.equals(user.getEmail())&&user.getEmailStatus()==1){
@@ -342,7 +342,7 @@ public class CustomerController extends UserController{
 			error("手机号不能为空", request, response);
 			return null;
 		}
-		HjsUser hjsUser = new HjsUser();
+		AbUser hjsUser = new AbUser();
 		hjsUser.setPhone(phone);
 		if(!userService.isUnique(hjsUser, "phone")){
 			error("手机号已经被注册", request, response);
@@ -361,8 +361,8 @@ public class CustomerController extends UserController{
 			error("手机校验码不正确", request, response);
 			return null;
 		}
-		HjsApproveSms sms = new HjsApproveSms();
-		HjsUser user = getLoginUser();
+		AbApproveSms sms = new AbApproveSms();
+		AbUser user = getLoginUser();
 		sms.setCreateIp(Utils.getCdnIpAddr(request));//创建IP
 		sms.setCreateTime(new Date());
 		sms.setVerifyRemark("");//备注
@@ -400,9 +400,9 @@ public class CustomerController extends UserController{
 	@RequestMapping(value = "/changeArea", produces = "application/json;charset=UTF-8")
 	public Object changeArea(Integer parentId,Integer areaId){
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<HjsSysArea> area = sysAreaService.getAreaLayer(areaId, parentId);
+		List<AbSysArea> area = sysAreaService.getAreaLayer(areaId, parentId);
 		if(area!=null&&area.size()>0){
-			for(HjsSysArea aa:area){
+			for(AbSysArea aa:area){
 				//处理areaname中的名称显示
 				if(aa.getAreaName().indexOf("_")>0){
 					aa.setAreaName(aa.getAreaName().substring(aa.getAreaName().indexOf("_")+1,aa.getAreaName().length()));
@@ -421,27 +421,27 @@ public class CustomerController extends UserController{
 	 */
 	@RequestMapping(value="/toPersonal")
 	public String toPersonalProfile(ModelMap model){
-		HjsUser hjsUser = userService.getById(getLoginUser().getId());
-		HjsUsersInfo info = usersInfoService.getById(getUsersInfo().getId());//会员信息，账户信息
-		HjsSysArea userArea = sysAreaService.getById(info.getAreaid());//会员区域信息
-		HjsUsersAdd usersAdd = usersAddService.getAddressByBaseId(info.getUserId());//收货地址信息
+		AbUser hjsUser = userService.getById(getLoginUser().getId());
+		AbUsersInfo info = usersInfoService.getById(getUsersInfo().getId());//会员信息，账户信息
+		AbSysArea userArea = sysAreaService.getById(info.getAreaid());//会员区域信息
+		AbUsersAdd usersAdd = usersAddService.getAddressByBaseId(info.getUserId());//收货地址信息
 		
 		//会员所属区域处理
-		HjsSysArea userParentArea = null;
+		AbSysArea userParentArea = null;
 		if(userArea!=null){
 			userParentArea = sysAreaService.getById(userArea.getParentId());
 		}
-		List<HjsSysArea> area1=null;
-		List<HjsSysArea> area = sysAreaService.getAreaLayer(1, 0);//获取省级地域
+		List<AbSysArea> area1=null;
+		List<AbSysArea> area = sysAreaService.getAreaLayer(1, 0);//获取省级地域
 		if(userParentArea!=null){
 			area1 = sysAreaService.getAreaLayer(2, userParentArea.getParentId());//获取市级地域
 		}
-		List<HjsSysArea> area2 =null;
+		List<AbSysArea> area2 =null;
 		if(userArea!=null){
 			area2 = sysAreaService.getAreaLayer(3, userArea.getParentId());//获取区县级地域
 		}
 		if(area2!=null&&area2.size()>0){
-			for(HjsSysArea aa:area2){
+			for(AbSysArea aa:area2){
 				//处理areaname中的名称显示
 				if(aa.getAreaName().indexOf("_")>0){
 					aa.setAreaName(aa.getAreaName().substring(aa.getAreaName().indexOf("_")+1,aa.getAreaName().length()));
@@ -450,25 +450,25 @@ public class CustomerController extends UserController{
 		}
 
 		//会员收货区域处理	
-		HjsSysArea addressArea = null;
+		AbSysArea addressArea = null;
 		if(usersAdd!=null){
 			addressArea = sysAreaService.getById(usersAdd.getAreaid());
 		}
-		HjsSysArea addressParentArea = null;
+		AbSysArea addressParentArea = null;
 		if(addressArea!=null){
 			addressParentArea = sysAreaService.getById(addressArea.getParentId());
 		}
-		List<HjsSysArea> area4=null;
-		List<HjsSysArea> area3 = sysAreaService.getAreaLayer(1, 0);//获取省级地域
+		List<AbSysArea> area4=null;
+		List<AbSysArea> area3 = sysAreaService.getAreaLayer(1, 0);//获取省级地域
 		if(addressParentArea!=null){
 			area4 = sysAreaService.getAreaLayer(2, addressParentArea.getParentId());//获取市级地域
 		}
-		List<HjsSysArea> area5 =null;
+		List<AbSysArea> area5 =null;
 		if(addressArea!=null){
 			area5 = sysAreaService.getAreaLayer(3, addressArea.getParentId());//获取区县级地域
 		}
 		if(area5!=null&&area5.size()>0){
-			for(HjsSysArea aa:area5){
+			for(AbSysArea aa:area5){
 				//处理areaname中的名称显示
 				if(aa.getAreaName().indexOf("_")>0){
 					aa.setAreaName(aa.getAreaName().substring(aa.getAreaName().indexOf("_")+1,aa.getAreaName().length()));
@@ -542,7 +542,7 @@ public class CustomerController extends UserController{
 			return null;
 		}
 		//获得登陆用户
-		HjsUser hjsUser = userService.getById(getLoginUser().getId());
+		AbUser hjsUser = userService.getById(getLoginUser().getId());
 
 		//更改密码更改用户名
 		Integer isUpdatedUsername = hjsUser.getIsUpdatedUsername();
@@ -558,7 +558,7 @@ public class CustomerController extends UserController{
 				error("用户名已经存在", request, response);
 				return null;
 			}
-			HjsUser user = new HjsUser();
+			AbUser user = new AbUser();
 			user.setPhone(username);
 			if(!userService.isUnique(user,"phone")){
 				error("用户名已经存在", request, response);
@@ -571,12 +571,12 @@ public class CustomerController extends UserController{
 			userService.update(hjsUser);
 			Session session = getSession();
 			session.setAttribute(Const.SESSION_USER, hjsUser);
-			HjsUsersInfo usersInfo = getUsersInfo();
-			HjsUserBase hjsUserBase = usersInfo.getHjsUserBase();
+			AbUsersInfo usersInfo = getUsersInfo();
+			AbUserBase hjsUserBase = usersInfo.getHjsUserBase();
 			hjsUserBase.setUsername(username);
 		}
 		
-		HjsUsersInfo usersInfo = getUsersInfo();
+		AbUsersInfo usersInfo = getUsersInfo();
 		//处理生日日期格式
 		String dateString = year+"-"+(month.length()==1?"0"+month:month)+"-"+(day.length()==1?"0"+day:day);
 		usersInfo.setBirthday(DateUtils.fomatDate(dateString));//生日
@@ -605,7 +605,7 @@ public class CustomerController extends UserController{
 	 * @date 2015年9月28日
 	 */
 	@RequestMapping(value="/editPDetail")
-	public String editUsersInfoDetail(ModelMap model,Integer area1,Integer area2,Integer area3,HjsUsersInfo user,HttpServletRequest request,HttpServletResponse response){
+	public String editUsersInfoDetail(ModelMap model,Integer area1,Integer area2,Integer area3,AbUsersInfo user,HttpServletRequest request,HttpServletResponse response){
 		model.addAttribute("tag","2");
 		if(area1!=null&&area2==null){
 			error("请选择市", request, response);
@@ -626,7 +626,7 @@ public class CustomerController extends UserController{
 		user.setAreaid(areaId);
 		usersInfoService.updateUserDetailInfo(user);
 		//更新session
-		HjsUsersInfo newInfo =getUsersInfo();
+		AbUsersInfo newInfo =getUsersInfo();
 		newInfo.setAreaid(areaId);//区域ID
 		newInfo.setQq(user.getQq());//qq号
 		newInfo.setBlood(user.getBlood());//血型
@@ -662,7 +662,7 @@ public class CustomerController extends UserController{
 			map.put("result", msg);
 			return AppUtil.returnObject(new PageData(), map);
 		}
-		HjsUsersInfo info = new HjsUsersInfo();
+		AbUsersInfo info = new AbUsersInfo();
 		info.setId(id);
 		if(getUsersInfo().getHeadPic()!=null&&!getUsersInfo().getHeadPic().equals(headPic)){
 			headPic = FastDFSUtil.uploadFilePublic(headPic);//将头像图片从nginx保存到服务器			
@@ -670,7 +670,7 @@ public class CustomerController extends UserController{
 		info.setHeadPic(headPic);
 		usersInfoService.updateUserAvatar(info);//保存地址到数据库
 		//更新session
-		HjsUsersInfo newInfo =getUsersInfo();
+		AbUsersInfo newInfo =getUsersInfo();
 		newInfo.setHeadPic(headPic);
 		request.getSession().removeAttribute(Const.SESSION_USERCUSTOMER);
 		request.getSession().setAttribute(Const.SESSION_USERCUSTOMER,newInfo);
@@ -725,7 +725,7 @@ public class CustomerController extends UserController{
 		}else if(area4!=null){
 			areaId = area4;
 		}
-		HjsUsersAdd usersAdd = new HjsUsersAdd();
+		AbUsersAdd usersAdd = new AbUsersAdd();
 		usersAdd.setAreaid(areaId);//收货区域
 		usersAdd.setCreateTime(new Date());//添加时间
 		usersAdd.setPost(number+"");//邮政编码
@@ -749,7 +749,7 @@ public class CustomerController extends UserController{
 	 */
 	@RequestMapping(value="/detailHF")
 	public String detailHF(ModelMap model){
-		HjsApproveRealname realname = approveRealnameService.getByLoginId(getLoginUser().getId());//通过登录ID获取实名验证信息
+		AbApproveRealname realname = approveRealnameService.getByLoginId(getLoginUser().getId());//通过登录ID获取实名验证信息
 		String rn = "";
 		String cid = "";
 		if(realname!=null){
@@ -777,7 +777,7 @@ public class CustomerController extends UserController{
 	 */
 	@RequestMapping(value = "/validateUsername")
 	public void validateUsername(String username,PrintWriter out){
-		HjsUser nameUser = userService.getByName(username);
+		AbUser nameUser = userService.getByName(username);
 		if(nameUser == null){
 			out.write("success");
 		}else{

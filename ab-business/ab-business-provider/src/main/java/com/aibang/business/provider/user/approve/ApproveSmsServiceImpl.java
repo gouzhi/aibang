@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import com.aibang.business.api.user.approve.ApproveSmsService;
 import com.aibang.business.provider.base.ProviderServiceBase;
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsApproveSms;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.vo.HjsApproveSmsQuery;
+import com.aibang.transfer.model.dto.AbApproveSms;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.vo.AbApproveSmsQuery;
 import com.alibaba.dubbo.rpc.RpcException;
  
  
@@ -21,14 +21,14 @@ import com.alibaba.dubbo.rpc.RpcException;
  
 @Service("approveSmsService")
 @SuppressWarnings({"unchecked"})
-public class ApproveSmsServiceImpl  extends ProviderServiceBase<HjsApproveSms,Integer> implements ApproveSmsService {
+public class ApproveSmsServiceImpl  extends ProviderServiceBase<AbApproveSms,Integer> implements ApproveSmsService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
 		return "HjsApproveSms";
 	}
 	
-	public HjsApproveSms saveOrUpdate(HjsApproveSms entity) {
+	public AbApproveSms saveOrUpdate(AbApproveSms entity) {
 		if(entity.getId() == null) 
 			save(entity);
 		else 
@@ -36,12 +36,12 @@ public class ApproveSmsServiceImpl  extends ProviderServiceBase<HjsApproveSms,In
 		return entity;
 	}
 	@SuppressWarnings({"rawtypes"})
-	public Page findPage(HjsApproveSmsQuery query) {
+	public Page findPage(AbApproveSmsQuery query) {
 		return pageQuery("HjsApproveSms.findPage",query);
 	}
 
 	@Override
-	public HjsApproveSms saveObj(HjsApproveSms model) {
+	public AbApproveSms saveObj(AbApproveSms model) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -52,8 +52,8 @@ public class ApproveSmsServiceImpl  extends ProviderServiceBase<HjsApproveSms,In
 	 * @author zhangyong
 	 * @date 2015年9月8日
 	 */
-    public HjsApproveSms getById(Integer id){
-    	HjsApproveSms hjsApproveSms = null;
+    public AbApproveSms getById(Integer id){
+    	AbApproveSms hjsApproveSms = null;
     	try {
     		hjsApproveSms = super.getById(id);
 		}catch (Exception e) {
@@ -68,10 +68,10 @@ public class ApproveSmsServiceImpl  extends ProviderServiceBase<HjsApproveSms,In
 	 * @author zhangyong
 	 * @date 2015年9月8日
 	 */
-	public void auditSms(HjsApproveSms entity){
+	public void auditSms(AbApproveSms entity){
 		try {
 			super.update(getIbatisMapperNamesapce()+".audit",entity);//修改手机审核状态
-			HjsUser hjsUser = new HjsUser();
+			AbUser hjsUser = new AbUser();
 			hjsUser.setId(entity.getUserId());
 			hjsUser.setPhoneStatus(entity.getStatus());
 			hjsUser.setOptId(entity.getVerifyUserid());
@@ -86,19 +86,19 @@ public class ApproveSmsServiceImpl  extends ProviderServiceBase<HjsApproveSms,In
 	 * @author zhangyong
 	 * @date 2015年9月18日
 	 */
-	public void activateSms(HjsApproveSms entity){
-		HjsApproveSms sms = null;
-		HjsApproveSmsQuery smsQuery = new HjsApproveSmsQuery();
+	public void activateSms(AbApproveSms entity){
+		AbApproveSms sms = null;
+		AbApproveSmsQuery smsQuery = new AbApproveSmsQuery();
 		try {
 			smsQuery.setUserId(entity.getUserId());
-			sms = (HjsApproveSms)findForObject(getIbatisMapperNamesapce()+".getByLoginId", smsQuery);
+			sms = (AbApproveSms)findForObject(getIbatisMapperNamesapce()+".getByLoginId", smsQuery);
 			if(sms!=null&&sms.getId()!=null){
 				entity.setId(sms.getId());
 				super.update(getIbatisMapperNamesapce()+".activate",entity);//修改手机审核状态
 			}else{
 				super.save(entity);
 			}
-			HjsUser hjsUser = new HjsUser();
+			AbUser hjsUser = new AbUser();
 			hjsUser.setId(entity.getUserId());
 			hjsUser.setPhoneStatus(entity.getStatus());
 			hjsUser.setPhone(entity.getPhone());

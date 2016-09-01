@@ -3,8 +3,8 @@ package com.aibang.business.api.user.message;
 import java.util.List;
 
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsUsersMessage;
-import com.aibang.transfer.model.vo.HjsUsersMessageQuery;
+import com.aibang.transfer.model.dto.AbUsersMessage;
+import com.aibang.transfer.model.vo.AbUsersMessageQuery;
  
  
 /** 
@@ -20,12 +20,12 @@ public interface UsersMessageService {
 	/** 
 	 * 创建HjsUsersMessage
 	 **/
-	public HjsUsersMessage saveObj(HjsUsersMessage model);
+	public AbUsersMessage saveObj(AbUsersMessage model);
 	
 	/** 
 	 * 更新HjsUsersMessage
 	 **/	
-    public void update(HjsUsersMessage model);
+    public void update(AbUsersMessage model);
     
 	/** 
 	 * 删除HjsUsersMessage
@@ -35,25 +35,25 @@ public interface UsersMessageService {
     /** 
      * 逻辑删除HjsUsersMessage
      */
-    public void remove(HjsUsersMessage model);
+    public void remove(AbUsersMessage model);
     
 	/** 
 	 * 根据ID得到HjsUsersMessage
 	 **/    
-    public HjsUsersMessage getById(Integer id);
+    public AbUsersMessage getById(Integer id);
     
  
-	public List<HjsUsersMessage> findAll();
+	public List<AbUsersMessage> findAll();
 	
-	public HjsUsersMessage saveOrUpdate(HjsUsersMessage entity);
+	public AbUsersMessage saveOrUpdate(AbUsersMessage entity);
 	 
-	public boolean isUnique(HjsUsersMessage entity, String uniquePropertyNames);
+	public boolean isUnique(AbUsersMessage entity, String uniquePropertyNames);
 	
 	/** 
 	 * 分页查询: HjsUsersMessage
 	 **/      
 	@SuppressWarnings("rawtypes")
-	public Page findPage(HjsUsersMessageQuery query);
+	public Page findPage(AbUsersMessageQuery query);
 
 	/**
 	 * 分页查询已收到的消息（type=2 or type=3）
@@ -63,7 +63,7 @@ public interface UsersMessageService {
 	 * @date 2015年9月22日
 	 */
 	@SuppressWarnings("rawtypes")
-	public Page findNoticesPageByUserId(HjsUsersMessageQuery query);
+	public Page findNoticesPageByUserId(AbUsersMessageQuery query);
 
 	/**
 	 * 执行标记已读

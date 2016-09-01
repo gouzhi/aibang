@@ -8,7 +8,7 @@
         <property name="dataSource" ref="readWriteDataSource"/>
         <property name="configLocation" value="classpath:conf/mybatis-config.xml"></property>
         <!-- mapper扫描 -->
-        <property name="mapperLocations" value="classpath:com/cifex/service/*/*.xml"></property>
+        <property name="mapperLocations" value="classpath:com/aibang/service/*/*.xml"></property>
     </bean>
     
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">

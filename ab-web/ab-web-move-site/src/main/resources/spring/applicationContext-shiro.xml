@@ -33,7 +33,7 @@
 		<property name="filters">  
             <util:map>  
                 <entry key="authc">  
-                    <bean class="com.cifex.web.move.site.interceptor.CustomFormAuthenticationFilter">  
+                    <bean class="com.aibang.web.move.site.interceptor.CustomFormAuthenticationFilter">  
                     </bean>  
                 </entry>  
             </util:map>  
@@ -67,7 +67,7 @@
 	
 	
 	<!-- 項目自定义的Realm -->
-    <bean id="ShiroRealm" class="com.cifex.framework.shiro.ShiroRealm" ></bean>
+    <bean id="ShiroRealm" class="com.aibang.framework.shiro.ShiroRealm" ></bean>
 	    
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />

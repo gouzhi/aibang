@@ -3,8 +3,8 @@ package com.aibang.business.api.user.approve;
 import java.util.List;
 
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsApproveSmsSendlog;
-import com.aibang.transfer.model.vo.HjsApproveSmsSendlogQuery;
+import com.aibang.transfer.model.dto.AbApproveSmsSendlog;
+import com.aibang.transfer.model.vo.AbApproveSmsSendlogQuery;
  
  
 /** 
@@ -20,12 +20,12 @@ public interface ApproveSmsSendlogService {
 	/** 
 	 * 创建HjsApproveSmsSendlog
 	 **/
-	public HjsApproveSmsSendlog saveObj(HjsApproveSmsSendlog model);
+	public AbApproveSmsSendlog saveObj(AbApproveSmsSendlog model);
 	
 	/** 
 	 * 更新HjsApproveSmsSendlog
 	 **/	
-    public void update(HjsApproveSmsSendlog model);
+    public void update(AbApproveSmsSendlog model);
     
 	/** 
 	 * 删除HjsApproveSmsSendlog
@@ -35,23 +35,23 @@ public interface ApproveSmsSendlogService {
     /** 
      * 逻辑删除HjsApproveSmsSendlog
      */
-    public void remove(HjsApproveSmsSendlog model);
+    public void remove(AbApproveSmsSendlog model);
     
 	/** 
 	 * 根据ID得到HjsApproveSmsSendlog
 	 **/    
-    public HjsApproveSmsSendlog getById(Integer id);
+    public AbApproveSmsSendlog getById(Integer id);
     
  
-	public List<HjsApproveSmsSendlog> findAll();
+	public List<AbApproveSmsSendlog> findAll();
 	
-	public HjsApproveSmsSendlog saveOrUpdate(HjsApproveSmsSendlog entity);
+	public AbApproveSmsSendlog saveOrUpdate(AbApproveSmsSendlog entity);
 	 
-	public boolean isUnique(HjsApproveSmsSendlog entity, String uniquePropertyNames);
+	public boolean isUnique(AbApproveSmsSendlog entity, String uniquePropertyNames);
 	
 	/** 
 	 * 分页查询: HjsApproveSmsSendlog
 	 **/      
-	public Page<?> findPage(HjsApproveSmsSendlogQuery query);
+	public Page<?> findPage(AbApproveSmsSendlogQuery query);
 	
 }

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import com.aibang.business.api.user.user.UsersLogService;
 import com.aibang.business.provider.base.ProviderServiceBase;
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsUsersLog;
-import com.aibang.transfer.model.vo.HjsUsersLogQuery;
+import com.aibang.transfer.model.dto.AbUsersLog;
+import com.aibang.transfer.model.vo.AbUsersLogQuery;
 import com.alibaba.dubbo.rpc.RpcException;
  
  
@@ -17,14 +17,14 @@ import com.alibaba.dubbo.rpc.RpcException;
  */
 @Service("usersLogService")
 @SuppressWarnings({"unchecked"})
-public class UsersLogServiceImpl  extends ProviderServiceBase<HjsUsersLog,Integer> implements UsersLogService {
+public class UsersLogServiceImpl  extends ProviderServiceBase<AbUsersLog,Integer> implements UsersLogService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
 		return "HjsUsersLog";
 	}
 	
-	public HjsUsersLog saveOrUpdate(HjsUsersLog entity) {
+	public AbUsersLog saveOrUpdate(AbUsersLog entity) {
 		if(entity.getId() == null) 
 			save(entity);
 		else 
@@ -32,7 +32,7 @@ public class UsersLogServiceImpl  extends ProviderServiceBase<HjsUsersLog,Intege
 		return entity;
 	}
 	@SuppressWarnings({"rawtypes"})
-	public Page findPage(HjsUsersLogQuery query) {
+	public Page findPage(AbUsersLogQuery query) {
 		return pageQuery("HjsUsersLog.findPage",query);
 	}
 
@@ -44,7 +44,7 @@ public class UsersLogServiceImpl  extends ProviderServiceBase<HjsUsersLog,Intege
 	 * @date 2015年9月15日
 	 */
 	@Override
-	public HjsUsersLog saveObj(HjsUsersLog model) {
+	public AbUsersLog saveObj(AbUsersLog model) {
 		try {
 			super.save(model);
 		}catch (Exception e) {

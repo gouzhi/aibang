@@ -2,8 +2,8 @@ package com.aibang.business.api.user.account;
 import java.util.List;
 
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsUserBase;
-import com.aibang.transfer.model.vo.HjsUserBaseQuery;
+import com.aibang.transfer.model.dto.AbUserBase;
+import com.aibang.transfer.model.vo.AbUserBaseQuery;
 
 
  /**
@@ -17,12 +17,12 @@ public interface UserBaseService {
 	/** 
 	 * 创建HjsUserBase
 	 **/
-	public HjsUserBase saveObj(HjsUserBase model);
+	public AbUserBase saveObj(AbUserBase model);
 	
 	/** 
 	 * 更新HjsUserBase
 	 **/	
-    public void update(HjsUserBase model);
+    public void update(AbUserBase model);
     
 	/** 
 	 * 删除HjsUserBase
@@ -32,24 +32,24 @@ public interface UserBaseService {
     /** 
      * 逻辑删除HjsUserBase
      */
-    public void remove(HjsUserBase model);
+    public void remove(AbUserBase model);
     
 	/** 
 	 * 根据ID得到HjsUserBase
 	 **/    
-    public HjsUserBase getById(Integer id);
+    public AbUserBase getById(Integer id);
     
  
-	public List<HjsUserBase> findAll();
+	public List<AbUserBase> findAll();
 	
-	public HjsUserBase saveOrUpdate(HjsUserBase entity);
+	public AbUserBase saveOrUpdate(AbUserBase entity);
 	 
-	public boolean isUnique(HjsUserBase entity, String uniquePropertyNames);
+	public boolean isUnique(AbUserBase entity, String uniquePropertyNames);
 	
 	/** 
 	 * 分页查询: HjsUserBase
 	 **/      
-	public Page<?> findPage(HjsUserBaseQuery query);
+	public Page<?> findPage(AbUserBaseQuery query);
 
 	/**
 	 * 获取冻结与余额的总和
@@ -60,7 +60,7 @@ public interface UserBaseService {
 	 * @author liuj
 	 * @date 2015年8月26日
 	 */
-	public Object findTotalBalance(HjsUserBaseQuery query);
+	public Object findTotalBalance(AbUserBaseQuery query);
 
 	/**
 	 * 获取用户账户详细信息
@@ -71,14 +71,14 @@ public interface UserBaseService {
 	 * @author liuj
 	 * @date 2015年8月26日
 	 */
-	public Object findUserDetailById(HjsUserBaseQuery query);
+	public Object findUserDetailById(AbUserBaseQuery query);
 	/**
 	 * 前台修改账户支付密码
 	 * @param entity void
 	 * @author zhangyong
 	 * @date 2015年9月21日
 	 */
-	public void editUserBase(HjsUserBase entity);
+	public void editUserBase(AbUserBase entity);
 	/**
 	 * 判断是否存在支付密码 true 已设置支付密码 false 未设置支付密码
 	 * @param id 用户BASE表ID

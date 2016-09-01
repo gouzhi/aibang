@@ -24,8 +24,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.aibang.business.api.system.approve.HjsApproveRealnameService;
-import com.aibang.business.api.system.user.HjsUsersInfoService;
+import com.aibang.business.api.system.approve.AbApproveRealnameService;
+import com.aibang.business.api.system.user.AbUsersInfoService;
 import com.aibang.framework.activemq.SendMessage;
 import com.aibang.framework.utils.BankName;
 import com.aibang.framework.utils.Const;
@@ -33,18 +33,18 @@ import com.aibang.framework.utils.JSONUtils;
 import com.aibang.framework.utils.ip.Utils;
 import com.aibang.framework.utils.page.Page;
 import com.aibang.framework.utils.validate.ValidateUtils;
-import com.aibang.transfer.model.dto.HjsApproveRealname;
-import com.aibang.transfer.model.dto.HjsUsersInfo;
-import com.aibang.transfer.model.vo.HjsUsersInfoQuery;
+import com.aibang.transfer.model.dto.AbApproveRealname;
+import com.aibang.transfer.model.dto.AbUsersInfo;
+import com.aibang.transfer.model.vo.AbUsersInfoQuery;
 import com.aibang.web.admin.operation.base.AdminController;
 
 @Controller
 @RequestMapping(value="/usersInfo")
 public class HjsUsersInfoController extends AdminController {
 	@Resource(name="hjsUsersInfoService")
-	HjsUsersInfoService hjsUsersInfoService;
+	AbUsersInfoService hjsUsersInfoService;
 	@Resource(name="hjsApproveRealnameService")
-	HjsApproveRealnameService hjsApproveRealnameService;
+	AbApproveRealnameService hjsApproveRealnameService;
 	@Autowired
     private Destination queueDestinationRegist;
     @Autowired
@@ -63,7 +63,7 @@ public class HjsUsersInfoController extends AdminController {
 	 */
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="/listU")
-	public String listUsersInfo(ModelMap model,HjsUsersInfoQuery userInfo){
+	public String listUsersInfo(ModelMap model,AbUsersInfoQuery userInfo){
 
 		userInfo.setSortColumns("u.CREATE_TIME DESC");
 		Page pd = hjsUsersInfoService.getUsersInfo(userInfo);
@@ -74,7 +74,7 @@ public class HjsUsersInfoController extends AdminController {
 		if(pd.getResult()!=null&&pd.getResult().size()>0){
 			List infoList=pd.getResult();
 			for(int i=0;i<infoList.size();i++){
-				HjsUsersInfo ui = (HjsUsersInfo)infoList.get(i);
+				AbUsersInfo ui = (AbUsersInfo)infoList.get(i);
 			}			
 		}
 		Integer status = 0;
@@ -112,7 +112,7 @@ public class HjsUsersInfoController extends AdminController {
 	 * @date 2015年9月1日
 	 */
 	@RequestMapping(value="/add")
-	public String add(ModelMap model,HjsUsersInfo usersInfo,HttpServletRequest request,HttpServletResponse response){
+	public String add(ModelMap model,AbUsersInfo usersInfo,HttpServletRequest request,HttpServletResponse response){
 		//数据入库验证
 		if (ValidateUtils.isStringEmpty(usersInfo.getHjsUser().getUsername())){
 			error("请填写用户登录名", request, response);
@@ -179,7 +179,7 @@ public class HjsUsersInfoController extends AdminController {
 	 * @date 2015年9月1日
 	 */
 	@RequestMapping(value="/toEdit")
-	public String toEdit(ModelMap model,HjsUsersInfoQuery usersInfoQuery){
+	public String toEdit(ModelMap model,AbUsersInfoQuery usersInfoQuery){
 		model.addAttribute("pd",hjsUsersInfoService.getEditUsersInfo(usersInfoQuery));
 		return display("usersInfo_edit");
 	}
@@ -194,15 +194,15 @@ public class HjsUsersInfoController extends AdminController {
 	 * @date 2015年9月1日
 	 */
 	@RequestMapping(value="/edit")
-	public String Edit(ModelMap model,HjsUsersInfo usersInfo,HttpServletRequest request,HttpServletResponse response){
+	public String Edit(ModelMap model,AbUsersInfo usersInfo,HttpServletRequest request,HttpServletResponse response){
 		//入库验证
 		if (ValidateUtils.isStringEmpty(usersInfo.getHjsUser().getUsername())){
 			error("请填写用户登录名", request, response);
 			return null;
 		}
-		HjsUsersInfoQuery usersInfoQuery = new HjsUsersInfoQuery();
+		AbUsersInfoQuery usersInfoQuery = new AbUsersInfoQuery();
 		usersInfoQuery.setId(usersInfo.getId());
-		HjsUsersInfo editUsersInfo = hjsUsersInfoService.getEditUsersInfo(usersInfoQuery);
+		AbUsersInfo editUsersInfo = hjsUsersInfoService.getEditUsersInfo(usersInfoQuery);
 		//用户登录信息设置
 		editUsersInfo.getHjsUser().setUsername(usersInfo.getHjsUser().getUsername());
 		if(usersInfo.getHjsUser().getPassword()!=null&&!usersInfo.getHjsUser().getPassword().equals("")){			
@@ -231,9 +231,9 @@ public class HjsUsersInfoController extends AdminController {
 	 * @date 2015年9月1日
 	 */
 	@RequestMapping(value="/detail")
-	public String detailUsersInfo(ModelMap model,HjsUsersInfoQuery usersInfoQuery){
-		HjsUsersInfo usersInfo = hjsUsersInfoService.getEditUsersInfo(usersInfoQuery);//账户信息
-		HjsApproveRealname realName = hjsApproveRealnameService.getByLoginId(usersInfo.getLoginId());//实名信息
+	public String detailUsersInfo(ModelMap model,AbUsersInfoQuery usersInfoQuery){
+		AbUsersInfo usersInfo = hjsUsersInfoService.getEditUsersInfo(usersInfoQuery);//账户信息
+		AbApproveRealname realName = hjsApproveRealnameService.getByLoginId(usersInfo.getLoginId());//实名信息
 		
 		//判断是否绑定银行
 		if(!ValidateUtils.isStringEmpty(usersInfo.getHjsUser().getNrpUsrId())){

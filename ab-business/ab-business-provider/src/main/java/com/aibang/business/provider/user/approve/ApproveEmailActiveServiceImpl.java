@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aibang.business.api.user.approve.ApproveEmailActiveService;
 import com.aibang.business.provider.base.ProviderServiceBase;
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsApproveEmailActive;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.vo.HjsApproveEmailActiveQuery;
+import com.aibang.transfer.model.dto.AbApproveEmailActive;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.vo.AbApproveEmailActiveQuery;
 import com.alibaba.dubbo.rpc.RpcException;
  
  
@@ -24,14 +24,14 @@ import com.alibaba.dubbo.rpc.RpcException;
  
 @Service("approveEmailActiveService")
 @SuppressWarnings({"unchecked"})
-public class ApproveEmailActiveServiceImpl  extends ProviderServiceBase<HjsApproveEmailActive,Integer> implements ApproveEmailActiveService {
+public class ApproveEmailActiveServiceImpl  extends ProviderServiceBase<AbApproveEmailActive,Integer> implements ApproveEmailActiveService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
 		return "HjsApproveEmailActive";
 	}
 	
-	public HjsApproveEmailActive saveOrUpdate(HjsApproveEmailActive entity) {
+	public AbApproveEmailActive saveOrUpdate(AbApproveEmailActive entity) {
 		if(entity.getId() == null) 
 			save(entity);
 		else 
@@ -39,12 +39,12 @@ public class ApproveEmailActiveServiceImpl  extends ProviderServiceBase<HjsAppro
 		return entity;
 	}
 	@SuppressWarnings({"rawtypes"})
-	public Page findPage(HjsApproveEmailActiveQuery query) {
+	public Page findPage(AbApproveEmailActiveQuery query) {
 		return pageQuery("HjsApproveEmailActive.findPage",query);
 	}
 
 	@Override
-	public HjsApproveEmailActive saveObj(HjsApproveEmailActive model) {
+	public AbApproveEmailActive saveObj(AbApproveEmailActive model) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -55,8 +55,8 @@ public class ApproveEmailActiveServiceImpl  extends ProviderServiceBase<HjsAppro
 	 * @author zhangyong
 	 * @date 2015年9月8日
 	 */
-    public HjsApproveEmailActive getById(Integer id){
-    	HjsApproveEmailActive hjsApproveRealname = null;
+    public AbApproveEmailActive getById(Integer id){
+    	AbApproveEmailActive hjsApproveRealname = null;
     	try {
     		hjsApproveRealname = super.getById(id);
 		}catch (Exception e) {
@@ -71,9 +71,9 @@ public class ApproveEmailActiveServiceImpl  extends ProviderServiceBase<HjsAppro
 	 * @date 2015年9月8日
 	 */
     @Transactional
-	public void activateEmail(HjsApproveEmailActive entity){
+	public void activateEmail(AbApproveEmailActive entity){
 		try {
-			HjsApproveEmailActive approveEmailActive = (HjsApproveEmailActive)super.findForObject(getIbatisMapperNamesapce()+".getByLoginId",entity.getUserId());
+			AbApproveEmailActive approveEmailActive = (AbApproveEmailActive)super.findForObject(getIbatisMapperNamesapce()+".getByLoginId",entity.getUserId());
 			//判断邮件验证表是否有记录，没有的话记录一条，有的话修改验证状态
 			if(approveEmailActive!=null&&approveEmailActive.getId()!=null){
 				entity.setId(approveEmailActive.getId());
@@ -87,7 +87,7 @@ public class ApproveEmailActiveServiceImpl  extends ProviderServiceBase<HjsAppro
 				super.save(entity);
 			}
 			//修改用户表相关
-			HjsUser hjsUser = new HjsUser();
+			AbUser hjsUser = new AbUser();
 			hjsUser.setId(entity.getUserId());
 			hjsUser.setEmail(entity.getEmail());
 			hjsUser.setEmailStatus(1);
@@ -103,10 +103,10 @@ public class ApproveEmailActiveServiceImpl  extends ProviderServiceBase<HjsAppro
 	 * @date 2015年9月8日
 	 */
     @Transactional
-	public void auditEmail(HjsApproveEmailActive entity){
+	public void auditEmail(AbApproveEmailActive entity){
 		try {
 			super.update(getIbatisMapperNamesapce()+".audit",entity);//修改邮件表审核状态
-			HjsUser hjsUser = new HjsUser();
+			AbUser hjsUser = new AbUser();
 			hjsUser.setId(entity.getUserId());
 			hjsUser.setEmailStatus(entity.getStatus());
 			hjsUser.setOptId(entity.getVerifyUserid());

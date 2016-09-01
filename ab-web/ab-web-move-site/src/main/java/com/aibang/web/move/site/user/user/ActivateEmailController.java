@@ -22,9 +22,9 @@ import com.aibang.framework.utils.DateUtils;
 import com.aibang.framework.utils.MD5;
 import com.aibang.framework.utils.ip.Utils;
 import com.aibang.framework.utils.validate.ValidateUtils;
-import com.aibang.transfer.model.dto.HjsApproveEmailActive;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.dto.HjsUsersInfo;
+import com.aibang.transfer.model.dto.AbApproveEmailActive;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.dto.AbUsersInfo;
 
 /**
  * 会员相关操作
@@ -66,7 +66,7 @@ public class ActivateEmailController extends com.aibang.web.move.site.base.UserC
 		Date nDate = DateUtils.fomatDate(DateUtils.getTime());
 		Long datesub = DateUtils.getHourSub(infos[2],DateUtils.getTime());
 		DateUtils.compareDate(vDate, nDate);
-		HjsUser user = userService.getByUsername(infos[0]);
+		AbUser user = userService.getByUsername(infos[0]);
 		//用户不存在及邮件失效处理
 		if(user==null){
 			return "用户不存在，验证失败";
@@ -78,7 +78,7 @@ public class ActivateEmailController extends com.aibang.web.move.site.base.UserC
 			return "邮箱认证失败";
 		}
 		//验证成功，修改相关激活状态
-		HjsApproveEmailActive hjsApproveEmailActive = new HjsApproveEmailActive();
+		AbApproveEmailActive hjsApproveEmailActive = new AbApproveEmailActive();
 		hjsApproveEmailActive.setUserId(user.getId());
 		hjsApproveEmailActive.setEmail(user.getEmail());
 		hjsApproveEmailActive.setCreateIp(Utils.getCdnIpAddr(request));
@@ -88,7 +88,7 @@ public class ActivateEmailController extends com.aibang.web.move.site.base.UserC
 		Subject currentUser = SecurityUtils.getSubject();
 		Session session = currentUser.getSession();
 		session.setAttribute(Const.SESSION_USER, user);
-		HjsUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(user.getId());
+		AbUsersInfo usersInfo = usersInfoService.getUsersInfoByLoginId(user.getId());
 		session.setAttribute(Const.SESSION_USERCUSTOMER, usersInfo);
 		request.setAttribute("msg", "恭喜您已成功验证电子邮箱！");
 		return "redirect:/user/center/accountall "; 

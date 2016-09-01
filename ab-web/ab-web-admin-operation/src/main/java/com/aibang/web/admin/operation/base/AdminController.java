@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 import com.aibang.framework.utils.Const;
 import com.aibang.framework.web.controller.BaseController;
-import com.aibang.transfer.model.dto.HjsUser;
+import com.aibang.transfer.model.dto.AbUser;
 
 
 
@@ -35,8 +35,8 @@ public class AdminController extends BaseController {
 	 * @author zeng.fangfang
 	 * @date 2015年8月28日
 	 */
-	public HjsUser getLoginUser(){
-	   return (HjsUser)SecurityUtils.getSubject().getSession().getAttribute(Const.SESSION_USER);
+	public AbUser getLoginUser(){
+	   return (AbUser)SecurityUtils.getSubject().getSession().getAttribute(Const.SESSION_USER);
 	}
 	/**
 	 * 获取Session

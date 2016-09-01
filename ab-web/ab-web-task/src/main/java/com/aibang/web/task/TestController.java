@@ -1,7 +1,7 @@
 package com.aibang.web.task;
 
-import com.aibang.business.api.system.user.HjsUserService;
-import com.aibang.transfer.model.dto.HjsUser;
+import com.aibang.business.api.system.user.AbUserService;
+import com.aibang.transfer.model.dto.AbUser;
 import com.aibang.web.task.util.SpringContextUtil;
 
 import org.springframework.stereotype.Controller;
@@ -23,13 +23,13 @@ public class TestController {
 //    @Reference(interfaceClass=UserService.class,interfaceName="com.cifex.business.api.system.user.UserService")
 //    private UserService userService2;
 
-    private HjsUserService userService = (HjsUserService) SpringContextUtil.getBean("userService");
+    private AbUserService userService = (AbUserService) SpringContextUtil.getBean("userService");
     @SuppressWarnings("unused")
-	private HjsUserService userService2 = (HjsUserService) SpringContextUtil.getBean("userService");
+	private AbUserService userService2 = (AbUserService) SpringContextUtil.getBean("userService");
 
     @RequestMapping(value="/addtest")
     public String addtest()throws Exception{
-        HjsUser user = new HjsUser();
+        AbUser user = new AbUser();
         user.setUsername("ttt111");
         user.setPassword("ttt111");
         user.setCreateIp("111");

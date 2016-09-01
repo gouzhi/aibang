@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aibang.business.api.user.approve.ApproveRealnameService;
 import com.aibang.business.provider.base.ProviderServiceBase;
 import com.aibang.framework.utils.page.Page;
-import com.aibang.transfer.model.dto.HjsApproveRealname;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.vo.HjsApproveRealnameQuery;
+import com.aibang.transfer.model.dto.AbApproveRealname;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.vo.AbApproveRealnameQuery;
 import com.alibaba.dubbo.rpc.RpcException;
  
  
@@ -24,14 +24,14 @@ import com.alibaba.dubbo.rpc.RpcException;
  
 @Service("approveRealnameService")
 @SuppressWarnings({"unchecked"})
-public class ApproveRealnameServiceImpl  extends ProviderServiceBase<HjsApproveRealname,Integer> implements ApproveRealnameService {
+public class ApproveRealnameServiceImpl  extends ProviderServiceBase<AbApproveRealname,Integer> implements ApproveRealnameService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
 		return "HjsApproveRealname";
 	}
 	
-	public HjsApproveRealname saveOrUpdate(HjsApproveRealname entity) {
+	public AbApproveRealname saveOrUpdate(AbApproveRealname entity) {
 		if(entity.getId() == null) 
 			save(entity);
 		else 
@@ -39,12 +39,12 @@ public class ApproveRealnameServiceImpl  extends ProviderServiceBase<HjsApproveR
 		return entity;
 	}
 	@SuppressWarnings({"rawtypes"})
-	public Page findPage(HjsApproveRealnameQuery query) {
+	public Page findPage(AbApproveRealnameQuery query) {
 		return pageQuery("HjsApproveRealname.findPage",query);
 	}
 
 	@Override
-	public HjsApproveRealname saveObj(HjsApproveRealname model) {
+	public AbApproveRealname saveObj(AbApproveRealname model) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -55,8 +55,8 @@ public class ApproveRealnameServiceImpl  extends ProviderServiceBase<HjsApproveR
 	 * @author zhangyong
 	 * @date 2015年9月8日
 	 */
-	public HjsApproveRealname getById(Integer id){
-		HjsApproveRealname hjsApproveRealname = null;
+	public AbApproveRealname getById(Integer id){
+		AbApproveRealname hjsApproveRealname = null;
 		try {
 			hjsApproveRealname = super.getById(id);
 		}catch (Exception e) {
@@ -71,10 +71,10 @@ public class ApproveRealnameServiceImpl  extends ProviderServiceBase<HjsApproveR
 	 * @date 2015年9月8日
 	 */
 	@Transactional
-	public void AuditRealName(HjsApproveRealname entity){
+	public void AuditRealName(AbApproveRealname entity){
 		try {
 			update(this.getIbatisMapperNamesapce()+".audit", entity);//修改实名审核信息
-			HjsUser hjsUser = new HjsUser();
+			AbUser hjsUser = new AbUser();
 			hjsUser.setId(entity.getUserId());
 			hjsUser.setRealNameStatus(entity.getStatus());
 			hjsUser.setOptId(entity.getVerifyUserid());
@@ -91,12 +91,12 @@ public class ApproveRealnameServiceImpl  extends ProviderServiceBase<HjsApproveR
 	 * @author zhangyong
 	 * @date 2015年9月11日
 	 */
-	public HjsApproveRealname getByLoginId(Integer id){
-		HjsApproveRealname hjsApproveRealname = null;
-		HjsApproveRealnameQuery hjsApproveRealnameQuery = new HjsApproveRealnameQuery();
+	public AbApproveRealname getByLoginId(Integer id){
+		AbApproveRealname hjsApproveRealname = null;
+		AbApproveRealnameQuery hjsApproveRealnameQuery = new AbApproveRealnameQuery();
 		hjsApproveRealnameQuery.setUserId(id);
 		try {
-			hjsApproveRealname = (HjsApproveRealname)findForObject(getIbatisMapperNamesapce()+".getByLoginId", hjsApproveRealnameQuery);
+			hjsApproveRealname = (AbApproveRealname)findForObject(getIbatisMapperNamesapce()+".getByLoginId", hjsApproveRealnameQuery);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过登录ID获得实名信息错误",e.getCause());
 		}
@@ -110,17 +110,17 @@ public class ApproveRealnameServiceImpl  extends ProviderServiceBase<HjsApproveR
 	 * @date 2015年9月21日
 	 */
 	@Transactional
-	public void activateRealName(HjsApproveRealname entity){
-		HjsApproveRealname hjsApproveRealname = null;
-		HjsApproveRealnameQuery hjsApproveRealnameQuery = new HjsApproveRealnameQuery();
-		HjsUser user =new HjsUser();
+	public void activateRealName(AbApproveRealname entity){
+		AbApproveRealname hjsApproveRealname = null;
+		AbApproveRealnameQuery hjsApproveRealnameQuery = new AbApproveRealnameQuery();
+		AbUser user =new AbUser();
 		user.setId(entity.getUserId());
 		user.setRealName(entity.getRealname());
 		user.setRealNameStatus(1);
 		try {
 			
 			hjsApproveRealnameQuery.setUserId(entity.getUserId());
-			hjsApproveRealname = (HjsApproveRealname)findForObject(getIbatisMapperNamesapce()+".getByLoginId", hjsApproveRealnameQuery);
+			hjsApproveRealname = (AbApproveRealname)findForObject(getIbatisMapperNamesapce()+".getByLoginId", hjsApproveRealnameQuery);
 			if(hjsApproveRealname!=null&&hjsApproveRealname.getId()!=null){
 				entity.setId(hjsApproveRealname.getId());
 				update(getIbatisMapperNamesapce()+".activate",entity);
@@ -141,12 +141,12 @@ public class ApproveRealnameServiceImpl  extends ProviderServiceBase<HjsApproveR
 	 * @date 2015年9月21日
 	 */
 	public boolean hasRealName(Integer loginId){
-		HjsApproveRealname hjsApproveRealname = null;
-		HjsApproveRealnameQuery hjsApproveRealnameQuery = new HjsApproveRealnameQuery();
+		AbApproveRealname hjsApproveRealname = null;
+		AbApproveRealnameQuery hjsApproveRealnameQuery = new AbApproveRealnameQuery();
 		boolean res = false;
 		hjsApproveRealnameQuery.setUserId(loginId);
 		try {
-			hjsApproveRealname = (HjsApproveRealname)findForObject(getIbatisMapperNamesapce()+".getByLoginId", hjsApproveRealnameQuery);
+			hjsApproveRealname = (AbApproveRealname)findForObject(getIbatisMapperNamesapce()+".getByLoginId", hjsApproveRealnameQuery);
 			if(hjsApproveRealname!=null&&hjsApproveRealname.getStatus()==1&&hjsApproveRealname.getCardId()!=null){
 				res = true;
 			}
@@ -164,12 +164,12 @@ public class ApproveRealnameServiceImpl  extends ProviderServiceBase<HjsApproveR
 	 * @date 2015年11月10日
 	 */
 	public boolean hasCardId(String cardId){
-		List<HjsApproveRealname> hjsApproveRealname = null;
-		HjsApproveRealnameQuery hjsApproveRealnameQuery = new HjsApproveRealnameQuery();
+		List<AbApproveRealname> hjsApproveRealname = null;
+		AbApproveRealnameQuery hjsApproveRealnameQuery = new AbApproveRealnameQuery();
 		boolean res = false;
 		hjsApproveRealnameQuery.setCardId(cardId);
 		try {
-			hjsApproveRealname = (List<HjsApproveRealname>)findForList(getIbatisMapperNamesapce()+".getByCardId", hjsApproveRealnameQuery);
+			hjsApproveRealname = (List<AbApproveRealname>)findForList(getIbatisMapperNamesapce()+".getByCardId", hjsApproveRealnameQuery);
 			if(hjsApproveRealname!=null&&hjsApproveRealname.size()>0){
 				res = true;
 			}

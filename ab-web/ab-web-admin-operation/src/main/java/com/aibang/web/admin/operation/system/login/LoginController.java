@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.aibang.business.api.system.menu.HjsSysMenuService;
-import com.aibang.business.api.system.user.HjsUserService;
-import com.aibang.business.api.system.user.HjsUsersOptLogService;
-import com.aibang.business.api.system.user.HjsUsersOptService;
+import com.aibang.business.api.system.menu.AbSysMenuService;
+import com.aibang.business.api.system.user.AbUserService;
+import com.aibang.business.api.system.user.AbUsersOptLogService;
+import com.aibang.business.api.system.user.AbUsersOptService;
 import com.aibang.framework.utils.AppUtil;
 import com.aibang.framework.utils.Const;
 import com.aibang.framework.utils.DateUtils;
@@ -31,13 +31,13 @@ import com.aibang.framework.utils.PageData;
 import com.aibang.framework.utils.RightsHelper;
 import com.aibang.framework.utils.Tools;
 import com.aibang.framework.utils.ip.Utils;
-import com.aibang.transfer.model.dto.HjsSysMenu;
-import com.aibang.transfer.model.dto.HjsSysRole;
-import com.aibang.transfer.model.dto.HjsUser;
-import com.aibang.transfer.model.dto.HjsUsersOpt;
-import com.aibang.transfer.model.dto.HjsUsersOptLog;
-import com.aibang.transfer.model.vo.HjsSysRoleQuery;
-import com.aibang.transfer.model.vo.HjsUserQuery;
+import com.aibang.transfer.model.dto.AbSysMenu;
+import com.aibang.transfer.model.dto.AbSysRole;
+import com.aibang.transfer.model.dto.AbUser;
+import com.aibang.transfer.model.dto.AbUsersOpt;
+import com.aibang.transfer.model.dto.AbUsersOptLog;
+import com.aibang.transfer.model.vo.AbSysRoleQuery;
+import com.aibang.transfer.model.vo.AbUserQuery;
 import com.aibang.web.admin.operation.base.AdminController;
 
 /**
@@ -51,13 +51,13 @@ import com.aibang.web.admin.operation.base.AdminController;
 public class LoginController extends AdminController {
 
 	@Resource(name = "hjsUserService")
-	private HjsUserService hjsUserService;
+	private AbUserService hjsUserService;
 	@Resource(name = "hjsSysMenuService")
-	private HjsSysMenuService hjsSysMenuService;
+	private AbSysMenuService hjsSysMenuService;
 	@Resource(name = "hjsUsersOptLogService")
-	private HjsUsersOptLogService hjsUsersOptLogService;
+	private AbUsersOptLogService hjsUsersOptLogService;
 	@Resource(name = "hjsUsersOptService")
-	private HjsUsersOptService hjsUsersOptService;
+	private AbUsersOptService hjsUsersOptService;
 
 	/**
 	 * 
@@ -116,10 +116,10 @@ public class LoginController extends AdminController {
 					String passwd = new SimpleHash("SHA-1", USERNAME, PASSWORD)
 							.toString(); // 密码加密
 					pd.put("PASSWORD", passwd);
-					HjsUserQuery query = new HjsUserQuery();
+					AbUserQuery query = new AbUserQuery();
 					query.setUsername(USERNAME);
 					query.setPassword(passwd);
-					HjsUser u = hjsUserService.getSysUserByNameAndPwd(query);
+					AbUser u = hjsUserService.getSysUserByNameAndPwd(query);
 					if (u != null) {
 						
 						
@@ -132,14 +132,14 @@ public class LoginController extends AdminController {
 							currentUser.getSession().stop();
 							Session session = currentUser.getSession();
 							currentUser.login(token);
-							HjsUsersOpt usersOpt = hjsUsersOptService.getUsersOptByLoginId(u.getId());
+							AbUsersOpt usersOpt = hjsUsersOptService.getUsersOptByLoginId(u.getId());
 							session.setAttribute(Const.SESSION_USEROPT,usersOpt);
 							session.setAttribute(Const.SESSION_USER, u);
 							session.removeAttribute(Const.SESSION_SECURITY_CODE);
 						} catch (AuthenticationException e) {
 							errInfo = "身份验证失败！";
 						} 
-						HjsUsersOptLog userOptLog = new HjsUsersOptLog();
+						AbUsersOptLog userOptLog = new AbUsersOptLog();
 						userOptLog.setContent("登陆");
 						userOptLog.setResult(1);
 						userOptLog.setUserId(u.getId());
@@ -185,19 +185,19 @@ public class LoginController extends AdminController {
 			// shiro管理的session
 			Subject currentUser = SecurityUtils.getSubject();
 			Session session = currentUser.getSession();
-			HjsUser user = (HjsUser) session.getAttribute(Const.SESSION_USER);
+			AbUser user = (AbUser) session.getAttribute(Const.SESSION_USER);
 			if (user != null) {
 
-				List<HjsSysRole> role = user.getRoles();
+				List<AbSysRole> role = user.getRoles();
 				// 避免每次拦截用户操作时查询数据库，以下将用户所属角色权限、用户权限限都存入session
 				session.setAttribute(Const.SESSION_USERNAME, user.getUsername()); // 放入用户名
-				List<HjsSysMenu> allmenuList = new ArrayList<HjsSysMenu>();
+				List<AbSysMenu> allmenuList = new ArrayList<AbSysMenu>();
 				if (null == session.getAttribute(Const.SESSION_allmenuList)) {
 					allmenuList = hjsSysMenuService.findAll();
 
 					if (role != null && role.size() > 0) {
-						for (HjsSysMenu menu : allmenuList) {
-							for (HjsSysRole rr : role) {
+						for (AbSysMenu menu : allmenuList) {
+							for (AbSysRole rr : role) {
 								if (RightsHelper.testRights(rr.getMenuRights(),
 										menu.getId())) {
 									menu.setHasMenu(true);
@@ -205,12 +205,12 @@ public class LoginController extends AdminController {
 								}
 							}
 							if (menu.isHasMenu()) {
-								List<HjsSysMenu> subMenuList = menu
+								List<AbSysMenu> subMenuList = menu
 										.getSubMenu();
 								if (subMenuList != null
 										&& subMenuList.size() > 0) {
-									for (HjsSysMenu sub : subMenuList) {
-										for (HjsSysRole rr : role) {
+									for (AbSysMenu sub : subMenuList) {
+										for (AbSysRole rr : role) {
 											if (RightsHelper.testRights(
 													rr.getMenuRights(),
 													sub.getId())) {
@@ -218,12 +218,12 @@ public class LoginController extends AdminController {
 												break;
 											}
 										}
-										List<HjsSysMenu> subMenuList3 = sub
+										List<AbSysMenu> subMenuList3 = sub
 												.getSubMenu();
 										if (subMenuList3 != null
 												&& subMenuList3.size() > 0) {
-											for (HjsSysMenu subMenu3 : subMenuList3) {
-												for (HjsSysRole rr : role) {
+											for (AbSysMenu subMenu3 : subMenuList3) {
+												for (AbSysRole rr : role) {
 													if (RightsHelper
 															.testRights(
 																	rr.getMenuRights(),
@@ -242,22 +242,22 @@ public class LoginController extends AdminController {
 					}
 					session.setAttribute(Const.SESSION_allmenuList, allmenuList); // 菜单权限放入session中
 				} else {
-					allmenuList = (List<HjsSysMenu>) session
+					allmenuList = (List<AbSysMenu>) session
 							.getAttribute(Const.SESSION_allmenuList);
 				}
 
 				// 切换菜单=====
-				List<HjsSysMenu> menuList = new ArrayList<HjsSysMenu>();
+				List<AbSysMenu> menuList = new ArrayList<AbSysMenu>();
 				// if(null == session.getAttribute(Const.SESSION_menuList) ||
 				// ("yes".equals(pd.getString("changeMenu")))){
 				// if(null == session.getAttribute(Const.SESSION_menuList) ||
 				// ("yes".equals(changeMenu))){
-				List<HjsSysMenu> menuList1 = new ArrayList<HjsSysMenu>();
-				List<HjsSysMenu> menuList2 = new ArrayList<HjsSysMenu>();
+				List<AbSysMenu> menuList1 = new ArrayList<AbSysMenu>();
+				List<AbSysMenu> menuList2 = new ArrayList<AbSysMenu>();
 
 				// 拆分菜单
 				for (int i = 0; i < allmenuList.size(); i++) {
-					HjsSysMenu menu = allmenuList.get(i);
+					AbSysMenu menu = allmenuList.get(i);
 					if (menu.getTypeId().intValue() == 1) {
 						menuList1.add(menu);
 					} else {
@@ -372,9 +372,9 @@ public class LoginController extends AdminController {
 			String USERNAME = session.getAttribute(Const.SESSION_USERNAME)
 					.toString();
 			pd.put(Const.SESSION_USERNAME, USERNAME);
-			HjsUserQuery u = new HjsUserQuery();
+			AbUserQuery u = new AbUserQuery();
 			u.setUsername(USERNAME);
-			List<HjsSysRole> roles = ((HjsUser) session
+			List<AbSysRole> roles = ((AbUser) session
 					.getAttribute(Const.SESSION_USER)).getRoles();
 
 			int finall_FX_QX = 0;
@@ -399,9 +399,9 @@ public class LoginController extends AdminController {
 			String finall_edit = "";
 			String finall_chas = "";
 			String finall_audit = "";
-			HjsSysRoleQuery srq = new HjsSysRoleQuery();
+			AbSysRoleQuery srq = new AbSysRoleQuery();
 			int i = 1;
-			for (HjsSysRole role : roles) {
+			for (AbSysRole role : roles) {
 				srq.setId(role.getId());
 				finall_FX_QX = finall_FX_QX | role.getFxQx();
 				finall_FW_QX = finall_FW_QX | role.getFwQx();
