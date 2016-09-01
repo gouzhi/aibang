@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsApproveSmsSendlog">
+<mapper namespace="AbApproveSmsSendlog">
 
-	<resultMap id="RM_HjsApproveSmsSendlog" type="com.cifex.transfer.model.dto.HjsApproveSmsSendlog">
+	<resultMap id="RM_AbApproveSmsSendlog" type="com.aibang.transfer.model.dto.AbApproveSmsSendlog">
         <result property="id" column="ID"/>
         <result property="typeId" column="TYPE_ID"/>
         <result property="userId" column="USER_ID"/>
@@ -21,22 +21,22 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsApproveSmsSendlog.columns">
+	<sql id="AbApproveSmsSendlog.columns">
 	    <![CDATA[
 		ID,TYPE_ID,USER_ID,PHONE,CONTENTS,STATUS,SEND_RETURN,SEND_TIME,CREATE_TIME,CREATE_IP
 	    ]]>
 	</sql>
 
-    <sql id="HjsApproveSmsSendlog.tbcolumns">
+    <sql id="AbApproveSmsSendlog.tbcolumns">
 	    <![CDATA[
 		tb.ID,tb.TYPE_ID,tb.USER_ID,tb.PHONE,tb.CONTENTS,tb.STATUS,tb.SEND_RETURN,tb.SEND_TIME,tb.CREATE_TIME,tb.CREATE_IP
 	    ]]>
 	</sql>
 	
 	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
-	<insert id="HjsApproveSmsSendlog.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbApproveSmsSendlog.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_approve_sms_sendlog (
+        INSERT INTO ab_approve_sms_sendlog (
         	ID ,
         	TYPE_ID ,
         	USER_ID ,
@@ -69,9 +69,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		-->
 	</insert>
     
-	<update id="HjsApproveSmsSendlog.update" >
+	<update id="AbApproveSmsSendlog.update" >
     <![CDATA[
-        UPDATE hjs_approve_sms_sendlog SET
+        UPDATE ab_approve_sms_sendlog SET
 	        TYPE_ID = #{typeId} ,
 	        USER_ID = #{userId} ,
 	        PHONE = #{phone} ,
@@ -89,9 +89,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
    
 	
-    <update id="HjsApproveSmsSendlog.remove">
+    <update id="AbApproveSmsSendlog.remove">
     <![CDATA[
-        UPDATE hjs_approve_sms_sendlog SET
+        UPDATE ab_approve_sms_sendlog SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -100,23 +100,23 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     </update>
     
     
-    <delete id="HjsApproveSmsSendlog.delete">
+    <delete id="AbApproveSmsSendlog.delete">
     <![CDATA[
-        DELETE FROM hjs_approve_sms_sendlog WHERE
+        DELETE FROM ab_approve_sms_sendlog WHERE
         ID = #{id} 
     ]]>
     </delete>
     
-    <select id="HjsApproveSmsSendlog.getById" resultMap="RM_HjsApproveSmsSendlog">
-		SELECT <include refid="HjsApproveSmsSendlog.columns" />
+    <select id="AbApproveSmsSendlog.getById" resultMap="RM_AbApproveSmsSendlog">
+		SELECT <include refid="AbApproveSmsSendlog.columns" />
 	    <![CDATA[
-		    FROM hjs_approve_sms_sendlog 
+		    FROM ab_approve_sms_sendlog 
 	        WHERE 
 		        ID = #{id} 
 	    ]]>
 	</select>
 	
-	<sql id="HjsApproveSmsSendlog.findPage.where">
+	<sql id="AbApproveSmsSendlog.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	      				
 	       <if test="@Ognl@isNotEmpty(id)">
@@ -158,19 +158,19 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 		
-    <select id="HjsApproveSmsSendlog.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_approve_sms_sendlog tb 
-		<include refid="HjsApproveSmsSendlog.findPage.where"/>    
+    <select id="AbApproveSmsSendlog.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_approve_sms_sendlog tb 
+		<include refid="AbApproveSmsSendlog.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsApproveSmsSendlog.findPage" resultType="map">
-    	SELECT <include refid="HjsApproveSmsSendlog.tbcolumns" />
-	    FROM hjs_approve_sms_sendlog tb
-		<include refid="HjsApproveSmsSendlog.findPage.where"/>
+    <select id="AbApproveSmsSendlog.findPage" resultType="map">
+    	SELECT <include refid="AbApproveSmsSendlog.tbcolumns" />
+	    FROM ab_approve_sms_sendlog tb
+		<include refid="AbApproveSmsSendlog.findPage.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}

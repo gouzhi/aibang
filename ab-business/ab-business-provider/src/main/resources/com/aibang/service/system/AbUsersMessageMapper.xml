@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsUsersMessage">
+<mapper namespace="AbUsersMessage">
 
-	<resultMap id="RM_HjsUsersMessage" type="com.cifex.transfer.model.dto.HjsUsersMessage">
+	<resultMap id="RM_AbUsersMessage" type="com.aibang.transfer.model.dto.AbUsersMessage">
         <result property="id" column="ID"/>
         <result property="type" column="TYPE"/>
         <result property="status" column="STATUS"/>
@@ -21,22 +21,22 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsUsersMessage.columns">
+	<sql id="AbUsersMessage.columns">
 	    <![CDATA[
 		ID,TYPE,STATUS,SEND_LOGINID,RECEIVE_LOGINID,MSG_TITLE,CONTENTS,PARENT_ID,OPT_ID,CREATE_TIME
 	    ]]>
 	</sql>
 
-    <sql id="HjsUsersMessage.tbcolumns">
+    <sql id="AbUsersMessage.tbcolumns">
 	    <![CDATA[
 		tb.ID,tb.TYPE,tb.STATUS,tb.SEND_LOGINID,tb.RECEIVE_LOGINID,tb.MSG_TITLE,tb.CONTENTS,tb.PARENT_ID,tb.OPT_ID,tb.CREATE_TIME
 	    ]]>
 	</sql>
 	
 	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
-	<insert id="HjsUsersMessage.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbUsersMessage.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_users_message (
+        INSERT INTO ab_users_message (
         	ID ,
         	TYPE ,
         	STATUS ,
@@ -69,9 +69,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		-->
 	</insert>
     
-	<update id="HjsUsersMessage.update" >
+	<update id="AbUsersMessage.update" >
     <![CDATA[
-        UPDATE hjs_users_message SET
+        UPDATE ab_users_message SET
 	        TYPE = #{type} ,
 	        STATUS = #{status} ,
 	        SEND_LOGINID = #{sendLoginid} ,
@@ -89,9 +89,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
    
 	
-    <update id="HjsUsersMessage.remove">
+    <update id="AbUsersMessage.remove">
     <![CDATA[
-        UPDATE hjs_users_message SET
+        UPDATE ab_users_message SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -100,23 +100,23 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     </update>
     
     
-    <delete id="HjsUsersMessage.delete">
+    <delete id="AbUsersMessage.delete">
     <![CDATA[
-        DELETE FROM hjs_users_message WHERE
+        DELETE FROM ab_users_message WHERE
         ID = #{id} 
     ]]>
     </delete>
     
-    <select id="HjsUsersMessage.getById" resultMap="RM_HjsUsersMessage">
-		SELECT <include refid="HjsUsersMessage.columns" />
+    <select id="AbUsersMessage.getById" resultMap="RM_AbUsersMessage">
+		SELECT <include refid="AbUsersMessage.columns" />
 	    <![CDATA[
-		    FROM hjs_users_message 
+		    FROM ab_users_message 
 	        WHERE 
 		        ID = #{id} 
 	    ]]>
 	</select>
 	
-	<sql id="HjsUsersMessage.findPage.where">
+	<sql id="AbUsersMessage.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	      				
 	       <if test="@Ognl@isNotEmpty(id)">
@@ -155,19 +155,19 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 		
-    <select id="HjsUsersMessage.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_users_message tb 
-		<include refid="HjsUsersMessage.findPage.where"/>    
+    <select id="AbUsersMessage.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_users_message tb 
+		<include refid="AbUsersMessage.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsUsersMessage.findPage" resultType="map">
-    	SELECT <include refid="HjsUsersMessage.tbcolumns" />
-	    FROM hjs_users_message tb
-		<include refid="HjsUsersMessage.findPage.where"/>
+    <select id="AbUsersMessage.findPage" resultType="map">
+    	SELECT <include refid="AbUsersMessage.tbcolumns" />
+	    FROM ab_users_message tb
+		<include refid="AbUsersMessage.findPage.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}
@@ -177,7 +177,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</if>
     </select>
     
-    <sql id="HjsUsersMessage.findNoticesPageByUserId.where">
+    <sql id="AbUsersMessage.findNoticesPageByUserId.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	      				
 	       <if test="@Ognl@isNotEmpty(type)">
@@ -194,10 +194,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			</if> 
 		</where>
 	</sql>
-    <select id="HjsUsersMessage.findNoticesPageByUserId" resultType="map">
-    	SELECT <include refid="HjsUsersMessage.tbcolumns" />
-	    FROM hjs_users_message tb
-		<include refid="HjsUsersMessage.findNoticesPageByUserId.where"/>
+    <select id="AbUsersMessage.findNoticesPageByUserId" resultType="map">
+    	SELECT <include refid="AbUsersMessage.tbcolumns" />
+	    FROM ab_users_message tb
+		<include refid="AbUsersMessage.findNoticesPageByUserId.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}
@@ -207,18 +207,18 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</if>
     </select>
 
-	<select id="HjsUsersMessage.findNoticesPageByUserId.count" resultType="long">
-        SELECT count(*) FROM hjs_users_message tb 
-		<include refid="HjsUsersMessage.findNoticesPageByUserId.where"/>    
+	<select id="AbUsersMessage.findNoticesPageByUserId.count" resultType="long">
+        SELECT count(*) FROM ab_users_message tb 
+		<include refid="AbUsersMessage.findNoticesPageByUserId.where"/>    
     </select>
 	
-	<select id="HjsUsersMessage.findAll" resultMap="RM_HjsUsersMessage">
-    	SELECT <include refid="HjsUsersMessage.columns" />
-	    FROM hjs_users_message  
+	<select id="AbUsersMessage.findAll" resultMap="RM_AbUsersMessage">
+    	SELECT <include refid="AbUsersMessage.columns" />
+	    FROM ab_users_message  
     </select>
     <!-- 统计登录用户未读的消息数量 -->
-    <select id="HjsUsersMessage.getUnreadMessageCount" resultType="int">
-        select count(*) from hjs_users_message where `STATUS`=2 and RECEIVE_LOGINID=#{receiveLoginid}
+    <select id="AbUsersMessage.getUnreadMessageCount" resultType="int">
+        select count(*) from ab_users_message where `STATUS`=2 and RECEIVE_LOGINID=#{receiveLoginid}
     </select>
 </mapper>
 

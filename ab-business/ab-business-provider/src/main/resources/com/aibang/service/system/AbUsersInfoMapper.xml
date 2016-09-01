@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsUsersInfo">
+<mapper namespace="AbUsersInfo">
 
-	<resultMap id="RM_HjsUsersInfo" type="com.cifex.transfer.model.dto.HjsUsersInfo">
+	<resultMap id="RM_AbUsersInfo" type="com.aibang.transfer.model.dto.AbUsersInfo">
         <result property="id" column="ID"/>
         <result property="userId" column="USER_ID"/>
         <result property="loginId" column="LOGIN_ID"/>
@@ -34,7 +34,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         <result property="headPic" column="HEAD_PIC"/>
         <result property="source" column="SOURCE"/>
 	</resultMap>
-	<resultMap id="RM_HjsUsersInfoPage" type="com.cifex.transfer.model.dto.HjsUsersInfo">
+	<resultMap id="RM_AbUsersInfoPage" type="com.aibang.transfer.model.dto.AbUsersInfo">
         <id property="id" column="ID"/>
         <result property="userId" column="USER_ID"/>
         <result property="loginId" column="LOGIN_ID"/>
@@ -60,7 +60,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         <result property="infoOpen" column="INFO_OPEN"/>
         <result property="headPic" column="HEAD_PIC"/>
         <result property="source" column="SOURCE"/>
-        <collection property="hjsUser" column="LOGINID"  ofType="com.cifex.transfer.model.dto.HjsUser">
+        <collection property="AbUser" column="LOGINID"  ofType="com.aibang.transfer.model.dto.AbUser">
 			<id property="id" column="LOGINID"/>
         	<result property="username" column="USERNAME"/>
         	<result property="typeId" column="TYPE_ID"/>
@@ -79,7 +79,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         	<result property="realNameStatus" column="REALNAME_STATUS"/>
         	<result property="nrpUsrId" column="NRP_USR_ID"/>
 		</collection>
-		<collection property="hjsUserBase" column="USERID"  ofType="com.cifex.transfer.model.dto.HjsUserBase">
+		<collection property="AbUserBase" column="USERID"  ofType="com.aibang.transfer.model.dto.AbUserBase">
 			<id property="id" column="USERID"/>
         	<result property="typeId" column="TYPE_ID"/>
         	<result property="username" column="USERNAME"/>
@@ -102,20 +102,20 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         	<result property="fadadaCaId" column="FADADA_CA_ID"/>
         	<result property="authorEndDate" column="AUTHOR_END_DATE"/>
 		</collection>
-		<collection property="hjsSysArea" column="AREAID" ofType="com.cifex.transfer.model.dto.HjsSysArea">
+		<collection property="AbSysArea" column="AREAID" ofType="com.aibang.transfer.model.dto.AbSysArea">
 			<id property="id" column="USERID"/>
 			<result property="areaName" column="AREA_NAME"/>
 		</collection>
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsUsersInfo.columns">
+	<sql id="AbUsersInfo.columns">
 	    <![CDATA[
 		ID,USER_ID,LOGIN_ID,AREAID,NINAME,BIRTHDAY,SEX,INVITE_USERID,INVITE_MONEY,QUESTION,ANSWER,LAST_TIME,LAST_IP,INVITE_CODE,INTRODUCTION,BASEINFO_OPEN,QQ,BLOOD,FAITH,EDUCATION,UNIVERSITY,MARRIAGE,INFO_OPEN,HEAD_PIC,SOURCE
 	    ]]>
 	</sql>
 	<!-- 会员管理模块抽取的列 -->
-	<sql id="HjsUsersInfo.columnsPage">
+	<sql id="AbUsersInfo.columnsPage">
 		i.ID,i.USER_ID,i.LOGIN_ID,i.AREAID,i.NINAME,i.BIRTHDAY,i.SEX,i.INVITE_USERID,
 		i.INVITE_MONEY,i.QUESTION,i.ANSWER,i.LAST_TIME,i.LAST_IP,
 		i.INVITE_CODE,i.INTRODUCTION,i.BASEINFO_OPEN,i.QQ,i.BLOOD,i.FAITH,i.EDUCATION,
@@ -135,9 +135,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<insert id="HjsUsersInfo.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbUsersInfo.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_users_info (
+        INSERT INTO ab_users_info (
         	USER_ID ,
         	LOGIN_ID ,
         	AREAID ,
@@ -202,9 +202,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<insert id="HjsUsersInfo.addUsersInfo" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbUsersInfo.addUsersInfo" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_users_info (
+        INSERT INTO ab_users_info (
         	USER_ID ,
         	LOGIN_ID ,
         	LAST_TIME ,
@@ -222,8 +222,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.24
 	-->
-	<update id="HjsUsersInfo.createInviteCode">
-        UPDATE hjs_users_info SET	        
+	<update id="AbUsersInfo.createInviteCode">
+        UPDATE ab_users_info SET	        
 	        INVITE_CODE = #{inviteCode}
 	         <if test="@Ognl@isNotEmpty(inviteUserid)">
 			,INVITE_USERID = #{inviteUserid} 
@@ -237,9 +237,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.24
 	-->
-	<update id="HjsUsersInfo.updateBase">
+	<update id="AbUsersInfo.updateBase">
 	<![CDATA[
-        UPDATE hjs_users_info SET	        
+        UPDATE ab_users_info SET	        
 	        SEX = #{sex} ,
 	        BIRTHDAY = #{birthday} ,
 	        INTRODUCTION = #{introduction} ,
@@ -253,9 +253,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.24
 	-->
-	<update id="HjsUsersInfo.updateDetail">
+	<update id="AbUsersInfo.updateDetail">
 	<![CDATA[
-        UPDATE hjs_users_info SET	        
+        UPDATE ab_users_info SET	        
 	        AREAID = #{areaid} ,
 	        QQ = #{qq} ,
 	        BLOOD = #{blood} ,
@@ -273,9 +273,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.24
 	-->
-	<update id="HjsUsersInfo.updateAvatar">
+	<update id="AbUsersInfo.updateAvatar">
 	<![CDATA[
-        UPDATE hjs_users_info SET	        
+        UPDATE ab_users_info SET	        
 	        HEAD_PIC = #{headPic} 
         WHERE 
 	        ID = #{id}  
@@ -286,9 +286,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUsersInfo.update" >
+	<update id="AbUsersInfo.update" >
     <![CDATA[
-        UPDATE hjs_users_info SET
+        UPDATE ab_users_info SET
 	        USER_ID = #{userId} ,
 	        LOGIN_ID = #{loginId} ,
 	        AREAID = #{areaid} ,
@@ -325,9 +325,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <update id="HjsUsersInfo.remove">
+    <update id="AbUsersInfo.remove">
     <![CDATA[
-        UPDATE hjs_users_info SET
+        UPDATE ab_users_info SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -340,9 +340,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <delete id="HjsUsersInfo.delete">
+    <delete id="AbUsersInfo.delete">
     <![CDATA[
-        DELETE FROM hjs_users_info WHERE
+        DELETE FROM ab_users_info WHERE
         ID = #{id} 
     ]]>
     </delete>
@@ -351,10 +351,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsUsersInfo.getById" resultMap="RM_HjsUsersInfo">
-		SELECT <include refid="HjsUsersInfo.columns" />
+    <select id="AbUsersInfo.getById" resultMap="RM_AbUsersInfo">
+		SELECT <include refid="AbUsersInfo.columns" />
 	    <![CDATA[
-		    FROM hjs_users_info 
+		    FROM ab_users_info 
 	        WHERE 
 		        ID = #{id} 
 	    ]]>
@@ -364,12 +364,12 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsUsersInfo.getUsersInfoById" resultMap="RM_HjsUsersInfoPage">
-		SELECT <include refid="HjsUsersInfo.columnsPage" />
-		    FROM hjs_users_info i
-	    left join hjs_user u on i.LOGIN_ID=u.ID 
-	    left join hjs_user_base b on i.USER_ID = b.ID 
-	    left join hjs_sys_area a on i.AREAID=a.ID
+	<select id="AbUsersInfo.getUsersInfoById" resultMap="RM_AbUsersInfoPage">
+		SELECT <include refid="AbUsersInfo.columnsPage" />
+		    FROM ab_users_info i
+	    left join ab_user u on i.LOGIN_ID=u.ID 
+	    left join ab_user_base b on i.USER_ID = b.ID 
+	    left join ab_sys_area a on i.AREAID=a.ID
 	        WHERE 
 		        i.ID = #{id} 
 	</select>
@@ -378,10 +378,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsUsersInfo.getByLoginId" resultMap="RM_HjsUsersInfo">
-		SELECT <include refid="HjsUsersInfo.columns" />
+	<select id="AbUsersInfo.getByLoginId" resultMap="RM_AbUsersInfo">
+		SELECT <include refid="AbUsersInfo.columns" />
 	    <![CDATA[
-		    FROM hjs_users_info 
+		    FROM ab_users_info 
 	        WHERE 
 		        LOGIN_ID = #{loginId} 
 	    ]]>
@@ -391,10 +391,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		描述：（前台）通过userBaseID获取会员信息功能sql
 		时间：2016.4.16
 	 -->
-	<select id="HjsUsersInfo.getByUserBaseId" resultMap="RM_HjsUsersInfo">
-		SELECT <include refid="HjsUsersInfo.columns" />
+	<select id="AbUsersInfo.getByUserBaseId" resultMap="RM_AbUsersInfo">
+		SELECT <include refid="AbUsersInfo.columns" />
 	    <![CDATA[
-		    FROM hjs_users_info 
+		    FROM ab_users_info 
 	        WHERE 
 		        USER_ID = #{userId} 
 	    ]]>
@@ -404,13 +404,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsUsersInfo.getByUsername" resultMap="RM_HjsUsersInfoPage">
-		SELECT <include refid="HjsUsersInfo.columnsPage" />
+	<select id="AbUsersInfo.getByUsername" resultMap="RM_AbUsersInfoPage">
+		SELECT <include refid="AbUsersInfo.columnsPage" />
 	    <![CDATA[
-		    FROM hjs_users_info i
-	    left join hjs_user u on i.LOGIN_ID=u.ID 
-	    left join hjs_user_base b on i.USER_ID = b.ID 
-	    left join hjs_sys_area a on i.AREAID=a.ID
+		    FROM ab_users_info i
+	    left join ab_user u on i.LOGIN_ID=u.ID 
+	    left join ab_user_base b on i.USER_ID = b.ID 
+	    left join ab_sys_area a on i.AREAID=a.ID
 	        WHERE
 	        	u.IS_DEL=0 AND u.TYPE_ID=3 AND 
 		        (u.USERNAME LIKE CONCAT(CONCAT('%', #{username}), '%') OR u.REALNAME LIKE CONCAT(CONCAT('%', #{username}), '%'))  
@@ -421,10 +421,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsUsersInfo.getInviteUser" resultMap="RM_HjsUsersInfo">
-		SELECT <include refid="HjsUsersInfo.columns" />
+	<select id="AbUsersInfo.getInviteUser" resultMap="RM_AbUsersInfo">
+		SELECT <include refid="AbUsersInfo.columns" />
 	    <![CDATA[
-		    FROM hjs_users_info 
+		    FROM ab_users_info 
 	        WHERE 
 		        INVITE_CODE = #{inviteCode} 
 	    ]]>
@@ -434,7 +434,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<sql id="HjsUsersInfo.findPage.where">
+	<sql id="AbUsersInfo.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>
 			u.IS_DEL=0 AND u.TYPE_ID=3	      				
@@ -547,31 +547,31 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->	
-    <select id="HjsUsersInfo.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_users_info i
-	    left join hjs_user u on i.LOGIN_ID=u.ID 
-	    left join hjs_user_base b on i.USER_ID = b.ID 
-	    left join hjs_sys_area a on i.AREAID=a.ID
-		<include refid="HjsUsersInfo.findPage.where"/>    
+    <select id="AbUsersInfo.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_users_info i
+	    left join ab_user u on i.LOGIN_ID=u.ID 
+	    left join ab_user_base b on i.USER_ID = b.ID 
+	    left join ab_sys_area a on i.AREAID=a.ID
+		<include refid="AbUsersInfo.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsUsersInfo.findPage" resultMap="RM_HjsUsersInfoPage">
-    	SELECT <include refid="HjsUsersInfo.columnsPage" />
-	    FROM hjs_users_info i
-	    left join hjs_user u on i.LOGIN_ID=u.ID 
-	    left join hjs_user_base b on i.USER_ID = b.ID 
-	    left join hjs_sys_area a on i.AREAID=a.ID
-	    left join hjs_users_invite tb on i.USER_ID=tb.USER_ID
-		<include refid="HjsUsersInfo.findPage.where"/>
+    <select id="AbUsersInfo.findPage" resultMap="RM_AbUsersInfoPage">
+    	SELECT <include refid="AbUsersInfo.columnsPage" />
+	    FROM ab_users_info i
+	    left join ab_user u on i.LOGIN_ID=u.ID 
+	    left join ab_user_base b on i.USER_ID = b.ID 
+	    left join ab_sys_area a on i.AREAID=a.ID
+	    left join ab_users_invite tb on i.USER_ID=tb.USER_ID
+		<include refid="AbUsersInfo.findPage.where"/>
 		<if test="@Ognl@isNotEmpty(phone)">
 				AND tb.INVITE_USER_ID IN (SELECT b.ID 
-												FROM hjs_user u
-												LEFT JOIN hjs_users_info i ON u.ID = i.LOGIN_ID
-												LEFT JOIN hjs_user_base b ON b.ID = i.USER_ID
+												FROM ab_user u
+												LEFT JOIN ab_users_info i ON u.ID = i.LOGIN_ID
+												LEFT JOIN ab_user_base b ON b.ID = i.USER_ID
 												WHERE u.PHONE LIKE CONCAT(CONCAT('%', #{phone}), '%') OR u.USERNAME LIKE CONCAT(CONCAT('%', #{phone}), '%'))
 		</if>
 		
@@ -585,10 +585,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     </select>
 	
 	<!-- 通过用户的baseid获得用户的手机号 -->
-	<select id="HjsUsersInfo.getUserPhoneByUserBaseId" resultType="string">
+	<select id="AbUsersInfo.getUserPhoneByUserBaseId" resultType="string">
 		SELECT u.PHONE
-			FROM hjs_users_info i
-			LEFT JOIN hjs_user u ON u.ID = i.LOGIN_ID 
+			FROM ab_users_info i
+			LEFT JOIN ab_user u ON u.ID = i.LOGIN_ID 
 			WHERE i.USER_ID = #{userId}
 	</select>
 	

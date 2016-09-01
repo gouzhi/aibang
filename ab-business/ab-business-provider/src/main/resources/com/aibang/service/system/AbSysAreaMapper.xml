@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsSysArea">
+<mapper namespace="AbSysArea">
 
-	<resultMap id="RM_HjsSysArea" type="com.cifex.transfer.model.dto.HjsSysArea">
+	<resultMap id="RM_AbSysArea" type="com.aibang.transfer.model.dto.AbSysArea">
         <result property="id" column="ID"/>
         <result property="areaName" column="AREA_NAME"/>
         <result property="pyName" column="PY_NAME"/>
@@ -21,22 +21,22 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsSysArea.columns">
+	<sql id="AbSysArea.columns">
 	    <![CDATA[
 		ID,AREA_NAME,PY_NAME,PARENT_ID,ALL_PARENTID,ORDER_ID,LAYER,IS_DEL,OPT_ID,CREATE_TIME
 	    ]]>
 	</sql>
 
-    <sql id="HjsSysArea.tbcolumns">
+    <sql id="AbSysArea.tbcolumns">
 	    <![CDATA[
 		tb.ID,tb.AREA_NAME,tb.PY_NAME,tb.PARENT_ID,tb.ALL_PARENTID,tb.ORDER_ID,tb.LAYER,tb.IS_DEL,tb.OPT_ID,tb.CREATE_TIME
 	    ]]>
 	</sql>
 	
 	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
-	<insert id="HjsSysArea.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbSysArea.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_sys_area (
+        INSERT INTO ab_sys_area (
         	ID ,
         	AREA_NAME ,
         	PY_NAME ,
@@ -73,9 +73,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsSysArea.update" >
+	<update id="AbSysArea.update" >
     <![CDATA[
-        UPDATE hjs_sys_area SET
+        UPDATE ab_sys_area SET
 	        AREA_NAME = #{areaName} ,
 	        PY_NAME = #{pyName} ,
 	        PARENT_ID = #{parentId} ,
@@ -97,9 +97,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <update id="HjsSysArea.remove">
+    <update id="AbSysArea.remove">
     <![CDATA[
-        UPDATE hjs_sys_area SET
+        UPDATE ab_sys_area SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -112,9 +112,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <delete id="HjsSysArea.delete">
+    <delete id="AbSysArea.delete">
     <![CDATA[
-        DELETE FROM hjs_sys_area WHERE
+        DELETE FROM ab_sys_area WHERE
         ID = #{id} 
     ]]>
     </delete>
@@ -123,10 +123,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsSysArea.getById" resultMap="RM_HjsSysArea">
-		SELECT <include refid="HjsSysArea.columns" />
+    <select id="AbSysArea.getById" resultMap="RM_AbSysArea">
+		SELECT <include refid="AbSysArea.columns" />
 	    <![CDATA[
-		    FROM hjs_sys_area 
+		    FROM ab_sys_area 
 	        WHERE 
 		        ID = #{id} 
 	    ]]>
@@ -136,10 +136,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.22
 	-->
-	<select id="HjsSysArea.findAll" resultMap="RM_HjsSysArea">
-		SELECT <include refid="HjsSysArea.columns" />
+	<select id="AbSysArea.findAll" resultMap="RM_AbSysArea">
+		SELECT <include refid="AbSysArea.columns" />
 	    <![CDATA[
-		    FROM hjs_sys_area 
+		    FROM ab_sys_area 
 	    ]]>
 	</select>
 	<!--
@@ -147,9 +147,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.22
 	-->
-	<select id="HjsSysArea.findAreaLayer" resultMap="RM_HjsSysArea">
-		SELECT <include refid="HjsSysArea.columns" /> 
-		    FROM hjs_sys_area 
+	<select id="AbSysArea.findAreaLayer" resultMap="RM_AbSysArea">
+		SELECT <include refid="AbSysArea.columns" /> 
+		    FROM ab_sys_area 
 		    WHERE 
 		    	LAYER = ${layer}
 		    	<if test="parentId!=0">
@@ -157,7 +157,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		    	</if> 
 		    	 
 	</select>
-	<sql id="HjsSysArea.findPage.where">
+	<sql id="AbSysArea.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	      				
 	       <if test="@Ognl@isNotEmpty(id)">
@@ -196,19 +196,19 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 		
-    <select id="HjsSysArea.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_sys_area tb 
-		<include refid="HjsSysArea.findPage.where"/>    
+    <select id="AbSysArea.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_sys_area tb 
+		<include refid="AbSysArea.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsSysArea.findPage" resultType="map">
-    	SELECT <include refid="HjsSysArea.tbcolumns" />
-	    FROM hjs_sys_area tb
-		<include refid="HjsSysArea.findPage.where"/>
+    <select id="AbSysArea.findPage" resultType="map">
+    	SELECT <include refid="AbSysArea.tbcolumns" />
+	    FROM ab_sys_area tb
+		<include refid="AbSysArea.findPage.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}

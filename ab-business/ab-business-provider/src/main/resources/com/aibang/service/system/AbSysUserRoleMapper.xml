@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsSysUserRole">
+<mapper namespace="AbSysUserRole">
 
-	<resultMap id="RM_HjsSysUserRole" type="com.cifex.transfer.model.dto.HjsSysUserRole">
+	<resultMap id="RM_AbSysUserRole" type="com.aibang.transfer.model.dto.AbSysUserRole">
         <result property="id" column="ID"/>
         <result property="userId" column="USER_ID"/>
         <result property="roleId" column="ROLE_ID"/>
@@ -20,16 +20,16 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsSysUserRole.columns">
+	<sql id="AbSysUserRole.columns">
 	    <![CDATA[
 		ID,USER_ID,ROLE_ID,IS_DEL,VERSION,OPT_ID,CREATE_TIME,UPDATE_TIME,DELETE_TIME
 	    ]]>
 	</sql>
 
 	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
-	<insert id="HjsSysUserRole.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbSysUserRole.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_sys_user_role (
+        INSERT INTO ab_sys_user_role (
         	
         	USER_ID ,
         	ROLE_ID ,
@@ -59,9 +59,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsSysUserRole.update" >
+	<update id="AbSysUserRole.update" >
     <![CDATA[
-        UPDATE hjs_sys_user_role SET
+        UPDATE ab_sys_user_role SET
 	        USER_ID = #{userId} ,
 	        ROLE_ID = #{roleId} ,
 	        IS_DEL = #{isDel} ,
@@ -79,9 +79,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <update id="HjsSysUserRole.remove">
+    <update id="AbSysUserRole.remove">
     <![CDATA[
-        UPDATE hjs_sys_user_role SET
+        UPDATE ab_sys_user_role SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -94,9 +94,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <delete id="HjsSysUserRole.delete">
+    <delete id="AbSysUserRole.delete">
     <![CDATA[
-        DELETE FROM hjs_sys_user_role WHERE
+        DELETE FROM ab_sys_user_role WHERE
         ID = #{id} 
     ]]>
     </delete>
@@ -105,9 +105,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <delete id="HjsSysUserRole.deleteUserRole">
+    <delete id="AbSysUserRole.deleteUserRole">
     <![CDATA[
-		DELETE FROM hjs_sys_user_role WHERE
+		DELETE FROM ab_sys_user_role WHERE
 		USER_ID = #{userId}
 		]]>
 	</delete>
@@ -116,10 +116,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsSysUserRole.getById" resultMap="RM_HjsSysUserRole">
-		SELECT <include refid="HjsSysUserRole.columns" />
+    <select id="AbSysUserRole.getById" resultMap="RM_AbSysUserRole">
+		SELECT <include refid="AbSysUserRole.columns" />
 	    <![CDATA[
-		    FROM hjs_sys_user_role 
+		    FROM ab_sys_user_role 
 	        WHERE 
 		        ID = #{id} 
 	    ]]>
@@ -129,7 +129,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<sql id="HjsSysUserRole.findPage.where">
+	<sql id="AbSysUserRole.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	      				
 	       <if test="@Ognl@isNotEmpty(id)">
@@ -171,19 +171,19 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 		
-    <select id="HjsSysUserRole.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_sys_user_role 
-		<include refid="HjsSysUserRole.findPage.where"/>    
+    <select id="AbSysUserRole.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_sys_user_role 
+		<include refid="AbSysUserRole.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsSysUserRole.findPage" resultMap="RM_HjsSysUserRole">
-    	SELECT <include refid="HjsSysUserRole.columns" />
-	    FROM hjs_sys_user_role 
-		<include refid="HjsSysUserRole.findPage.where"/>
+    <select id="AbSysUserRole.findPage" resultMap="RM_AbSysUserRole">
+    	SELECT <include refid="AbSysUserRole.columns" />
+	    FROM ab_sys_user_role 
+		<include refid="AbSysUserRole.findPage.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}
@@ -194,9 +194,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     </select>
     
     <!-- 列出此角色下的所有用户 -->
-	<select id="HjsSysUserRole.listAllUByRid" resultMap="RM_HjsSysUserRole">
+	<select id="AbSysUserRole.listAllUByRid" resultMap="RM_AbSysUserRole">
 		select USER_ID
-		from HJS_SYS_USER_ROLE 
+		from ab_sys_user_role 
 		where 
 		ROLE_ID = #{id}
 	</select>

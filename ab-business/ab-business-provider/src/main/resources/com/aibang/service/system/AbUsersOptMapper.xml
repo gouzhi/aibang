@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsUsersOpt">
+<mapper namespace="AbUsersOpt">
 
-	<resultMap id="RM_HjsUsersOpt" type="com.cifex.transfer.model.dto.HjsUsersOpt">
+	<resultMap id="RM_AbUsersOpt" type="com.aibang.transfer.model.dto.AbUsersOpt">
         <result property="id" column="ID"/>
         <result property="loginId" column="LOGIN_ID"/>
         <result property="entId" column="ENT_ID"/>
@@ -17,7 +17,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         <result property="sex" column="SEX"/>
         <result property="lastTime" column="LAST_TIME"/>
         <result property="lastIp" column="LAST_IP"/>
-        <collection property="hjsUser" column="USER_ID"  ofType="com.cifex.transfer.model.dto.HjsUser">
+        <collection property="AbUser" column="USER_ID"  ofType="com.aibang.transfer.model.dto.AbUser">
 			<id column="USER_ID" property="id"/>
         	<result property="username" column="USERNAME"/>
         	<result property="typeId" column="TYPE_ID"/>
@@ -34,13 +34,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsUsersOpt.columns">
+	<sql id="AbUsersOpt.columns">
 	    <![CDATA[
 		ID,LOGIN_ID,ENT_ID,OPT_USERNAME,REMARK,QQ,SEX,LAST_TIME,LAST_IP
 	    ]]>
 	</sql>
 	<!-- 用于关联查询的列 -->
-	<sql id="HjsUsersOpt.columnsPage">
+	<sql id="AbUsersOpt.columnsPage">
 	    <![CDATA[
 		o.ID,o.LOGIN_ID,o.ENT_ID,o.OPT_USERNAME,o.REMARK,o.QQ,SEX,o.LAST_TIME,o.LAST_IP,
 		u.ID as USER_ID,u.USERNAME,u.TYPE_ID,u.EMAIL,u.PHONE,u.PASSWORD,u.STATUS,u.OPT_ID,u.CREATE_TIME,u.CREATE_IP,u.IS_DEL,u.DELETE_TIME,u.PHONE_STATUS,u.EMAIL_STATUS,u.REALNAME,u.REALNAME_STATUS
@@ -54,9 +54,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		时间：2015.9.14
 	-->
 	
-	<insert id="HjsUsersOpt.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbUsersOpt.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_users_opt (
+        INSERT INTO ab_users_opt (
         	LOGIN_ID ,
         	ENT_ID ,
         	OPT_USERNAME ,
@@ -84,9 +84,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         </selectKey>
 		-->
 	</insert>
-	<update id="HjsUsersOpt.update" >
+	<update id="AbUsersOpt.update" >
     <![CDATA[
-        UPDATE hjs_users_opt SET
+        UPDATE ab_users_opt SET
 	        LOGIN_ID = #{loginId} ,
 	        ENT_ID = #{entId} ,
 	        OPT_USERNAME = #{optUsername} ,
@@ -104,9 +104,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUsersOpt.updateByLoginId" >
+	<update id="AbUsersOpt.updateByLoginId" >
 
-        UPDATE hjs_users_opt SET
+        UPDATE ab_users_opt SET
 	        LOGIN_ID = #{loginId} ,
 	        <if test="@Ognl@isNotEmpty(optUsername)">
 				OPT_USERNAME = #{optUsername} ,
@@ -138,9 +138,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <update id="HjsUsersOpt.remove">
+    <update id="AbUsersOpt.remove">
     <![CDATA[
-        UPDATE hjs_users_opt SET
+        UPDATE ab_users_opt SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -149,9 +149,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     </update>
     
     
-    <delete id="HjsUsersOpt.delete">
+    <delete id="AbUsersOpt.delete">
     <![CDATA[
-        DELETE FROM hjs_users_opt WHERE
+        DELETE FROM ab_users_opt WHERE
         ID = #{id} 
     ]]>
     </delete>
@@ -160,9 +160,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <delete id="HjsUsersOpt.deleteByLoginId">
+    <delete id="AbUsersOpt.deleteByLoginId">
     <![CDATA[
-        DELETE FROM hjs_users_opt WHERE
+        DELETE FROM ab_users_opt WHERE
         LOGIN_ID = #{loginId} 
     ]]>
     </delete>
@@ -171,8 +171,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUsersOpt.deleteAllByLoginId">
-		DELETE FROM hjs_users_opt 
+	<update id="AbUsersOpt.deleteAllByLoginId">
+		DELETE FROM ab_users_opt 
 		where 
 			LOGIN_ID in
   			 <foreach item="item" index="index" collection="loginIds" open="(" separator="," close=")">
@@ -184,10 +184,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsUsersOpt.getById" resultMap="RM_HjsUsersOpt">
-		SELECT <include refid="HjsUsersOpt.columns" />
+    <select id="AbUsersOpt.getById" resultMap="RM_AbUsersOpt">
+		SELECT <include refid="AbUsersOpt.columns" />
 	    <![CDATA[
-		    FROM hjs_users_opt 
+		    FROM ab_users_opt 
 	        WHERE 
 		        ID = #{id} 
 	    ]]>
@@ -197,10 +197,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsUsersOpt.getByLoginId" resultMap="RM_HjsUsersOpt">
-		SELECT <include refid="HjsUsersOpt.columns" />
+	<select id="AbUsersOpt.getByLoginId" resultMap="RM_AbUsersOpt">
+		SELECT <include refid="AbUsersOpt.columns" />
 	    <![CDATA[
-		    FROM hjs_users_opt 
+		    FROM ab_users_opt 
 	        WHERE 
 		        LOGIN_ID = #{loginId} 
 	    ]]>
@@ -210,16 +210,16 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsUsersOpt.getByENTId" resultMap="RM_HjsUsersOpt">
-		SELECT <include refid="HjsUsersOpt.columns" />
+	<select id="AbUsersOpt.getByENTId" resultMap="RM_AbUsersOpt">
+		SELECT <include refid="AbUsersOpt.columns" />
 	    <![CDATA[
-		    FROM hjs_users_opt 
+		    FROM ab_users_opt 
 	        WHERE 
 		        ENT_ID = #{entId} 
 	    ]]>
 	</select>
 	
-	<sql id="HjsUsersOpt.findPage.where">
+	<sql id="AbUsersOpt.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	
 			 u.IS_DEL=0 AND u.TYPE_ID=1      				
@@ -259,21 +259,21 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 		
-    <select id="HjsUsersOpt.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_users_opt o  
-        left join hjs_user u on o.LOGIN_ID=u.ID 
-		<include refid="HjsUsersOpt.findPage.where"/>    
+    <select id="AbUsersOpt.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_users_opt o  
+        left join ab_user u on o.LOGIN_ID=u.ID 
+		<include refid="AbUsersOpt.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsUsersOpt.findPage" resultMap="RM_HjsUsersOpt">
-    	SELECT <include refid="HjsUsersOpt.columnsPage" />
-	    FROM hjs_users_opt o 
-        left join hjs_user u on o.LOGIN_ID=u.ID 
-		<include refid="HjsUsersOpt.findPage.where"/>
+    <select id="AbUsersOpt.findPage" resultMap="RM_AbUsersOpt">
+    	SELECT <include refid="AbUsersOpt.columnsPage" />
+	    FROM ab_users_opt o 
+        left join ab_user u on o.LOGIN_ID=u.ID 
+		<include refid="AbUsersOpt.findPage.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}
@@ -283,10 +283,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</if>
     </select>
 	
-	<select id="HjsUsersOpt.getByUserId" resultMap="RM_HjsUsersOpt">
-		SELECT <include refid="HjsUsersOpt.columnsPage" />
-			FROM hjs_users_opt o 
-	        left join hjs_user u on o.LOGIN_ID=u.ID 
+	<select id="AbUsersOpt.getByUserId" resultMap="RM_AbUsersOpt">
+		SELECT <include refid="AbUsersOpt.columnsPage" />
+			FROM ab_users_opt o 
+	        left join ab_user u on o.LOGIN_ID=u.ID 
         	WHERE o.LOGIN_ID = #{loginId}
 	</select>
 	

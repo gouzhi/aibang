@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsApproveRealname">
+<mapper namespace="AbApproveRealname">
 
-	<resultMap id="RM_HjsApproveRealname" type="com.cifex.transfer.model.dto.HjsApproveRealname">
+	<resultMap id="RM_AbApproveRealname" type="com.aibang.transfer.model.dto.AbApproveRealname">
         <result property="id" column="ID"/>
         <result property="userId" column="USER_ID"/>
         <result property="realname" column="REALNAME"/>
@@ -22,20 +22,20 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         <result property="verifyTime" column="VERIFY_TIME"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="createIp" column="CREATE_IP"/>
-        <collection property="hjsUser" column="LOGINID"  ofType="com.cifex.transfer.model.dto.HjsUser">
+        <collection property="AbUser" column="LOGINID"  ofType="com.aibang.transfer.model.dto.AbUser">
 			<id property="id" column="LOGINID"/>
         	<result property="username" column="USERNAME"/>
 		</collection>
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsApproveRealname.columns">
+	<sql id="AbApproveRealname.columns">
 	    <![CDATA[
 		ID,USER_ID,REALNAME,CARD_ID,STATUS,SEX,CARD_PIC,CARD_PIC1,CARD_PIC2,VERIFY_USERID,VERIFY_MEMO,VERIFY_TIME,CREATE_TIME,CREATE_IP
 	    ]]>
 	</sql>
 
-    <sql id="HjsApproveRealname.tbcolumns">
+    <sql id="AbApproveRealname.tbcolumns">
 	    <![CDATA[
 		tb.ID,tb.USER_ID,tb.REALNAME,tb.CARD_ID,tb.STATUS,tb.SEX,tb.CARD_PIC,tb.CARD_PIC1,tb.CARD_PIC2,tb.VERIFY_USERID,tb.VERIFY_MEMO,tb.VERIFY_TIME,tb.CREATE_TIME,tb.CREATE_IP,
 		u.ID as LOGINID,u.USERNAME
@@ -48,9 +48,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<insert id="HjsApproveRealname.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbApproveRealname.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_approve_realname (
+        INSERT INTO ab_approve_realname (
         	
         	USER_ID ,
         	REALNAME ,
@@ -94,9 +94,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsApproveRealname.update" >
+	<update id="AbApproveRealname.update" >
     <![CDATA[
-        UPDATE hjs_approve_realname SET
+        UPDATE ab_approve_realname SET
 	        USER_ID = #{userId} ,
 	        REALNAME = #{realname} ,
 	        CARD_ID = #{cardId} ,
@@ -119,8 +119,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsApproveRealname.audit">		
-		update hjs_approve_realname set 
+	<update id="AbApproveRealname.audit">		
+		update ab_approve_realname set 
 		STATUS = #{status} ,
 		VERIFY_MEMO = #{verifyMemo} ,
 	    VERIFY_TIME = #{verifyTime} ,
@@ -132,8 +132,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsApproveRealname.activate">		
-		update hjs_approve_realname set 
+	<update id="AbApproveRealname.activate">		
+		update ab_approve_realname set 
 		REALNAME = #{realname} ,
 	    CARD_ID = #{cardId} ,
 		STATUS = #{status} ,
@@ -148,9 +148,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <update id="HjsApproveRealname.remove">
+    <update id="AbApproveRealname.remove">
     <![CDATA[
-        UPDATE hjs_approve_realname SET
+        UPDATE ab_approve_realname SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -163,9 +163,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <delete id="HjsApproveRealname.delete">
+    <delete id="AbApproveRealname.delete">
     <![CDATA[
-        DELETE FROM hjs_approve_realname WHERE
+        DELETE FROM ab_approve_realname WHERE
         ID = #{id} 
     ]]>
     </delete>
@@ -174,10 +174,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsApproveRealname.getById" resultMap="RM_HjsApproveRealname">
-		SELECT <include refid="HjsApproveRealname.columns" />
+    <select id="AbApproveRealname.getById" resultMap="RM_AbApproveRealname">
+		SELECT <include refid="AbApproveRealname.columns" />
 	    <![CDATA[
-		    FROM hjs_approve_realname 
+		    FROM ab_approve_realname 
 	        WHERE 
 		        ID = #{id} 
 	    ]]>
@@ -187,10 +187,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsApproveRealname.getByLoginId" resultMap="RM_HjsApproveRealname">
-		SELECT <include refid="HjsApproveRealname.columns" />
+	<select id="AbApproveRealname.getByLoginId" resultMap="RM_AbApproveRealname">
+		SELECT <include refid="AbApproveRealname.columns" />
 	    <![CDATA[
-		    FROM hjs_approve_realname 
+		    FROM ab_approve_realname 
 	        WHERE 
 		        USER_ID = #{userId} 
 	    ]]>
@@ -200,10 +200,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsApproveRealname.getByCardId" resultMap="RM_HjsApproveRealname">
-		SELECT <include refid="HjsApproveRealname.columns" />
+	<select id="AbApproveRealname.getByCardId" resultMap="RM_AbApproveRealname">
+		SELECT <include refid="AbApproveRealname.columns" />
 	    <![CDATA[
-		    FROM hjs_approve_realname 
+		    FROM ab_approve_realname 
 	        WHERE 
 		        CARD_ID = #{cardId} 
 	    ]]>
@@ -214,7 +214,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<sql id="HjsApproveRealname.findPage.where">
+	<sql id="AbApproveRealname.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	      				
 	       <if test="@Ognl@isNotEmpty(id)">
@@ -271,21 +271,21 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 		
-    <select id="HjsApproveRealname.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_approve_realname tb 
-        left join hjs_user u on tb.USER_ID=u.ID 
-		<include refid="HjsApproveRealname.findPage.where"/>    
+    <select id="AbApproveRealname.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_approve_realname tb 
+        left join ab_user u on tb.USER_ID=u.ID 
+		<include refid="AbApproveRealname.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsApproveRealname.findPage" resultType="map">
-    	SELECT <include refid="HjsApproveRealname.tbcolumns" />
-	    FROM hjs_approve_realname tb
-	    left join hjs_user u on tb.USER_ID=u.ID 
-		<include refid="HjsApproveRealname.findPage.where"/>
+    <select id="AbApproveRealname.findPage" resultType="map">
+    	SELECT <include refid="AbApproveRealname.tbcolumns" />
+	    FROM ab_approve_realname tb
+	    left join ab_user u on tb.USER_ID=u.ID 
+		<include refid="AbApproveRealname.findPage.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}

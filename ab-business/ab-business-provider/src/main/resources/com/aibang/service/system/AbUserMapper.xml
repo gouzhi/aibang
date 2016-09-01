@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsUser">
+<mapper namespace="AbUser">
 
-	<resultMap id="userAndRoleResultMap" type="com.cifex.transfer.model.dto.HjsUser">
+	<resultMap id="userAndRoleResultMap" type="com.aibang.transfer.model.dto.AbUser">
         <result property="id" column="ID"/>
         <result property="username" column="USERNAME"/>
         <result property="typeId" column="TYPE_ID"/>
@@ -52,7 +52,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			<result column="Q4" property="q4"/>
 		</collection>
 	</resultMap>
-	<resultMap id="RM_HjsUser" type="com.cifex.transfer.model.dto.HjsUser">
+	<resultMap id="RM_AbUser" type="com.aibang.transfer.model.dto.AbUser">
         <result property="id" column="ID"/>
         <result property="username" column="USERNAME"/>
         <result property="typeId" column="TYPE_ID"/>
@@ -73,7 +73,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         <result property="nrpUsrId" column="NRP_USR_ID"/>
         <result property="isUpdatedUsername" column="IS_UPDATED_USERNAME"/>
 	</resultMap>
-	<resultMap id="RM_HjsUserOpt" type="com.cifex.transfer.model.dto.HjsUser">
+	<resultMap id="RM_AbUserOpt" type="com.aibang.transfer.model.dto.AbUser">
         <result property="id" column="ID"/>
         <result property="username" column="USERNAME"/>
         <result property="typeId" column="TYPE_ID"/>
@@ -93,7 +93,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         <result property="passwordLevel" column="PASSWORD_LEVEL"/>
         <result property="nrpUsrId" column="NRP_USR_ID"/>
         <result property="isUpdatedUsername" column="IS_UPDATED_USERNAME"/>
-        <collection property="hjsUsersOpt" column="OPT_ID"  ofType="com.cifex.transfer.model.dto.HjsUsersOpt">
+        <collection property="AbUsersOpt" column="OPT_ID"  ofType="com.aibang.transfer.model.dto.AbUsersOpt">
 			<id column="OPT_ID" property="id"/>
 			<result column="LOGIN_ID" property="loginId"/>
 			<result column="ENT_ID" property="entId"/>
@@ -106,12 +106,12 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsUser.columns">
+	<sql id="AbUser.columns">
 	    <![CDATA[
 		ID,USERNAME,TYPE_ID,EMAIL,PHONE,PASSWORD,STATUS,OPT_ID,CREATE_TIME,CREATE_IP,IS_DEL,DELETE_TIME,PHONE_STATUS,EMAIL_STATUS,REALNAME,REALNAME_STATUS,PASSWORD_LEVEL,NRP_USR_ID,IS_UPDATED_USERNAME
 	    ]]>
 	</sql>
-	<sql id="HjsUser.columnsOpt">	    
+	<sql id="AbUser.columnsOpt">	    
 		u.ID,u.USERNAME,u.TYPE_ID,u.EMAIL,u.PHONE,u.PASSWORD,
 		u.STATUS,u.OPT_ID,u.CREATE_TIME,u.CREATE_IP,u.IS_DEL,
 		u.DELETE_TIME,u.PHONE_STATUS,u.EMAIL_STATUS,u.REALNAME,u.REALNAME_STATUS,u.PASSWORD_LEVEL,u.NRP_USR_ID,u.IS_UPDATED_USERNAME,
@@ -124,9 +124,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<insert id="HjsUser.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbUser.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_user (
+        INSERT INTO ab_user (
         	USERNAME ,
         	TYPE_ID ,
         	EMAIL ,
@@ -167,8 +167,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUser.update" >
-        UPDATE hjs_user SET
+	<update id="AbUser.update" >
+        UPDATE ab_user SET
         	<if test="@Ognl@isNotEmpty(username)">
 				USERNAME = #{username} ,
 			</if>
@@ -229,8 +229,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUser.updatePass">
-		update hjs_user set
+	<update id="AbUser.updatePass">
+		update ab_user set
 			<if test="@Ognl@isNotEmpty(password)">
 				PASSWORD=#{password},
 			</if>
@@ -246,8 +246,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUser.updateCustomerPass">
-		update hjs_user set
+	<update id="AbUser.updateCustomerPass">
+		update ab_user set
 		<if test="@Ognl@isNotEmpty(passwordLevel)">
 		PASSWORD_LEVEL = #{passwordLevel},
 		</if>
@@ -260,8 +260,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUser.auditRealName">
-		update hjs_user set
+	<update id="AbUser.auditRealName">
+		update ab_user set
 		REALNAME_STATUS=#{realNameStatus},
 		OPT_ID=#{optId}
 		where ID = #{id}
@@ -271,8 +271,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUser.activateRealName">
-		update hjs_user set
+	<update id="AbUser.activateRealName">
+		update ab_user set
 		REALNAME = #{realName},
 		REALNAME_STATUS=#{realNameStatus}
 		where ID = #{id}
@@ -282,8 +282,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUser.auditEmail">
-		update hjs_user set
+	<update id="AbUser.auditEmail">
+		update ab_user set
 		EMAIL_STATUS = #{emailStatus},
 		OPT_ID=#{optId}
 		where ID = #{id}
@@ -293,8 +293,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.18
 	-->
-	<update id="HjsUser.activateEmail">
-		update hjs_user set
+	<update id="AbUser.activateEmail">
+		update ab_user set
 		EMAIL = #{email},
 		EMAIL_STATUS = #{emailStatus}
 		where ID = #{id}
@@ -304,8 +304,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUser.auditPhone">
-		update hjs_user set
+	<update id="AbUser.auditPhone">
+		update ab_user set
 		PHONE_STATUS = #{phoneStatus},
 		OPT_ID=#{optId}
 		where ID = #{id}
@@ -315,8 +315,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUser.activatePhone">
-		update hjs_user set
+	<update id="AbUser.activatePhone">
+		update ab_user set
 		PHONE = #{phone},
 		PHONE_STATUS = #{phoneStatus}
 		where ID = #{id}
@@ -328,9 +328,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <update id="HjsUser.remove">
+    <update id="AbUser.remove">
     <![CDATA[
-        UPDATE hjs_user SET
+        UPDATE ab_user SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -343,9 +343,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <delete id="HjsUser.delete">
+    <delete id="AbUser.delete">
     <![CDATA[
-        DELETE FROM hjs_user WHERE
+        DELETE FROM ab_user WHERE
         ID = #{id} 
     ]]>
     </delete>
@@ -354,7 +354,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsUser.getById" resultMap="userAndRoleResultMap">
+    <select id="AbUser.getById" resultMap="userAndRoleResultMap">
 		SELECT 	u.ID,u.USERNAME,u.TYPE_ID,u.EMAIL,u.PHONE,u.PASSWORD,u.STATUS,u.OPT_ID,u.CREATE_TIME,u.CREATE_IP,
 		        u.IS_DEL,u.DELETE_TIME,u.PHONE_STATUS,u.EMAIL_STATUS,u.REALNAME,u.REALNAME_STATUS,u.PASSWORD_LEVEL,u.NRP_USR_ID,u.IS_UPDATED_USERNAME,
 				r.ID as ROLE_ID,
@@ -379,9 +379,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 				r.Q2,
 				r.Q3,
 				r.Q4
-		    FROM hjs_user u
-		left join HJS_SYS_USER_ROLE ur on ur.USER_ID=u.ID 
-		left join HJS_SYS_ROLE r on ur.ROLE_ID=r.ID 
+		    FROM ab_user u
+		left join ab_SYS_USER_ROLE ur on ur.USER_ID=u.ID 
+		left join ab_SYS_ROLE r on ur.ROLE_ID=r.ID 
 	        WHERE u.IS_DEL=0 AND
 		        u.ID = #{id} 
 	</select>
@@ -390,7 +390,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<sql id="HjsUser.findPage.where">
+	<sql id="AbUser.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	 
 			u.IS_DEL=0 AND u.TYPE_ID=1   				
@@ -465,20 +465,20 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsUser.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_user u
-		<include refid="HjsUser.findPage.where"/>    
+    <select id="AbUser.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_user u
+		<include refid="AbUser.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsUser.findPage" resultMap="RM_HjsUserOpt">
-    	SELECT <include refid="HjsUser.columnsOpt" />
-	    FROM hjs_user u
-	    left join hjs_users_opt o on u.ID=o.LOGIN_ID
-		<include refid="HjsUser.findPage.where"/>
+    <select id="AbUser.findPage" resultMap="RM_AbUserOpt">
+    	SELECT <include refid="AbUser.columnsOpt" />
+	    FROM ab_user u
+	    left join ab_users_opt o on u.ID=o.LOGIN_ID
+		<include refid="AbUser.findPage.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}
@@ -492,10 +492,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsUser.getByUsername" resultMap="RM_HjsUser" parameterType="java.lang.String">
-	    SELECT <include refid="HjsUser.columns"/>
+    <select id="AbUser.getByUsername" resultMap="RM_AbUser" parameterType="java.lang.String">
+	    SELECT <include refid="AbUser.columns"/>
 	    <![CDATA[
-	        FROM hjs_user  where IS_DEL=0 AND STATUS=1 AND USERNAME = #{username}
+	        FROM ab_user  where IS_DEL=0 AND STATUS=1 AND USERNAME = #{username}
 	    ]]>
     </select>
     <!--
@@ -503,10 +503,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.24
 	-->
-    <select id="HjsUser.getByName" resultMap="RM_HjsUser">
-	    SELECT <include refid="HjsUser.columns"/>
+    <select id="AbUser.getByName" resultMap="RM_AbUser">
+	    SELECT <include refid="AbUser.columns"/>
 	    <![CDATA[
-	        FROM hjs_user  where IS_DEL=0 AND STATUS=1 AND ((EMAIL = #{email} AND EMAIL_STATUS=1) OR (PHONE = #{phone} AND PHONE_STATUS=1) OR (USERNAME = #{username}))
+	        FROM ab_user  where IS_DEL=0 AND STATUS=1 AND ((EMAIL = #{email} AND EMAIL_STATUS=1) OR (PHONE = #{phone} AND PHONE_STATUS=1) OR (USERNAME = #{username}))
 	    ]]>
     </select>
     
@@ -515,7 +515,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsUser.getUserInfo" parameterType="User" resultMap="userAndRoleResultMap"><!-- insert update delete (flushCache="true/false") -->
+	<select id="AbUser.getUserInfo" parameterType="User" resultMap="userAndRoleResultMap"><!-- insert update delete (flushCache="true/false") -->
 		select  u.ID,
 				u.USERNAME,
 				u.PASSWORD,
@@ -542,9 +542,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 				r.Q1,
 				r.Q2,
 				r.Q3,
-				r.Q4  from HJS_USER u
-		left join HJS_SYS_USER_ROLE ur on ur.USER_ID=u.ID 
-		left join HJS_SYS_ROLE r on ur.ROLE_ID=r.ID 
+				r.Q4  from ab_USER u
+		left join ab_SYS_USER_ROLE ur on ur.USER_ID=u.ID 
+		left join ab_SYS_ROLE r on ur.ROLE_ID=r.ID 
 		where u.IS_DEL=0 and TYPE_ID=1 and STATUS=1
 		<if test="username != null and password != null">
 	  	and	(
@@ -564,9 +564,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsUser.getCustomerInfo" parameterType="User" resultMap="RM_HjsUser"><!-- insert update delete (flushCache="true/false") -->
-		select  <include refid="HjsUser.columns"/>  
-	  	from HJS_USER  
+	<select id="AbUser.getCustomerInfo" parameterType="User" resultMap="RM_AbUser"><!-- insert update delete (flushCache="true/false") -->
+		select  <include refid="AbUser.columns"/>  
+	  	from ab_USER  
 		where IS_DEL=0 and TYPE_ID=3 
 		<if test="username != null and password != null">
 	  	and	(
@@ -586,8 +586,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUser.deleteAllU">
-		update HJS_USER 
+	<update id="AbUser.deleteAllU">
+		update ab_USER 
 		set IS_DEL=1,
 		DELETE_TIME=#{deleteTimeBegin}
 		where 
@@ -601,8 +601,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<delete id="HjsUser.deleteUserRole">
-		delete from HJS_SYS_USER_ROLE
+	<delete id="AbUser.deleteUserRole">
+		delete from ab_SYS_USER_ROLE
 		where USER_ID =#{userId}
 	</delete>
 	<!--
@@ -610,8 +610,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsUser.userenameUnique" resultMap="RM_HjsUser">
-		select ID from HJS_USER 
+	<select id="AbUser.userenameUnique" resultMap="RM_AbUser">
+		select ID from ab_USER 
 		WHERE IS_DEL=0 AND USERNAME = #{username} 
 		<if test="@Ognl@isNotEmpty(id)">
 				AND ID != #{id}
@@ -622,8 +622,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsUser.emailUnique" resultMap="RM_HjsUser">
-		select ID from HJS_USER 
+	<select id="AbUser.emailUnique" resultMap="RM_AbUser">
+		select ID from ab_USER 
 		WHERE IS_DEL=0 AND EMAIL = #{email}
 		<if test="@Ognl@isNotEmpty(id)">
 				AND ID != #{id}
@@ -634,8 +634,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsUser.phoneUnique" resultMap="RM_HjsUser">
-		select ID from HJS_USER 
+	<select id="AbUser.phoneUnique" resultMap="RM_AbUser">
+		select ID from ab_USER 
 		WHERE IS_DEL=0 AND PHONE = #{phone}
 		<if test="@Ognl@isNotEmpty(id)">
 				AND ID != #{id}
@@ -646,16 +646,16 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.11.18
 	-->
-	<update id="HjsUser.saveHF">
-		update HJS_USER 
+	<update id="AbUser.saveHF">
+		update ab_USER 
 		set NRP_USR_ID=#{nrpUsrId} 
 		where 
 			ID = #{id}			 
 	</update>
 	
 	<!--  通过手机号查询客户信息-->
-	<select id="HjsUser.getByPhone" resultMap="RM_HjsUser">
-		select * from HJS_USER 
+	<select id="AbUser.getByPhone" resultMap="RM_AbUser">
+		select * from ab_USER 
 		WHERE PHONE = #{phone} OR USERNAME = #{username}
 	</select>
 </mapper>

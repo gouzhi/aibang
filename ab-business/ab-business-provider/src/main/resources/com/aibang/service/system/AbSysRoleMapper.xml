@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsSysRole">
+<mapper namespace="AbSysRole">
 
-	<resultMap id="RM_HjsSysRole" type="com.cifex.transfer.model.dto.HjsSysRole">
+	<resultMap id="RM_AbSysRole" type="com.aibang.transfer.model.dto.AbSysRole">
         <result property="id" column="ID"/>
         <result property="parentId" column="PARENT_ID"/>
         <result property="roleName" column="ROLE_NAME"/>
@@ -40,7 +40,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsSysRole.columns">
+	<sql id="AbSysRole.columns">
 	    <![CDATA[
 		ID,PARENT_ID,ROLE_NAME,MENU_RIGHTS,ADD_QX,DEL_QX,EDIT_QX,CHA_QX,AUDIT_QX,FX_QX,FW_QX,QX1,QX2,QX3,QX4,C1,C2,C3,C4,Q1,Q2,Q3,Q4,IS_DEL,VERSION,CREATE_TIME,UPDATE_TIME,DELETE_TIME,OPT_ID
 	    ]]>
@@ -52,9 +52,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<insert id="HjsSysRole.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbSysRole.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_sys_role (
+        INSERT INTO ab_sys_role (
         	ID ,
         	PARENT_ID ,
         	ROLE_NAME ,
@@ -129,8 +129,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsSysRole.update" >
-        UPDATE hjs_sys_role SET
+	<update id="AbSysRole.update" >
+        UPDATE ab_sys_role SET
         	<if test="@Ognl@isNotEmpty(parentId)">
 				PARENT_ID = #{parentId} ,
 		   </if>
@@ -227,9 +227,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <update id="HjsSysRole.remove">
+    <update id="AbSysRole.remove">
     <![CDATA[
-        UPDATE hjs_sys_role SET
+        UPDATE ab_sys_role SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -242,9 +242,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <delete id="HjsSysRole.delete">
+    <delete id="AbSysRole.delete">
     <![CDATA[
-        DELETE FROM hjs_sys_role WHERE
+        DELETE FROM ab_sys_role WHERE
         ID = #{id} 
     ]]>
     </delete>
@@ -253,10 +253,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsSysRole.getById" resultMap="RM_HjsSysRole">
-		SELECT <include refid="HjsSysRole.columns" />
+    <select id="AbSysRole.getById" resultMap="RM_AbSysRole">
+		SELECT <include refid="AbSysRole.columns" />
 	    <![CDATA[
-		    FROM hjs_sys_role 
+		    FROM ab_sys_role 
 	        WHERE IS_DEL=0 AND
 		        ID = #{id} 
 	    ]]>
@@ -266,7 +266,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<sql id="HjsSysRole.findPage.where">
+	<sql id="AbSysRole.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	
 		 IS_DEL=0 AND      				
@@ -369,19 +369,19 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 		
-    <select id="HjsSysRole.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_sys_role 
-		<include refid="HjsSysRole.findPage.where"/>    
+    <select id="AbSysRole.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_sys_role 
+		<include refid="AbSysRole.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsSysRole.findPage" resultMap="RM_HjsSysRole">
-    	SELECT <include refid="HjsSysRole.columns" />
-	    FROM hjs_sys_role 
-		<include refid="HjsSysRole.findPage.where"/>
+    <select id="AbSysRole.findPage" resultMap="RM_AbSysRole">
+    	SELECT <include refid="AbSysRole.columns" />
+	    FROM ab_sys_role 
+		<include refid="AbSysRole.findPage.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}
@@ -391,7 +391,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</if>
     </select>
     
-    <select id="HjsSysRole.listAllERRoles" resultMap="RM_HjsSysRole">
+    <select id="AbSysRole.listAllERRoles" resultMap="RM_AbSysRole">
 		select 
 			ID,
 			ROLE_NAME,
@@ -401,13 +401,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			DEL_QX,
 			EDIT_QX,
 			CHA_QX,AUDIT_QX
-		from HJS_SYS_ROLE 
+		from ab_sys_role 
 		where IS_DEL=0 AND
 			PARENT_ID != '0'
 	</select>
 	
 	<!-- 列出会员二级角色信息 -->
-	<select id="HjsSysRole.listAllappERRoles" resultMap="RM_HjsSysRole">
+	<select id="AbSysRole.listAllappERRoles" resultMap="RM_AbSysRole">
 		select 
 			ROLE_ID,
 			ROLE_NAME,
@@ -418,14 +418,14 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			EDIT_QX,
 			CHA_QX,AUDIT_QX,
 			QX_ID
-		from HJS_SYS_ROLE 
+		from ab_sys_role 
 		where IS_DEL=0 AND
 		 	PARENT_ID = '7'
 	</select>
 	
 	<!-- 给全部子职位加菜单权限 -->
-	<update id="HjsSysRole.setAllRights">
-		update HJS_SYS_ROLE 
+	<update id="AbSysRole.setAllRights">
+		update ab_sys_role 
 		set MENU_RIGHTS=#{menuRights} 
 		where PARENT_ID=#{id}
 	</update>
@@ -434,8 +434,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsSysRole.add_qx" >
-		update HJS_SYS_ROLE 
+	<update id="AbSysRole.add_qx" >
+		update ab_sys_role 
 		set ADD_QX=#{addQx} 
 		where ID=#{id}
 	</update>
@@ -444,8 +444,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsSysRole.del_qx" >
-		update HJS_SYS_ROLE 
+	<update id="AbSysRole.del_qx" >
+		update ab_sys_role 
 		set DEL_QX=#{delQx} 
 		where ID=#{id}
 	</update>
@@ -454,8 +454,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsSysRole.edit_qx">
-		update HJS_SYS_ROLE 
+	<update id="AbSysRole.edit_qx">
+		update ab_sys_role 
 		set EDIT_QX=#{editQx} 
 		where ID=#{id}
 	</update>
@@ -464,8 +464,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsSysRole.cha_qx" >
-		update HJS_SYS_ROLE 
+	<update id="AbSysRole.cha_qx" >
+		update ab_sys_role 
 		set CHA_QX=#{chaQx} 
 		where ID=#{id}
 	</update>
@@ -474,32 +474,32 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsSysRole.audit_qx" >
-		update HJS_SYS_ROLE 
+	<update id="AbSysRole.audit_qx" >
+		update ab_sys_role 
 		set AUDIT_QX=#{auditQx} 
 		where ID=#{id}
 	</update>
 	
-	<update id="HjsSysRole.kfqx1" parameterType="pd">
-		update HJS_SYS_ROLE 
+	<update id="AbSysRole.kfqx1" parameterType="pd">
+		update ab_sys_role 
 		set QX1=#{qx1} 
 		where ID=#{id}
 	</update>
 	
-	<update id="HjsSysRole.kfqx2" parameterType="pd">
-		update HJS_SYS_ROLE 
+	<update id="AbSysRole.kfqx2" parameterType="pd">
+		update ab_sys_role 
 		set QX2=#{qx2} 
 		where ID=#{id}
 	</update>
 	
-	<update id="HjsSysRole.fxqx" parameterType="pd">
-		update HJS_SYS_ROLE 
+	<update id="AbSysRole.fxqx" parameterType="pd">
+		update ab_sys_role 
 		set FX_QX=#{fxQx} 
 		where ID=#{id}
 	</update>
 	
-	<update id="HjsSysRole.fwqx" parameterType="pd">
-		update HJS_SYS_ROLE 
+	<update id="AbSysRole.fwqx" parameterType="pd">
+		update ab_sys_role 
 		set FW_QX=#{fwQx} 
 		where ID=#{id}
 	</update>
@@ -508,8 +508,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsSysRole.updateRoleRights" parameterType="Role">
-		update HJS_SYS_ROLE 
+	<update id="AbSysRole.updateRoleRights" parameterType="Role">
+		update ab_sys_role 
 		set MENU_RIGHTS=#{menuRights} 
 		where ID=#{id}
 	</update>
@@ -518,7 +518,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsSysRole.listAllRoles" resultMap="RM_HjsSysRole">
+	<select id="AbSysRole.listAllRoles" resultMap="RM_AbSysRole">
 		select 
 			ID,
 			ROLE_NAME,
@@ -531,7 +531,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			FX_QX,
 			FW_QX,
 			QX1,QX2,QX3,QX4,C1,C2,C3,C4,Q1,Q2,Q3,Q4			
-		from HJS_SYS_ROLE 
+		from ab_sys_role 
 		where IS_DEL=0 AND PARENT_ID = 0
 		ORDER BY ID
 	</select>
@@ -540,7 +540,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="listAllRolesByPId" resultMap="RM_HjsSysRole">
+	<select id="listAllRolesByPId" resultMap="RM_AbSysRole">
 		select 
 			ID,
 			ROLE_NAME,
@@ -553,7 +553,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			FX_QX,
 			FW_QX,
 			QX1,QX2,QX3,QX4,C1,C2,C3,C4,Q1,Q2,Q3,Q4
-		from HJS_SYS_ROLE  
+		from ab_sys_role  
 		where IS_DEL=0 AND
 			PARENT_ID = #{id}
 		ORDER BY ID

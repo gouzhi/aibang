@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsSysMenu">
+<mapper namespace="AbSysMenu">
 
-	<resultMap id="RM_HjsSysMenu" type="com.cifex.transfer.model.dto.HjsSysMenu">
+	<resultMap id="RM_AbSysMenu" type="com.aibang.transfer.model.dto.AbSysMenu">
         <result property="id" column="ID"/>
         <result property="menuName" column="MENU_NAME"/>
         <result property="typeId" column="TYPE_ID"/>
@@ -24,7 +24,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsSysMenu.columns">
+	<sql id="AbSysMenu.columns">
 	    <![CDATA[
 		ID,MENU_NAME,TYPE_ID,PARENT_ID,MENU_URL,ORDER_ID,MENU_ICON,IS_DEL,VERSION,CREATE_TIME,UPDATE_TIME,DELETE_TIME,OPT_ID
 	    ]]>
@@ -36,9 +36,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<insert id="HjsSysMenu.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbSysMenu.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_sys_menu (
+        INSERT INTO ab_sys_menu (
         	ID ,
         	MENU_NAME ,
         	TYPE_ID ,
@@ -75,9 +75,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsSysMenu.update" >
+	<update id="AbSysMenu.update" >
     <![CDATA[
-        UPDATE hjs_sys_menu SET
+        UPDATE ab_sys_menu SET
 	        MENU_NAME = #{menuName} ,
 	        TYPE_ID = #{typeId} ,
 	        PARENT_ID = #{parentId} ,
@@ -94,9 +94,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <update id="HjsSysMenu.remove">
+    <update id="AbSysMenu.remove">
     <![CDATA[
-        UPDATE hjs_sys_menu SET
+        UPDATE ab_sys_menu SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -109,9 +109,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <delete id="HjsSysMenu.delete">
+    <delete id="AbSysMenu.delete">
     <![CDATA[
-        DELETE FROM hjs_sys_menu WHERE
+        DELETE FROM ab_sys_menu WHERE
         ID = #{id} 
     ]]>
     </delete>
@@ -120,10 +120,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsSysMenu.getById" resultMap="RM_HjsSysMenu">
-		SELECT <include refid="HjsSysMenu.columns" />
+    <select id="AbSysMenu.getById" resultMap="RM_AbSysMenu">
+		SELECT <include refid="AbSysMenu.columns" />
 	    <![CDATA[
-		    FROM hjs_sys_menu 
+		    FROM ab_sys_menu 
 	        WHERE 
 		        ID = #{id} 
 	    ]]>
@@ -133,7 +133,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<sql id="HjsSysMenu.findPage.where">
+	<sql id="AbSysMenu.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	
 			IS_DEL=0      				
@@ -188,19 +188,19 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 		
-    <select id="HjsSysMenu.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_sys_menu 
-		<include refid="HjsSysMenu.findPage.where"/>    
+    <select id="AbSysMenu.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_sys_menu 
+		<include refid="AbSysMenu.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsSysMenu.findPage" resultMap="RM_HjsSysMenu">
-    	SELECT <include refid="HjsSysMenu.columns" />
-	    FROM hjs_sys_menu 
-		<include refid="HjsSysMenu.findPage.where"/>
+    <select id="AbSysMenu.findPage" resultMap="RM_AbSysMenu">
+    	SELECT <include refid="AbSysMenu.columns" />
+	    FROM ab_sys_menu 
+		<include refid="AbSysMenu.findPage.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}
@@ -214,8 +214,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsSysMenu.listAllParentMenu" resultMap="RM_HjsSysMenu">
-		select * from hjs_sys_menu 
+    <select id="AbSysMenu.listAllParentMenu" resultMap="RM_AbSysMenu">
+		select * from ab_sys_menu 
 		where IS_DEL=0 AND PARENT_ID = '0' order by ORDER_ID 
 	</select>
 	<!--
@@ -223,8 +223,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsSysMenu.listSubMenuByParentId" resultMap="RM_HjsSysMenu">
-		select  * from hjs_sys_menu
+	<select id="AbSysMenu.listSubMenuByParentId" resultMap="RM_AbSysMenu">
+		select  * from ab_sys_menu
 		where IS_DEL=0 AND PARENT_ID = #{id} order by ORDER_ID 
 	</select>
 	<!--
@@ -232,8 +232,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsSysMenu.editicon" parameterType="Menu">
-		update HJS_SYS_MENU set 
+	<update id="AbSysMenu.editicon" parameterType="Menu">
+		update ab_SYS_MENU set 
 			MENU_ICON=#{menuIcon}
 		where ID=#{id}
 	</update>
@@ -242,8 +242,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsSysMenu.editType" parameterType="Menu">
-		update HJS_SYS_MENU set 
+	<update id="AbSysMenu.editType" parameterType="Menu">
+		update ab_SYS_MENU set 
 			TYPE_ID=#{typeId}
 		where PARENT_ID=#{id}
 	</update>
@@ -252,8 +252,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsSysMenu.findAllMenu" resultMap="RM_HjsSysMenu">
-		select * from HJS_SYS_MENU order by ORDER_ID
+	<select id="AbSysMenu.findAllMenu" resultMap="RM_AbSysMenu">
+		select * from ab_SYS_MENU order by ORDER_ID
 	</select>
 
 	

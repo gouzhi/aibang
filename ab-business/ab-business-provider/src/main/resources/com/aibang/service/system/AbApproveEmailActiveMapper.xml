@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsApproveEmailActive">
+<mapper namespace="AbApproveEmailActive">
 
-	<resultMap id="RM_HjsApproveEmailActive" type="com.cifex.transfer.model.dto.HjsApproveEmailActive">
+	<resultMap id="RM_AbApproveEmailActive" type="com.aibang.transfer.model.dto.AbApproveEmailActive">
         <result property="id" column="ID"/>
         <result property="userId" column="USER_ID"/>
         <result property="email" column="EMAIL"/>
@@ -17,20 +17,20 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         <result property="verifyTime" column="VERIFY_TIME"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="createIp" column="CREATE_IP"/>
-        <collection property="hjsUser" column="LOGINID"  ofType="com.cifex.transfer.model.dto.HjsUser">
+        <collection property="AbUser" column="LOGINID"  ofType="com.aibang.transfer.model.dto.AbUser">
 			<id property="id" column="LOGINID"/>
         	<result property="username" column="USERNAME"/>
 		</collection>
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsApproveEmailActive.columns">
+	<sql id="AbApproveEmailActive.columns">
 	    <![CDATA[
 		ID,USER_ID,EMAIL,STATUS,CREATE_TIME,CREATE_IP,VERIFY_USERID,VERIFY_MEMO,VERIFY_TIME
 	    ]]>
 	</sql>
 
-    <sql id="HjsApproveEmailActive.tbcolumns">
+    <sql id="AbApproveEmailActive.tbcolumns">
 	    <![CDATA[
 		tb.ID,tb.USER_ID,tb.EMAIL,tb.STATUS,tb.CREATE_TIME,tb.CREATE_IP,tb.VERIFY_USERID,tb.VERIFY_MEMO,tb.VERIFY_TIME,
 		u.ID as LOGINID,u.USERNAME
@@ -43,9 +43,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<insert id="HjsApproveEmailActive.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbApproveEmailActive.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_approve_email_active (       	
+        INSERT INTO ab_approve_email_active (       	
         	USER_ID ,
         	EMAIL ,
         	STATUS ,
@@ -78,9 +78,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsApproveEmailActive.update" >
+	<update id="AbApproveEmailActive.update" >
     <![CDATA[
-        UPDATE hjs_approve_email_active SET
+        UPDATE ab_approve_email_active SET
 	        USER_ID = #{userId} ,
 	        EMAIL = #{email} ,
 	        STATUS = #{status} ,
@@ -98,8 +98,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsApproveEmailActive.audit">		
-		update hjs_approve_email_active set 
+	<update id="AbApproveEmailActive.audit">		
+		update ab_approve_email_active set 
 		STATUS = #{status} ,
 		VERIFY_USERID = #{verifyUserid} ,
 	    VERIFY_MEMO = #{verifyMemo} ,
@@ -111,8 +111,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsApproveEmailActive.activate">		
-		update hjs_approve_email_active set 
+	<update id="AbApproveEmailActive.activate">		
+		update ab_approve_email_active set 
 		EMAIL = #{email} ,
 		STATUS = #{status} ,
 	    VERIFY_TIME = #{verifyTime} 
@@ -123,9 +123,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <update id="HjsApproveEmailActive.remove">
+    <update id="AbApproveEmailActive.remove">
     <![CDATA[
-        UPDATE hjs_approve_email_active SET
+        UPDATE ab_approve_email_active SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -138,9 +138,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <delete id="HjsApproveEmailActive.delete">
+    <delete id="AbApproveEmailActive.delete">
     <![CDATA[
-        DELETE FROM hjs_approve_email_active WHERE
+        DELETE FROM ab_approve_email_active WHERE
         ID = #{id} 
     ]]>
     </delete>
@@ -149,10 +149,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsApproveEmailActive.getById" resultMap="RM_HjsApproveEmailActive">
-		SELECT <include refid="HjsApproveEmailActive.columns" />
+    <select id="AbApproveEmailActive.getById" resultMap="RM_AbApproveEmailActive">
+		SELECT <include refid="AbApproveEmailActive.columns" />
 	    <![CDATA[
-		    FROM hjs_approve_email_active 
+		    FROM ab_approve_email_active 
 	        WHERE 
 		        ID = #{id} 
 	    ]]>
@@ -162,10 +162,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsApproveEmailActive.getByLoginId" resultMap="RM_HjsApproveEmailActive">
-		SELECT <include refid="HjsApproveEmailActive.columns" />
+	<select id="AbApproveEmailActive.getByLoginId" resultMap="RM_AbApproveEmailActive">
+		SELECT <include refid="AbApproveEmailActive.columns" />
 	    <![CDATA[
-		    FROM hjs_approve_email_active 
+		    FROM ab_approve_email_active 
 	        WHERE 
 		        USER_ID = #{userId} 
 	    ]]>
@@ -175,7 +175,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<sql id="HjsApproveEmailActive.findPage.where">
+	<sql id="AbApproveEmailActive.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	      				
 	       <if test="@Ognl@isNotEmpty(id)">
@@ -211,21 +211,21 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 		
-    <select id="HjsApproveEmailActive.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_approve_email_active tb 
-        left join hjs_user u on tb.USER_ID=u.ID 
-		<include refid="HjsApproveEmailActive.findPage.where"/>    
+    <select id="AbApproveEmailActive.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_approve_email_active tb 
+        left join ab_user u on tb.USER_ID=u.ID 
+		<include refid="AbApproveEmailActive.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsApproveEmailActive.findPage" resultType="map">
-    	SELECT <include refid="HjsApproveEmailActive.tbcolumns" />
-	    FROM hjs_approve_email_active tb 
-	    left join hjs_user u on tb.USER_ID=u.ID 
-		<include refid="HjsApproveEmailActive.findPage.where"/>
+    <select id="AbApproveEmailActive.findPage" resultType="map">
+    	SELECT <include refid="AbApproveEmailActive.tbcolumns" />
+	    FROM ab_approve_email_active tb 
+	    left join ab_user u on tb.USER_ID=u.ID 
+		<include refid="AbApproveEmailActive.findPage.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}

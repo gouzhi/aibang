@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsUsersInvite">
+<mapper namespace="AbUsersInvite">
 
-	<resultMap id="RM_HjsUsersInviteAndBase" type="com.cifex.transfer.model.dto.HjsUsersInvite">
+	<resultMap id="RM_AbUsersInviteAndBase" type="com.aibang.transfer.model.dto.AbUsersInvite">
         <result property="id" column="ID"/>
         <result property="inviteType" column="INVITE_TYPE"/>
         <result property="userId" column="USER_ID"/>
@@ -15,12 +15,12 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         <result property="inviteCode" column="INVITE_CODE"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="createIp" column="CREATE_IP"/>
-        <collection property="inviteBase" column="USERID"  ofType="com.cifex.transfer.model.dto.HjsUserBase">
+        <collection property="inviteBase" column="USERID"  ofType="com.aibang.transfer.model.dto.AbUserBase">
 			<id property="id" column="USERID"/>
         	<result property="username" column="USERNAME"/>       	
 		</collection>
 	</resultMap>
-	<resultMap id="RM_HjsUsersInvite" type="com.cifex.transfer.model.dto.HjsUsersInvite">
+	<resultMap id="RM_AbUsersInvite" type="com.aibang.transfer.model.dto.AbUsersInvite">
         <result property="id" column="ID"/>
         <result property="inviteType" column="INVITE_TYPE"/>
         <result property="userId" column="USER_ID"/>
@@ -31,13 +31,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsUsersInvite.columns">
+	<sql id="AbUsersInvite.columns">
 	    <![CDATA[
 		ID,INVITE_TYPE,USER_ID,INVITE_USER_ID,INVITE_CODE,CREATE_TIME,CREATE_IP
 	    ]]>
 	</sql>
 
-    <sql id="HjsUsersInvite.tbcolumns">
+    <sql id="AbUsersInvite.tbcolumns">
 	    <![CDATA[
 		tb.ID,tb.INVITE_TYPE,tb.USER_ID,tb.INVITE_USER_ID,tb.INVITE_CODE,tb.CREATE_TIME,tb.CREATE_IP,
 		b.ID AS USERID,b.USERNAME
@@ -45,9 +45,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</sql>
 	
 	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
-	<insert id="HjsUsersInvite.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbUsersInvite.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_users_invite (
+        INSERT INTO ab_users_invite (
         	
         	INVITE_TYPE ,
         	USER_ID ,
@@ -74,9 +74,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		-->
 	</insert>
     
-	<update id="HjsUsersInvite.update" >
+	<update id="AbUsersInvite.update" >
     <![CDATA[
-        UPDATE hjs_users_invite SET
+        UPDATE ab_users_invite SET
 	        INVITE_TYPE = #{inviteType} ,
 	        USER_ID = #{userId} ,
 	        INVITE_USER_ID = #{inviteUserId} ,
@@ -91,9 +91,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
    
 	
-    <update id="HjsUsersInvite.remove">
+    <update id="AbUsersInvite.remove">
     <![CDATA[
-        UPDATE hjs_users_invite SET
+        UPDATE ab_users_invite SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -102,23 +102,23 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     </update>
     
     
-    <delete id="HjsUsersInvite.delete">
+    <delete id="AbUsersInvite.delete">
     <![CDATA[
-        DELETE FROM hjs_users_invite WHERE
+        DELETE FROM ab_users_invite WHERE
         ID = #{id} 
     ]]>
     </delete>
     
-    <select id="HjsUsersInvite.getById" resultMap="RM_HjsUsersInvite">
-		SELECT <include refid="HjsUsersInvite.columns" />
+    <select id="AbUsersInvite.getById" resultMap="RM_AbUsersInvite">
+		SELECT <include refid="AbUsersInvite.columns" />
 	    <![CDATA[
-		    FROM hjs_users_invite 
+		    FROM ab_users_invite 
 	        WHERE 
 		        ID = #{id} 
 	    ]]>
 	</select>
 	
-	<sql id="HjsUsersInvite.findPage.where">
+	<sql id="AbUsersInvite.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	      				
 	       <if test="@Ognl@isNotEmpty(id)">
@@ -148,19 +148,19 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 		
-    <select id="HjsUsersInvite.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_users_invite tb 
-		<include refid="HjsUsersInvite.findPage.where"/>    
+    <select id="AbUsersInvite.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_users_invite tb 
+		<include refid="AbUsersInvite.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsUsersInvite.findPage" resultType="map">
-    	SELECT <include refid="HjsUsersInvite.tbcolumns" />
-	    FROM hjs_users_invite tb
-		<include refid="HjsUsersInvite.findPage.where"/>
+    <select id="AbUsersInvite.findPage" resultType="map">
+    	SELECT <include refid="AbUsersInvite.tbcolumns" />
+	    FROM ab_users_invite tb
+		<include refid="AbUsersInvite.findPage.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}
@@ -171,32 +171,32 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     </select>
 
 	
-	<select id="HjsUsersInvite.findAll" resultMap="RM_HjsUsersInvite">
-    	SELECT <include refid="HjsUsersInvite.columns" />
-	    FROM hjs_users_invite  
+	<select id="AbUsersInvite.findAll" resultMap="RM_AbUsersInvite">
+    	SELECT <include refid="AbUsersInvite.columns" />
+	    FROM ab_users_invite  
     </select>
     
     
     <!-- 获取验证码-->
-    <select id="HjsUsersInvite.list" resultType="String">
+    <select id="AbUsersInvite.list" resultType="String">
 		SELECT
 			distinct a.INVITE_CODE
 		FROM
-			hjs_users_info a where a.USER_ID = #{userId}
+			ab_users_info a where a.USER_ID = #{userId}
 	</select>
 	
 	<!-- 获取 inviteUserId-->
-	 <select id="HjsUsersInvite.getByUserId" resultType="Integer">
+	 <select id="AbUsersInvite.getByUserId" resultType="Integer">
 		SELECT tb.INVITE_USER_ID
-		    FROM hjs_users_invite tb
+		    FROM ab_users_invite tb
 	        WHERE 
 		        USER_ID = #{userId} 
 	</select>
 	<!-- 获取邀请人的账户信息 -->
-	<select id="HjsUsersInvite.getByBaseId" resultMap="RM_HjsUsersInviteAndBase">
+	<select id="AbUsersInvite.getByBaseId" resultMap="RM_AbUsersInviteAndBase">
 		SELECT b.USERNAME
-		    FROM hjs_users_invite tb
-		    left join hjs_user_base b on b.ID=tb.INVITE_USER_ID
+		    FROM ab_users_invite tb
+		    left join ab_user_base b on b.ID=tb.INVITE_USER_ID
 	        WHERE 
 		        tb.USER_ID = #{userId} 
 	</select>

@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsUsersBlack">
+<mapper namespace="AbUsersBlack">
 
-	<resultMap id="RM_HjsUsersBlackpage" type="com.cifex.transfer.model.dto.HjsUsersBlack">
+	<resultMap id="RM_AbUsersBlackpage" type="com.aibang.transfer.model.dto.AbUsersBlack">
         <result property="id" column="ID"/>
         <result property="userId" column="USER_ID"/>
         <result property="memo" column="MEMO"/>
@@ -15,7 +15,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         <result property="optId" column="OPT_ID"/>
         <result property="charge" column="CHARGE"/>
         <result property="limiteTender" column="LIMITE_TENDER"/>
-        <collection property="hjsUser" column="LOGINID"  ofType="com.cifex.transfer.model.dto.HjsUser">
+        <collection property="AbUser" column="LOGINID"  ofType="com.aibang.transfer.model.dto.AbUser">
 			<id property="id" column="LOGINID"/>
         	<result property="username" column="USERNAME"/>       	
         	<result property="status" column="STATUS"/>      	
@@ -23,7 +23,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         	<result property="realName" column="REALNAME"/>
 		</collection>
 	</resultMap>
-	<resultMap id="RM_HjsUsersBlack" type="com.cifex.transfer.model.dto.HjsUsersBlack">
+	<resultMap id="RM_AbUsersBlack" type="com.aibang.transfer.model.dto.AbUsersBlack">
         <result property="id" column="ID"/>
         <result property="userId" column="USER_ID"/>
         <result property="memo" column="MEMO"/>
@@ -35,13 +35,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsUsersBlack.columns">
+	<sql id="AbUsersBlack.columns">
 	    <![CDATA[
 		ID,USER_ID,MEMO,CREATE_IP,CREATE_TIME,OPT_ID,CHARGE,LIMITE_TENDER
 	    ]]>
 	</sql>
 
-    <sql id="HjsUsersBlack.tbcolumns">
+    <sql id="AbUsersBlack.tbcolumns">
 	    <![CDATA[
 		tb.ID,tb.USER_ID,tb.MEMO,tb.CREATE_IP,tb.OPT_ID,tb.CHARGE,tb.LIMITE_TENDER,
 		u.ID AS LOGINID,u.USERNAME,u.REALNAME,u.CREATE_TIME,u.STATUS
@@ -49,9 +49,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</sql>
 	
 	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
-	<insert id="HjsUsersBlack.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbUsersBlack.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_users_black (
+        INSERT INTO ab_users_black (
         	
         	USER_ID ,
         	MEMO ,
@@ -79,9 +79,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		-->
 	</insert>
     
-	<update id="HjsUsersBlack.update" >
+	<update id="AbUsersBlack.update" >
     <![CDATA[
-        UPDATE hjs_users_black SET
+        UPDATE ab_users_black SET
 	        USER_ID = #{userId} ,
 	        MEMO = #{memo} ,
 	        CREATE_IP = #{createIp} ,
@@ -98,9 +98,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.11.3
 	-->
-	<update id="HjsUsersBlack.editBlack" >
+	<update id="AbUsersBlack.editBlack" >
     <![CDATA[
-        UPDATE hjs_users_black SET
+        UPDATE ab_users_black SET
 	        OPT_ID = #{optId} ,
 	        CHARGE = #{charge} ,
 	        LIMITE_TENDER = #{limiteTender} 
@@ -112,9 +112,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
    
 	
-    <update id="HjsUsersBlack.remove">
+    <update id="AbUsersBlack.remove">
     <![CDATA[
-        UPDATE hjs_users_black SET
+        UPDATE ab_users_black SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -123,17 +123,17 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     </update>
     
     
-    <delete id="HjsUsersBlack.delete">
+    <delete id="AbUsersBlack.delete">
     <![CDATA[
-        DELETE FROM hjs_users_black WHERE
+        DELETE FROM ab_users_black WHERE
         ID = #{id} 
     ]]>
     </delete>
     
-    <select id="HjsUsersBlack.getById" resultMap="RM_HjsUsersBlack">
-		SELECT <include refid="HjsUsersBlack.columns" />
+    <select id="AbUsersBlack.getById" resultMap="RM_AbUsersBlack">
+		SELECT <include refid="AbUsersBlack.columns" />
 	    <![CDATA[
-		    FROM hjs_users_black 
+		    FROM ab_users_black 
 	        WHERE 
 		        ID = #{id} 
 	    ]]>
@@ -143,16 +143,16 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.11.2
 	-->
-	<select id="HjsUsersBlack.getByBaseId" resultMap="RM_HjsUsersBlack">
-		SELECT <include refid="HjsUsersBlack.columns" />
+	<select id="AbUsersBlack.getByBaseId" resultMap="RM_AbUsersBlack">
+		SELECT <include refid="AbUsersBlack.columns" />
 	    <![CDATA[
-		    FROM hjs_users_black 
+		    FROM ab_users_black 
 	        WHERE 
 		        USER_ID = #{userId}
 	    ]]>
 	</select>
 	
-	<sql id="HjsUsersBlack.findPage.where">
+	<sql id="AbUsersBlack.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	      				
 	       <if test="@Ognl@isNotEmpty(id)">
@@ -188,23 +188,23 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 		
-    <select id="HjsUsersBlack.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_users_black tb 
-        left join hjs_users_info i on tb.USER_ID=i.USER_ID
-        left join hjs_user u on i.LOGIN_ID=u.ID 
-		<include refid="HjsUsersBlack.findPage.where"/>    
+    <select id="AbUsersBlack.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_users_black tb 
+        left join ab_users_info i on tb.USER_ID=i.USER_ID
+        left join ab_user u on i.LOGIN_ID=u.ID 
+		<include refid="AbUsersBlack.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsUsersBlack.findPage" resultType="map">
-    	SELECT <include refid="HjsUsersBlack.tbcolumns" />
-	    FROM hjs_users_black tb 
-	    left join hjs_users_info i on tb.USER_ID=i.USER_ID
-        left join hjs_user u on i.LOGIN_ID=u.ID 
-		<include refid="HjsUsersBlack.findPage.where"/>
+    <select id="AbUsersBlack.findPage" resultType="map">
+    	SELECT <include refid="AbUsersBlack.tbcolumns" />
+	    FROM ab_users_black tb 
+	    left join ab_users_info i on tb.USER_ID=i.USER_ID
+        left join ab_user u on i.LOGIN_ID=u.ID 
+		<include refid="AbUsersBlack.findPage.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}
@@ -215,9 +215,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     </select>
 
 	
-	<select id="HjsUsersBlack.findAll" resultMap="RM_HjsUsersBlack">
-    	SELECT <include refid="HjsUsersBlack.columns" />
-	    FROM hjs_users_black  
+	<select id="AbUsersBlack.findAll" resultMap="RM_AbUsersBlack">
+    	SELECT <include refid="AbUsersBlack.columns" />
+	    FROM ab_users_black  
     </select>
 </mapper>
 

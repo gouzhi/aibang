@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsApproveSms">
+<mapper namespace="AbApproveSms">
 
-	<resultMap id="RM_HjsApproveSms" type="com.cifex.transfer.model.dto.HjsApproveSms">
+	<resultMap id="RM_AbApproveSms" type="com.aibang.transfer.model.dto.AbApproveSms">
         <result property="id" column="ID"/>
         <result property="userId" column="USER_ID"/>
         <result property="status" column="STATUS"/>
@@ -19,20 +19,20 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         <result property="verifyRemark" column="VERIFY_REMARK"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="createIp" column="CREATE_IP"/>
-        <collection property="hjsUser" column="LOGINID"  ofType="com.cifex.transfer.model.dto.HjsUser">
+        <collection property="AbUser" column="LOGINID"  ofType="com.aibang.transfer.model.dto.AbUser">
 			<id property="id" column="LOGINID"/>
         	<result property="username" column="USERNAME"/>
 		</collection>
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsApproveSms.columns">
+	<sql id="AbApproveSms.columns">
 	    <![CDATA[
 		ID,USER_ID,STATUS,TYPE,PHONE,CREDIT,VERIFY_USERID,VERIFY_TIME,VERIFY_REMARK,CREATE_TIME,CREATE_IP
 	    ]]>
 	</sql>
 
-    <sql id="HjsApproveSms.tbcolumns">
+    <sql id="AbApproveSms.tbcolumns">
 	    <![CDATA[
 		tb.ID,tb.USER_ID,tb.STATUS,tb.TYPE,tb.PHONE,tb.CREDIT,tb.VERIFY_USERID,tb.VERIFY_TIME,tb.VERIFY_REMARK,tb.CREATE_TIME,tb.CREATE_IP,
 		u.ID AS LOGINID,u.USERNAME
@@ -45,9 +45,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<insert id="HjsApproveSms.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbApproveSms.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_approve_sms (
+        INSERT INTO ab_approve_sms (
         	USER_ID ,
         	STATUS ,
         	TYPE ,
@@ -84,9 +84,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsApproveSms.update" >
+	<update id="AbApproveSms.update" >
     <![CDATA[
-        UPDATE hjs_approve_sms SET
+        UPDATE ab_approve_sms SET
 	        USER_ID = #{userId} ,
 	        STATUS = #{status} ,
 	        TYPE = #{type} ,
@@ -106,8 +106,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsApproveSms.audit">		
-		update hjs_approve_sms set 
+	<update id="AbApproveSms.audit">		
+		update ab_approve_sms set 
 		STATUS = #{status} ,
 		VERIFY_REMARK = #{verifyRemark} ,
 	    VERIFY_TIME = #{verifyTime} ,
@@ -119,8 +119,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsApproveSms.activate">		
-		update hjs_approve_sms set 
+	<update id="AbApproveSms.activate">		
+		update ab_approve_sms set 
 		PHONE = #{phone} ,
 		STATUS = #{status} ,
 		VERIFY_REMARK = #{verifyRemark} ,
@@ -133,9 +133,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		时间：2015.9.14
 	-->
 	
-    <update id="HjsApproveSms.remove">
+    <update id="AbApproveSms.remove">
     <![CDATA[
-        UPDATE hjs_approve_sms SET
+        UPDATE ab_approve_sms SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -148,9 +148,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		时间：2015.9.14
 	-->
 	
-    <update id="HjsApproveSms.updatePhone">
+    <update id="AbApproveSms.updatePhone">
     <![CDATA[
-        UPDATE hjs_approve_sms SET
+        UPDATE ab_approve_sms SET
 	       PHONE = #{phone} ,
 		   STATUS = 0 
         WHERE 
@@ -163,9 +163,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <delete id="HjsApproveSms.delete">
+    <delete id="AbApproveSms.delete">
     <![CDATA[
-        DELETE FROM hjs_approve_sms WHERE
+        DELETE FROM ab_approve_sms WHERE
         ID = #{id} 
     ]]>
     </delete>
@@ -174,10 +174,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsApproveSms.getById" resultMap="RM_HjsApproveSms">
-		SELECT <include refid="HjsApproveSms.columns" />
+    <select id="AbApproveSms.getById" resultMap="RM_AbApproveSms">
+		SELECT <include refid="AbApproveSms.columns" />
 	    <![CDATA[
-		    FROM hjs_approve_sms 
+		    FROM ab_approve_sms 
 	        WHERE 
 		        ID = #{id} 
 	    ]]>
@@ -187,10 +187,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<select id="HjsApproveSms.getByLoginId" resultMap="RM_HjsApproveSms">
-		SELECT <include refid="HjsApproveSms.columns" />
+	<select id="AbApproveSms.getByLoginId" resultMap="RM_AbApproveSms">
+		SELECT <include refid="AbApproveSms.columns" />
 	    <![CDATA[
-		    FROM hjs_approve_sms 
+		    FROM ab_approve_sms 
 	        WHERE 
 		        USER_ID = #{userId} 
 	    ]]>
@@ -200,7 +200,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<sql id="HjsApproveSms.findPage.where">
+	<sql id="AbApproveSms.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	      				
 	       <if test="@Ognl@isNotEmpty(id)">
@@ -251,21 +251,21 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 		
-    <select id="HjsApproveSms.findPage.count" resultType="long">
-        SELECT count(*) FROM hjs_approve_sms tb 
-        left join hjs_user u on tb.USER_ID=u.ID 
-		<include refid="HjsApproveSms.findPage.where"/>    
+    <select id="AbApproveSms.findPage.count" resultType="long">
+        SELECT count(*) FROM ab_approve_sms tb 
+        left join ab_user u on tb.USER_ID=u.ID 
+		<include refid="AbApproveSms.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsApproveSms.findPage" resultType="map">
-    	SELECT <include refid="HjsApproveSms.tbcolumns" />
-	    FROM hjs_approve_sms tb 
-	    left join hjs_user u on tb.USER_ID=u.ID 
-		<include refid="HjsApproveSms.findPage.where"/>
+    <select id="AbApproveSms.findPage" resultType="map">
+    	SELECT <include refid="AbApproveSms.tbcolumns" />
+	    FROM ab_approve_sms tb 
+	    left join ab_user u on tb.USER_ID=u.ID 
+		<include refid="AbApproveSms.findPage.where"/>
 		
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}

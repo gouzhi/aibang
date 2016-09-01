@@ -5,9 +5,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 
 
 <!-- 不使用namespace的话sql搜索定位会比较方便 -->
-<mapper namespace="HjsUserBase">
+<mapper namespace="AbUserBase">
 
-	<resultMap id="RM_HjsUserBase" type="com.cifex.transfer.model.dto.HjsUserBase">
+	<resultMap id="RM_AbUserBase" type="com.aibang.transfer.model.dto.AbUserBase">
         <result property="id" column="ID"/>
         <result property="typeId" column="TYPE_ID"/>
         <result property="username" column="USERNAME"/>
@@ -37,13 +37,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="HjsUserBase.columns">
+	<sql id="AbUserBase.columns">
 	    <![CDATA[
 		ID,TYPE_ID,USERNAME,PAY_PASSWORD,TOTAL,BALANCE,AVL_BALANCE,FROST,AWAIT,TENDER_NUM,TENDER_ACCOUNT,INCOME,EXPEND,CREATE_TIME,CREATE_IP,UPDATE_TIME,UPDATE_IP,OPT_ID,AWAIT_INTEREST,AWAIT_CAPITAL,USR_CUST_ID,IS_NEW,FADADA_CA_ID,AUTHOR_END_DATE,AUTHOR_TRADE_ID,AUTHOR_CONTRACT_ID
 	    ]]>
 	</sql>
 
-    <sql id="HjsUserBase.tbcolumns">
+    <sql id="AbUserBase.tbcolumns">
 	    <![CDATA[
 		tb.ID,tb.TYPE_ID,tb.USERNAME,tb.PAY_PASSWORD,tb.TOTAL,tb.BALANCE,tb.AVL_BALANCE,tb.FROST,tb.AWAIT,tb.TENDER_NUM,tb.TENDER_ACCOUNT,tb.INCOME,tb.EXPEND,tb.CREATE_TIME,tb.CREATE_IP,tb.UPDATE_TIME,tb.UPDATE_IP,tb.OPT_ID,tb.AWAIT_INTEREST,tb.AWAIT_CAPITAL,tb.USR_CUST_ID,tb.IS_NEW,tb.FADADA_CA_ID,tb.AUTHOR_END_DATE,tb.AUTHOR_TRADE_ID,tb.AUTHOR_CONTRACT_ID
 	    ]]>
@@ -55,9 +55,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<insert id="HjsUserBase.insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbUserBase.insert" useGeneratedKeys="true" keyProperty="id">
     <![CDATA[
-        INSERT INTO hjs_user_base (
+        INSERT INTO ab_user_base (
         	TYPE_ID ,
         	USERNAME ,
         	PAY_PASSWORD ,
@@ -124,9 +124,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<insert id="HjsUserBase.addUserBase" useGeneratedKeys="true" keyProperty="id">
+	<insert id="AbUserBase.addUserBase" useGeneratedKeys="true" keyProperty="id">
 	<![CDATA[
-        INSERT INTO hjs_user_base (
+        INSERT INTO ab_user_base (
         	TYPE_ID ,
         	USERNAME ,
         	PAY_PASSWORD ,
@@ -150,9 +150,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUserBase.update" >
+	<update id="AbUserBase.update" >
     <![CDATA[
-        UPDATE hjs_user_base SET
+        UPDATE ab_user_base SET
 	        TYPE_ID = #{typeId} ,
 	        USERNAME = #{username} ,
 	        PAY_PASSWORD = #{payPassword} ,
@@ -187,8 +187,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUserBase.updatePass">
-		update hjs_user_base set
+	<update id="AbUserBase.updatePass">
+		update ab_user_base set
 		<if test="@Ognl@isNotEmpty(payPassword)">
 				PAY_PASSWORD=#{payPassword},
 			</if>	
@@ -202,8 +202,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<update id="HjsUserBase.updatePayPass">
-		update hjs_user_base set
+	<update id="AbUserBase.updatePayPass">
+		update ab_user_base set
 		PAY_PASSWORD=#{payPassword},
 		UPDATE_TIME=#{updateTime},
 		UPDATE_IP=#{updateIp}
@@ -216,9 +216,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <update id="HjsUserBase.remove">
+    <update id="AbUserBase.remove">
     <![CDATA[
-        UPDATE hjs_user_base SET
+        UPDATE ab_user_base SET
 	       IS_DEL=1,
 	       DELETE_TIME=#{deleteTime} 
         WHERE 
@@ -231,9 +231,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <delete id="HjsUserBase.delete">
+    <delete id="AbUserBase.delete">
     <![CDATA[
-        DELETE FROM hjs_user_base WHERE
+        DELETE FROM ab_user_base WHERE
         ID = #{id} 
     ]]>
     </delete>
@@ -242,18 +242,18 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsUserBase.getById" resultMap="RM_HjsUserBase">
-		SELECT <include refid="HjsUserBase.columns" />
+    <select id="AbUserBase.getById" resultMap="RM_AbUserBase">
+		SELECT <include refid="AbUserBase.columns" />
 	    <![CDATA[
-		    FROM hjs_user_base 
+		    FROM ab_user_base 
 	        WHERE 
 		        ID = #{id} 
 	    ]]>
 	</select>
-	<select id="HjsUserBase.getByIdForUpdate" resultMap="RM_HjsUserBase">
-		SELECT <include refid="HjsUserBase.columns" />
+	<select id="AbUserBase.getByIdForUpdate" resultMap="RM_AbUserBase">
+		SELECT <include refid="AbUserBase.columns" />
 	    <![CDATA[
-		    FROM hjs_user_base 
+		    FROM ab_user_base 
 	        WHERE 
 		        ID = #{id} FOR UPDATE
 	    ]]>
@@ -263,7 +263,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-	<sql id="HjsUserBase.findPage.where">
+	<sql id="AbUserBase.findPage.where">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<where>	      	
 			AND u.IS_DEL=0
@@ -361,24 +361,24 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 		
-    <select id="HjsUserBase.findPage.count" resultType="long">
+    <select id="AbUserBase.findPage.count" resultType="long">
         SELECT count(*) 
-        FROM hjs_user_base tb
-	    join hjs_users_info info on info.USER_ID=tb.ID
-	    join hjs_user u on u.ID=info.LOGIN_ID
-		<include refid="HjsUserBase.findPage.where"/>    
+        FROM ab_user_base tb
+	    join ab_users_info info on info.USER_ID=tb.ID
+	    join ab_user u on u.ID=info.LOGIN_ID
+		<include refid="AbUserBase.findPage.where"/>    
     </select>
     
     <!--
     	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
     	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
     -->
-    <select id="HjsUserBase.findPage" resultType="map">
-    	SELECT  <include refid="HjsUserBase.tbcolumns" />,u.USERNAME, tb.ID USERID,u.PHONE
-	    FROM hjs_user_base tb
-	    join hjs_users_info info on info.USER_ID=tb.ID
-	    join hjs_user u on u.ID=info.LOGIN_ID
-		<include refid="HjsUserBase.findPage.where"/>
+    <select id="AbUserBase.findPage" resultType="map">
+    	SELECT  <include refid="AbUserBase.tbcolumns" />,u.USERNAME, tb.ID USERID,u.PHONE
+	    FROM ab_user_base tb
+	    join ab_users_info info on info.USER_ID=tb.ID
+	    join ab_user u on u.ID=info.LOGIN_ID
+		<include refid="AbUserBase.findPage.where"/>
 		<if test="@Ognl@isNotEmpty(sortColumns)">
 			ORDER BY ${sortColumns}
 		</if>
@@ -389,21 +389,21 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsUserBase.findUserDetailById" resultType="map">
+    <select id="AbUserBase.findUserDetailById" resultType="map">
     	SELECT u.USERNAME,u.REALNAME,info.SEX,u.PHONE,u.PHONE_STATUS,u.EMAIL_STATUS,u.EMAIL,u.CREATE_TIME,info.LAST_TIME,info.LAST_IP,tb.ID,tb.TOTAL,tb.FROST,tb.AVL_BALANCE,tb.AWAIT,u.ID USERID,tb.USR_CUST_ID,tb.IS_NEW,tb.FADADA_CA_ID
-	    FROM hjs_user_base tb
-	    join hjs_users_info info on info.USER_ID=tb.ID
-	    join hjs_user u on u.ID=info.LOGIN_ID
+	    FROM ab_user_base tb
+	    join ab_users_info info on info.USER_ID=tb.ID
+	    join ab_user u on u.ID=info.LOGIN_ID
 	    WHERE info.USER_ID=#{userId}
     </select>
 
 
-    <select id="HjsUserBase.findTotalBalance" resultType="map">
+    <select id="AbUserBase.findTotalBalance" resultType="map">
     	SELECT sum(tb.FROST+tb.AVL_BALANCE)TotalBalance
-	    FROM hjs_user_base tb
-	    join hjs_users_info info on info.USER_ID=tb.ID
-	    join hjs_user u on u.ID=info.LOGIN_ID
-		<include refid="HjsUserBase.findPage.where"/>
+	    FROM ab_user_base tb
+	    join ab_users_info info on info.USER_ID=tb.ID
+	    join ab_user u on u.ID=info.LOGIN_ID
+		<include refid="AbUserBase.findPage.where"/>
     </select>
     
     <!--
@@ -411,16 +411,16 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.11.18
 	-->
-	<update id="HjsUserBase.saveHF">
-		update hjs_user_base 
+	<update id="AbUserBase.saveHF">
+		update ab_user_base 
 		set USR_CUST_ID=#{usrCustId} , FADADA_CA_ID = #{fadadaCaId}
 		where 
 			ID = #{id}			 
 	</update>
 	
 	
-	<update id="HjsUserBase.updateById">
-		update hjs_user_base 
+	<update id="AbUserBase.updateById">
+		update ab_user_base 
 		set TOTAL=#{total} 
 		where 
 			ID = #{id}			 
@@ -430,33 +430,33 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		作者：Zhang Yong
 		时间：2015.9.14
 	-->
-    <select id="HjsUserBase.getByUserCustId" resultMap="RM_HjsUserBase">
-		SELECT <include refid="HjsUserBase.columns" />
+    <select id="AbUserBase.getByUserCustId" resultMap="RM_AbUserBase">
+		SELECT <include refid="AbUserBase.columns" />
 	    <![CDATA[
-		    FROM hjs_user_base 
+		    FROM ab_user_base 
 	        WHERE 
 		        USR_CUST_ID = #{usrCustId} 
 	    ]]>
 	</select>
-	<update id="HjsUserBase.updateIsNewById">
-	  update hjs_user_base set IS_NEW=1  where id=#{id}
+	<update id="AbUserBase.updateIsNewById">
+	  update ab_user_base set IS_NEW=1  where id=#{id}
 	</update>
 	
 	<!-- 查询没有开通法大大的用户 -->
-	<select id="HjsUserBase.findFadadaNo" resultType="map">
+	<select id="AbUserBase.findFadadaNo" resultType="map">
 		SELECT u.PHONE, u.EMAIL , ar.CARD_ID ,ar.REALNAME , ub.ID
-			FROM hjs_users_info ui
-			LEFT OUTER JOIN  hjs_user u ON u.ID = ui.LOGIN_ID
-			LEFT OUTER JOIN hjs_user_base ub ON ub.ID = ui.USER_ID 
-			LEFT OUTER JOIN hjs_approve_realname ar ON ar.USER_ID = u.ID
+			FROM ab_users_info ui
+			LEFT OUTER JOIN  ab_user u ON u.ID = ui.LOGIN_ID
+			LEFT OUTER JOIN ab_user_base ub ON ub.ID = ui.USER_ID 
+			LEFT OUTER JOIN ab_approve_realname ar ON ar.USER_ID = u.ID
 			WHERE u.NRP_USR_ID IS NOT NULL 
 				AND ub.FADADA_CA_ID IS NULL
 				AND u.IS_DEL = 0;
 	</select>
 	
 	<!-- 根据baseid用户 -->
-	<select id="HjsUserBase.getByBaseId" resultMap="RM_HjsUserBase">
-		SELECT * FROM hjs_user_base
+	<select id="AbUserBase.getByBaseId" resultMap="RM_AbUserBase">
+		SELECT * FROM ab_user_base
 			WHERE ID = #{id}
 	</select> 
 </mapper>
