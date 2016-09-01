@@ -19,20 +19,20 @@ import com.alibaba.dubbo.rpc.RpcException;
  * @author zhangyong    
  * @date 2015年8月25日
  */
-@Service("hjsSysMenuService")
+@Service("abSysMenuService")
 @SuppressWarnings({"unchecked"})
 public class AbSysMenuServiceImpl  extends ProviderServiceBase<AbSysMenu,Integer> implements AbSysMenuService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsSysMenu";
+		return "AbSysMenu";
 	}
 	
 	/**
 	 * 添加或修改菜单信息
 	 *  
 	 * @param entity
-	 * @return HjsSysMenu
+	 * @return AbSysMenu
 	 * @author zhangyong
 	 * @date 2015年8月25日
 	 */
@@ -56,7 +56,7 @@ public class AbSysMenuServiceImpl  extends ProviderServiceBase<AbSysMenu,Integer
 	public Page findPage(AbSysMenuQuery query) {
 		Page page = new Page();
 		try {
-			page = super.pageQuery("HjsSysMenu.findPage",query);
+			page = super.pageQuery("AbSysMenu.findPage",query);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"菜单分页列表错误",e.getCause());
 		}

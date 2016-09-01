@@ -21,13 +21,13 @@ import com.alibaba.dubbo.rpc.RpcException;
 
 
  
-@Service("hjsUsersBlackService")
+@Service("abUsersBlackService")
 @SuppressWarnings({"unchecked"})
 public class AbUsersBlackServiceImpl  extends ProviderServiceBase<AbUsersBlack,Integer> implements AbUsersBlackService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsUsersBlack";
+		return "AbUsersBlack";
 	}
 	
 	public AbUsersBlack saveOrUpdate(AbUsersBlack entity) {
@@ -51,7 +51,7 @@ public class AbUsersBlackServiceImpl  extends ProviderServiceBase<AbUsersBlack,I
 				
 				query.setCreateTimeEnd(format1.parse(format.format(query.getCreateTimeEnd())+" 23:59:59"));
 			}
-			infoPage = pageQuery("HjsUsersBlack.findPage",query);
+			infoPage = pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"后台得到受限用户信息列表（分页）错误",e.getCause());
 		}
@@ -104,7 +104,7 @@ public class AbUsersBlackServiceImpl  extends ProviderServiceBase<AbUsersBlack,I
 				for(String id:ids){
 					AbUsersBlackQuery query = new AbUsersBlackQuery();
 					query.setUserId(Integer.parseInt(id));
-					AbUsersBlack black = (AbUsersBlack)findForObject("HjsUsersBlack.getByBaseId", query);
+					AbUsersBlack black = (AbUsersBlack)findForObject(getIbatisMapperNamesapce() + ".getByBaseId", query);
 					if(black==null){
 						usersBlack.setUserId(Integer.parseInt(id));
 						save(usersBlack);
@@ -137,7 +137,7 @@ public class AbUsersBlackServiceImpl  extends ProviderServiceBase<AbUsersBlack,I
 				String[] uids= ids.split(",");
 				for(String id:uids){
 					usersBlack.setId(Integer.parseInt(id));
-					update("HjsUsersBlack.editBlack",usersBlack);
+					update(getIbatisMapperNamesapce() + ".editBlack",usersBlack);
 				}
 			}
 			

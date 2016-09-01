@@ -19,7 +19,7 @@ import com.alibaba.dubbo.rpc.RpcException;
  * @author zhangyong    
  * @date 2015年8月25日
  */
-@Service("hjsSysConfigService")
+@Service("abSysConfigService")
 @SuppressWarnings({ "unchecked" })
 public class AbSysConfigServiceImpl extends
 		ProviderServiceBase<AbSysConfig, Integer> implements
@@ -27,7 +27,7 @@ public class AbSysConfigServiceImpl extends
 
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsSysConfig";
+		return "AbSysConfig";
 	}
 	/**
 	 * 添加或修改配置信息
@@ -57,7 +57,7 @@ public class AbSysConfigServiceImpl extends
 	public Page findPage(AbSysConfigQuery query) {
 		Page page = new Page();
 		try {
-			page = pageQuery("HjsSysConfig.findPage", query);
+			page = pageQuery(getIbatisMapperNamesapce() + ".findPage", query);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,
 					"分页显示配置信息错误", e.getCause());
@@ -76,7 +76,7 @@ public class AbSysConfigServiceImpl extends
 		AbSysConfig config = new AbSysConfig();
 		try {
 			config = (AbSysConfig) getSqlSessionTemplate().selectOne(
-					"HjsSysConfig.getByPcode", v);
+					getIbatisMapperNamesapce() + ".getByPcode", v);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,
 					"通过父级编码_当前编号获得配置信息错误", e.getCause());

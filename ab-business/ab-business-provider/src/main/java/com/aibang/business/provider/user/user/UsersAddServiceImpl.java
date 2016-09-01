@@ -24,7 +24,7 @@ public class UsersAddServiceImpl  extends ProviderServiceBase<AbUsersAdd,Integer
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsUsersAdd";
+		return "AbUsersAdd";
 	}
 	
 	public AbUsersAdd saveOrUpdate(AbUsersAdd entity) {
@@ -37,7 +37,7 @@ public class UsersAddServiceImpl  extends ProviderServiceBase<AbUsersAdd,Integer
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbUsersAddQuery query) {
 		try {
-		    return pageQuery("HjsUsersAdd.findPage",query);
+		    return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"查询列表页错误",e.getCause());
 		}

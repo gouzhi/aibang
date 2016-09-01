@@ -18,13 +18,13 @@ import com.alibaba.dubbo.rpc.RpcException;
  * @author zhangyong    
  * @date 2015年8月25日
  */
-@Service("hjsSysRoleService")
+@Service("abSysRoleService")
 @SuppressWarnings({"unchecked"})
 public class AbSysRoleServiceImpl  extends ProviderServiceBase<AbSysRole,Integer> implements AbSysRoleService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsSysRole";
+		return "AbSysRole";
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class AbSysRoleServiceImpl  extends ProviderServiceBase<AbSysRole,Integer
 	 */
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbSysRoleQuery query) {
-		return pageQuery("HjsSysRole.findPage",query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 	}
 	
 	/**

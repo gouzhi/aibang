@@ -17,13 +17,13 @@ import com.aibang.transfer.model.vo.AbSysAreaQuery;
 
 
  
-@Service("hjsSysAreaService")
+@Service("abSysAreaService")
 @SuppressWarnings({"unchecked"})
 public class AbSysAreaServiceImpl  extends ProviderServiceBase<AbSysArea,Integer> implements AbSysAreaService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsSysArea";
+		return "AbSysArea";
 	}
 	
 	public AbSysArea saveOrUpdate(AbSysArea entity) {
@@ -35,7 +35,7 @@ public class AbSysAreaServiceImpl  extends ProviderServiceBase<AbSysArea,Integer
 	}
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbSysAreaQuery query) {
-		return pageQuery("HjsSysArea.findPage",query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 	}
 
 	@Override

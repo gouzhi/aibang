@@ -28,7 +28,7 @@ public class ApproveEmailActiveServiceImpl  extends ProviderServiceBase<AbApprov
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsApproveEmailActive";
+		return "AbApproveEmailActive";
 	}
 	
 	public AbApproveEmailActive saveOrUpdate(AbApproveEmailActive entity) {
@@ -40,7 +40,7 @@ public class ApproveEmailActiveServiceImpl  extends ProviderServiceBase<AbApprov
 	}
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbApproveEmailActiveQuery query) {
-		return pageQuery("HjsApproveEmailActive.findPage",query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 	}
 
 	@Override
@@ -56,13 +56,13 @@ public class ApproveEmailActiveServiceImpl  extends ProviderServiceBase<AbApprov
 	 * @date 2015年9月8日
 	 */
     public AbApproveEmailActive getById(Integer id){
-    	AbApproveEmailActive hjsApproveRealname = null;
+    	AbApproveEmailActive abApproveRealname = null;
     	try {
-    		hjsApproveRealname = super.getById(id);
+    		abApproveRealname = super.getById(id);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过ID获得邮件认证信息错误",e.getCause());
 		}
-    	return hjsApproveRealname;
+    	return abApproveRealname;
     }
 	/**
 	 * 前台会员邮件认证
@@ -87,11 +87,11 @@ public class ApproveEmailActiveServiceImpl  extends ProviderServiceBase<AbApprov
 				super.save(entity);
 			}
 			//修改用户表相关
-			AbUser hjsUser = new AbUser();
-			hjsUser.setId(entity.getUserId());
-			hjsUser.setEmail(entity.getEmail());
-			hjsUser.setEmailStatus(1);
-			update("HjsUser.activateEmail", hjsUser);//修改用户表相关邮件审核状态
+			AbUser abUser = new AbUser();
+			abUser.setId(entity.getUserId());
+			abUser.setEmail(entity.getEmail());
+			abUser.setEmailStatus(1);
+			update("AbUser.activateEmail", abUser);//修改用户表相关邮件审核状态
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"前台会员邮件认证错误",e.getCause());
 		}
@@ -106,11 +106,11 @@ public class ApproveEmailActiveServiceImpl  extends ProviderServiceBase<AbApprov
 	public void auditEmail(AbApproveEmailActive entity){
 		try {
 			super.update(getIbatisMapperNamesapce()+".audit",entity);//修改邮件表审核状态
-			AbUser hjsUser = new AbUser();
-			hjsUser.setId(entity.getUserId());
-			hjsUser.setEmailStatus(entity.getStatus());
-			hjsUser.setOptId(entity.getVerifyUserid());
-			update("HjsUser.auditEmail", hjsUser);//修改用户表相关邮件审核状态
+			AbUser abUser = new AbUser();
+			abUser.setId(entity.getUserId());
+			abUser.setEmailStatus(entity.getStatus());
+			abUser.setOptId(entity.getVerifyUserid());
+			update("HjsUser.auditEmail", abUser);//修改用户表相关邮件审核状态
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"审核邮件认证错误",e.getCause());
 		}

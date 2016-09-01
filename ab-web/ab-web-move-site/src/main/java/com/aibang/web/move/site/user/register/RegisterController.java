@@ -163,8 +163,8 @@ public class RegisterController extends UserController{
 
 		// 会员信息
 		usersInfo.setInviteCode(invitecode);// 邀请码
-		usersInfo.setHjsUser(user);// 设置登录信息
-		usersInfo.setHjsUserBase(userBase);// 设置账户信息
+		usersInfo.setAbUser(user);// 设置登录信息
+		usersInfo.setAbUserBase(userBase);// 设置账户信息
 		usersInfo.setLastTime(new Date());// 最后登录时间
 		usersInfo = usersInfoService.registerUser(usersInfo);
 		

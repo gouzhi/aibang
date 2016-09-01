@@ -26,7 +26,7 @@ public class SysAreaServiceImpl  extends ProviderServiceBase<AbSysArea,Integer> 
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsSysArea";
+		return "AbSysArea";
 	}
 	
 	public AbSysArea saveOrUpdate(AbSysArea entity) {
@@ -38,7 +38,7 @@ public class SysAreaServiceImpl  extends ProviderServiceBase<AbSysArea,Integer> 
 	}
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbSysAreaQuery query) {
-		return pageQuery("HjsSysArea.findPage",query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 	}
 
 	@Override

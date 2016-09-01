@@ -28,7 +28,7 @@ public class ApproveRealnameServiceImpl  extends ProviderServiceBase<AbApproveRe
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsApproveRealname";
+		return "AbApproveRealname";
 	}
 	
 	public AbApproveRealname saveOrUpdate(AbApproveRealname entity) {
@@ -40,7 +40,7 @@ public class ApproveRealnameServiceImpl  extends ProviderServiceBase<AbApproveRe
 	}
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbApproveRealnameQuery query) {
-		return pageQuery("HjsApproveRealname.findPage",query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 	}
 
 	@Override
@@ -56,13 +56,13 @@ public class ApproveRealnameServiceImpl  extends ProviderServiceBase<AbApproveRe
 	 * @date 2015年9月8日
 	 */
 	public AbApproveRealname getById(Integer id){
-		AbApproveRealname hjsApproveRealname = null;
+		AbApproveRealname abApproveRealname = null;
 		try {
-			hjsApproveRealname = super.getById(id);
+			abApproveRealname = super.getById(id);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"根据ID获得实名信息错误",e.getCause());
 		}
-		return hjsApproveRealname;
+		return abApproveRealname;
 	}
 	/**
 	 * 用户实名认证审核
@@ -74,11 +74,11 @@ public class ApproveRealnameServiceImpl  extends ProviderServiceBase<AbApproveRe
 	public void AuditRealName(AbApproveRealname entity){
 		try {
 			update(this.getIbatisMapperNamesapce()+".audit", entity);//修改实名审核信息
-			AbUser hjsUser = new AbUser();
-			hjsUser.setId(entity.getUserId());
-			hjsUser.setRealNameStatus(entity.getStatus());
-			hjsUser.setOptId(entity.getVerifyUserid());
-			update("HjsUser.auditRealName", hjsUser);//修改用户表实名审核相关
+			AbUser abUser = new AbUser();
+			abUser.setId(entity.getUserId());
+			abUser.setRealNameStatus(entity.getStatus());
+			abUser.setOptId(entity.getVerifyUserid());
+			update("AbUser.auditRealName", abUser);//修改用户表实名审核相关
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"用户实名认证审核错误",e.getCause());
 		}
@@ -92,15 +92,15 @@ public class ApproveRealnameServiceImpl  extends ProviderServiceBase<AbApproveRe
 	 * @date 2015年9月11日
 	 */
 	public AbApproveRealname getByLoginId(Integer id){
-		AbApproveRealname hjsApproveRealname = null;
-		AbApproveRealnameQuery hjsApproveRealnameQuery = new AbApproveRealnameQuery();
-		hjsApproveRealnameQuery.setUserId(id);
+		AbApproveRealname abApproveRealname = null;
+		AbApproveRealnameQuery abApproveRealnameQuery = new AbApproveRealnameQuery();
+		abApproveRealnameQuery.setUserId(id);
 		try {
-			hjsApproveRealname = (AbApproveRealname)findForObject(getIbatisMapperNamesapce()+".getByLoginId", hjsApproveRealnameQuery);
+			abApproveRealname = (AbApproveRealname)findForObject(getIbatisMapperNamesapce()+".getByLoginId", abApproveRealnameQuery);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过登录ID获得实名信息错误",e.getCause());
 		}
-		return hjsApproveRealname;
+		return abApproveRealname;
 	}
 	
 	/**
@@ -111,18 +111,18 @@ public class ApproveRealnameServiceImpl  extends ProviderServiceBase<AbApproveRe
 	 */
 	@Transactional
 	public void activateRealName(AbApproveRealname entity){
-		AbApproveRealname hjsApproveRealname = null;
-		AbApproveRealnameQuery hjsApproveRealnameQuery = new AbApproveRealnameQuery();
+		AbApproveRealname abApproveRealname = null;
+		AbApproveRealnameQuery abApproveRealnameQuery = new AbApproveRealnameQuery();
 		AbUser user =new AbUser();
 		user.setId(entity.getUserId());
 		user.setRealName(entity.getRealname());
 		user.setRealNameStatus(1);
 		try {
 			
-			hjsApproveRealnameQuery.setUserId(entity.getUserId());
-			hjsApproveRealname = (AbApproveRealname)findForObject(getIbatisMapperNamesapce()+".getByLoginId", hjsApproveRealnameQuery);
-			if(hjsApproveRealname!=null&&hjsApproveRealname.getId()!=null){
-				entity.setId(hjsApproveRealname.getId());
+			abApproveRealnameQuery.setUserId(entity.getUserId());
+			abApproveRealname = (AbApproveRealname)findForObject(getIbatisMapperNamesapce()+".getByLoginId", abApproveRealnameQuery);
+			if(abApproveRealname!=null&&abApproveRealname.getId()!=null){
+				entity.setId(abApproveRealname.getId());
 				update(getIbatisMapperNamesapce()+".activate",entity);
 			}else{
 				save(entity);

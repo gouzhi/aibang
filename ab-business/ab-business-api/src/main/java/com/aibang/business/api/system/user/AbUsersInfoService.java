@@ -107,7 +107,7 @@ public interface AbUsersInfoService {
 	 * @author zhangyong
 	 * @date 2015年9月1日
 	 */
-	public AbUsersInfo addHjsUsersInfo(AbUsersInfo entity);
+	public AbUsersInfo addAbUsersInfo(AbUsersInfo entity);
 	/**
 	 * 后台加载修改会员信息
 	 * @param query

@@ -18,13 +18,13 @@ import com.alibaba.dubbo.rpc.RpcException;
 
 
  
-@Service("hjsUsersOptLogService")
+@Service("abUsersOptLogService")
 @SuppressWarnings({"unchecked"})
 public class AbUsersOptLogServiceImpl  extends ProviderServiceBase<AbUsersOptLog,Integer> implements AbUsersOptLogService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsUsersOptLog";
+		return "AbUsersOptLog";
 	}
 	
 	public AbUsersOptLog saveOrUpdate(AbUsersOptLog entity) {
@@ -36,7 +36,7 @@ public class AbUsersOptLogServiceImpl  extends ProviderServiceBase<AbUsersOptLog
 	}
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbUsersOptLogQuery query) {
-		return pageQuery("HjsUsersOptLog.findPage",query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 	}
 	
 	@Override

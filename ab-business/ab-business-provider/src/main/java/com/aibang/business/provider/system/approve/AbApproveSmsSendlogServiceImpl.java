@@ -17,13 +17,13 @@ import com.aibang.transfer.model.vo.AbApproveSmsSendlogQuery;
 
 
  
-@Service("hjsApproveSmsSendlogService")
+@Service("abApproveSmsSendlogService")
 @SuppressWarnings({"unchecked"})
 public class AbApproveSmsSendlogServiceImpl  extends ProviderServiceBase<AbApproveSmsSendlog,Integer> implements AbApproveSmsSendlogService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsApproveSmsSendlog";
+		return "AbApproveSmsSendlog";
 	}
 	
 	public AbApproveSmsSendlog saveOrUpdate(AbApproveSmsSendlog entity) {
@@ -35,7 +35,7 @@ public class AbApproveSmsSendlogServiceImpl  extends ProviderServiceBase<AbAppro
 	}
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbApproveSmsSendlogQuery query) {
-		return pageQuery("HjsApproveSmsSendlog.findPage",query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 	}
 
 	@Override

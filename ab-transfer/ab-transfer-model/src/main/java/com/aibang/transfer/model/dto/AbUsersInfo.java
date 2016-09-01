@@ -159,21 +159,21 @@ public class AbUsersInfo extends BaseEntity implements Serializable{
 	/**
 	 * 会员登录信息
 	 */
-	private AbUser hjsUser;
+	private AbUser abUser;
 	/**
 	 * 会员账户信息
 	 */
-	private AbUserBase hjsUserBase;
+	private AbUserBase abUserBase;
 	/**
 	 * 会员区域信息
 	 */
-	private AbSysArea hjsSysArea;
+	private AbSysArea abSysArea;
 	/**
 	 * 会员黑名单信息
 	 */
-	private AbUsersBlack hjsUsersBlack;
+	private AbUsersBlack abUsersBlack;
 	
-	private AbUsersInvite hjsUsersInvite;
+	private AbUsersInvite abUsersInvite;
 	
 	private String username;
 
@@ -389,44 +389,44 @@ public class AbUsersInfo extends BaseEntity implements Serializable{
 		this.source = source;
 	}
 
-	public AbUser getHjsUser() {
-		return hjsUser;
+	public AbUser getAbUser() {
+		return abUser;
 	}
 
-	public void setHjsUser(AbUser hjsUser) {
-		this.hjsUser = hjsUser;
+	public void setAbUser(AbUser abUser) {
+		this.abUser = abUser;
 	}
 
-	public AbUserBase getHjsUserBase() {
-		return hjsUserBase;
+	public AbUserBase getAbUserBase() {
+		return abUserBase;
 	}
 
-	public void setHjsUserBase(AbUserBase hjsUserBase) {
-		this.hjsUserBase = hjsUserBase;
+	public void setAbUserBase(AbUserBase abUserBase) {
+		this.abUserBase = abUserBase;
 	}
 
-	public AbSysArea getHjsSysArea() {
-		return hjsSysArea;
+	public AbSysArea getAbSysArea() {
+		return abSysArea;
 	}
 
-	public void setHjsSysArea(AbSysArea hjsSysArea) {
-		this.hjsSysArea = hjsSysArea;
+	public void setAbSysArea(AbSysArea abSysArea) {
+		this.abSysArea = abSysArea;
 	}
 
-	public AbUsersBlack getHjsUsersBlack() {
-		return hjsUsersBlack;
+	public AbUsersBlack getAbUsersBlack() {
+		return abUsersBlack;
 	}
 
-	public void setHjsUsersBlack(AbUsersBlack hjsUsersBlack) {
-		this.hjsUsersBlack = hjsUsersBlack;
+	public void setAbUsersBlack(AbUsersBlack abUsersBlack) {
+		this.abUsersBlack = abUsersBlack;
 	}
 
-	public AbUsersInvite getHjsUsersInvite() {
-		return hjsUsersInvite;
+	public AbUsersInvite getAbUsersInvite() {
+		return abUsersInvite;
 	}
 
-	public void setHjsUsersInvite(AbUsersInvite hjsUsersInvite) {
-		this.hjsUsersInvite = hjsUsersInvite;
+	public void setAbUsersInvite(AbUsersInvite abUsersInvite) {
+		this.abUsersInvite = abUsersInvite;
 	}
 
 	public String getUsername() {

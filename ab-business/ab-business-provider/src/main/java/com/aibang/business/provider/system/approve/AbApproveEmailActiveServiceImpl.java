@@ -18,7 +18,7 @@ import com.alibaba.dubbo.rpc.RpcException;
  * @since 1.0
  */
 
-@Service("hjsApproveEmailActiveService")
+@Service("AbApproveEmailActiveService")
 @SuppressWarnings({ "unchecked" })
 public class AbApproveEmailActiveServiceImpl extends
 		ProviderServiceBase<AbApproveEmailActive, Integer> implements
@@ -26,7 +26,7 @@ public class AbApproveEmailActiveServiceImpl extends
 
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsApproveEmailActive";
+		return "AbApproveEmailActive";
 	}
 
 	public AbApproveEmailActive saveOrUpdate(AbApproveEmailActive entity) {
@@ -53,7 +53,7 @@ public class AbApproveEmailActiveServiceImpl extends
 				
 				query.setVerifyTimeEnd(format1.parse(format.format(query.getVerifyTimeEnd())+" 23:59:59"));
 			}
-			return pageQuery("HjsApproveEmailActive.findPage", query);
+			return pageQuery(getIbatisMapperNamesapce() + ".findPage", query);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,
 					"显示邮箱验证信息错误", e.getCause());
@@ -70,25 +70,27 @@ public class AbApproveEmailActiveServiceImpl extends
 	 * 通过ID获得邮件认证信息
 	 * 
 	 * @param id
-	 * @return HjsApproveEmailActive
+	 * @return AbApproveEmailActive
 	 * @author zhangyong
 	 * @date 2015年9月8日
 	 */
 	public AbApproveEmailActive getById(Integer id) {
-		AbApproveEmailActive hjsApproveRealname = null;
+		AbApproveEmailActive abApproveRealname = null;
 		try {
-			hjsApproveRealname = super.getById(id);
+			abApproveRealname = super.getById(id);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,
 					"通过ID获得邮件认证信息错误", e.getCause());
 		}
-		return hjsApproveRealname;
+		return abApproveRealname;
 	}
 
 	/**
 	 * 审核邮件认证
 	 * 
 	 * @param entity
+	 * 
+	 * 
 	 *            void
 	 * @author zhangyong
 	 * @date 2015年9月8日
@@ -96,11 +98,11 @@ public class AbApproveEmailActiveServiceImpl extends
 	public void auditEmail(AbApproveEmailActive entity) {
 		try {
 			super.update(getIbatisMapperNamesapce() + ".audit", entity);// 修改邮件表审核状态
-			AbUser hjsUser = new AbUser();
-			hjsUser.setId(entity.getUserId());
-			hjsUser.setEmailStatus(entity.getStatus());
-			hjsUser.setOptId(entity.getVerifyUserid());
-			update("HjsUser.auditEmail", hjsUser);// 修改用户表相关邮件审核状态
+			AbUser abUser = new AbUser();
+			abUser.setId(entity.getUserId());
+			abUser.setEmailStatus(entity.getStatus());
+			abUser.setOptId(entity.getVerifyUserid());
+			update("AbUser.auditEmail", abUser);// 修改用户表相关邮件审核状态
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION, "审核邮件认证错误",
 					e.getCause());

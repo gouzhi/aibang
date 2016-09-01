@@ -28,7 +28,7 @@ public class AbSysUserRoleServiceImpl  extends ProviderServiceBase<AbSysUserRole
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsSysUserRole";
+		return "AbSysUserRole";
 	}
 	
 	public AbSysUserRole saveOrUpdate(AbSysUserRole entity) {
@@ -40,7 +40,7 @@ public class AbSysUserRoleServiceImpl  extends ProviderServiceBase<AbSysUserRole
 	}
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbSysUserRoleQuery query) {
-		return pageQuery("HjsSysUserRole.findPage",query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 	}
 
 	@Override

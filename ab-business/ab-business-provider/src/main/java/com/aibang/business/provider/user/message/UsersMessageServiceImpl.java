@@ -24,7 +24,7 @@ public class UsersMessageServiceImpl  extends ProviderServiceBase<AbUsersMessage
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsUsersMessage";
+		return "AbUsersMessage";
 	}
 	
 	public AbUsersMessage saveOrUpdate(AbUsersMessage entity) {
@@ -37,7 +37,7 @@ public class UsersMessageServiceImpl  extends ProviderServiceBase<AbUsersMessage
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbUsersMessageQuery query) {
 		try {
-		    return pageQuery("HjsUsersMessage.findPage",query);
+		    return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"查询列表页错误",e.getCause());
 		}
@@ -58,7 +58,7 @@ public class UsersMessageServiceImpl  extends ProviderServiceBase<AbUsersMessage
 	@Override
 	public Page findNoticesPageByUserId(AbUsersMessageQuery query) {
 		try {
-		    return pageQuery("HjsUsersMessage.findNoticesPageByUserId",query);
+		    return pageQuery(getIbatisMapperNamesapce() + ".findNoticesPageByUserId",query);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"查询列表页错误",e.getCause());
 		}

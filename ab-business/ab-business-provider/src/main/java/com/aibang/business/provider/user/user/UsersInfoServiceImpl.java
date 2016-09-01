@@ -40,12 +40,12 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 	
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsUsersInfo";
+		return "AbUsersInfo";
 	}
 	/**
 	 * 添加或修改会员信息
 	 * @param entity
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
@@ -65,12 +65,12 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 	 */
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbUsersInfoQuery query) {
-		return pageQuery("HjsUsersInfo.findPage",query);
+		return pageQuery("AbUsersInfo.findPage",query);
 	}
 	/**
 	 * 新增会员信息
 	 * @param model
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
@@ -127,22 +127,22 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 	/**
 	 * 通过ID得到会员信息
 	 * @param id
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
 	public AbUsersInfo getById(Integer id){
-		AbUsersInfo hjsUsersInfo = null;
+		AbUsersInfo AbUsersInfo = null;
 		try {
-			hjsUsersInfo = super.getById(id);
+			AbUsersInfo = super.getById(id);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过ID得到会员信息错误",e.getCause());
 		}
-		return hjsUsersInfo;
+		return AbUsersInfo;
 	}
 	/**
 	 * 得到所有会员信息列表
-	 * @return List<HjsUsersInfo>
+	 * @return List<AbUsersInfo>
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
@@ -191,17 +191,17 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 	/**
 	 * 会员注册
 	 * @param entity
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年9月1日
 	 */
 	@Transactional
 	public AbUsersInfo registerUser(AbUsersInfo entity){
 		try {
-			save("HjsUser.insert",entity.getHjsUser());//登陆信息
-			save("HjsUserBase.addUserBase",entity.getHjsUserBase());//账户信息
-			entity.setLoginId(entity.getHjsUser().getId());
-			entity.setUserId(entity.getHjsUserBase().getId());
+			save("AbUser.insert",entity.getAbUser());//登陆信息
+			save("AbUserBase.addUserBase",entity.getAbUserBase());//账户信息
+			entity.setLoginId(entity.getAbUser().getId());
+			entity.setUserId(entity.getAbUserBase().getId());
 			
 
 			//邀请码相关操作
@@ -210,15 +210,15 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 			//判断是否输入邀请码
 			if(inviteCode!=null&&!inviteCode.equals("")){
 				if(inviteCode.length()==6){
-					AbUsersInfo inviteUsersInfo = (AbUsersInfo)findForObject("HjsUsersInfo.getInviteUser", inviteCode);
+					AbUsersInfo inviteUsersInfo = (AbUsersInfo)findForObject("AbUsersInfo.getInviteUser", inviteCode);
 					if(inviteUsersInfo!=null){
 						usersInvite.setInviteCode(inviteCode);
 						usersInvite.setInviteUserId(inviteUsersInfo.getUserId());
 						usersInvite.setInviteType(1);
-						usersInvite.setCreateIp(entity.getHjsUser().getCreateIp());
+						usersInvite.setCreateIp(entity.getAbUser().getCreateIp());
 						usersInvite.setCreateTime(new Date());
-						usersInvite.setUserId(entity.getHjsUserBase().getId());
-						save("HjsUsersInvite.insert",usersInvite);
+						usersInvite.setUserId(entity.getAbUserBase().getId());
+						save("AbUsersInvite.insert",usersInvite);
 						entity.setInviteUserid(inviteUsersInfo.getUserId());
 					}
 				}else{
@@ -227,24 +227,24 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 				
 			}
 
-			save("HjsUsersInfo.addUsersInfo",entity);//会员信息
+			save("AbUsersInfo.addUsersInfo",entity);//会员信息
 			//注册有手机验证，故设置手机验证通过
 			AbApproveSms approveSms = new AbApproveSms();
-			approveSms.setUserId(entity.getHjsUser().getId());
+			approveSms.setUserId(entity.getAbUser().getId());
 			approveSms.setType(1);
 			approveSms.setStatus(1);//审核成功
-			approveSms.setPhone(entity.getHjsUser().getPhone());
+			approveSms.setPhone(entity.getAbUser().getPhone());
 			approveSms.setCredit(0);
-			approveSms.setCreateIp(entity.getHjsUser().getCreateIp());
+			approveSms.setCreateIp(entity.getAbUser().getCreateIp());
 			approveSms.setCreateTime(new Date());
 			approveSms.setVerifyRemark("");
 			approveSms.setVerifyTime(new Date());
-			approveSms.setVerifyUserid(entity.getHjsUser().getId());
-			save("HjsApproveSms.insert",approveSms);
+			approveSms.setVerifyUserid(entity.getAbUser().getId());
+			save("AbApproveSms.insert",approveSms);
 
 			//生成邀请码
 			entity.setInviteCode(ShareCodeUtil.toSerialCode(entity.getId()));
-			update("HjsUsersInfo.createInviteCode",entity);
+			update("AbUsersInfo.createInviteCode",entity);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"会员注册错误",e.getCause());
 		}
@@ -253,14 +253,14 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 	/**
 	 * 后台加载修改会员信息
 	 * @param query
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年9月1日
 	 */
 	public AbUsersInfo getEditUsersInfo(AbUsersInfoQuery query){
 		AbUsersInfo usersInfo = null;
 		try {
-			usersInfo = (AbUsersInfo)findForObject("HjsUsersInfo.getUsersInfoById", query);
+			usersInfo = (AbUsersInfo)findForObject("AbUsersInfo.getUsersInfoById", query);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"后台加载修改会员信息错误",e.getCause());
 		}
@@ -269,7 +269,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 	/**
 	 * 后台修改会员基本信息
 	 * @param entity
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年9月1日
 	 */
@@ -277,8 +277,8 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 	public AbUsersInfo editUsersInfo(AbUsersInfo entity){
 
 		try {
-			update("HjsUser.updatePass",entity.getHjsUser());//登陆信息
-			update("HjsUserBase.updatePass",entity.getHjsUserBase());//账户信息
+			update("AbUser.updatePass",entity.getAbUser());//登陆信息
+			update("AbUserBase.updatePass",entity.getAbUserBase());//账户信息
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"后台修改会员基本信息错误",e.getCause());
 		}
@@ -287,7 +287,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 	/**
 	 * 通过登录ID获取用户信息
 	 * @param query
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年9月15日
 	 */
@@ -295,14 +295,14 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 		AbUsersInfo usersInfo = null;
 		try {
 			//会员信息
-			AbUsersInfoQuery hjsUsersInfoQuery = new AbUsersInfoQuery();
-			hjsUsersInfoQuery.setLoginId(LoginId);
-			usersInfo = (AbUsersInfo)findForObject("HjsUsersInfo.getByLoginId", hjsUsersInfoQuery);
+			AbUsersInfoQuery AbUsersInfoQuery = new AbUsersInfoQuery();
+			AbUsersInfoQuery.setLoginId(LoginId);
+			usersInfo = (AbUsersInfo)findForObject("AbUsersInfo.getByLoginId", AbUsersInfoQuery);
 			//会员账户信息
 			if(usersInfo!=null && usersInfo.getUserId()!=null){
 				AbUserBaseQuery userBase = new AbUserBaseQuery();
 				userBase.setId(usersInfo.getUserId());
-				usersInfo.setHjsUserBase((AbUserBase)super.findForObject("HjsUserBase.getById", userBase));
+				usersInfo.setAbUserBase((AbUserBase)super.findForObject("AbUserBase.getById", userBase));
 			}
 
 		}catch (Exception e) {
@@ -354,14 +354,14 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 	/**
 	 * 保存汇付信息
 	 * @param entity
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年11月18日
 	 */
 	@Transactional
 	public void saveHF(AbUsersInfo entity,AbApproveRealname realName){
-		AbApproveRealname hjsApproveRealname = null;
-		AbApproveRealnameQuery hjsApproveRealnameQuery = new AbApproveRealnameQuery();
+		AbApproveRealname AbApproveRealname = null;
+		AbApproveRealnameQuery AbApproveRealnameQuery = new AbApproveRealnameQuery();
 		AbUser user =new AbUser();
 		user.setId(realName.getUserId());
 		user.setRealName(realName.getRealname());
@@ -369,12 +369,12 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 		try {
 			//--------法大大开通开始----------
 			try {
-				String responseStr = FddClient.invokeSyncPersonAuto(realName.getRealname(), entity.getHjsUser().getEmail(), realName.getCardId(), entity.getHjsUser().getPhone());
+				String responseStr = FddClient.invokeSyncPersonAuto(realName.getRealname(), entity.getAbUser().getEmail(), realName.getCardId(), entity.getAbUser().getPhone());
 				Map<String, Object> resultMap =JSON.parseObject(responseStr, new TypeReference<Map<String,Object>>(){});
 				if(resultMap != null){
 					String codeStr = (String)resultMap.get("code");
 					if("1000".equals(codeStr)){
-						entity.getHjsUserBase().setFadadaCaId((String)resultMap.get("customer_id"));
+						entity.getAbUserBase().setFadadaCaId((String)resultMap.get("customer_id"));
 					}else{
 						logger.error((String)resultMap.get("msg"));
 					}
@@ -386,17 +386,17 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 				logger.error("法大大开通失败");
 			}
 			//---------法大大开通结束-------------------
-			update("HjsUserBase.saveHF",entity.getHjsUserBase());
-			update("HjsUser.saveHF",entity.getHjsUser());
-			hjsApproveRealnameQuery.setUserId(realName.getUserId());
-			hjsApproveRealname = (AbApproveRealname)findForObject("HjsApproveRealname.getByLoginId", hjsApproveRealnameQuery);
-			if(hjsApproveRealname!=null&&hjsApproveRealname.getId()!=null){
-				realName.setId(hjsApproveRealname.getId());
-				update("HjsApproveRealname.activate",realName);
+			update("AbUserBase.saveHF",entity.getAbUserBase());
+			update("AbUser.saveHF",entity.getAbUser());
+			AbApproveRealnameQuery.setUserId(realName.getUserId());
+			AbApproveRealname = (AbApproveRealname)findForObject("AbApproveRealname.getByLoginId", AbApproveRealnameQuery);
+			if(AbApproveRealname!=null&&AbApproveRealname.getId()!=null){
+				realName.setId(AbApproveRealname.getId());
+				update("AbApproveRealname.activate",realName);
 			}else{
-				save("HjsApproveRealname.insert",realName);
+				save("AbApproveRealname.insert",realName);
 			}
-			update("HjsUser.activateRealName", user);//修改用户表相关实名认证状态
+			update("AbUser.activateRealName", user);//修改用户表相关实名认证状态
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"保存汇付信息错误",e.getCause());
 		}
@@ -410,14 +410,14 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 		AbUsersInfo usersInfo = null;
 		try {
 			//会员信息
-			AbUsersInfoQuery hjsUsersInfoQuery = new AbUsersInfoQuery();
-			hjsUsersInfoQuery.setUserId(userBaseId);
-			usersInfo = (AbUsersInfo)findForObject("HjsUsersInfo.getByUserBaseId", hjsUsersInfoQuery);
+			AbUsersInfoQuery AbUsersInfoQuery = new AbUsersInfoQuery();
+			AbUsersInfoQuery.setUserId(userBaseId);
+			usersInfo = (AbUsersInfo)findForObject("AbUsersInfo.getByUserBaseId", AbUsersInfoQuery);
 			//会员账户信息
 			if(usersInfo!=null && usersInfo.getUserId()!=null){
 				AbUserBaseQuery userBase = new AbUserBaseQuery();
 				userBase.setId(usersInfo.getUserId());
-				usersInfo.setHjsUserBase((AbUserBase)super.findForObject("HjsUserBase.getById", userBase));
+				usersInfo.setAbUserBase((AbUserBase)super.findForObject("AbUserBase.getById", userBase));
 			}
 
 		}catch (Exception e) {
@@ -428,9 +428,9 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 	@Override
 	public String getUserPhoneByUserBaseId(Integer userid) {
 		try{
-			AbUsersInfoQuery hjsUsersInfoQuery = new AbUsersInfoQuery();
-			hjsUsersInfoQuery.setUserId(userid);
-			return (String) findForObject("HjsUsersInfo.getUserPhoneByUserBaseId", hjsUsersInfoQuery);
+			AbUsersInfoQuery AbUsersInfoQuery = new AbUsersInfoQuery();
+			AbUsersInfoQuery.setUserId(userid);
+			return (String) findForObject("AbUsersInfo.getUserPhoneByUserBaseId", AbUsersInfoQuery);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过登录ID获取用户信息错误",e.getCause());
 		}

@@ -24,17 +24,17 @@ import com.alibaba.dubbo.rpc.RpcException;
  * @version 1.0
  * @since 1.0
  */
-@Service("hjsUsersInfoService")
+@Service("AbUsersInfoService")
 @SuppressWarnings({"unchecked"})
 public class AbUsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integer> implements AbUsersInfoService {
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsUsersInfo";
+		return "AbUsersInfo";
 	}
 	/**
 	 * 添加或修改会员信息
 	 * @param entity
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
@@ -54,12 +54,12 @@ public class AbUsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Int
 	 */
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbUsersInfoQuery query) {
-		return pageQuery("HjsUsersInfo.findPage",query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 	}
 	/**
 	 * 新增会员信息
 	 * @param model
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年8月31日
 	 */
@@ -116,22 +116,22 @@ public class AbUsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Int
     /**
      * 通过ID得到会员信息   
      * @param id
-     * @return HjsUsersInfo
+     * @return AbUsersInfo
      * @author zhangyong
      * @date 2015年8月31日
      */
     public AbUsersInfo getById(Integer id){
-    	AbUsersInfo hjsUsersInfo = null;
+    	AbUsersInfo AbUsersInfo = null;
     	try {
-    		hjsUsersInfo = getById(id);
+    		AbUsersInfo = getById(id);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过ID得到会员信息错误",e.getCause());
 		}
-		return hjsUsersInfo;
+		return AbUsersInfo;
     }
     /**
      * 得到所有会员信息列表
-     * @return List<HjsUsersInfo>
+     * @return List<AbUsersInfo>
      * @author zhangyong
      * @date 2015年8月31日
      */
@@ -186,8 +186,8 @@ public class AbUsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Int
 				for(AbUsersInfo info :infoPage.getResult()){
 					AbUsersInvite invite = new AbUsersInvite();
 					invite.setUserId(info.getUserId());
-					AbUsersInvite inviteUser = (AbUsersInvite)findForObject("HjsUsersInvite.getByBaseId", invite);
-					info.setHjsUsersInvite(inviteUser);
+					AbUsersInvite inviteUser = (AbUsersInvite)findForObject("AbUsersInvite.getByBaseId", invite);
+					info.setAbUsersInvite(inviteUser);
 				}
 			}
 		}catch (Exception e) {
@@ -198,52 +198,52 @@ public class AbUsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Int
 	/**
 	 * 后台添加会员
 	 * @param entity
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年9月1日
 	 */
 	@Transactional
-	public AbUsersInfo addHjsUsersInfo(AbUsersInfo entity){
+	public AbUsersInfo addAbUsersInfo(AbUsersInfo entity){
 		try {
-			save("HjsUser.insert",entity.getHjsUser());//登陆信息
-			save("HjsUserBase.addUserBase",entity.getHjsUserBase());//账户信息
-			entity.setLoginId(entity.getHjsUser().getId());
-			entity.setUserId(entity.getHjsUserBase().getId());
-			save("HjsUsersInfo.addUsersInfo",entity);//会员信息
+			save("AbUser.insert",entity.getAbUser());//登陆信息
+			save("AbUserBase.addUserBase",entity.getAbUserBase());//账户信息
+			entity.setLoginId(entity.getAbUser().getId());
+			entity.setUserId(entity.getAbUserBase().getId());
+			save(getIbatisMapperNamesapce() + ".addUsersInfo",entity);//会员信息
 			
 			//保存手机认证信息
 			AbApproveSms sms = new AbApproveSms();
-			sms.setUserId(entity.getHjsUser().getId());//用户登录ID
+			sms.setUserId(entity.getAbUser().getId());//用户登录ID
 			sms.setStatus(0);//认证状态0未认证
 			sms.setType(1);//类型
-			sms.setPhone(entity.getHjsUser().getPhone());//手机号
+			sms.setPhone(entity.getAbUser().getPhone());//手机号
 			sms.setCreateTime(new Date());//创建时间
-			sms.setCreateIp(entity.getHjsUser().getCreateIp());//创建IP
+			sms.setCreateIp(entity.getAbUser().getCreateIp());//创建IP
 			sms.setCredit(0);//验证码默认0
 			sms.setVerifyTime(sms.getCreateTime());//验证时间，此时与创建时间相同
-			sms.setVerifyUserid(entity.getHjsUser().getId());//验证用户ID，此时为自己
+			sms.setVerifyUserid(entity.getAbUser().getId());//验证用户ID，此时为自己
 			sms.setVerifyRemark("");//备注
-			save("HjsApproveSms.insert",sms);
+			save("AbApproveSms.insert",sms);
 			
 			//邀请码相关操作
 			AbUsersInvite usersInvite = new AbUsersInvite();
 			String inviteCode = entity.getInviteCode();
-			AbUsersInfo inviteUsersInfo = (AbUsersInfo)findForObject("HjsUsersInfo.getInviteUser", inviteCode);
+			AbUsersInfo inviteUsersInfo = (AbUsersInfo)findForObject(getIbatisMapperNamesapce() + ".getInviteUser", inviteCode);
 			if(inviteUsersInfo!=null){
 				usersInvite.setInviteCode(inviteCode);//邀请码
 				usersInvite.setInviteUserId(inviteUsersInfo.getUserId());//邀请用户ID
 				usersInvite.setInviteType(1);//邀请类型
-				usersInvite.setCreateIp(entity.getHjsUser().getCreateIp());//创建IP
+				usersInvite.setCreateIp(entity.getAbUser().getCreateIp());//创建IP
 				usersInvite.setCreateTime(new Date());//创建时间
-				usersInvite.setUserId(entity.getHjsUserBase().getId());//账户ID
-				save("HjsUsersInvite.insert",usersInvite);
+				usersInvite.setUserId(entity.getAbUserBase().getId());//账户ID
+				save("AbUsersInvite.insert",usersInvite);
 				entity.setInviteUserid(inviteUsersInfo.getUserId());
 			}
 			
 			
 			//生成邀请码
 			entity.setInviteCode(ShareCodeUtil.toSerialCode(entity.getId()));
-			update("HjsUsersInfo.createInviteCode",entity);
+			update(getIbatisMapperNamesapce() + ".createInviteCode",entity);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"后台添加会员错误",e.getCause());
 		}
@@ -252,14 +252,14 @@ public class AbUsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Int
 	/**
 	 * 后台加载修改会员信息
 	 * @param query
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年9月1日
 	 */
 	public AbUsersInfo getEditUsersInfo(AbUsersInfoQuery query){
 		AbUsersInfo usersInfo = null;
 		try {
-			usersInfo = (AbUsersInfo)findForObject("HjsUsersInfo.getUsersInfoById", query);
+			usersInfo = (AbUsersInfo)findForObject(getIbatisMapperNamesapce() + ".getUsersInfoById", query);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"后台加载修改会员信息错误",e.getCause());
 		}
@@ -268,7 +268,7 @@ public class AbUsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Int
 	/**
 	 * 后台修改会员基本信息
 	 * @param entity
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年9月1日
 	 */
@@ -276,14 +276,14 @@ public class AbUsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Int
 	public AbUsersInfo editUsersInfo(AbUsersInfo entity){
 		
 		try {
-			update("HjsUser.updatePass",entity.getHjsUser());//登陆信息
-			update("HjsUserBase.updatePass",entity.getHjsUserBase());//账户信息
-			if(entity.getHjsUser().getPhone()!=null&&!entity.getHjsUser().getPhone().equals("")){
+			update("AbUser.updatePass",entity.getAbUser());//登陆信息
+			update("AbUserBase.updatePass",entity.getAbUserBase());//账户信息
+			if(entity.getAbUser().getPhone()!=null&&!entity.getAbUser().getPhone().equals("")){
 				AbApproveSms sms = new AbApproveSms();
 				sms.setUserId(entity.getLoginId());
-				sms.setPhone(entity.getHjsUser().getPhone());
+				sms.setPhone(entity.getAbUser().getPhone());
 				sms.setStatus(0);
-				update("HjsApproveSms.updatePhone",sms);
+				update("AbApproveSms.updatePhone",sms);
 			}
 			
 			
@@ -295,7 +295,7 @@ public class AbUsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Int
 	/**
 	 * 通过登录ID获取用户信息
 	 * @param query
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年9月15日
 	 */
@@ -303,14 +303,14 @@ public class AbUsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Int
 		AbUsersInfo usersInfo = null;
 		try {
 			//会员信息
-			AbUsersInfoQuery hjsUsersInfoQuery = new AbUsersInfoQuery();
-			hjsUsersInfoQuery.setLoginId(LoginId);
-			usersInfo = (AbUsersInfo)findForObject("HjsUsersInfo.getByLoginId", hjsUsersInfoQuery);
+			AbUsersInfoQuery AbUsersInfoQuery = new AbUsersInfoQuery();
+			AbUsersInfoQuery.setLoginId(LoginId);
+			usersInfo = (AbUsersInfo)findForObject(getIbatisMapperNamesapce() + ".getByLoginId", AbUsersInfoQuery);
 			//会员账户信息
 			if(usersInfo!=null && usersInfo.getUserId()!=null){
 				AbUserBaseQuery userBase = new AbUserBaseQuery();
 				userBase.setId(usersInfo.getUserId());		
-				usersInfo.setHjsUserBase((AbUserBase)super.findForObject("HjsUserBase.getById", userBase));
+				usersInfo.setAbUserBase((AbUserBase)super.findForObject("AbUserBase.getById", userBase));
 			}
 			
 		}catch (Exception e) {
@@ -321,7 +321,7 @@ public class AbUsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Int
 	/**
 	 * 通过username获取用户信息
 	 * @param query
-	 * @return HjsUsersInfo
+	 * @return AbUsersInfo
 	 * @author zhangyong
 	 * @date 2015年9月15日
 	 */
@@ -329,14 +329,14 @@ public class AbUsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Int
 		List<AbUsersInfo> infoPage=null;
 		try {
 			//会员信息
-			AbUsersInfoQuery hjsUsersInfoQuery = new AbUsersInfoQuery();
-			hjsUsersInfoQuery.setUsername(username);
-			infoPage = (List<AbUsersInfo>)findForList("HjsUsersInfo.getByUsername", hjsUsersInfoQuery);
+			AbUsersInfoQuery AbUsersInfoQuery = new AbUsersInfoQuery();
+			AbUsersInfoQuery.setUsername(username);
+			infoPage = (List<AbUsersInfo>)findForList(getIbatisMapperNamesapce() + ".getByUsername", AbUsersInfoQuery);
 			if(infoPage!=null&&infoPage.size()>0){
 				for(AbUsersInfo info:infoPage){
 					AbUserBaseQuery userBase = new AbUserBaseQuery();
 					userBase.setId(info.getUserId());		
-					info.setHjsUserBase((AbUserBase)super.findForObject("HjsUserBase.getById", userBase));
+					info.setAbUserBase((AbUserBase)super.findForObject("AbUserBase.getById", userBase));
 				}
 			}					
 		}catch (Exception e) {

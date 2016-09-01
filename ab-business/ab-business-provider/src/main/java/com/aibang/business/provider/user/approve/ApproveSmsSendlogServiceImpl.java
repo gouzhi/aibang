@@ -23,7 +23,7 @@ public class ApproveSmsSendlogServiceImpl  extends ProviderServiceBase<AbApprove
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsApproveSmsSendlog";
+		return "AbApproveSmsSendlog";
 	}
 	
 	public AbApproveSmsSendlog saveOrUpdate(AbApproveSmsSendlog entity) {
@@ -35,7 +35,7 @@ public class ApproveSmsSendlogServiceImpl  extends ProviderServiceBase<AbApprove
 	}
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbApproveSmsSendlogQuery query) {
-		return pageQuery("HjsApproveSmsSendlog.findPage",query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class UsersLogServiceImpl  extends ProviderServiceBase<AbUsersLog,Integer
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsUsersLog";
+		return "AbUsersLog";
 	}
 	
 	public AbUsersLog saveOrUpdate(AbUsersLog entity) {
@@ -33,13 +33,13 @@ public class UsersLogServiceImpl  extends ProviderServiceBase<AbUsersLog,Integer
 	}
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbUsersLogQuery query) {
-		return pageQuery("HjsUsersLog.findPage",query);
+		return pageQuery("AbUsersLog.findPage",query);
 	}
 
 	/**
 	 * 保存会员日志
 	 * @param model
-	 * @return HjsUsersLog
+	 * @return AbUsersLog
 	 * @author zhangyong
 	 * @date 2015年9月15日
 	 */

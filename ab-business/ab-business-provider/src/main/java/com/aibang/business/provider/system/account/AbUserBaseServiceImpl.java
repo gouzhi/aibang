@@ -26,12 +26,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
 /**
- * @classname HjsUserBaseServiceImpl
+ * @classname AbUserBaseServiceImpl
  * @description 用户账户管理
  * @author liuj
  * @date 2015年8月26日
  */
-@Service("hjsUserBaseService")
+@Service("AbUserBaseService")
 @SuppressWarnings({ "unchecked" })
 public class AbUserBaseServiceImpl extends ProviderServiceBase<AbUserBase, Integer>implements AbUserBaseService {
 
@@ -39,7 +39,7 @@ public class AbUserBaseServiceImpl extends ProviderServiceBase<AbUserBase, Integ
 
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsUserBase";
+		return "AbUserBase";
 	}
 
 	public AbUserBase saveOrUpdate(AbUserBase entity) {
@@ -54,7 +54,7 @@ public class AbUserBaseServiceImpl extends ProviderServiceBase<AbUserBase, Integ
 	public Page findPage(AbUserBaseQuery query) {
 		query.setUpdateTimeBegin(DateUtils.getStartDate(query.getUpdateTimeBegin()));
 		query.setUpdateTimeEnd(DateUtils.getEndDate(query.getUpdateTimeEnd()));
-		return pageQuery("HjsUserBase.findPage", query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage", query);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class AbUserBaseServiceImpl extends ProviderServiceBase<AbUserBase, Integ
 	 */
 	public Object findTotalBalance(AbUserBaseQuery query) {
 		try {
-			return findForObject("HjsUserBase.findTotalBalance", query);
+			return findForObject(getIbatisMapperNamesapce() + ".findTotalBalance", query);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION, "获取冻结与余额的总和错误", e.getCause());
 		}
@@ -87,7 +87,7 @@ public class AbUserBaseServiceImpl extends ProviderServiceBase<AbUserBase, Integ
 	 */
 	public Object findUserDetailById(AbUserBaseQuery query) {
 		try {
-			return findForObject("HjsUserBase.findUserDetailById", query);
+			return findForObject(getIbatisMapperNamesapce() + ".findUserDetailById", query);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION, "获取用户账户详细信息错误", e.getCause());
 		}
@@ -105,7 +105,7 @@ public class AbUserBaseServiceImpl extends ProviderServiceBase<AbUserBase, Integ
 	@Override
 	public void updateIsNewById(Integer id) {
 		try {
-			super.update("HjsUserBase.updateIsNewById", id);
+			super.update(getIbatisMapperNamesapce() + ".updateIsNewById", id);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION, "修改是否是新手错误", e.getCause());
 		}
@@ -113,7 +113,7 @@ public class AbUserBaseServiceImpl extends ProviderServiceBase<AbUserBase, Integ
 
 	public AbUserBase getByBaseId(Integer id) {
 		try {
-			return (AbUserBase) findForObject("HjsUserBase.getByBaseId", id);
+			return (AbUserBase) findForObject(getIbatisMapperNamesapce() + ".getByBaseId", id);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION, "通过baseid查询用户失败", e.getCause());
 		}
@@ -125,11 +125,11 @@ public class AbUserBaseServiceImpl extends ProviderServiceBase<AbUserBase, Integ
 	public String synFadada() {
 		String msg = null;
 		// 没有开通法大大的用户查出来
-		List<Map<String, Object>> userMsgs = (List<Map<String, Object>>) findForList("HjsUserBase.findFadadaNo", null);
+		List<Map<String, Object>> userMsgs = (List<Map<String, Object>>) findForList(getIbatisMapperNamesapce() + ".findFadadaNo", null);
 		// 预先设定用到的变量
 		String responseStr = null;// 法大大相应字符串
 		Map<String, Object> resultMap = null;// json字符串转map的变量
-		AbUserBase hjsUserBase = null;// 查询userbase
+		AbUserBase abUserBase = null;// 查询userbase
 		if (userMsgs != null && userMsgs.size() > 0) {
 			// 遍历未开通法大大的用户
 			for (Map<String, Object> userMsg : userMsgs) {
@@ -141,10 +141,10 @@ public class AbUserBaseServiceImpl extends ProviderServiceBase<AbUserBase, Integ
 					// 判断返回code值
 					if ("1000".equals((String) resultMap.get("code"))) {
 						// 根据id查userbase
-						hjsUserBase = getByBaseId(Integer.valueOf(((Long) userMsg.get("ID")).toString()));
-						if (hjsUserBase != null) {
-							hjsUserBase.setFadadaCaId((String) resultMap.get("customer_id"));
-							update(hjsUserBase);
+						abUserBase = getByBaseId(Integer.valueOf(((Long) userMsg.get("ID")).toString()));
+						if (abUserBase != null) {
+							abUserBase.setFadadaCaId((String) resultMap.get("customer_id"));
+							update(abUserBase);
 						}
 					} else {
 						logger.error((String) userMsg.get("CARD_ID") + ":" + (String) resultMap.get("msg"));

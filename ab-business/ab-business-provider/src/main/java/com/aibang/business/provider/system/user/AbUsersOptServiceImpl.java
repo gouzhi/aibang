@@ -27,13 +27,13 @@ import com.alibaba.dubbo.rpc.RpcException;
 
 
  
-@Service("hjsUsersOptService")
+@Service("abUsersOptService")
 @SuppressWarnings({"unchecked"})
 public class AbUsersOptServiceImpl  extends ProviderServiceBase<AbUsersOpt,Integer> implements AbUsersOptService {
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsUsersOpt";
+		return "AbUsersOpt";
 	}
 	
 	public AbUsersOpt saveOrUpdate(AbUsersOpt entity) {
@@ -56,7 +56,7 @@ public class AbUsersOptServiceImpl  extends ProviderServiceBase<AbUsersOpt,Integ
 				
 				query.setLastTimeEnd(format1.parse(format.format(query.getLastTimeEnd())+" 23:59:59"));
 			}
-			return	pageQuery("HjsUsersOpt.findPage",query);
+			return	pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 		}catch (Exception e) {
 				throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"分页获得信息错误",e.getCause());
 			}
@@ -86,7 +86,7 @@ public class AbUsersOptServiceImpl  extends ProviderServiceBase<AbUsersOpt,Integ
 			AbUsersOptQuery usersOptQuery = new AbUsersOptQuery();
 			usersOptQuery.setLoginId(id);
 			//得到企业用户信息
-			usersOpt = (AbUsersOpt)super.findForObject("HjsUsersOpt.getByLoginId", usersOptQuery);
+			usersOpt = (AbUsersOpt)super.findForObject(getIbatisMapperNamesapce() + ".getByLoginId", usersOptQuery);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过登录ID获取用户相关数据错误",e.getCause());
 		}		
@@ -104,7 +104,7 @@ public class AbUsersOptServiceImpl  extends ProviderServiceBase<AbUsersOpt,Integ
 	public AbUsersOpt saveUser(AbUsersOpt model) {
 		try {
 			//用户登陆信息创建
-			super.save("HjsUser.insert",model.getHjsUser());
+			super.save("AbUser.insert",model.getHjsUser());
 			//平台用户信息创建
 			model.setLoginId(model.getHjsUser().getId());
 			model.setEntId(0);   //暂时设置成固定值，以后可拓展
@@ -122,7 +122,7 @@ public class AbUsersOptServiceImpl  extends ProviderServiceBase<AbUsersOpt,Integ
 			if(model.getHjsUser().getRoles()!=null && model.getHjsUser().getRoles().size()>0){
 				for(AbSysRole role:model.getHjsUser().getRoles()){
 					hsurq.setRoleId(role.getId());
-					super.save("HjsSysUserRole.insert", hsurq);
+					super.save("AbSysUserRole.insert", hsurq);
 				}
 			}
 		} catch (Exception e) {
@@ -144,7 +144,7 @@ public class AbUsersOptServiceImpl  extends ProviderServiceBase<AbUsersOpt,Integ
     public void update(AbUsersOpt model){
     	try {
     			//用户登陆信息修改
-    			super.update("HjsUser.update",model.getHjsUser());    			
+    			super.update("AbUser.update",model.getHjsUser());    			
     			//用户详细修改
     			model.setLoginId(model.getHjsUser().getId());
     			model.setEntId(0);   //暂时设置成固定值，以后可拓展
@@ -155,14 +155,14 @@ public class AbUsersOptServiceImpl  extends ProviderServiceBase<AbUsersOpt,Integ
     			if(model.getHjsUser().getRoles()!=null&&model.getHjsUser().getRoles().size()>0){
 					AbSysUserRole hsur = new AbSysUserRole();
 					hsur.setUserId(model.getHjsUser().getId());
-					super.delete("HjsSysUserRole.deleteUserRole",hsur);
+					super.delete("AbSysUserRole.deleteUserRole",hsur);
 					hsur.setIsDel(0);
 					hsur.setCreateTime(new Date());
 					hsur.setVersion(0);
 						for(AbSysRole role:model.getHjsUser().getRoles()){
 							if(role.getId()!=null){
 								hsur.setRoleId(role.getId());
-								super.save("HjsSysUserRole.insert", hsur);
+								super.save("AbSysUserRole.insert", hsur);
 							}
 						}
 				}
@@ -201,10 +201,10 @@ public class AbUsersOptServiceImpl  extends ProviderServiceBase<AbUsersOpt,Integ
     	try {
     		AbUser user = getById(model.getId()).getHjsUser();
     		user.setDeleteTime(new Date());
-			super.delete("HjsUser.remove",user);//删除登陆信息（逻辑）
+			super.delete("AbUser.remove",user);//删除登陆信息（逻辑）
 			AbSysUserRoleQuery hsurq = new AbSysUserRoleQuery();
 			hsurq.setUserId(user.getId());
-			super.delete("HjsSysUserRole.deleteUserRole",hsurq);//移除用户角色
+			super.delete("AbSysUserRole.deleteUserRole",hsurq);//移除用户角色
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"逻辑删除用户错误",e.getCause());
 		}
@@ -223,7 +223,7 @@ public class AbUsersOptServiceImpl  extends ProviderServiceBase<AbUsersOpt,Integ
     		AbUsersOpt usersOpt = super.getById(id);
     		AbUser user = new AbUser();
     		user.setId(usersOpt.getLoginId());
-    		usersOpt.setHjsUser((AbUser)super.findForObject("HjsUser.getById", user));
+    		usersOpt.setHjsUser((AbUser)super.findForObject("AbUser.getById", user));
 			return usersOpt;
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过ID获得用户信息错误",e.getCause());
@@ -279,8 +279,8 @@ public class AbUsersOptServiceImpl  extends ProviderServiceBase<AbUsersOpt,Integ
 			AbUser user = getById(query.getId()).getHjsUser();
 			hsurq.setSysUserIds(query.getUserIds());
 			user.setDeleteTime(new Date());
-			delete("HjsSysUserRole.deleteUserRole",hsurq);//移除用户角色
-			delete("HjsUser.deleteAllU",user);//批量删除（逻辑）
+			delete("AbSysUserRole.deleteUserRole",hsurq);//移除用户角色
+			delete("AbUser.deleteAllU",user);//批量删除（逻辑）
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"批量删除用户错误",e.getCause());
 		}
@@ -291,7 +291,7 @@ public class AbUsersOptServiceImpl  extends ProviderServiceBase<AbUsersOpt,Integ
 		try {
 			AbUsersOptQuery hjsUsersOptQuery = new AbUsersOptQuery();
 			hjsUsersOptQuery.setLoginId(userid);
-			AbUsersOpt usersOpt = (AbUsersOpt)findForObject("HjsUsersOpt.getByUserId", hjsUsersOptQuery);
+			AbUsersOpt usersOpt = (AbUsersOpt)findForObject("AbUsersOpt.getByUserId", hjsUsersOptQuery);
 			return usersOpt;
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过用户id获取信息失败",e.getCause());

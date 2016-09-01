@@ -25,7 +25,7 @@ public class UserBaseServiceImpl  extends ProviderServiceBase<AbUserBase,Integer
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsUserBase";
+		return "AbUserBase";
 	}
 	
 	public AbUserBase saveOrUpdate(AbUserBase entity) {
@@ -39,7 +39,7 @@ public class UserBaseServiceImpl  extends ProviderServiceBase<AbUserBase,Integer
 	public Page findPage(AbUserBaseQuery query) {
 		query.setUpdateTimeBegin(DateUtils.getStartDate(query.getUpdateTimeBegin()));
 		query.setUpdateTimeEnd(DateUtils.getEndDate(query.getUpdateTimeEnd()));
-		return pageQuery("HjsUserBase.findPage",query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class UserBaseServiceImpl  extends ProviderServiceBase<AbUserBase,Integer
 	 */
 	public Object findTotalBalance(AbUserBaseQuery query) {
 		try {
-		  return findForObject("HjsUserBase.findTotalBalance", query);
+		  return findForObject(getIbatisMapperNamesapce() + ".findTotalBalance", query);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"获取冻结与余额的总和错误",e.getCause());
 		}
@@ -69,7 +69,7 @@ public class UserBaseServiceImpl  extends ProviderServiceBase<AbUserBase,Integer
 	 */
 	public Object findUserDetailById(AbUserBaseQuery query) {
 		try {
-			return findForObject("HjsUserBase.findUserDetailById", query);
+			return findForObject(getIbatisMapperNamesapce() + ".findUserDetailById", query);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"获取用户账户详细信息错误",e.getCause());
 		}
@@ -93,7 +93,7 @@ public class UserBaseServiceImpl  extends ProviderServiceBase<AbUserBase,Integer
 	 */
 	public void editUserBase(AbUserBase entity){
 		try {
-			update("HjsUserBase.updatePayPass", entity);
+			update(getIbatisMapperNamesapce() + ".updatePayPass", entity);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"前台修改账户支付密码错误",e.getCause());
 		}
@@ -128,7 +128,7 @@ public class UserBaseServiceImpl  extends ProviderServiceBase<AbUserBase,Integer
 	@Override
 	public Object findByUserCustId(String usrCustId) {
 			try {
-				return findForObject("HjsUserBase.getByUserCustId", usrCustId);
+				return findForObject(getIbatisMapperNamesapce() + ".getByUserCustId", usrCustId);
 			}catch (Exception e) {
 				throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"获取用户账户详细信息错误",e.getCause());
 			}

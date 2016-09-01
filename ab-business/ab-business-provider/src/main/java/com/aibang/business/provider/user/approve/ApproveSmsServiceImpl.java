@@ -25,7 +25,7 @@ public class ApproveSmsServiceImpl  extends ProviderServiceBase<AbApproveSms,Int
  
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsApproveSms";
+		return "AbApproveSms";
 	}
 	
 	public AbApproveSms saveOrUpdate(AbApproveSms entity) {
@@ -37,7 +37,7 @@ public class ApproveSmsServiceImpl  extends ProviderServiceBase<AbApproveSms,Int
 	}
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbApproveSmsQuery query) {
-		return pageQuery("HjsApproveSms.findPage",query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 	}
 
 	@Override
@@ -53,13 +53,13 @@ public class ApproveSmsServiceImpl  extends ProviderServiceBase<AbApproveSms,Int
 	 * @date 2015年9月8日
 	 */
     public AbApproveSms getById(Integer id){
-    	AbApproveSms hjsApproveSms = null;
+    	AbApproveSms abApproveSms = null;
     	try {
-    		hjsApproveSms = super.getById(id);
+    		abApproveSms = super.getById(id);
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"根据ID获得手机认证信息错误",e.getCause());
 		}
-    	return hjsApproveSms;
+    	return abApproveSms;
     }
     /**
 	 * 审核手机认证
@@ -71,11 +71,11 @@ public class ApproveSmsServiceImpl  extends ProviderServiceBase<AbApproveSms,Int
 	public void auditSms(AbApproveSms entity){
 		try {
 			super.update(getIbatisMapperNamesapce()+".audit",entity);//修改手机审核状态
-			AbUser hjsUser = new AbUser();
-			hjsUser.setId(entity.getUserId());
-			hjsUser.setPhoneStatus(entity.getStatus());
-			hjsUser.setOptId(entity.getVerifyUserid());
-			update("HjsUser.auditPhone", hjsUser);//修改用户表手机审核相关状态
+			AbUser abUser = new AbUser();
+			abUser.setId(entity.getUserId());
+			abUser.setPhoneStatus(entity.getStatus());
+			abUser.setOptId(entity.getVerifyUserid());
+			update("AbUser.auditPhone", abUser);//修改用户表手机审核相关状态
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"审核手机认证错误",e.getCause());
 		}
@@ -98,11 +98,11 @@ public class ApproveSmsServiceImpl  extends ProviderServiceBase<AbApproveSms,Int
 			}else{
 				super.save(entity);
 			}
-			AbUser hjsUser = new AbUser();
-			hjsUser.setId(entity.getUserId());
-			hjsUser.setPhoneStatus(entity.getStatus());
-			hjsUser.setPhone(entity.getPhone());
-			update("HjsUser.activatePhone", hjsUser);//修改用户表手机审核相关状态
+			AbUser abUser = new AbUser();
+			abUser.setId(entity.getUserId());
+			abUser.setPhoneStatus(entity.getStatus());
+			abUser.setPhone(entity.getPhone());
+			update("AbUser.activatePhone", abUser);//修改用户表手机审核相关状态
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"审核手机认证错误",e.getCause());
 		}

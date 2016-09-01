@@ -32,7 +32,7 @@ public class UserServiceImpl  extends ProviderServiceBase<AbUser,Integer> implem
 
 	@Override
 	public String getIbatisMapperNamesapce() {
-		return "HjsUser";
+		return "AbUser";
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class UserServiceImpl  extends ProviderServiceBase<AbUser,Integer> implem
 	 */
 	@SuppressWarnings({"rawtypes"})
 	public Page findPage(AbUserQuery query) {
-		return pageQuery("HjsUser.findPage",query);
+		return pageQuery(getIbatisMapperNamesapce() + ".findPage",query);
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class UserServiceImpl  extends ProviderServiceBase<AbUser,Integer> implem
 	 * @date 2015年8月25日
 	 */
 	public AbUser getByUsername(String v) {
-		return (AbUser)getSqlSessionTemplate().selectOne("HjsUser.getByUsername",v);
+		return (AbUser)getSqlSessionTemplate().selectOne(getIbatisMapperNamesapce() + ".getByUsername",v);
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class UserServiceImpl  extends ProviderServiceBase<AbUser,Integer> implem
 			admin.setEntId(0);   //暂时设置成固定值，以后可拓展
 			admin.setLastTime(new Date());
 			admin.setOptUsername("");
-			super.save("HjsUsersOpt.insert",admin);
+			super.save("AbUsersOpt.insert",admin);
 			//用户角色创建
 			AbSysUserRole hsurq = new AbSysUserRole();
 			hsurq.setUserId(model.getId());
@@ -104,7 +104,7 @@ public class UserServiceImpl  extends ProviderServiceBase<AbUser,Integer> implem
 			if(model.getRoles()!=null && model.getRoles().size()>0){
 				for(AbSysRole role:model.getRoles()){
 					hsurq.setRoleId(role.getId());
-					super.save("HjsSysUserRole.insert", hsurq);
+					super.save("AbSysUserRole.insert", hsurq);
 				}
 			}
 		} catch (Exception e) {
@@ -132,12 +132,12 @@ public class UserServiceImpl  extends ProviderServiceBase<AbUser,Integer> implem
     				admin.setEntId(0);   //暂时设置成固定值，以后可拓展
     				admin.setLastTime(new Date());
     				admin.setOptUsername("");
-    				super.update("HjsUsersOpt.updateByLoginId",admin);
+    				super.update("AbUsersOpt.updateByLoginId",admin);
     			}
     			//用户角色修改
 				AbSysUserRole hsur = new AbSysUserRole();
 				hsur.setUserId(model.getId());
-				super.delete("HjsSysUserRole.deleteUserRole",hsur);
+				super.delete("AbSysUserRole.deleteUserRole",hsur);
 				hsur.setIsDel(0);
 				hsur.setCreateTime(new Date());
 				hsur.setVersion(0);
@@ -145,7 +145,7 @@ public class UserServiceImpl  extends ProviderServiceBase<AbUser,Integer> implem
 					for(AbSysRole role:model.getRoles()){
 						if(role.getId()!=null){
 							hsur.setRoleId(role.getId());
-							super.save("HjsSysUserRole.insert", hsur);
+							super.save("AbSysUserRole.insert", hsur);
 						}
 					}
 				}
@@ -184,7 +184,7 @@ public class UserServiceImpl  extends ProviderServiceBase<AbUser,Integer> implem
 			super.remove(model);
 			AbSysUserRoleQuery hsurq = new AbSysUserRoleQuery();
 			hsurq.setUserId(model.getId());
-			super.delete("HjsSysUserRole.deleteUserRole",hsurq);
+			super.delete("AbSysUserRole.deleteUserRole",hsurq);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"逻辑删除用户错误",e.getCause());
 		}
@@ -203,7 +203,7 @@ public class UserServiceImpl  extends ProviderServiceBase<AbUser,Integer> implem
     		AbUser user = super.getById(id);
     		AbUsersOpt usersOpt = new AbUsersOpt();
     		usersOpt.setLoginId(id);
-    		user.setHjsUsersOpt((AbUsersOpt)super.findForObject("HjsUsersOpt.getByLoginId", usersOpt));
+    		user.setHjsUsersOpt((AbUsersOpt)super.findForObject("AbUsersOpt.getByLoginId", usersOpt));
 			return user;
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过ID获得用户信息错误",e.getCause());
@@ -272,7 +272,7 @@ public class UserServiceImpl  extends ProviderServiceBase<AbUser,Integer> implem
 	public AbUser getSysUserByNameAndPwd(AbUserQuery query) {
 		AbUser user = null;
 		try {
-			user = (AbUser) findForObject("HjsUser.getCustomerInfo", query);
+			user = (AbUser) findForObject(getIbatisMapperNamesapce() + ".getCustomerInfo", query);
 			
 		}catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"通过username与pass获取用户信息错误",e.getCause());
@@ -293,7 +293,7 @@ public class UserServiceImpl  extends ProviderServiceBase<AbUser,Integer> implem
 			hsurq.setUserId(query.getId());
 			hsurq.setSysUserIds(query.getSysUserIds());
 			query.setDeleteTimeBegin(new Date());
-			delete("HjsSysUserRole.deleteUserRole",hsurq);
+			delete("AbSysUserRole.deleteUserRole",hsurq);
 			delete(getIbatisMapperNamesapce()+".deleteAllU",query);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"批量删除用户错误",e.getCause());
@@ -308,7 +308,7 @@ public class UserServiceImpl  extends ProviderServiceBase<AbUser,Integer> implem
 	 */
 	public void updateCustomerPass(AbUser entity){
 		try {
-			super.update("HjsUser.updateCustomerPass",entity);
+			super.update(getIbatisMapperNamesapce() + ".updateCustomerPass",entity);
 		} catch (Exception e) {
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"前台修改会员登录密码错误",e.getCause());
 		}
