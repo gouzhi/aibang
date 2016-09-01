@@ -38,7 +38,7 @@
 	
 	
 	<!-- 項目自定义的Realm -->
-    <bean id="ShiroRealm" class="com.cifex.framework.shiro.ShiroRealm" ></bean>
+    <bean id="ShiroRealm" class="com.aibang.framework.shiro.ShiroRealm" ></bean>
 	    
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />

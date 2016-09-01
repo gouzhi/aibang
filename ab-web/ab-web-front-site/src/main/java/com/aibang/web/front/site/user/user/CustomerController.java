@@ -572,7 +572,7 @@ public class CustomerController extends UserController{
 			Session session = getSession();
 			session.setAttribute(Const.SESSION_USER, hjsUser);
 			AbUsersInfo usersInfo = getUsersInfo();
-			AbUserBase hjsUserBase = usersInfo.getHjsUserBase();
+			AbUserBase hjsUserBase = usersInfo.getAbUserBase();
 			hjsUserBase.setUsername(username);
 		}
 		
@@ -731,7 +731,7 @@ public class CustomerController extends UserController{
 		usersAdd.setPost(number+"");//邮政编码
 		usersAdd.setRealname(receiver);//收货人
 		usersAdd.setTel(receiverPhone);//收货手机
-		usersAdd.setUserId(getUsersInfo().getHjsUserBase().getId());//关联账户ID
+		usersAdd.setUserId(getUsersInfo().getAbUserBase().getId());//关联账户ID
 		usersAdd.setId(addressId);//收货地址ID
 		usersAdd.setAddr(address);//收货详细地址
 		usersAddService.saveOrUpdate(usersAdd);

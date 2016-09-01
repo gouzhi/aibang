@@ -59,11 +59,11 @@
 				<redis.port>6379</redis.port>
 				<activemq.url>tcp://localhost:61616</activemq.url>
 				<!--写数据库 -->
-				<writesource.jdbc.url>jdbc:mysql://172.11.1.248:3306/ab_web?useUnicode=true&amp;characterEncoding=UTF-8</writesource.jdbc.url>
+				<writesource.jdbc.url>jdbc:mysql://127.0.0.1:3306/ab_web?useUnicode=true&amp;characterEncoding=UTF-8</writesource.jdbc.url>
 				<writesource.jdbc.username>root</writesource.jdbc.username>
 				<writesource.jdbc.password>root</writesource.jdbc.password>
 				<!--读数据库 -->
-				<readsource.jdbc.url>jdbc:mysql://172.11.1.248:3306/ab_web?useUnicode=true&amp;characterEncoding=UTF-8</readsource.jdbc.url>
+				<readsource.jdbc.url>jdbc:mysql://127.0.0.1:3306/ab_web?useUnicode=true&amp;characterEncoding=UTF-8</readsource.jdbc.url>
 				<readsource.jdbc.username>root</readsource.jdbc.username>
 				<readsource.jdbc.password>root</readsource.jdbc.password>
 

@@ -14,44 +14,44 @@
     <dubbo:provider protocol="dubbo" default="true" timeout="350000"  />
 	
 	<!-- 管理后台配置 -->
-	<dubbo:service interface="com.cifex.business.api.system.menu.HjsSysMenuService" ref="hjsSysMenuService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.role.HjsSysRoleService" ref="hjsSysRoleService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.userRole.HjsSysUserRoleService" ref="hjsSysUserRoleService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.config.HjsSysConfigService" ref="hjsSysConfigService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.area.HjsSysAreaService" ref="hjsSysAreaService" protocol="dubbo" />
+	<dubbo:service interface="com.aibang.business.api.system.menu.AbSysMenuService" ref="abSysMenuService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.system.role.AbSysRoleService" ref="abSysRoleService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.system.userRole.AbSysUserRoleService" ref="abSysUserRoleService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.system.config.AbSysConfigService" ref="abSysConfigService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.system.area.AbSysAreaService" ref="abSysAreaService" protocol="dubbo" />
 	
-	<dubbo:service interface="com.cifex.business.api.system.account.HjsUserBaseService" ref="hjsUserBaseService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.user.HjsUserService" ref="hjsUserService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersOptLogService" ref="hjsUsersOptLogService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersOptService" ref="hjsUsersOptService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersInfoService" ref="hjsUsersInfoService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersLogService" ref="hjsUsersLogService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.system.user.HjsUsersBlackService" ref="hjsUsersBlackService" protocol="dubbo" />
+	<dubbo:service interface="com.aibang.business.api.system.account.AbUserBaseService" ref="abUserBaseService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.system.user.AbUserService" ref="abUserService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.system.user.AbUsersOptLogService" ref="abUsersOptLogService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.system.user.AbUsersOptService" ref="abUsersOptService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.system.user.AbUsersInfoService" ref="abUsersInfoService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.system.user.AbUsersLogService" ref="abUsersLogService" protocol="dubbo" />
+	<dubbo:service interface="com.aibang.business.api.system.user.AbUsersBlackService" ref="abUsersBlackService" protocol="dubbo" />
 	
-	<dubbo:service interface="com.cifex.business.api.system.approve.HjsApproveRealnameService" ref="hjsApproveRealnameService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.approve.HjsApproveEmailActiveService" ref="hjsApproveEmailActiveService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.approve.HjsApproveSmsService" ref="hjsApproveSmsService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.system.approve.HjsApproveSmsSendlogService" ref="hjsApproveSmsSendlogService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.system.approve.AbApproveRealnameService" ref="abApproveRealnameService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.system.approve.AbApproveEmailActiveService" ref="abApproveEmailActiveService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.system.approve.AbApproveSmsService" ref="abApproveSmsService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.system.approve.AbApproveSmsSendlogService" ref="abApproveSmsSendlogService"  protocol="dubbo"  />
 	
 	
-    <bean id="hjsSysMenuService" class="com.cifex.business.provider.system.menu.HjsSysMenuServiceImpl"></bean>
-    <bean id="hjsSysRoleService" class="com.cifex.business.provider.system.role.HjsSysRoleServiceImpl"></bean>
-    <bean id="hjsSysUserRoleService" class="com.cifex.business.provider.system.userRole.HjsSysUserRoleServiceImpl"></bean>
-    <bean id="hjsSysConfigService" class="com.cifex.business.provider.system.config.HjsSysConfigServiceImpl"></bean>
-	<bean id="hjsSysAreaService" class="com.cifex.business.provider.system.area.HjsSysAreaServiceImpl"></bean>
+    <bean id="abSysMenuService" class="com.aibang.business.provider.system.menu.AbSysMenuServiceImpl"></bean>
+    <bean id="abSysRoleService" class="com.aibang.business.provider.system.role.AbSysRoleServiceImpl"></bean>
+    <bean id="abSysUserRoleService" class="com.aibang.business.provider.system.userRole.AbSysUserRoleServiceImpl"></bean>
+    <bean id="abSysConfigService" class="com.aibang.business.provider.system.config.AbSysConfigServiceImpl"></bean>
+	<bean id="abSysAreaService" class="com.aibang.business.provider.system.area.AbSysAreaServiceImpl"></bean>
    
-    <bean id="hjsUserBaseService" class="com.cifex.business.provider.system.account.HjsUserBaseServiceImpl"></bean>
-    <bean id="hjsUserService" class="com.cifex.business.provider.system.user.HjsUserServiceImpl"></bean>
-    <bean id="hjsUsersOptLogService" class="com.cifex.business.provider.system.user.HjsUsersOptLogServiceImpl"></bean>
-	<bean id="hjsUsersOptService" class="com.cifex.business.provider.system.user.HjsUsersOptServiceImpl"></bean>
-    <bean id="hjsUsersInfoService" class="com.cifex.business.provider.system.user.HjsUsersInfoServiceImpl"></bean>
-    <bean id="hjsUsersLogService" class="com.cifex.business.provider.system.user.HjsUsersLogServiceImpl"></bean>
-	<bean id="hjsUsersBlackService" class="com.cifex.business.provider.system.user.HjsUsersBlackServiceImpl"></bean>
+    <bean id="abUserBaseService" class="com.aibang.business.provider.system.account.AbUserBaseServiceImpl"></bean>
+    <bean id="abUserService" class="com.aibang.business.provider.system.user.AbUserServiceImpl"></bean>
+    <bean id="abUsersOptLogService" class="com.aibang.business.provider.system.user.AbUsersOptLogServiceImpl"></bean>
+	<bean id="abUsersOptService" class="com.aibang.business.provider.system.user.AbUsersOptServiceImpl"></bean>
+    <bean id="abUsersInfoService" class="com.aibang.business.provider.system.user.AbUsersInfoServiceImpl"></bean>
+    <bean id="abUsersLogService" class="com.aibang.business.provider.system.user.AbUsersLogServiceImpl"></bean>
+	<bean id="abUsersBlackService" class="com.aibang.business.provider.system.user.AbUsersBlackServiceImpl"></bean>
 
-    <bean id="hjsApproveRealnameService" class="com.cifex.business.provider.system.approve.HjsApproveRealnameServiceImpl"></bean>
-    <bean id="hjsApproveEmailActiveService" class="com.cifex.business.provider.system.approve.HjsApproveEmailActiveServiceImpl"></bean>
-    <bean id="hjsApproveSmsService" class="com.cifex.business.provider.system.approve.HjsApproveSmsServiceImpl"></bean>
-    <bean id="hjsApproveSmsSendlogService" class="com.cifex.business.provider.system.approve.HjsApproveSmsSendlogServiceImpl"></bean>
+    <bean id="abApproveRealnameService" class="com.aibang.business.provider.system.approve.AbApproveRealnameServiceImpl"></bean>
+    <bean id="abApproveEmailActiveService" class="com.aibang.business.provider.system.approve.AbApproveEmailActiveServiceImpl"></bean>
+    <bean id="abApproveSmsService" class="com.aibang.business.provider.system.approve.AbApproveSmsServiceImpl"></bean>
+    <bean id="abApproveSmsSendlogService" class="com.aibang.business.provider.system.approve.AbApproveSmsSendlogServiceImpl"></bean>
     
 	
     
@@ -59,36 +59,36 @@
 	<!-- 管理后台配置结束 -->
 	
 	<!-- 前台配置 -->
-	<dubbo:service interface="com.cifex.business.api.user.area.SysAreaService" ref="sysAreaService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.config.SysConfigService" ref="sysConfigService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.user.area.SysAreaService" ref="sysAreaService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.user.config.SysConfigService" ref="sysConfigService"  protocol="dubbo"  />
 	
-	<dubbo:service interface="com.cifex.business.api.user.account.UserBaseService" ref="userBaseService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.user.UserService" ref="userService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.user.UsersInfoService" ref="usersInfoService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.user.UsersLogService" ref="usersLogService" protocol="dubbo" />
-	<dubbo:service interface="com.cifex.business.api.user.message.UsersMessageService" ref="usersMessageService" protocol="dubbo"/>
-	<dubbo:service interface="com.cifex.business.api.user.user.UsersAddService" ref="usersAddService" protocol="dubbo"/>
+	<dubbo:service interface="com.aibang.business.api.user.account.UserBaseService" ref="userBaseService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.user.user.UserService" ref="userService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.user.user.UsersInfoService" ref="usersInfoService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.user.user.UsersLogService" ref="usersLogService" protocol="dubbo" />
+	<dubbo:service interface="com.aibang.business.api.user.message.UsersMessageService" ref="usersMessageService" protocol="dubbo"/>
+	<dubbo:service interface="com.aibang.business.api.user.user.UsersAddService" ref="usersAddService" protocol="dubbo"/>
 	
-	<dubbo:service interface="com.cifex.business.api.user.approve.ApproveRealnameService" ref="approveRealnameService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.approve.ApproveEmailActiveService" ref="approveEmailActiveService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.approve.ApproveSmsService" ref="approveSmsService"  protocol="dubbo"  />
-	<dubbo:service interface="com.cifex.business.api.user.approve.ApproveSmsSendlogService" ref="approveSmsSendlogService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.user.approve.ApproveRealnameService" ref="approveRealnameService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.user.approve.ApproveEmailActiveService" ref="approveEmailActiveService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.user.approve.ApproveSmsService" ref="approveSmsService"  protocol="dubbo"  />
+	<dubbo:service interface="com.aibang.business.api.user.approve.ApproveSmsSendlogService" ref="approveSmsSendlogService"  protocol="dubbo"  />
 
 	
-	<bean id="sysAreaService" class="com.cifex.business.provider.user.area.SysAreaServiceImpl"></bean>
-	<bean id="sysConfigService" class="com.cifex.business.provider.user.config.SysConfigServiceImpl"></bean>
+	<bean id="sysAreaService" class="com.aibang.business.provider.user.area.SysAreaServiceImpl"></bean>
+	<bean id="sysConfigService" class="com.aibang.business.provider.user.config.SysConfigServiceImpl"></bean>
 	
-	<bean id="userBaseService" class="com.cifex.business.provider.user.account.UserBaseServiceImpl"></bean>
-	<bean id="userService" class="com.cifex.business.provider.user.user.UserServiceImpl"></bean>
-    <bean id="usersInfoService" class="com.cifex.business.provider.user.user.UsersInfoServiceImpl"></bean>
-    <bean id="usersLogService" class="com.cifex.business.provider.user.user.UsersLogServiceImpl"></bean>
-	<bean id="usersAddService" class="com.cifex.business.provider.user.user.UsersAddServiceImpl"></bean>
-	<bean id="usersMessageService" class="com.cifex.business.provider.user.message.UsersMessageServiceImpl"></bean>
+	<bean id="userBaseService" class="com.aibang.business.provider.user.account.UserBaseServiceImpl"></bean>
+	<bean id="userService" class="com.aibang.business.provider.user.user.UserServiceImpl"></bean>
+    <bean id="usersInfoService" class="com.aibang.business.provider.user.user.UsersInfoServiceImpl"></bean>
+    <bean id="usersLogService" class="com.aibang.business.provider.user.user.UsersLogServiceImpl"></bean>
+	<bean id="usersAddService" class="com.aibang.business.provider.user.user.UsersAddServiceImpl"></bean>
+	<bean id="usersMessageService" class="com.aibang.business.provider.user.message.UsersMessageServiceImpl"></bean>
     
-    <bean id="approveRealnameService" class="com.cifex.business.provider.user.approve.ApproveRealnameServiceImpl"></bean>
-    <bean id="approveEmailActiveService" class="com.cifex.business.provider.user.approve.ApproveEmailActiveServiceImpl"></bean>
-    <bean id="approveSmsService" class="com.cifex.business.provider.user.approve.ApproveSmsServiceImpl"></bean>
-    <bean id="approveSmsSendlogService" class="com.cifex.business.provider.user.approve.ApproveSmsSendlogServiceImpl"></bean>
+    <bean id="approveRealnameService" class="com.aibang.business.provider.user.approve.ApproveRealnameServiceImpl"></bean>
+    <bean id="approveEmailActiveService" class="com.aibang.business.provider.user.approve.ApproveEmailActiveServiceImpl"></bean>
+    <bean id="approveSmsService" class="com.aibang.business.provider.user.approve.ApproveSmsServiceImpl"></bean>
+    <bean id="approveSmsSendlogService" class="com.aibang.business.provider.user.approve.ApproveSmsSendlogServiceImpl"></bean>
 	<!-- 前台配置结束 -->
 	
 </beans> 

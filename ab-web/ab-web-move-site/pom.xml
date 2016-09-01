@@ -48,6 +48,11 @@
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency> 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.2.0.Final</version>
+        </dependency>
     </dependencies>
 
 
@@ -65,7 +70,7 @@
                 <ip.ipseeker.ip.file>D://qqwry.dat</ip.ipseeker.ip.file>
                 <css.image.domain>/ab-web-move-site/static</css.image.domain>
                 <web.domain>.domain.com.cn</web.domain>
-                <web.name>m.money</web.name>
+                <web.name>m.aibang</web.name>
                 <project.name>/ab-web-move-site</project.name>
                 <web.commoninterceptor.image.domain.public>http://172.11.1.249/</web.commoninterceptor.image.domain.public>
                 <web.commoninterceptor.image.domain>http://172.11.1.249/</web.commoninterceptor.image.domain>

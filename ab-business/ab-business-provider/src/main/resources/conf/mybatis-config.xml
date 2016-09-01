@@ -12,12 +12,12 @@
     </settings>
 
     <typeAliases>
-        <typeAlias type="com.cifex.transfer.model.dto.HjsUser" alias="User"/>
-		<typeAlias type="com.cifex.transfer.model.dto.HjsSysRole" alias="Role"/>
-		<typeAlias type="com.cifex.transfer.model.dto.HjsSysMenu" alias="Menu"/>
-		<typeAlias type="com.cifex.framework.utils.PageData" alias="pd"/>
+        <typeAlias type="com.aibang.transfer.model.dto.AbUser" alias="User"/>
+		<typeAlias type="com.aibang.transfer.model.dto.AbSysRole" alias="Role"/>
+		<typeAlias type="com.aibang.transfer.model.dto.AbSysMenu" alias="Menu"/>
+		<typeAlias type="com.aibang.framework.utils.PageData" alias="pd"/>
 		<!-- 分页 -->
-		<typeAlias type="com.cifex.framework.utils.page.PagePd" alias="Page"/>
+		<typeAlias type="com.aibang.framework.utils.page.PagePd" alias="Page"/>
     </typeAliases>
     <plugins>
 	    <!-- com.github.pagehelper为PageHelper类所在包名 -->
@@ -50,7 +50,7 @@
 	    </plugin>
 	</plugins>
    <!--  <plugins>
-		<plugin interceptor="com.cifex.framework.support.dao.plugin.PagePlugin">
+		<plugin interceptor="com.aibang.framework.support.dao.plugin.PagePlugin">
 			<property name="dialect" value="mysql"/>
 			<property name="pageSqlId" value=".*listPage.*"/>
 		</plugin>
@@ -58,7 +58,7 @@
 	
     <!-- <mappers>
         分页查询配置，很重要
-        <mapper resource="com/cifex/common/OraclePagination.xml" />
-        <mapper resource="classpath:com/cifex/common/MysqlPagination.xml" />
+        <mapper resource="com/aibang/common/OraclePagination.xml" />
+        <mapper resource="classpath:com/aibang/common/MysqlPagination.xml" />
     </mappers> -->
 </configuration>

@@ -291,6 +291,12 @@
             <version>2.4</version>
             <classifier>jdk15</classifier>
         </dependency>
+        <!-- mail -->
+        <dependency>
+            <groupId>mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.0</version>
+        </dependency>
         <!-- test 单元测试 -->
         <dependency>
             <groupId>junit</groupId>

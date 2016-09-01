@@ -114,48 +114,48 @@ public class HjsUsersInfoController extends AdminController {
 	@RequestMapping(value="/add")
 	public String add(ModelMap model,AbUsersInfo usersInfo,HttpServletRequest request,HttpServletResponse response){
 		//数据入库验证
-		if (ValidateUtils.isStringEmpty(usersInfo.getHjsUser().getUsername())){
+		if (ValidateUtils.isStringEmpty(usersInfo.getAbUser().getUsername())){
 			error("请填写用户登录名", request, response);
 			return null;
 		}
-		if (ValidateUtils.isStringEmpty(usersInfo.getHjsUser().getPassword())){
+		if (ValidateUtils.isStringEmpty(usersInfo.getAbUser().getPassword())){
 			error("请填写登陆密码", request, response);
 			return null;
 		}
-		if (ValidateUtils.isStringEmpty(usersInfo.getHjsUser().getPhone())){
+		if (ValidateUtils.isStringEmpty(usersInfo.getAbUser().getPhone())){
 			error("请填写用户手机号", request, response);
 			return null;
 		}
-		if (ValidateUtils.isStringEmpty(usersInfo.getHjsUserBase().getPayPassword())){
+		if (ValidateUtils.isStringEmpty(usersInfo.getAbUserBase().getPayPassword())){
 			error("请填写用户支付密码", request, response);
 			return null;
 		}
 		//用户账户设置
-		usersInfo.getHjsUserBase().setCreateIp(Utils.getCdnIpAddr(request));
-		usersInfo.getHjsUserBase().setCreateTime(new Date());
-		usersInfo.getHjsUserBase().setOptId(getLoginUser().getId());
-		usersInfo.getHjsUserBase().setTypeId(3);
-		usersInfo.getHjsUserBase().setUsername(usersInfo.getHjsUser().getUsername());
-		usersInfo.getHjsUserBase().setPayPassword(new SimpleHash("SHA-1",usersInfo.getHjsUser().getUsername(),usersInfo.getHjsUserBase().getPayPassword()).toString());
+		usersInfo.getAbUserBase().setCreateIp(Utils.getCdnIpAddr(request));
+		usersInfo.getAbUserBase().setCreateTime(new Date());
+		usersInfo.getAbUserBase().setOptId(getLoginUser().getId());
+		usersInfo.getAbUserBase().setTypeId(3);
+		usersInfo.getAbUserBase().setUsername(usersInfo.getAbUser().getUsername());
+		usersInfo.getAbUserBase().setPayPassword(new SimpleHash("SHA-1",usersInfo.getAbUser().getUsername(),usersInfo.getAbUserBase().getPayPassword()).toString());
 		//用户登陆信息设置
-		usersInfo.getHjsUser().setCreateIp(Utils.getCdnIpAddr(request));
-		usersInfo.getHjsUser().setCreateTime(new Date());
-		usersInfo.getHjsUser().setOptId(getLoginUser().getId());
-		usersInfo.getHjsUser().setTypeId(3);
-		usersInfo.getHjsUser().setStatus(1);
-		usersInfo.getHjsUser().setIsDel(0);
-		usersInfo.getHjsUser().setEmailStatus(0);
-		usersInfo.getHjsUser().setPhoneStatus(0);
-		usersInfo.getHjsUser().setRealNameStatus(0);
-		usersInfo.getHjsUser().setPassword(new SimpleHash("SHA-1",usersInfo.getHjsUser().getUsername(),usersInfo.getHjsUser().getPassword()).toString());
+		usersInfo.getAbUser().setCreateIp(Utils.getCdnIpAddr(request));
+		usersInfo.getAbUser().setCreateTime(new Date());
+		usersInfo.getAbUser().setOptId(getLoginUser().getId());
+		usersInfo.getAbUser().setTypeId(3);
+		usersInfo.getAbUser().setStatus(1);
+		usersInfo.getAbUser().setIsDel(0);
+		usersInfo.getAbUser().setEmailStatus(0);
+		usersInfo.getAbUser().setPhoneStatus(0);
+		usersInfo.getAbUser().setRealNameStatus(0);
+		usersInfo.getAbUser().setPassword(new SimpleHash("SHA-1",usersInfo.getAbUser().getUsername(),usersInfo.getAbUser().getPassword()).toString());
 		
 		usersInfo.setLastTime(new Date());
-		usersInfo = hjsUsersInfoService.addHjsUsersInfo(usersInfo);
+		usersInfo = hjsUsersInfoService.addAbUsersInfo(usersInfo);
 		
 		Map<String, Object> paras = new HashMap<>();
 		paras.put("userid", usersInfo.getUserId());
 		paras.put("userloginid",usersInfo.getLoginId());
-		paras.put("username", usersInfo.getHjsUser().getPhone());
+		paras.put("username", usersInfo.getAbUser().getPhone());
 		if(usersInfo.getInviteUserid() != null){
 			paras.put("inviteUserid", usersInfo.getInviteUserid());
 		}
@@ -165,7 +165,7 @@ public class HjsUsersInfoController extends AdminController {
 		activemqSendMessage.sendMessage(queueDestinationRegist, jsonString);
 		
 		//注册红包
-		//hjsActBonusUsersService.saveActBonusUsers(usersInfo.getHjsUserBase().getId(), usersInfo.getInviteUserid(), Utils.getCdnIpAddr(request));
+		//hjsActBonusUsersService.saveActBonusUsers(usersInfo.getAbUserBase().getId(), usersInfo.getInviteUserid(), Utils.getCdnIpAddr(request));
 		
 		success("添加会员成功", request, response);
 		return toAdd(model);
@@ -196,7 +196,7 @@ public class HjsUsersInfoController extends AdminController {
 	@RequestMapping(value="/edit")
 	public String Edit(ModelMap model,AbUsersInfo usersInfo,HttpServletRequest request,HttpServletResponse response){
 		//入库验证
-		if (ValidateUtils.isStringEmpty(usersInfo.getHjsUser().getUsername())){
+		if (ValidateUtils.isStringEmpty(usersInfo.getAbUser().getUsername())){
 			error("请填写用户登录名", request, response);
 			return null;
 		}
@@ -204,20 +204,20 @@ public class HjsUsersInfoController extends AdminController {
 		usersInfoQuery.setId(usersInfo.getId());
 		AbUsersInfo editUsersInfo = hjsUsersInfoService.getEditUsersInfo(usersInfoQuery);
 		//用户登录信息设置
-		editUsersInfo.getHjsUser().setUsername(usersInfo.getHjsUser().getUsername());
-		if(usersInfo.getHjsUser().getPassword()!=null&&!usersInfo.getHjsUser().getPassword().equals("")){			
-			editUsersInfo.getHjsUser().setPassword(new SimpleHash("SHA-1",usersInfo.getHjsUser().getUsername(),usersInfo.getHjsUser().getPassword()).toString());
+		editUsersInfo.getAbUser().setUsername(usersInfo.getAbUser().getUsername());
+		if(usersInfo.getAbUser().getPassword()!=null&&!usersInfo.getAbUser().getPassword().equals("")){			
+			editUsersInfo.getAbUser().setPassword(new SimpleHash("SHA-1",usersInfo.getAbUser().getUsername(),usersInfo.getAbUser().getPassword()).toString());
 		}
-		editUsersInfo.getHjsUser().setPhone(usersInfo.getHjsUser().getPhone());
-		editUsersInfo.getHjsUser().setStatus(usersInfo.getHjsUser().getStatus());
-		editUsersInfo.getHjsUser().setOptId(getLoginUser().getId());
+		editUsersInfo.getAbUser().setPhone(usersInfo.getAbUser().getPhone());
+		editUsersInfo.getAbUser().setStatus(usersInfo.getAbUser().getStatus());
+		editUsersInfo.getAbUser().setOptId(getLoginUser().getId());
 		//用户账户设置
-		if(usersInfo.getHjsUserBase().getPayPassword()!=null&&!usersInfo.getHjsUserBase().getPayPassword().equals("")){			
-			editUsersInfo.getHjsUserBase().setPayPassword(new SimpleHash("SHA-1",usersInfo.getHjsUser().getUsername(),usersInfo.getHjsUserBase().getPayPassword()).toString());
+		if(usersInfo.getAbUserBase().getPayPassword()!=null&&!usersInfo.getAbUserBase().getPayPassword().equals("")){			
+			editUsersInfo.getAbUserBase().setPayPassword(new SimpleHash("SHA-1",usersInfo.getAbUser().getUsername(),usersInfo.getAbUserBase().getPayPassword()).toString());
 		}
-		editUsersInfo.getHjsUserBase().setUpdateTime(new Date());
-		editUsersInfo.getHjsUserBase().setUpdateIp(Utils.getCdnIpAddr(request));
-		editUsersInfo.getHjsUserBase().setOptId(getLoginUser().getId());
+		editUsersInfo.getAbUserBase().setUpdateTime(new Date());
+		editUsersInfo.getAbUserBase().setUpdateIp(Utils.getCdnIpAddr(request));
+		editUsersInfo.getAbUserBase().setOptId(getLoginUser().getId());
 		hjsUsersInfoService.editUsersInfo(editUsersInfo);
 		success("修改会员成功", request, response);
 		return toEdit(model, usersInfoQuery);
@@ -236,7 +236,7 @@ public class HjsUsersInfoController extends AdminController {
 		AbApproveRealname realName = hjsApproveRealnameService.getByLoginId(usersInfo.getLoginId());//实名信息
 		
 		//判断是否绑定银行
-		if(!ValidateUtils.isStringEmpty(usersInfo.getHjsUser().getNrpUsrId())){
+		if(!ValidateUtils.isStringEmpty(usersInfo.getAbUser().getNrpUsrId())){
 			Map<String,Object> bankMap = null;
 			String cardId = "";//汇付绑定银行卡号
 			String BankId = "";//银行代号
