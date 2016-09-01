@@ -11,11 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 import java.util.TimeZone;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -23,8 +19,6 @@ import org.apache.commons.net.ftp.FTPClientConfig;
 import org.apache.commons.net.ftp.FTPReply;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.aibang.framework.utils.DateUtils;
 /**
  * Apache.FTPClient FTP操作共公类
  * @classname FTPFileUtil    

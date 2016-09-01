@@ -966,30 +966,4 @@ public class LoginController extends UserController {
 			}
 		}
 	}
-	@RequestMapping(value="/goCorpRegister")
-	public String goCorpRegister(ModelMap model){
-		return "user/login/corpRegister";
-	}
-	
-	/**
-	 * 企业开户
-	 */
-//	@RequestMapping(value="/corpRegister")
-//	public void corpRegister(@RequestParam("Busicode")String Busicode,@RequestParam("UsrId")String UsrId,HttpServletRequest request,HttpServletResponse response){
-//		String htmlText = usersInfoService.toCorpRegister(Busicode,UsrId,66).getParams().get("htmlText").toString();;
-//		ResponseUtils.renderHtml(response, "utf-8",htmlText);
-//	}
-//	@RequestMapping(value="/goCorpRegisterQuery")
-//	public String goCorpRegisterQuery(ModelMap model){
-//		return "user/login/corpRegisterQuery";
-//	}
-	
-	/**
-	 * 企业开户
-	 */
-//	@RequestMapping(value="/corpRegisterQuery")
-//	public void corpRegisterQuery(@RequestParam("Busicode")String Busicode,HttpServletRequest request,HttpServletResponse response){
-//		OutParameter outParameter = usersInfoService.corpRegisterQuery(Busicode);
-//		System.out.println(outParameter.toString());
-//	}
 }

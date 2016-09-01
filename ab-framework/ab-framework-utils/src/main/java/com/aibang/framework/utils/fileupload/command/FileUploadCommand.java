@@ -6,11 +6,7 @@
 package com.aibang.framework.utils.fileupload.command;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +32,6 @@ import com.aibang.framework.utils.fileupload.rule.ReturnResult;
 import com.aibang.framework.utils.fileupload.rule.impl.BuildPathRuleImpl;
 import com.aibang.framework.utils.fileupload.rule.impl.ImageSaveRuleImpl;
 import com.aibang.framework.utils.fileupload.util.FileUtils;
-import com.aibang.framework.utils.fileupload.util.ImageUtils;
 import com.alibaba.fastjson.JSON;
 
 /**
