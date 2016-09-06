@@ -68,6 +68,38 @@ public class CustomerController extends UserController{
 	private UsersAddService usersAddService;
 	@Resource(name = "usersMessageService")
 	private UsersMessageService usersMessageService;
+	
+	/**
+	 * 加载会员账户安全页
+	 * @return String
+	 * @author zhangyong
+	 * @date 2015年9月16日
+	 */
+	@RequestMapping(value="/toSafe")
+	private String toCustomerSafe(ModelMap model){
+		//判断是否绑定银行
+		Integer loginUserId=getLoginUser().getId();
+		AbUser user = userService.getById(getLoginUser().getId());
+		
+		//手机格式处理
+		String phoneString = user.getPhone();
+		if(phoneString!=null&&phoneString.length()==11){
+			model.addAttribute("phone",phoneString.substring(0,3)+"******"+phoneString.substring(phoneString.length()-2, phoneString.length()));
+		}
+		//邮箱格式处理
+		String emailString = user.getEmail();
+		if(emailString!=null&&emailString.indexOf("@")!=-1){
+			model.addAttribute("email",emailString.substring(0,1)+"******"+emailString.substring(emailString.indexOf("@"), emailString.length()));
+		}
+		Integer unreadMessageCount= usersMessageService.getUnreadMessageCount(loginUserId);
+		Subject currentUser = SecurityUtils.getSubject();
+		Session session = currentUser.getSession();
+		session.setAttribute("unreadMessageCount", unreadMessageCount);
+		model.addAttribute("emailStatus",user.getEmailStatus());
+		getRequest().getSession().removeAttribute("result_name");//清除实名认证安全缓存
+		return "user/customer/accountSecurity";
+	}
+	
 	/**
 	 * 前台加载修改密码页面
 	 * @param model

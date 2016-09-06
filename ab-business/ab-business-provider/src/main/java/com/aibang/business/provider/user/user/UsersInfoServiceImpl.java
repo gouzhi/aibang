@@ -246,6 +246,7 @@ public class UsersInfoServiceImpl  extends ProviderServiceBase<AbUsersInfo,Integ
 			entity.setInviteCode(ShareCodeUtil.toSerialCode(entity.getId()));
 			update("AbUsersInfo.createInviteCode",entity);
 		}catch (Exception e) {
+			e.printStackTrace();
 			throw new RpcException(RpcException.UNKNOWN_EXCEPTION,"会员注册错误",e.getCause());
 		}
 		return entity;

@@ -168,28 +168,6 @@ public class RegisterController extends UserController{
 		usersInfo.setLastTime(new Date());// 最后登录时间
 		usersInfo = usersInfoService.registerUser(usersInfo);
 		
-		//渠道用户信息,发送队列消息
-		//String paras = uid +"&"+ uname +"&"+ logo + "&" + chlid + "&" + usersInfo.getUserId() + "&" + user.getUsername() + "&" + usersInfo.getInviteUserid() + "&" + Utils.getCdnIpAddr(request);
-		Map<String, Object> paras = new HashMap<>();
-		paras.put("chlUserid", uid);
-		paras.put("chlUsername", uname);
-		paras.put("logo", logo);
-		paras.put("chlid", chlid);
-		paras.put("userid", usersInfo.getUserId());
-		paras.put("userloginid",usersInfo.getLoginId());
-		paras.put("username", user.getUsername());
-		if(usersInfo.getInviteUserid() != null){
-			paras.put("inviteUserid", usersInfo.getInviteUserid());
-		}
-		paras.put("ip", Utils.getCdnIpAddr(request));
-		JSONObject jsonObject = JSONUtils.toJSONObject(paras);
-		String jsonString = JSONUtils.toJSONString(jsonObject);
-		activemqSendMessage.sendMessage(queueDestinationRegist, jsonString);
-		
-		// 注册红包
-/*		actBonusUsersService.saveActBonusUsers(usersInfo.getHjsUserBase()
-				.getId(), usersInfo.getInviteUserid(), Utils
-				.getCdnIpAddr(request));*/
 
 		return registerSuccess(model, user);
 	}
@@ -236,7 +214,7 @@ public class RegisterController extends UserController{
 		usersLog.setCreateTime(new Date());
 		usersLogService.saveObj(usersLog);
 		session.setAttribute(Const.SESSION_USERCUSTOMER, usersInfo);
-		return "redirect:/";
+		return "redirect:/user/center/accountall";
 	}
 	/**
 	 * 注册成功提示页

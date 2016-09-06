@@ -50,6 +50,10 @@ public class SmsCodeController extends UserController {
 		// 结果状态 0发送失败 否则返回验证码
 		int res = 0;
 		int codeInt = Tools.getRandomNum();
+		//短信发送成功返回true
+		if (true) {
+			res = codeInt;
+		}
 		try {
 			springRedisCacheService.delete("reg_"+phone);
 			springRedisCacheService.set("reg_"+phone, res+"", 1800);
@@ -141,6 +145,10 @@ public class SmsCodeController extends UserController {
 	private int getSendCode(String phone) {
 		int res = 0;
 		int code = Tools.getRandomNum();
+		//短信发送成功返回true
+		if (true) {
+			res = code;
+		}
 		return res;
 	}
 	/**

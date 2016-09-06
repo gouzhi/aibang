@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>华金所</title>
+		<title>爱帮</title>
 		<%@ include file="/WEB-INF/jsp/common/head.jsp"%>
 		<script src="${css_imagedomain}/move/js/zhuce_mobile.js" type="text/javascript"></script>
 	</head>
@@ -51,7 +51,8 @@
 			{
 				$.post('${project_name}/login', $('#login_form').serialize(), function(response){
 					if("success" == response.result){
-						window.location.href="/${project_name}";
+						alert(window.location.href);
+						window.location.href="${project_name}/user/center/accountall";
 					}else
 					{
 						alert(response.result);

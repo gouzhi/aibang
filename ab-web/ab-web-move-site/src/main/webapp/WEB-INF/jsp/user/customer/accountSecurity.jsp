@@ -6,7 +6,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>华金所</title>
+		<title>爱帮</title>
 		<%@ include file="/WEB-INF/jsp/common/head.jsp"%>
 		<script src="${css_imagedomain}/move/js/zhuce_mobile.js" type="text/javascript"></script>
 	</head>
@@ -34,46 +34,8 @@
 		    </li>
 		    <li><span class="okCircle"></span>手机验证<a href="pv?vt=2" class="accSecA">修改</a></li>
 		    
-		    <li>
-		    	<c:choose>
-		    		 <c:when test="${not empty HFID}">
-				    	<span class="okCircle"></span>汇付天下账户
-				    	<a href="detailHF" class="accSecA">查看</a>
-				    </c:when>
-				    <c:otherwise>
-				    	<span class="okCircle whyCircle"></span>汇付天下账户
-				    	<a href="toActivateName" class="accSecA">开通</a>
-				    </c:otherwise>
-				    
-		    	</c:choose>
-		    </li>
-		    <li>
-		    	<c:choose>
-		    		<c:when test="${not empty HFID}">
-		    			<c:if test="${hasBank}">
-					    	<span class="okCircle"></span>提现银行卡
-					    	<a href="${project_name}/user/customer/checkBank" class="accSecA">更换</a>
-					    </c:if>
-					     <c:if test="${!hasBank }">
-					     	<span class="okCircle whyCircle"></span>提现银行卡
-					    	<a  id="btnbindingok" href="${project_name}/user/customer/toBindBank" class="accSecA">绑定</a>
-					     </c:if>
-				    </c:when>
-				    <c:otherwise>
-				     	<c:if test="${!hasBank }">
-				     		<span class="okCircle whyCircle"></span>提现银行卡
-					    	<a href="javascript:void(0);" class="accSecA" id="btnbinding">绑定</a>
-				     	</c:if>
-				    </c:otherwise>
-			    </c:choose>
-		    </li>
 		  </ul>
 		</div>
 		</div>
-		<script type="text/javascript">
-			$("#btnbinding").click(function(){
-				alert("您还没有开通第三方托管账户，请先开通后再进行绑定提现银行卡操作。");
-			})
-		</script>
 	</body>
 </html>
