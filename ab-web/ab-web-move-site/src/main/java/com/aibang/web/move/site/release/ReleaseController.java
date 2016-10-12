@@ -33,7 +33,7 @@ public class ReleaseController extends UserController{
 	@ResponseBody
 	private String guesYouLike(ModelMap model){
 		
-		return "";
+		return "{\"code\":\"00\",\"msg\":\"3\",\"content\":[{\"imgPath\":\"http://dfasdfad.com/23fasdf13/safasdfasdf.jpg\",\"title\":\"欢迎QQ家具入住\",\"author\":\"bobo\",\"infoType\":\"001\",\"infoId\":\"dfadfadsf发的发的是的发送到发送到阿萨德发的是\",\"createTime\":\"2016-09-3012:22:36\"},{\"imgPath\":\"http://dfasdfad.com/23fasdf1dd3/safasdfasdf.jpg\",\"title\":\"欢迎QQ家具入住\",\"author\":\"bobo\",\"infoType\":\"001\",\"infoId\":\"dfadfadsf发的发的是的发的发的发送到发送到阿萨德发的是\",\"createTime\":\"2016-09-3012:22:36\"}]}";
 	}
 	
 }
