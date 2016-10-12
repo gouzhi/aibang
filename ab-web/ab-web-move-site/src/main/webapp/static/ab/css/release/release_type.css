@@ -1,0 +1,98 @@
+.mui-card .mui-control-content {
+	padding: 10px;
+}
+
+.mui-control-content {
+	min-height: 400px;
+}
+
+.mui-scroll-wrapper {
+    overflow: auto;
+}
+
+.mui-table-view-cell {
+	float: left;
+	width: 33.3%;
+	height: 160px;
+	padding: 10px 2px 10px 2px;
+	text-align: -webkit-center;
+}
+.mui-table-view-cell>img{
+	height: 90%;
+}
+.mui-table-view-cell>div{
+	height: 10%;
+}
+
+@media only screen and (max-width: 320px) {
+	.mui-table-view-cell {
+		float: left;
+		width: 50%;
+		height: 140px;
+		
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	.mui-table-view-cell {
+		float: left;
+		width: 50%;
+		height: 140px;
+	}
+}
+
+@media only screen and (min-width: 400px) and (max-width: 480px) {
+	body {
+		font-size: 20px;
+	}
+	.mui-control-content {
+		min-height: 600px;
+	}
+	.mui-table-view-cell {
+		float: left;
+		width: 33.3%;
+		height: 200px;
+	}
+}
+
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+	body {
+		font-size: 25px;
+	}
+	.mui-control-content {
+		min-height: 600px;
+	}
+	.mui-table-view-cell {
+		float: left;
+		width: 33.3%;
+		height: 270px;
+	}
+	.mui-table-view-cell>img{
+		height: 90%;
+	}
+	.mui-table-view-cell>div{
+		height: 40px;
+    	line-height: 40px;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	body {
+		font-size: 30px;
+	}
+	.mui-control-content {
+		min-height: 768px;
+	}
+	.mui-table-view-cell {
+		float: left;
+		width: 33.3%;
+		height: 300px;
+	}
+	.mui-table-view-cell>img{
+		height: 90%;
+	}
+	.mui-table-view-cell>div{
+		height: 40px;
+    	line-height: 40px;
+	}
+}

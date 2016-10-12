@@ -126,21 +126,26 @@ public class RegisterController extends UserController{
 			error("请填写密码", request, response);
 			return null;
 		}
+		/*bobo====
 		if (request.getSession().getAttribute("regCode") == null) {
 			error("请获取手机验证码", request, response);
 			return null;
 		}
+		
 		String codeString = request.getSession().getAttribute("regCode")
 				.toString();
 		Date codeTime = (Date) request.getSession().getAttribute("regTime");
 		String phoneString = request.getSession().getAttribute("regPhone")
 				.toString();
 		long diff = (new Date().getTime() - codeTime.getTime()) / (1000 * 60);
+		*/
+		/*bobo====
 		if (!codeString.equals(phonecode) || diff > 30
 				|| !phoneString.equals(user.getPhone())) {
 			error("手机校验码不正确", request, response);
 			return null;
 		}
+		*/
 		user.setUsername(user.getPhone());
 		AbUsersInfo usersInfo = new AbUsersInfo();
 		AbUserBase userBase = new AbUserBase();

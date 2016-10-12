@@ -52,20 +52,20 @@
 		<profile>
 			<id>develope</id>
 			<properties>
-				<zookeeper.url>127.0.0.1:2181</zookeeper.url>
+				<zookeeper.url>120.25.169.233:2181</zookeeper.url>
 				<memcache.ip>127.0.0.1</memcache.ip>
 				<memcache.port>11211</memcache.port>
-				<redis.ip>127.0.0.1</redis.ip>
+				<redis.ip>115.28.71.26</redis.ip>
 				<redis.port>6379</redis.port>
 				<activemq.url>tcp://localhost:61616</activemq.url>
 				<!--写数据库 -->
-				<writesource.jdbc.url>jdbc:mysql://127.0.0.1:3306/ab_web?useUnicode=true&amp;characterEncoding=UTF-8</writesource.jdbc.url>
-				<writesource.jdbc.username>root</writesource.jdbc.username>
-				<writesource.jdbc.password>root</writesource.jdbc.password>
+				<writesource.jdbc.url>jdbc:mysql://120.25.169.233:3306/ab_db?useUnicode=true&amp;characterEncoding=UTF-8</writesource.jdbc.url>
+				<writesource.jdbc.username>yl_user</writesource.jdbc.username>
+				<writesource.jdbc.password>1q2w3e4r5t</writesource.jdbc.password>
 				<!--读数据库 -->
-				<readsource.jdbc.url>jdbc:mysql://127.0.0.1:3306/ab_web?useUnicode=true&amp;characterEncoding=UTF-8</readsource.jdbc.url>
-				<readsource.jdbc.username>root</readsource.jdbc.username>
-				<readsource.jdbc.password>root</readsource.jdbc.password>
+				<readsource.jdbc.url>jdbc:mysql://120.25.169.233:3306/ab_db?useUnicode=true&amp;characterEncoding=UTF-8</readsource.jdbc.url>
+				<readsource.jdbc.username>yl_user</readsource.jdbc.username>
+				<readsource.jdbc.password>1q2w3e4r5t</readsource.jdbc.password>
 
 				<!--nginx的html根目录 后面无/ -->
 				<web.nginx.htmlpath>F:/tools/nginx/html</web.nginx.htmlpath>

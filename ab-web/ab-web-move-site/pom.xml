@@ -60,12 +60,13 @@
         <profile>
             <id>develope</id>
             <properties>
-                <zookeeper.url>127.0.0.1:2181</zookeeper.url>
+                <zookeeper.url>120.25.169.233:2181</zookeeper.url>
+                <!-- <memcache.ip>120.25.169.233</memcache.ip> -->
                 <memcache.ip>127.0.0.1</memcache.ip>
                 <memcache.port>11211</memcache.port>
                 <redis.ip>127.0.0.1</redis.ip>
                 <redis.port>6379</redis.port>
-                <activemq.url>tcp://localhost:61616</activemq.url>
+                <activemq.url>tcp://120.25.169.233:61616/</activemq.url>
 
                 <ip.ipseeker.ip.file>D://qqwry.dat</ip.ipseeker.ip.file>
                 <css.image.domain>/ab-web-move-site/static</css.image.domain>

@@ -56,7 +56,7 @@
         <profile>
             <id>develope</id>
             <properties>
-                <zookeeper.url>127.0.0.1:2181</zookeeper.url>
+                <zookeeper.url>120.25.169.233:2181</zookeeper.url>
                 <memcache.ip>127.0.0.1</memcache.ip>
                 <memcache.port>11211</memcache.port>
                 <redis.ip>127.0.0.1</redis.ip>

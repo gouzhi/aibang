@@ -1,0 +1,111 @@
+@media only screen and (min-width: 640px) {
+	
+	
+}
+@media only screen and (min-width: 480px) and (max-width: 640px) {
+	
+
+	
+}
+
+@media only screen and (max-width: 480px) {
+	#find-header{
+		height: 45px;
+	}
+	#find-header>h1{
+		height: 45px;
+		line-height: 45px;
+		font-size: 20px;
+	}
+	#find-section{
+		padding-top: 45px;
+	}
+	#find-section>ul{
+		padding-bottom: 10px;
+	}
+	.find-li{
+		margin-bottom: 0;
+	}
+	#find-section .find-li-img{
+		height: 60px;
+	}
+	#find-section .find-li-img>i{
+		width: 50px;
+		height: 50px;
+		
+	}
+	#find-section .find-li-text{
+		height: 60px;
+	}
+	.find-li-text>div{
+		height: 60px;
+	}
+	#find-section .find-li-text p{
+		font-size: 16px;
+		height:30px;
+		line-height: 45px;
+	}
+	#find-section .find-li-text span{
+		font-size: 14px;
+		height: 30px;
+		line-height: 30px;	
+	}
+	.find-li-text>s{
+		margin-top: 22px;
+		margin-right: 16px;
+	}
+	.find-other>p{
+		font-size: 20px;
+		padding-left:10px;
+		margin: 15px 0;
+	}
+	.find-other-img{
+		height: 60px;
+	}
+	.find-other-ul{
+		padding-left: 10px;
+	}
+	.find-other-text{
+		height: 60px;
+		padding-left:10px
+	}
+	.find-other-text>p{
+		font-size: 16px;
+		height: 25px;
+		line-height: 20px;
+	}
+	.find-other-text>div{
+		height: 25px;
+		line-height: 25px;
+	}
+	.find-other-text span{
+		font-size:15px;
+		height:25px;
+		line-height:25px;
+	}
+	.find-other-text b{
+		margin-right: 20px;
+		font-size:15px;
+	}
+	.find-other-li{
+		margin-bottom: 15px;
+	}
+	
+	
+	
+	
+	
+	
+}
+@media only screen and (max-width: 360px) {
+	
+	
+	
+	
+}
+@media only screen and (max-width: 320px) {
+
+	
+	
+		
+}

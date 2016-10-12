@@ -1,6 +1,12 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 
-<div id="navi" class="footBg"><a href="http://www.huafax.com/hjsh5/" class="a1"><b></b><span>精选推荐</span></a><a href="${project_name}/borrow/list" class="a2"><b></b><span>产品列表</span></a><a href="${project_name}/user/center/accountall" class="a3"><b></b><span>个人中心</span></a></div>
+<div id="navi" class="footBg">
+<a href="${project_name}/toIndex" class="a1"><b></b><span>首页</span></a>
+<a href="${project_name}/toFind" class="a2"><b></b><span>发现</span></a>
+<a href="${project_name}/toRelease" class="a3"><b></b><span>发布</span></a>
+<a href="${project_name}/toInfo" class="a4"><b></b><span>消息</span></a>
+<a href="${project_name}/user/center/accountall" class="a5"><b></b><span>我的</span></a>
+</div>
  
 <script type="text/javascript" language="javascript">
 $(function(){

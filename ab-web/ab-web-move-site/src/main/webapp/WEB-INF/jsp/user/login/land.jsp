@@ -52,7 +52,8 @@
 				$.post('${project_name}/login', $('#login_form').serialize(), function(response){
 					if("success" == response.result){
 						alert(window.location.href);
-						window.location.href="${project_name}/user/center/accountall";
+						//window.location.href="http://127.0.0.1:8888" + "${project_name}/user/center/accountall";
+						window.location.href="http://127.0.0.1:8888" + "${project_name}/toIndex";
 					}else
 					{
 						alert(response.result);

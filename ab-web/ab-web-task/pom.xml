@@ -43,8 +43,8 @@
         <profile>
             <id>develope</id>
             <properties>
-                <zookeeper.url>127.0.0.1:2181</zookeeper.url>
-                <redis.ip>127.0.0.1</redis.ip>
+                <zookeeper.url>120.25.169.233:2181</zookeeper.url>
+                <redis.ip>115.28.71.26</redis.ip>
                 <redis.port>6379</redis.port>
             </properties>
             <activation>

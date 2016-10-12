@@ -104,7 +104,7 @@ public class LoginController extends UserController {
 			map.put("result", message);
 			return AppUtil.returnObject(new PageData(), map);
 		}
-		
+		/*===bobo
 		String sessionCode = (String) getSession().getAttribute(Const.SESSION_SECURITY_CODE); // 获取session中的验证码
 		
 		if (!sessionCode.equalsIgnoreCase(code)) 
@@ -113,6 +113,7 @@ public class LoginController extends UserController {
 			map.put("result", message);
 			return AppUtil.returnObject(new PageData(), map);
 		} 
+		*/
 	    AbUser hjsUser = userService.getByName(username);//通过用户名得到用户数据
 	    if(hjsUser==null)
 	    {
